@@ -7,7 +7,7 @@
         <div class="form-inputs">
         <%= devise_error_messages! %>
         <%= f.input :email, input_html: {class: "input-xxlarge"} %>
-        <%= f.input :password, label: "Current Password", :hint => "We need your current password to confirm your changes", input_html: {class: "input-xxlarge"}%>
+        <%= f.input :current_password, label: "Current Password", :hint => "We need your current password to confirm your changes", input_html: {class: "input-xxlarge"}%>
         <%= f.input :password, label: "New Password", input_html: {class: "input-xxlarge"}, placeholder: "Use this field to change your password." %>
         <%= f.input :password_confirmation, :hint => "Must have at least 6 characters: at least 1 digit, at least 1 upper case letter.", input_html: {class: "input-xxlarge"}%>
       </div>
