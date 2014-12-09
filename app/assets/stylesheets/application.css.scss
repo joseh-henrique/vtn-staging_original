@@ -9,17 +9,12 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
+ *= require custom-bootstrap
  *= require jquery.tag
  *= require jquery-ui.custom
  *= require magiczoom
- *= require bootstrap
- *= require bootstrap-responsive
- *= require site
- *= require style
  *= require chosen
+ *= require_tree ./bootstrap-social
  *= require jquery.fileupload-ui
- *= require vtn
+ *= require customize
  */
-/*$linkColor: #1e92d5;*/
-/*@import "bootstrap";*/
-/*@import "bootstrap-responsive";*/

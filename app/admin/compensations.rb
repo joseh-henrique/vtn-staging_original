@@ -19,7 +19,11 @@ ActiveAdmin.register Compensation do
       print_as_currency(compensation.amount)
     end
     column "Range (hours)" do |compensation|
-      "#{compensation.min_range} to #{compensation.max_range}"
+      unless compensation.is_over
+        "#{compensation.min_range} to #{compensation.max_range}"
+      else
+        "Over #{compensation.min_range}" if compensation.is_over
+      end
     end
 
     default_actions
@@ -32,14 +36,17 @@ ActiveAdmin.register Compensation do
 
 
   form do |f|
+    within @head do
+      script :src => javascript_path('compensation'), :type => "text/javascript"
+    end
     f.inputs "New Compensation" do
-
       f.input :appraisal_plan, :as => :select, :collection => hItems
       f.input :amount, :hint => "Enter the amount in dollars to be paid to the appraiser"
       f.input :min_range, :hint => "In hours"
       f.input :max_range, :hint => "In hours"
+      f.input :is_over, label: "Do not have the Max range"
     end
-    f.buttons
+    f.actions
   end
 
   show do
@@ -50,6 +57,22 @@ ActiveAdmin.register Compensation do
       row("Max Range") {compensation.max_range}
     end
   end
+
+  controller do
+    # This code is evaluated within the controller class
+
+    def update
+      super
+      if params[:compensation][:is_over] == "1"
+        @admin_compensation = Compensation.find(params[:id])
+        @admin_compensation.update_attributes(max_range: nil)
+      end
+
+
+
+    end
+  end
+
 end
 
 ActiveAdmin.register_page "Compensation Table" do

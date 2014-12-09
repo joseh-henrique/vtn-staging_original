@@ -1,6 +1,10 @@
 ActiveAdmin.register Customer do
   menu :if => proc{ can?(:manage, Customer) }    
-  actions :all, :except => [:new, :destroy] 
+  actions :all, :except => [:new, :destroy]
+
+  PAYMENT_TERMS = {"Net 30" => "Net 30",
+                   "Net 60" => "Net 60",
+                   "Net 90" => "Net 90"}
 
   action_item :only => :show do
     link_to "Become", "/switch_user?scope_identifier=user_#{customer.id}"
@@ -23,8 +27,13 @@ ActiveAdmin.register Customer do
     f.inputs "Admin Details" do
       f.input :name
       f.input :email
+      f.input :secondary_contact_name
+      f.input :secondary_contact_email
+      f.input :negotiated_cost
+      f.input :payment_term, :as => :select, :collection => PAYMENT_TERMS
+      f.input :is_partner, :label => "Create Vendor key", :wrapper_html => {:class => "partner_checkbox"}
     end
-    f.buttons
+    f.actions
   end
 
   after_create { |admin| admin.send_reset_password_instructions }
@@ -34,13 +43,19 @@ ActiveAdmin.register Customer do
 
 
   controller do
-  	load_and_authorize_resource :except => :index
   	def scoped_collection
   		end_of_association_chain.accessible_by(current_ability)
   	end
   	rescue_from CanCan::AccessDenied do |exception|
   		redirect_to admin_dashboard_path, :alert => exception.message
   	end
+
+  end
+
+  member_action :regenerate_token, :method => :put do 
+    user = User.find(params[:id])
+    user.re_generate_token
+    redirect_to :action => :show
   end
 
   show :title => :name do
@@ -49,6 +64,15 @@ ActiveAdmin.register Customer do
       row("Email") {customer.email}
       row("Created") {customer.created_at}
       row("Status") {customer.status}
+      row("Secondary Contact Name") {customer.secondary_contact_name}
+      row("Secondary Contact Email") {customer.secondary_contact_email}
+      row("Vendor Token") {customer.vendor_token}
+      if customer.is_partner
+        row "Generate Token" do
+          button_to("Regenerate Token", regenerate_token_admin_customer_path(id: customer), method: :put, class: "btn")
+        end
+      end
+      
     end
 
     panel "Address" do
@@ -58,5 +82,7 @@ ActiveAdmin.register Customer do
     panel "Additional Information" do
       render :partial=> "admin/users/appraiser_info", :locals => {:extra_info => customer.customer_extra}
     end
+
   end
+
 end

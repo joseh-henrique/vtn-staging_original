@@ -1,0 +1,144 @@
+#btnSaveComment {
+  margin-bottom: 1%;
+}
+
+#btnUpdateAppraisalReply {
+ margin-top: 1%;
+ margin-bottom: 1%;
+}
+
+.btn.btn-success.pull-right.claim, .btn.btn-success.pull-right.edit, .large-photo {
+  margin-bottom: 1%;
+}
+
+#build_general .chosen-container.chosen-container-single {
+  width: 100% !important;
+}
+
+#build_plan .formProdPair{
+  width: 100%;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+#build_plan .formProdPairText{
+  margin-bottom: 5px;
+}
+
+#build_plan .label_isPair {
+  font-weight: normal;
+}
+
+#build_plan .buttons {
+  margin-top: 5px;
+    padding-bottom: 50px;
+}
+
+.bottom-button {
+  margin-top: 5px;
+}
+
+#addSkillBtn {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+#addCategotyBtn {
+  width: 100%;
+}
+
+select[name="demo6_"] {
+  width: 80%;
+}
+
+.medium-title {
+  font-size: 27px;
+  font-weight: bold;
+  color: #373737;
+}
+
+.big-title {
+  margin-left: 3%;
+}
+
+label.error {
+  color: red;
+}
+
+input.error:focus, textarea.error:focus {
+  border-color: rgba(229, 103, 23, 0.8);
+  box-shadow: 0 1px 1px rgba(229, 103, 23, 0.075) inset, 0 0 8px rgba(229, 103, 23, 0.6);
+  outline: 0 none;
+}
+
+.brief_name {
+  margin-bottom: 10px;
+}
+
+.formProdSelected-small {
+  background: url(check.png) no-repeat;
+  /*background-position: 285px 0px;*/
+  cursor: default;
+  color: #000;
+}
+
+#txtRejectionReason {
+  width: 48.5%;
+}
+
+#btnSaveComment {
+  width: 10%;
+}
+
+#homeItem {
+  height: 350px !important;
+} 
+
+.responsive-container { 
+  margin-bottom: 30px
+}
+
+body {
+  overflow-x: hidden;
+}
+
+#build_plan .hidden_select_inner {
+  width: 170px;
+  margin: 0 auto;
+}
+
+#couponblock{
+  background:url(bg_coupon.jpg) repeat-x;
+  text-align:center;
+  position:relative;
+  padding:8px;
+  font-size:18px;
+  color:#fff;
+}
+
+.alert.alert_phonenumber, .alert.alert_dismissable{
+  color: #c09853;
+  background-color: #F7F3D9;
+}
+
+#check_use_infor {
+  padding-left: 35px;
+}
+
+#check_use_VTN {
+  padding-left: 6px;
+}
+
+.payment_hr {
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+.social-button-div {
+  width: 300px;
+}
+
+#error_explanation h2 {
+  text-align: left;
+  font-size: 25px;
+}

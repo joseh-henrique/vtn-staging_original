@@ -10,6 +10,7 @@ jQuery ->
   $(".currency-input").maskMoney()
   $("#supplemental_information").collapse({toggle:false})
   $(".chzn-select").chosen()
+  $(".show_if_checked").hide();
   
   # Make sure that at least one image has been uploaded before continuing
   $('#btn_step_2_wizard_image_upload').click ->
@@ -66,48 +67,130 @@ jQuery ->
 
   $('#btnSubmitAppraisalReply').click ->
     $('#appraisal_status').val("10")
+    if payment_selected_plan == 4 || payment_selected_plan == 8
+      if words_number < 100
+        alert "The minimum length for Appraiser's Additional Comments is 100 words"
+        false
+      else
+        true
+
+  $("#chkSuggestRejection").click ->
+    if ($(this).attr("checked") == "checked")
+      $("#btnUpdateAppraisalReply").attr("disabled", true)
+      $("#btnSubmitAppraisalReply").attr("disabled", true)
+      $("#btnRejectAppraisal").attr("disabled", false)
+    else
+      $("#btnUpdateAppraisalReply").attr("disabled", false)
+      $("#btnSubmitAppraisalReply").attr("disabled", false)
+      $("#btnRejectAppraisal").attr("disabled", true)
+
+  $('#btnRejectAppraisal').click ->
+    edit_form.resetForm()
+    form = $('.edit_appraisal').get(0)
+    $.removeData(form,'validator')
+    $('#appraisal_status').val("14")
+    if $("#chkSuggestRejection").is(':checked') and $("#txtRejectionReason").val().length == 0
+      alert "Please enter a reason for rejecting the appraisal"
+      false
+  
+  $('#btnUpdateAppraisalReply').click ->
+    if payment_selected_plan == 4 || payment_selected_plan == 8
+      if words_number < 100
+        alert "The minimum length for Appraiser's Additional Comments is 100 words"
+        false
+      else
+        true
 
   # Begin Code for Plan Selection in Appraisal Wizard $("#plansel1").click ->
   $("#planprod1").click ->
-    $("#planprod1").addClass("formProdOn").siblings().removeClass "formProdOn"
-    $("#plansel1").addClass("formProdSelected").siblings().removeClass "formProdSelected"
+    $(".formProd").removeClass("formProdOn")
+    $("#planprod1").addClass("formProdOn")
+    $(".formProdSelect").removeClass("formProdSelected")
+    $(".formProdSelect").removeClass("formProdSelected-small")
+    $("#plansel1").addClass("formProdSelected")
+    $("#small-plansel1").addClass("formProdSelected-small")
+    resetSelectTxt()
+    $("#small-plansel1").html "Selected"
+    $("#appraisal_selected_plan").val(vtn_constants.EAAppraisalTypeShortRestricted)
+
+  $("#planprod2").click ->
+    $(".formProd").removeClass("formProdOn")
+    $("#planprod2").addClass("formProdOn")
+    $(".formProdSelect").removeClass("formProdSelected")
+    $(".formProdSelect").removeClass("formProdSelected-small")
+    $("#plansel2").addClass("formProdSelected")
+    $("#small-plansel2").addClass("formProdSelected-small")
+    resetSelectTxt()
+    $("#plansel2").html "Selected"
+    $("#small-plansel2").html "Selected"
+    $("#appraisal_selected_plan").val(vtn_constants.EAAppraisalTypeLongRestricted)
+
+  $("#planprod4").click ->
+    $(".formProd").removeClass("formProdOn")
+    $("#planprod4").addClass("formProdOn")
+    $(".formProdSelect").removeClass("formProdSelected")
+    $(".formProdSelect").removeClass("formProdSelected-small")
+    $("#plansel4").addClass("formProdSelected")
+    $("#small-plansel4").addClass("formProdSelected-small")
+    resetSelectTxt()
+    $("#plansel4").html "Selected"
+    $("#small-plansel4").html "Selected"
+    $("#appraisal_selected_plan").val(vtn_constants.EAAppraisalTypeLongForSelling)
+
+  $("#plansel1").click ->
+    $(".formProd").removeClass("formProdOn")
+    $("#planprod1").addClass("formProdOn")
+    $(".formProdSelect").removeClass("formProdSelected")
+    $("#plansel1").addClass("formProdSelected")
     resetSelectTxt()
     $("#plansel1").html "Selected"
     $("#appraisal_selected_plan").val(vtn_constants.EAAppraisalTypeShortRestricted)
 
-  $("#planprod2").click ->
-    $("#planprod2").addClass("formProdOn").siblings().removeClass "formProdOn"
-    $("#plansel2").addClass("formProdSelected").siblings().removeClass "formProdSelected"
+  $("#small-plansel1").click ->
+    $(".formProd").removeClass("formProdOn")
+    $("#planprod1").addClass("formProdOn")
+    $(".formProdSelect").removeClass("formProdSelected-small")
+    $("#small-plansel1").addClass("formProdSelected-small")
+    resetSelectTxt()
+    $("#small-plansel1").html "Selected"
+    $("#appraisal_selected_plan").val(vtn_constants.EAAppraisalTypeShortRestricted)
+
+  $("#plansel2").click ->
+    $(".formProd").removeClass("formProdOn")
+    $("#planprod2").addClass("formProdOn")
+    $(".formProdSelect").removeClass("formProdSelected")
+    $("#plansel2").addClass("formProdSelected")
     resetSelectTxt()
     $("#plansel2").html "Selected"
     $("#appraisal_selected_plan").val(vtn_constants.EAAppraisalTypeLongRestricted)
 
-  $("#planprod4").click ->
-    $("#planprod4").addClass("formProdOn").siblings().removeClass "formProdOn"
-    $("#plansel4").addClass("formProdSelected").siblings().removeClass "formProdSelected"
+  $("#small-plansel2").click ->
+    $(".formProd").removeClass("formProdOn")
+    $("#planprod2").addClass("formProdOn")
+    $(".formProdSelect").removeClass("formProdSelected-small")
+    $("#small-plansel2").addClass("formProdSelected-small")
     resetSelectTxt()
-    $("#plansel4").html "Selected"
-    $("#appraisal_selected_plan").val(vtn_constants.EAAppraisalTypeLongForSelling)
-
-  $("#plansel1").click ->
-    $("#planprod1").addClass("formProdOn").siblings().removeClass "formProdOn"
-    $(this).addClass("formProdSelected").siblings().removeClass "formProdSelected"
-    resetSelectTxt()
-    $(this).html "Selected"
-    $("#appraisal_selected_plan").val(vtn_constants.EAAppraisalTypeShortRestricted)
-
-  $("#plansel2").click ->
-    $("#planprod2").addClass("formProdOn").siblings().removeClass "formProdOn"
-    $(this).addClass("formProdSelected").siblings().removeClass "formProdSelected"
-    resetSelectTxt()
-    $(this).html "Selected"
+    $("#small-plansel2").html "Selected"
     $("#appraisal_selected_plan").val(vtn_constants.EAAppraisalTypeLongRestricted)
 
+
   $("#plansel4").click ->
-    $("#planprod4").addClass("formProdOn").siblings().removeClass "formProdOn"
-    $(this).addClass("formProdSelected").siblings().removeClass "formProdSelected"
+    $(".formProd").removeClass("formProdOn")
+    $("#planprod4").addClass("formProdOn")
+    $(".formProdSelect").removeClass("formProdSelected")
+    $("#plansel4").addClass("formProdSelected")
     resetSelectTxt()
-    $(this).html "Selected"
+    $("#plansel4").html "Selected"
+    $("#small-plansel4").html "Selected"
+    $("#appraisal_selected_plan").val(vtn_constants.EAAppraisalTypeLongForSelling)
+
+  $("#small-plansel4").click ->
+    $(".formProd").removeClass("formProdOn")
+    $("#planprod4").addClass("formProdOn")
+    $(".formProdSelect").removeClass("formProdSelected-small")
+    $("#small-plansel4").addClass("formProdSelected-small")
+    resetSelectTxt()
+    $("#small-plansel4").html "Selected"
     $("#appraisal_selected_plan").val(vtn_constants.EAAppraisalTypeLongForSelling)
 
   setSelectedPlan()
@@ -120,13 +203,6 @@ jQuery ->
     else
       $("#divRejectionReason").hide()
       $("#txtRejectionReason").val("")
-
-  $('#btnUpdateAppraisalReply').click ->
-    if $("#chkSuggestRejection").is(':checked') and $("#txtRejectionReason").val().length == 0
-      alert "Please enter a reason for rejecting the appraisal"
-      false
-    else
-      true
 
   $("#chkImportAccount").change ->
     if $(this).is(':checked')
@@ -141,17 +217,49 @@ jQuery ->
       $("#appraisal_payment_attributes_city").val("")
       $("#appraisal_payment_attributes_state").val("")
       $("#appraisal_payment_attributes_zip").val("")
+  
+  $("#chkVtnPartner").change ->
+    if $(this).is(":checked")
+      $(".hide_if_checked").hide()
+      $(".show_if_checked").show()
+      disable_user_information();
 
+      $("#appraisal_payment_attributes_vendor_token_partner").val($("#customer_vendor_token").val())
+
+    else
+      $(".show_if_checked").hide()
+      $(".hide_if_checked").show()
+      enable_user_information();
+    return  
+
+  $("#auto_fill").change ->
+    if $(this).is(":checked")
+      $("#txtCompanyName_partner").val($("#customer_name").val())
+      $("#appraisal_payment_attributes_address_partner").val($("#customer_address_attributes_address").val())
+      if $("#customer_address_attributes_city").val() != "" && $("#customer_address_attributes_state").val() != "" && $("#customer_address_attributes_zip").val() != ""
+        city_state_postal =  $("#customer_address_attributes_city").val() + ", " + $("#customer_address_attributes_state").val() + " " +  $("#customer_address_attributes_zip").val()
+      else
+        city_state_postal = ""
+      $("#appraisal_payment_attributes_city_state_postal_partner").val(city_state_postal)
+      $("#appraisal_payment_attributes_claim_partner").val("")
+      
+    else
+      $("#txtCompanyName_partner").val("")
+      $("#appraisal_payment_attributes_address_partner").val("")
+      $("#appraisal_payment_attributes_city_state_postal_partner").val("")
+      $("#appraisal_payment_attributes_claim_partner").val("")
+    return
+  
   $("#btnBuildWizardPhoto").click ->
-    if $('.img-row').length is 0
+    if $('.img-row').length == 1
       alert "Please upload at least one image to continue"
       false
     else
       true
 
-  $("#btnBuildWizardGeneral").click ->
+  $("#btnBuildWizardGeneral").click ->       
     if $("#appraisal_classification_attributes_category_id").val() is ""
-      alert "Error. Please choose a category before proceeding"
+      alert "Error. Please complete all required fields"
       false
     else
       true
@@ -182,9 +290,9 @@ jQuery ->
       return false
 
   $("#paymentModal").on "hide", ->
-      $("#paymentModalLoading").show()
-      $("#paymentModalDeclined").hide()
-      $("#paymentModalFooter").hide()
+      $("#paymentModalLoading").show();
+      $("#paymentModalDeclined").hide();
+      $("#paymentModalFooter").hide();
 
   $("#tooltipAppraiserId").tooltip
     placement: "bottom"
@@ -192,27 +300,45 @@ jQuery ->
 
   $("#txtAppraisalComments").textareaCount {originalStyle: "originalDisplayInfo"}, (data) ->
     if data.words >= 100
-      $("#fullSummaryHelp").hide()
+      $("#fullSummaryHelp").hide();
     else
-      $("#fullSummaryHelp").show()
-    return textareaCount
+      $("#fullSummaryHelp").show();
 
 requiredFields = ->
   isValid = true
-  $("[required]").each ->
-    isValid = false if $(this).val() is ""
+  if $("#chkVtnPartner")[0].checked == true
+    $("[partner-required]").not(":hidden").each ->
+      isValid = false if $(this).val() is ""
+  else
+    $("[required]").not(":hidden").each ->
+      isValid = false if $(this).val() is ""
   isValid
+
 
 resetSelectTxt = ->
   $("#plansel1").html "Select"
   $("#plansel2").html "Select"
   $("#plansel4").html "Select"
 
+  $("#small-plansel1").html "Select"
+  $("#small-plansel2").html "Select"
+  $("#small-plansel4").html "Select"
+
 setSelectedPlan = ->
   if $("#appraisal_selected_plan").val()
     $("#plansel"+$("#appraisal_selected_plan").val()).trigger('click')
   else
     $("#plansel4").trigger('click')
+
+disable_user_information = ->
+  $("#chkImportAccount").attr("disabled", "disabled");
+  $("[required]").attr("disabled", "disabled");
+
+enable_user_information = ->
+  $("#chkImportAccount").removeAttr("disabled");
+  $("[required]").removeAttr("disabled");
+
+
 
 $.fn.serializeObject = ->
   json = {}

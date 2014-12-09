@@ -1,0 +1,13 @@
+development:
+    app_id: '5opDPGOTgq5G2Whd3fCBkIhvG'
+    app_secret: 'dkVFVLVdO3kQnyeDUpmgsWTXqUCZpzGoEvrlCHmpdwYtvqi8Ap'
+staging:
+    app_id: '5opDPGOTgq5G2Whd3fCBkIhvG'
+    app_secret: 'dkVFVLVdO3kQnyeDUpmgsWTXqUCZpzGoEvrlCHmpdwYtvqi8Ap'
+sandbox:
+    app_id: '5opDPGOTgq5G2Whd3fCBkIhvG'
+    app_secret: 'dkVFVLVdO3kQnyeDUpmgsWTXqUCZpzGoEvrlCHmpdwYtvqi8Ap'
+production:
+    app_id: '5opDPGOTgq5G2Whd3fCBkIhvG'
+    app_secret: 'dkVFVLVdO3kQnyeDUpmgsWTXqUCZpzGoEvrlCHmpdwYtvqi8Ap'        
+

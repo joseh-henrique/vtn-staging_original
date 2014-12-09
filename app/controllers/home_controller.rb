@@ -19,16 +19,6 @@ class HomeController < ApplicationController
     end
   end
 
-  # What we value
-  def categories
-    render cms_page: '/categories'
-  end
-
-  # Excluded items
-  def exclusions
-    render cms_page: '/exclusions'
-  end
-
   # Privacy Policy
   def privacy
     render cms_page: '/privacy-policy'
@@ -66,9 +56,6 @@ class HomeController < ApplicationController
 
   def what_makes
     render cms_page: '/what_makes'
-  end
-
-  def appraiser_invite
   end
 
   def fee_schedule
@@ -114,10 +101,19 @@ class HomeController < ApplicationController
       end
     end
   end
-  # End For Future Use
-  #
+
   def blog_redirect
     url = params[:slug] ? "http://blog.valuethisnow.com/posts/#{params[:slug]}" : "http://blog.valuethisnow.com"
     redirect_to url
   end
+
+  def using_online_appraisals
+    render cms_page: '/using-online-appraisals'
+  end
+
+  def cost_of_appraisals
+    render cms_page: '/cost-of-appraisals'
+  end
+
+
 end

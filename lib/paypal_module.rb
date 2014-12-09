@@ -6,7 +6,6 @@ module PaypalModule
         @login  = paypal_credential[:login]
         @password = paypal_credential[:password]    
         @signature= paypal_credential[:signature] 
-
       end
 
       def charge(mycc, ip)

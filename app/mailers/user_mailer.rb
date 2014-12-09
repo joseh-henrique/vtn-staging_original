@@ -1,6 +1,8 @@
 class UserMailer < ActionMailer::Base
   helper :application
-  default :from    => "no-reply@valuethisnow.com",
+  # default :from    => "no-reply@valuethisnow.com",
+  #   :sent_on => Time.now.to_s
+  default :from    => "lypt@elarion.com",
     :sent_on => Time.now.to_s
 
   def notify_appraiser_of_new_appraisal(appraiser,appraisal)
@@ -91,6 +93,12 @@ class UserMailer < ActionMailer::Base
     mail(:bcc => Setting.get("admin_distribution_list").split(','),
          :to => @customer.email,
          :subject => "[Appraisal Rejected ] #{appraisal.name}")
+  end
+
+  def notify_appraiser_for_new_assign(appraiser_id)
+    @appraiser = Appraiser.find(appraiser_id)
+    mail(:to => @appraiser.email,
+         :subject => "[Value This Now] An Appraisal has been assigned to you")
   end
 
   private

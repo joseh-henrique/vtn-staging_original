@@ -16,6 +16,8 @@ class Appraisal < ActiveRecord::Base
   has_one :classification
   has_one :payment
 
+  has_many :partner_informations
+
   belongs_to :assigned_to, :class_name => 'User' , :foreign_key => "assigned_to"
   belongs_to :owned_by,    :class_name => 'User' , :foreign_key => "created_by"
 
@@ -25,28 +27,31 @@ class Appraisal < ActiveRecord::Base
   accepts_nested_attributes_for :payment, :allow_destroy => true
 
   validates_presence_of :created_by, if: :active_or_general?
-  validates_presence_of :name, :title, if: :active_or_general?
+  validates_presence_of :name, :title, :insurance_location, if: :active_or_general?
   validates :selected_plan, :presence => { :message => "Please select a plan to continue" }, if: :active?
   validate :validate_appraisal_requirements, if: :active?
   validate :validate_appraiser_referral, if: :active_or_general?
 
   serialize :appraisal_info, AppraisalInfo
 
-  attr_accessible :appraiser_referral, :allow_share, :created_by, :selected_plan, :name, :photos_attributes, :appraiser_number, :appraisal_info, :status, :appraisal_type, :title
+  attr_accessible :appraiser_referral, :allow_share, :created_by, :selected_plan, :name, :photos_attributes, :appraiser_number, :appraisal_info, :status, :appraisal_type, :title, :is_downloaded
   attr_accessible :classification_attributes, :payment_attributes, :step, :rejection_reason
   attr_accessible :insurance_claim, :insurance_prior, :insurance_location
   acts_as_commentable
 
-  scope :visible, where("status != ?", EActivityValueHidden)
-  scope :processing, where("status = ?", EActivityValueClaimed)
-  scope :complete, where("status = ?", EActivityValueFinalized)
+  scope :visible, -> {where("status != ?", EActivityValueHidden)}
+  scope :processing, -> {where("status = ?", EActivityValueClaimed)}
+  scope :complete, -> {where("status = ?", EActivityValueFinalized)}
 
   # Returns how much time it took the appraiser to complete the appraisal (can return in seconds (s), minutes(m), hours(h), or days(d))
   def completion_time(format = "s")
     begin
-      claimed_on = (get_date_for_status_change(EActivityValuePayed, EActivityValueClaimed)).to_i
+      # claimed_on = (get_date_for_status_change(EActivityValuePayed, EActivityValueClaimed)).to_i
+      claimed_on = get_claimed_on
       completed_on = (get_date_for_status_change(EActivityValueClaimed, EActivityValueFinalized)).to_i
+
       duration = (claimed_on == 0 || completed_on == 0) ? 0 : (completed_on - claimed_on)
+
       case format
       when 'm'
         (duration/60).to_i
@@ -59,6 +64,20 @@ class Appraisal < ActiveRecord::Base
       end
     rescue
       return 0
+    end
+  end
+
+  def get_claimed_on
+    reject_to_process = self.versions.select {|x| YAML.load(x.object_changes)["status"] == [EActivityValueReviewRejection, EActivityValueClaimed] }
+    unclaim_to_process = self.versions.select {|x| YAML.load(x.object_changes)["status"] == [EActivityValuePayed, EActivityValueClaimed] }
+
+    # If no rejected
+    if reject_to_process.blank?
+      return unclaim_to_process.last.created_at.to_i
+    elsif reject_to_process.length >= unclaim_to_process.length
+      return reject_to_process.last.created_at.to_i
+    elsif reject_to_process.length < unclaim_to_process.length
+      return unclaim_to_process.last.created_at.to_i
     end
   end
 
@@ -118,6 +137,7 @@ class Appraisal < ActiveRecord::Base
   def reject(comments)
     comments ||= "No reason for rejection was given"
     self.status = EActivityValueRejected
+    self.rejection_reason = "" unless self.rejection_reason
     self.rejection_reason = self.rejection_reason + " ADMIN COMMENTS: " + comments
     self.save
     UserMailer.notify_user_of_rejection(self,comments).deliver if (Rails.env == 'development' || Rails.env == 'production')
@@ -126,6 +146,38 @@ class Appraisal < ActiveRecord::Base
   def return_to_claimed_status
     self.status = EActivityValueClaimed
     self.save
+  end
+
+  def return_to_queue
+    unless self.status == EActivityValuePayed
+      self.status = EActivityValuePayed
+      self.appraisal_info.additional_ea = ""
+      self.appraisal_info.appraiser_comments = ""
+      self.appraisal_info.replacement_cost_min = ""
+      self.appraisal_info.replacement_cost_max = ""
+      self.appraisal_info.fair_market_value_min = ""
+      self.appraisal_info.fair_market_value_max = ""
+    end
+    self.appraiser_referral = ""
+    self.assigned_to = nil
+    self.save 
+  end
+
+  def assign_to_appraiser_id(appraiser)
+    unless self.status == EActivityValuePayed
+      self.status = EActivityValuePayed
+      self.appraisal_info.additional_ea = ""
+      self.appraisal_info.appraiser_comments = ""
+      self.appraisal_info.replacement_cost_min = ""
+      self.appraisal_info.replacement_cost_max = ""
+      self.appraisal_info.fair_market_value_min = ""
+      self.appraisal_info.fair_market_value_max = ""
+    end
+    self.appraiser_referral = appraiser.referral_id
+    self.assigned_to = appraiser
+    self.assigned_on = Time.now
+    self.save
+    UserMailer.notify_appraiser_for_new_assign(appraiser.id).deliver
   end
 
   def claim!(params)
@@ -195,7 +247,14 @@ class Appraisal < ActiveRecord::Base
       if self.appraisal_info.appraiser_comments.blank?
         errors.add(:appraiser_comments, "can't be blank")
       end
-    end
+    when EActivityValueClaimed
+      if self.appraisal_info.appraiser_comments.blank?
+        errors.add(:appraiser_comments, "can't be blank")
+      end
+      if (self.appraisal_info.appraiser_comments.length <= 100 )
+        errors.add(:appraiser_comments, "minimum length of 100 words")
+      end
+    end  
   end
 
   def validate_appraisal_info

@@ -14,7 +14,7 @@ class AppraisalsController < ApplicationController
     end
     @appraisals = @appraisals.flatten
 
-    if @appraisals.empty?
+    if @appraisals.blank?
       @appraisal = Appraisal.new
       1.times { @appraisal.photos.build }
     end
@@ -55,7 +55,7 @@ class AppraisalsController < ApplicationController
     
     template_file = @pdf_full ? "/appraisals/reports/full.pdf.erb" : "/appraisals/reports/lacey.pdf.erb"
     respond_to do |format|
-      format.pdf { render :pdf => 'report.pdf', :page_size => "Legal", :show_as_html => params[:debug].present?, :template => template_file }
+      format.pdf { render :pdf => 'report', :page_size => "Legal", :show_as_html => params[:debug].present?, :template => template_file }
     end
   end
 
@@ -110,7 +110,8 @@ class AppraisalsController < ApplicationController
   # PUT /appraisals/1
   def update
     @appraisal = Appraisal.find(params[:id])
-    if params[:suggest_rejection]
+
+    if params[:suggest_rejection] && params[:appraisal][:status] == "14"
       pending_rejection = @appraisal.suggest_for_rejection(rejection_reason: params[:txtRejectionReason])
     end
     previous_status = @appraisal.status
@@ -202,15 +203,51 @@ class AppraisalsController < ApplicationController
   def reject
     if current_user.admin?
       @appraisal = Appraisal.find(params[:id])
-      if params[:btn_submit] == "Return to Claimed"
-        @appraisal.return_to_claimed_status
-        flash[:error]  = "The appraisal was returned for claimed status"
-      else
-        @appraisal.reject(params[:comments])
-        flash[:error]  = "The appraisal was rejected"
-      end
+
+      type = params[:btn_submit]
+      case type
+        when "Return to Appraiser"
+          @appraisal.return_to_claimed_status
+          flash[:error]  = "The appraisal was returned for claimed status"
+          redirect_to admin_root_path
+        when "Return to queue"
+          if @appraisal.status != 0
+            @appraisal.return_to_queue
+            flash[:error] = "The appraisal was returned to queue"
+            redirect_to admin_root_path
+          else
+            flash[:error] = "Can not return incompleted appraisal to queue"
+            redirect_to admin_appraisal_path(@appraisal)
+          end
+        when "Assign to Appraiser ID"
+          appraiser_id = params[:appraiser_id].to_i
+          unless appraiser_id <= 0 || appraiser_id > 999
+            
+            if Appraiser.exists?(appraiser_id) && Appraiser.find(appraiser_id).type == "Appraiser"
+              appraiser = Appraiser.find(appraiser_id)
+              if appraiser.status == 2
+                @appraisal.assign_to_appraiser_id(appraiser)
+                flash[:error] = "The appraisal was assigned to Appraiser with ID: #{params[:appraiser_id]}"
+                redirect_to admin_root_path
+              else
+                flash[:error] = "Please be noticed that the appraisal only be assigned to the Confirmed Appraiser"
+                redirect_to admin_appraisal_path(@appraisal)
+              end
+            else
+              flash[:error] = "Appraiser is not found"
+              redirect_to admin_appraisal_path(@appraisal)
+            end
+          else
+            flash[:error] = "Appraiser with ID must be between 1 and 999"
+            redirect_to admin_appraisal_path(@appraisal)
+          end
+        else
+          @appraisal.reject(params[:comments])
+          flash[:error]  = "The appraisal was rejected"
+          redirect_to admin_root_path
+      end    
     end
-    redirect_to admin_root_path
+    
   end
 
 

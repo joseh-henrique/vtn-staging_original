@@ -1,6 +1,5 @@
 ActiveAdmin.register Payout do
   menu :if => proc{ can?(:manage, Payout) }     
-  controller.authorize_resource 
   actions :all, :except => [:destroy]
   menu :label => "Appraiser Payouts", :parent => "Compensations"  
 
@@ -39,7 +38,7 @@ ActiveAdmin.register Payout do
 
   show do
     attributes_table do
-      row	:created_at
+      row :created_at
       row :updated_at
       row :id
       row :appraisal_id
@@ -50,6 +49,10 @@ ActiveAdmin.register Payout do
   end
 
   batch_action :pay_with_paypal, :confirm => "Are you sure you want to send this payouts?" do |selection|
-    redirect_to payouts_create_path(:payouts => Payout.find(selection))
+    redirect_to payouts_create_path(Payout.find(selection))
   end
+
+  # batch_action :pay_with_paypal, :confirm => "Are you sure you want to send this payouts?" do |selection|
+  #   redirect_to payout_my_custom_path
+  # end
 end

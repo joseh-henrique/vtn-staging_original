@@ -1,0 +1,12 @@
+development:
+  app_id: '75vq8v46ai2zqe'
+  app_secret: 'lkwJznV7C2jVjbGl'
+staging:
+  app_id: '75vq8v46ai2zqe'
+  app_secret: 'lkwJznV7C2jVjbGl'
+sandbox:
+  app_id: '75vq8v46ai2zqe'
+  app_secret: 'lkwJznV7C2jVjbGl'
+production:
+  app_id: '75vq8v46ai2zqe'
+  app_secret: 'lkwJznV7C2jVjbGl'

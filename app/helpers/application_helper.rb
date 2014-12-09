@@ -51,7 +51,7 @@ module ApplicationHelper
               EAAppraisalTypeShortForSellingPair => "Light Summary Appraisal Pair",
               EAAppraisalTypeLongForSellingPair => "Full Summary Appraisal Pair"}
 
-    hItems[nType].empty? ? "" : hItems[nType]
+    hItems[nType].blank? ? "" : hItems[nType]
   end
 
   def getStringForPayoutStatus(status)
@@ -104,7 +104,7 @@ module ApplicationHelper
   end
 
   def print_as_currency(number)
-    number_to_currency(number, :locale => :us)
+    number_to_currency(number, :locale => 'en-US')
   end
 
   def display_time(total_seconds)
@@ -153,6 +153,10 @@ module ApplicationHelper
     return raw(page.nil? ? "" : page.content)
   end
 
+  def get_static_page_html(path, col = 10, offset = 1)
+    return raw "<div class='row'><div class='col-md-#{col} col-md-offset-#{offset}'>#{get_cms_content('/testimonials')}</div></div>"
+  end
+
   def form_text_field(params)
     title = params[:title] || params[:field].to_s.titleize
     required = params[:required] || false
@@ -167,11 +171,44 @@ module ApplicationHelper
     hint = params[:hint] || nil
     value = params[:value] || nil
 
+
+    markup = "
+      <div class='form-group'>
+        <label class='col-sm-2 control-label'>Email</label>
+        <div class='col-sm-10'>
+          <%= f.input_field :email, class: 'form-control' %>
+        </div>
+      </div>"
+
     markup = "<tr><td class='formTitle' valign='top'>#{'*' if required} #{title}</td>"
     markup += "<td class='formBlock'>"
     markup += params[:form].input params[:field], as: as, required: required, label: label, input_html: input_html, placeholder: placeholder, priority: priority, value: value, hint: hint
     markup += "</td></tr>"
     return raw markup
+  end
+
+
+  def tb_field(params)
+    label_width = params[:label_width] || 2
+    field_width = params[:label_width] || 10
+    title = params[:title] || params[:field].to_s.titleize
+    form = params[:form]
+    value = params[:value] || nil
+    as = params[:as] || :string
+    input_html = params[:input_html] || nil
+    label = as == :hidden ? "" : "<label class='col-sm-#{label_width} control-label'>#{title}</label>"
+    markup = "<div class='form-group'>" + label + "<div class='col-sm-#{field_width}'>"
+    markup += params[:form].input_field :email, class: 'form-control', value: value, as: as, input_html: input_html
+    markup += "</div></div>"
+    return raw markup
+  end
+
+  def tb_submit_button(params = {})
+    label_width = params[:label_width] || 2
+    field_width = params[:label_width] || 10
+    title = params[:title] || "Save"
+    html_class = params[:html_class] || "btn btn-success"
+    return raw "<div class='form-group'><div class='col-sm-offset-#{label_width} col-sm-#{field_width}'><button type='submit' class='#{html_class}'>#{title}</button></div></div>"
   end
 
   def form_submit_button(params)
@@ -207,4 +244,38 @@ module ApplicationHelper
     }.merge options
     url_for(options)
   end
+  #  TODO Return the price of partner customer
+  def get_pricing_of_partner(user, selected_plan, is_xw = false)
+    pricing = PartnerPricing.find_by_user_id(user)
+    price = 0
+
+    if selected_plan > 4
+      selected_plan -= 4
+      price += 20
+    end
+
+    plan = PAYMENT_PLAN_FOR_PARTNER[selected_plan]
+    if is_xw.blank?
+      case plan
+        when "short_restricted"
+          price += pricing.short_restricted
+        when "full_restricted"
+          price += pricing.full_restricted
+        when "full_use"
+          price += pricing.full_use      
+      end
+    else
+      case plan
+        when "short_restricted"
+          price += pricing.short_restricted_xw
+        when "full_restricted"
+          price += pricing.full_restricted_xw
+        when "full_use"
+          price += pricing.full_use_xw
+      end
+    end
+
+    return price
+  end
+
 end

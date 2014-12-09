@@ -11,16 +11,14 @@ class UsersController < ApplicationController
     respond_to do |format|
       if @user.update_attributes(params[:user])
         format.html { redirect_to(after_sign_in_path_for(@user), :notice => 'Your profile was successfully updated.') }
-        format.xml { head :ok }
       else
         format.html { redirect_to(after_sign_in_path_for(@user), :alert => 'Your profile was not updated. Check the input value you gave is correct.') }
-        format.xml { render :xml => @user.errors, :status => :unprocessable_entity }
       end
     end
   end
 
   def get_user
-    @user = params[:id].nil? ? current_user : User.find(params[:id])
+    @user = current_user
     redirect_to root_path if @user.nil?# || @user.role != "admin"
   end
 
@@ -110,4 +108,26 @@ class UsersController < ApplicationController
       end
     end
   end
+  
+   def get_user_by_vendor_token
+    @user = User.where(:vendor_token => params[:vendor_id]).first
+    unless @user.blank?
+      responce = {:name => @user.name, :address => @user.address.try(:address), :city => @user.address.try(:city), :state => @user.address.try(:state), :zip => @user.address.try(:zip)} 
+    end
+    render :json => responce
+  end
+
+  def finish_signup
+    # authorize! :update, @user 
+    if request.patch? && params[:user] #&& params[:user][:email]
+      if @user.update(user_params)
+        @user.skip_reconfirmation!
+        sign_in(@user, :bypass => true)
+        redirect_to @user, notice: 'Your profile was successfully updated.'
+      else
+        @show_errors = true
+      end
+    end
+  end
+
 end

@@ -1,6 +1,9 @@
 development:
-    app_id: '425544334168202'
-    app_secret: 'b466a4f70ed5102ffd737f1bc069bb8d'
+    app_id: '657063611076751'
+    app_secret: 'ea6cafc02d8c776838398959353f6844'
+# development:
+#     app_id: '425544334168202'
+#     app_secret: 'b466a4f70ed5102ffd737f1bc069bb8d'
 
 test:
     app_id: '425544334168202'

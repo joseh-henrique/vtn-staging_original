@@ -1,4 +1,7 @@
+Devise::TRUE_VALUES << ["on"]
 FACEBOOK_ACCESS = YAML.load_file(File.join(Rails.root, "config", "facebook_access.yml"))
+TWITTER_ACCESS = YAML.load_file(File.join(Rails.root, "config", "twitter_access.yml"))
+LINKEDIN_ACCESS = YAML.load_file(File.join(Rails.root, "config", "linkedin_access.yml"))
 # Use this hook to configure devise mailer, warden hooks and so forth.
 # Many of these configuration options can be set straight in your model.
 Devise.setup do |config|
@@ -104,7 +107,7 @@ Devise.setup do |config|
 
   # ==> Configuration for :rememberable
   # The time the user will be remembered without asking for credentials again.
-  # config.remember_for = 2.weeks
+  config.remember_for = 2.weeks
 
   # If true, extends the user's remember period when remembered via cookie.
   # config.extend_remember_period = false
@@ -231,6 +234,11 @@ Devise.setup do |config|
   # so you need to do it manually. For the users scope, it would be:
   # config.omniauth_path_prefix = "/my_engine/users/auth"
   config.omniauth :facebook, FACEBOOK_ACCESS[Rails.env]['app_id'], FACEBOOK_ACCESS[Rails.env]['app_secret']
-  config.password_regex = /^.*(?=.{6,})(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).*$/
+  config.omniauth :twitter, TWITTER_ACCESS[Rails.env]['app_id'], TWITTER_ACCESS[Rails.env]['app_secret']
+  config.omniauth :linkedin, LINKEDIN_ACCESS[Rails.env]['app_id'], LINKEDIN_ACCESS[Rails.env]['app_secret']
+
+  config.password_regex = /\A.*(?=.{6,})(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).*\z/
+
+  config.secret_key = '489c9e8986cdc807866a5588fee7a848d6c64af1a58324eaad6be044acb8899bf5e278f526e1b3812c32d95c31819c9230ae27a81a5cbb4f225c436e07621a2c'
 
 end

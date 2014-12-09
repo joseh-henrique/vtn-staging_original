@@ -11,9 +11,11 @@
 // GO AFTER THE REQUIRES BELOW.
 //
 //= require jquery
+//= require jquery-migrate-min
 //= require jquery_ujs
 // Loads all Bootstrap javascripts
 //= require bootstrap
+//= require jquery.validate
 //= require jquery.maskedinput-1.3.min
 //= require excanvas.compiled
 //= require cloudinary 

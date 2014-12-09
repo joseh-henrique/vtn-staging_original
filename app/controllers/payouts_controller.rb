@@ -27,4 +27,8 @@ class PayoutsController < ApplicationController
 		end
   	end
   end
+
+  def my_custom
+    p "MY CUSTOME------------------------------"
+  end
 end
