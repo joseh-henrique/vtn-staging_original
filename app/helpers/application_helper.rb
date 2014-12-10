@@ -140,7 +140,7 @@ module ApplicationHelper
 
   def get_page_title(path)
     page = Cms::Snippet.find_by_label("title-"+path)
-    return raw(page.nil? ? "ValueThisNow: An Online Appraisal Service For Antiques & Collectibles" : page.content)
+    return raw(page.nil? ? "An Online Appraisal Service For Antiques & Collectibles" : page.content)
   end
 
   def get_page_description(path)
