@@ -5,3 +5,7 @@ table#strategic_partner .col.col-name {
   text-overflow: ellipsis; 
   -o-text-overflow: ellipsis;
 }
+
+.bigger-size {
+  font-size: 15px;
+}
