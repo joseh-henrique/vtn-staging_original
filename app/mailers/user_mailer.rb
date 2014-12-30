@@ -1,10 +1,7 @@
 class UserMailer < ActionMailer::Base
   helper :application
-  # default :from    => "no-reply@valuethisnow.com",
-  #   :sent_on => Time.now.to_s
-  default :from    => "lypt@elarion.com",
+  default :from    => "no-reply@valuethisnow.com",
     :sent_on => Time.now.to_s
-
   def notify_appraiser_of_new_appraisal(appraiser,appraisal)
     @appraiser = appraiser
     @appraisal = appraisal
