@@ -49,7 +49,7 @@ ActiveAdmin.register Payout do
   end
 
   batch_action :pay_with_paypal, :confirm => "Are you sure you want to send this payouts?" do |selection|
-    redirect_to payouts_create_path(Payout.find(selection))
+    redirect_to payouts_create_path(:payouts => Payout.find(selection))
   end
 
   # batch_action :pay_with_paypal, :confirm => "Are you sure you want to send this payouts?" do |selection|
