@@ -3,6 +3,16 @@ class ApplicationController < ActionController::Base
 
   before_filter :rename_params
   before_filter :configure_permitted_parameters, if: :devise_controller?
+  before_filter :ensure_domain
+
+  APP_DOMAIN = 'www.valuethisnow.com'
+
+  def ensure_domain
+    if request.env['HTTP_HOST'] != APP_DOMAIN
+      # HTTP 301 is a "permanent" redirect
+      redirect_to "https://#{APP_DOMAIN}", :status => 301
+    end
+  end
 
   rescue_from CanCan::AccessDenied do |exception|
     redirect_to admin_dashboard_path, :alert => exception.message
