@@ -76,6 +76,7 @@ PurexNew::Application.routes.draw do
   get '/tickets/:id' => "contact#show", :as => :show_ticket
 
   # Static pages linked from CMS
+  get 'unsubscribe' => 'home#unsubscribe'
   get '/home/how' => 'home#how', :as => 'how'
   get '/home/become' => 'home#become', :as => 'become'
   get '/home/privacy' => 'home#privacy', :as => 'privacy'

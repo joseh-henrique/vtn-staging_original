@@ -1,3 +1,4 @@
+<%= stylesheet_link_tag "progress_step_bar" %>
 <div class="row">
   <div class="col-md-11 col-md-offset-1 big-title">
     Upload Photos
@@ -7,10 +8,39 @@
   </div>
 </div>
 
-<div class="row">
-  <div class="col-md-10 col-md-offset-1">
-    <%= render  :partial => "photos/new_multiple_image_upload_form", locals: {photos: @photos} %>
-    <%= link_to "Back", previous_wizard_path, class: "btn btn-success pull-left" %>
-    <%= link_to "Next", next_wizard_path, class: "btn btn-success pull-right", id: "btnBuildWizardPhoto" %>
+<div class="row stepsbar">
+  <div class="col-md-12 center">
+    <%= image_tag "steps/progressbar-4.jpg"%>
+    <!-- <%= render "progress_step_3"%> -->
   </div>
+</div>
+
+<div class="row">
+  <div class="col-md-10">
+    <%= render  :partial => "photos/new_multiple_image_upload_form", locals: {photos: @photos} %>
+    <div class="btns-back-forward">
+
+      <%= link_to "Back", previous_wizard_path, class: "btn btn-success pull-left" %>
+      <%= link_to "Forward", next_wizard_path, class: "btn btn-success pull-right", id: "btnBuildWizardPhoto" %>
+    </div>
+    
+  </div>
+
+  <div class="col-md-2">
+    <div class="center">
+      <%= link_to "Save It", appraisals_path, id: "save_it_btn", class: "btn btn-success"%>
+      </br>
+      If you have to go lets save your stuff for next time!
+    </div>
+
+    <div id="pinnote-1">
+      <%= image_tag "pinnotes/pinnote3.png", class: "img-responsive"%>
+    </div>
+
+    <div id="pinnote-2">
+      <%= image_tag "pinnotes/pinnote4.png", class: "img-responsive"%>
+    </div>
+
+  </div>
+
 </div>

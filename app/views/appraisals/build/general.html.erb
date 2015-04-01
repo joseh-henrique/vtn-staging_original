@@ -1,3 +1,4 @@
+<%= stylesheet_link_tag "progress_step_bar" %>
 <div id="build_general">
   <div class="row">
     <div class="col-md-11 col-md-offset-1 big-title">
@@ -8,9 +9,16 @@
     </div>
   </div>
 
+  <div class="row stepsbar">
+    <div class="col-md-12 center">
+      <%= image_tag "steps/progressbar-2.jpg", class: "img-responsive"%>
+
+      <!-- <%= render "progress_step_1"%> -->
+    </div>
+  </div>
 
   <div class="row">
-    <div class="col-md-10 col-md-offset-1">
+    <div class="col-md-10">
       <%= simple_form_for @appraisal, :url => wizard_path, :method => :put,  :html => {:multipart => true, :class => "form-horizontal"},
         wrapper: :horizontal_form,
         wrapper_mappings: {
@@ -48,10 +56,30 @@
               <%= f.input :insurance_location, label: "Location", as: :string, :input_html => {:class =>"span8" }, required: true, hint: "Please provide the location (city/state) of the property."%>
               <%= f.input :insurance_claim, label: false, inline_label: "This appraisal is for damage claims purposes. I'm seeking values prior to damage", hint: "Remember to provide detailed photos of the item (including a photo showing the whole item)", :input_html => {:class =>"" } %>
             <% end %>
-            <%= f.button :submit, "Next", class: "btn btn-success pull-right",id: "btnBuildWizardGeneral"  %>
+
+            <div class="btns-back-forward">
+              <%= f.button :submit, "Forward", class: "btn btn-success pull-right",id: "btnBuildWizardGeneral"  %>
+            </div>
+            
           </div>
         </div>
       <% end %>
     </div>
+
+    <div class="col-md-2">
+      <div class="center">
+        <%= link_to "Save It", appraisals_path, id: "save_it_btn", class: "btn btn-success"%>
+        </br>
+        If you have to go lets save your stuff for next time!
+      </div>
+
+    <div>
+      <%= image_tag "pinnotes/pinnote1.png", class: "img-responsive"%>
+    </div>
+    
+
+
+    </div>
+
   </div>
 </div>

@@ -1,3 +1,4 @@
+<%= stylesheet_link_tag "progress_step_bar" %>
 <div class="row">
   <div class="col-md-11 col-md-offset-1 big-title">
     Payment and Confirm
@@ -7,8 +8,9 @@
   </div>
 </div>
 
+
 <div class="row" id="build-payment">
-  <div class="col-md-10 col-md-offset-1">
+  <div class="col-md-10">
     <!-- Requested appraisal and product snapshot -->
     <h3>Requested appraisal</h3>
 
@@ -327,18 +329,17 @@
         </div>
       </div>
       <!--Billing Information-->
-      <hr class="payment_hr">
-
-      <!---Promo and Total-->
-      
-      <div class="row"> 
+      <div class="row total-charge-text"> 
         <div class="col-md-offset-6 text-right">
           <h3>Total charge: <span id="td_appraisal_total"><%= number_to_currency(PAYMENT_PLAN[ @appraisal.selected_plan-1]) %></span></h3>
         </div>
       </div>
 
+      <hr class="payment_hr">
+
+      <!---Promo and Total-->
       <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-12 btns-back-forward">
           <%= link_to "Back", previous_wizard_path, class: "btn btn-success pull-left" %>
           <%= f.button :submit, "Purchase", class: "btn btn-success pull-right", id: "btnBuildWizardPayment" %>
         </div>
@@ -351,11 +352,24 @@
           <script type="text/javascript">var ANS_customer_id="e6d07733-39cf-4af2-9f8c-b27b1dbdfb31";</script> <script type="text/javascript" src="//verify.authorize.net/anetseal/seal.js" ></script> <a href="https://test.authorize.net/gateway/transact.dll" id="AuthorizeNetText" target="_blank"></a>
           <%= image_tag "cards.jpg" %>
         </div>
-      </div>
-      
+      </div>  
+      <% end %>
     <% end %>
-  <% end %>
-</div>
+  </div>
+
+  <div class="col-md-2 save-it-last-btn">
+    <div class="center">
+      <%= link_to "Save It", appraisals_path, id: "save_it_btn", class: "btn btn-success"%>
+      </br>
+      If you have to go lets save your stuff for next time!
+    </div>
+
+    <div>
+      <%= image_tag "pinnotes/pinnote6.png", class: "img-responsive"%>
+    </div>
+
+  </div>
+
 </div>
 
 <div class="modal fade" id="paymentModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

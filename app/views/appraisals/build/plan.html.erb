@@ -1,3 +1,4 @@
+<%= stylesheet_link_tag "progress_step_bar" %>
 <div id="build_plan">
   <div class="row">
     <div class="col-md-11 col-md-offset-1 big-title">
@@ -8,11 +9,16 @@
     </div>
   </div>
 
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12">
+  <div class="row stepsbar">
+    <div class="col-md-12 center">
+      <%= image_tag "steps/progressbar-5.jpg"%>
+      <!-- <%= render "progress_step_4"%> -->
+    </div>
+  </div>
 
-        <%= simple_form_for(@appraisal, :url => wizard_path, :method => :put,  :html => {:multipart => true, :class => "form-horizontal"}) do |f| %>
+  <div class="row">
+    <div class="col-md-10">
+      <%= simple_form_for(@appraisal, :url => wizard_path, :method => :put,  :html => {:multipart => true, :class => "form-horizontal"}) do |f| %>
           <div>
             <!--- Content start -->
             <div class="row">
@@ -169,15 +175,27 @@
 
             <%= f.input :selected_plan, as: :hidden %>
 
-            <div class="buttons" style="margin-top: 20px; padding-bottom: 20px;">
+            <div class="btns-back-forward buttons" style="margin-top: 20px; padding-bottom: 20px;">
               <%= link_to "Back", previous_wizard_path, class: "btn btn-success pull-left" %>
-              <%= f.button :submit, "Next", class: "btn btn-success pull-right" %>
+              <%= f.button :submit, "Forward", class: "btn btn-success pull-right" %>
             </div>
             
 
           </div>
         <% end %>
+    </div>
+
+    <div class="col-md-2">
+      <div class="center">
+        <%= link_to "Save It", appraisals_path, id: "save_it_btn", class: "btn btn-success"%>
+        </br>
+        If you have to go lets save your stuff for next time!
       </div>
+
+      <div>
+        <%= image_tag "pinnotes/pinnote5.png", class: "img-responsive"%>
+      </div>
+
     </div>
   </div>
 </div>

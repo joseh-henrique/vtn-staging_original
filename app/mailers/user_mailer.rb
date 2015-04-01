@@ -59,7 +59,7 @@ class UserMailer < ActionMailer::Base
     @status = appraiser.status
     @rejection_reasons = rejection_reasons
     @additional_comments = additional_comments
-    mail( #:to => "appraiser_support@colosses.com", 
+    mail( #:to => "appraiser_support@colosses.com",
          :to => appraiser.email,
          :subject => "[Your Value This Now Application] #{message.name}")
   end
@@ -96,6 +96,21 @@ class UserMailer < ActionMailer::Base
     @appraiser = Appraiser.find(appraiser_id)
     mail(:to => @appraiser.email,
          :subject => "[Value This Now] An Appraisal has been assigned to you")
+  end
+
+  def notify_uncomplete_appraisal(appraisal, type_of_notify)
+    @txt = Cms::Page.find_by_label("email_when_#{type_of_notify}")
+    @appraisal = appraisal
+    @user = @appraisal.owned_by
+    if (@user && !@user.is_deny_email)
+      # create a token from id
+      crypt = ActiveSupport::MessageEncryptor.new(Devise.secret_key)
+      @token = crypt.encrypt_and_sign(@user.id)
+      unsubscribe_url = unsubscribe_url(token: @token)
+      @content = @txt.content.gsub('UnsubscribeEmailUrl', unsubscribe_url)
+      mail(:to => @user.email,
+         :subject => "[Value This Now] Uncompleted Appraisal!")
+    end
   end
 
   private
