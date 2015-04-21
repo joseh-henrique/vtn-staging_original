@@ -163,3 +163,33 @@ body {
   text-align: left;
   font-size: 25px;
 }
+//Quan add 10/4/2015
+.notes{
+  background-image: url(pinnotes/notes.jpeg);
+  background-position: center;
+  background-size: 220px;
+  background-repeat: no-repeat;
+  height: 250px;
+  width: 100%;
+  display: table;
+  
+  .content-note{
+    display: table-cell;
+    margin: auto;
+    text-align: center;
+    vertical-align: middle;
+    span{
+      font-family: Calibri ;
+      font-size: 11pt;
+      font-weight: bold;
+      line-height: 1.7;
+    }
+  }
+}
+
+#menu2.dropdown-menu{
+  background-color: gray;
+}
+#menu2 li a{
+  text-align: left;
+}
