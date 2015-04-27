@@ -98,8 +98,8 @@ PurexNew::Application.routes.draw do
   get '/home/stores' => 'home#stores'
   get '/home/roadshows' => 'home#roadshows'
   get '/home/salvages' => 'home#salvages'
-  get '/home/rare_books' => 'home#rare_books'
-  get '/home/sports_memorabilia' => 'home#sports_memorabilia'
+  get '/home/rare-books' => 'home#rare_books'
+  get '/home/sports-memorabilia' => 'home#sports_memorabilia'
   get '/home/affiliate' => 'home#affiliate', :as => 'affiliate'
   get '/home/appraisal_provider_agreement' => 'home#appraisal_provider_agreement', :as => "appraisal_provider_agreement"
   get '/home/using_online_appraisals' => 'home#using_online_appraisals', :as => "using_online_appraisals"
