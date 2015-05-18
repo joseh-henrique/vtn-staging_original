@@ -306,12 +306,12 @@ class Appraisal < ActiveRecord::Base
       end
     end
 
-    appraisals_2w = Appraisal.where("status=0 AND updated_at between ? and ?", Time.now - 2.weeks - 1.hour, Time.now - 2.weeks + 1.hour)
-    unless appraisals_2w.blank?
-      appraisals_2w.each do |a|
-        UserMailer.delay.notify_uncomplete_appraisal(a, "2w")
-      end
-    end
+    # appraisals_2w = Appraisal.where("status=0 AND updated_at between ? and ?", Time.now - 2.weeks - 1.hour, Time.now - 2.weeks + 1.hour)
+    # unless appraisals_2w.blank?
+    #   appraisals_2w.each do |a|
+    #     UserMailer.delay.notify_uncomplete_appraisal(a, "2w")
+    #   end
+    # end
 
     appraisals_30d = Appraisal.where("status=0 AND updated_at between ? and ?", Time.now - 30.days - 1.hour, Time.now - 30.days + 1.hour)
     unless appraisals_30d.blank?
