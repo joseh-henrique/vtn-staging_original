@@ -278,28 +278,29 @@ class Appraisal < ActiveRecord::Base
   end
 
   def self.auto_email_when_uncomplete
-    appraisals_24h = Appraisal.where("status=0 AND updated_at between ? and ?", Time.now - 24.hours - 1.hour , Time.now - 24.hours + 1.hour)
+    start_time = Time.now
+    appraisals_24h = Appraisal.where("status=0 AND updated_at between ? and ?", start_time - 24.hours - 1.hour , start_time - 24.hours + 59.minutes + 59.seconds)
     unless appraisals_24h.blank?
       appraisals_24h.each do |a|
         UserMailer.delay.notify_uncomplete_appraisal(a, "24h")
       end
     end
 
-    appraisals_48h = Appraisal.where("status=0 AND updated_at between ? and ?", Time.now - 48.hours - 1.hour, Time.now - 48.hours + 1.hour)
+    appraisals_48h = Appraisal.where("status=0 AND updated_at between ? and ?", start_time - 48.hours - 1.hour, start_time - 48.hours + 59.minutes + 59.seconds)
     unless appraisals_48h.blank?
       appraisals_48h.each do |a|
         UserMailer.delay.notify_uncomplete_appraisal(a, "48h")
       end
     end
 
-    appraisals_72h = Appraisal.where("status=0 AND updated_at between ? and ?", Time.now - 72.hours - 1.hour, Time.now - 72.hours + 1.hour)
+    appraisals_72h = Appraisal.where("status=0 AND updated_at between ? and ?", start_time - 72.hours - 1.hour, start_time - 72.hours + 59.minutes + 59.seconds)
     unless appraisals_72h.blank?
       appraisals_72h.each do |a|
         UserMailer.delay.notify_uncomplete_appraisal(a, "72h")
       end
     end
 
-    appraisals_1w = Appraisal.where("status=0 AND updated_at between ? and ?", Time.now - 1.week - 1.hour, Time.now - 1.week + 1.hour)
+    appraisals_1w = Appraisal.where("status=0 AND updated_at between ? and ?", start_time - 1.week - 1.hour, start_time - 1.week + 59.minutes + 59.seconds)
     unless appraisals_1w.blank?
       appraisals_1w.each do |a|
         UserMailer.delay.notify_uncomplete_appraisal(a, "1w")
@@ -313,7 +314,7 @@ class Appraisal < ActiveRecord::Base
     #   end
     # end
 
-    appraisals_30d = Appraisal.where("status=0 AND updated_at between ? and ?", Time.now - 30.days - 1.hour, Time.now - 30.days + 1.hour)
+    appraisals_30d = Appraisal.where("status=0 AND updated_at between ? and ?", start_time - 30.days - 1.hour, start_time - 30.days + 59.minutes + 59.seconds)
     unless appraisals_30d.blank?
       appraisals_30d.each do |a|
         UserMailer.delay.notify_uncomplete_appraisal(a, "30d")
