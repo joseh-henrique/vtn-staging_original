@@ -95,11 +95,11 @@ PurexNew::Application.routes.draw do
   get '/home/appraisal_body_summary_forselling_USPAP_compliant_yes' => 'home#appraisal_body_summary_forselling_USPAP_compliant_yes'
   get '/home/cost' => 'home#cost'
   get '/home/testimonials' => 'home#testimonials'
-  get '/home/stores' => 'home#stores'
-  get '/home/roadshows' => 'home#roadshows'
-  get '/home/salvages' => 'home#salvages'
-  get '/home/rare-books' => 'home#rare_books'
-  get '/home/sports-memorabilia' => 'home#sports_memorabilia'
+  get '/stores' => 'home#stores'
+  get '/roadshows' => 'home#roadshows'
+  get '/salvages' => 'home#salvages'
+  get 'rare-books' => 'home#rare_books'
+  get 'sports-memorabilia' => 'home#sports_memorabilia'
   get '/home/affiliate' => 'home#affiliate', :as => 'affiliate'
   get '/home/appraisal_provider_agreement' => 'home#appraisal_provider_agreement', :as => "appraisal_provider_agreement"
   get '/home/using_online_appraisals' => 'home#using_online_appraisals', :as => "using_online_appraisals"
