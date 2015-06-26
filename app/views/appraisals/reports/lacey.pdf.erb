@@ -1,4 +1,6 @@
 <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <html>
 <head>
@@ -9,6 +11,8 @@
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
 <script type="text/javascript" src="https://s3.amazonaws.com/vtn.assets.valuethisnow.com/js/jquery-ui-1.8.16.custom.min.js"></script>
 <script type="text/javascript" src="https://s3.amazonaws.com/vtn.assets.valuethisnow.com/js/min.js"></script>
+<%= wicked_pdf_javascript_include_tag "jquery.signature-panel" %>
+<%= wicked_pdf_stylesheet_link_tag "jquery.signature-panel" %>
 
 
 <script type="text/javascript">
@@ -24,10 +28,10 @@ $(document).ready(function() {
 <body>
 <% unless @supplemental %>  
 <section class="container">
-  <div class=" top_certificate">
+  <div class=" top_certificate" style="width:961px;margin:0px;padding:0px">
   </div>
 
-  <div class="content-certificate">
+  <div class="content-certificate" style="width:961px;margin-left: -0.1px; padding: 0px">
     <h1><%= @appraisal.title %></h1>
 
     <div class="slider">
@@ -127,7 +131,7 @@ $(document).ready(function() {
       <h1 class="signature clear" >Prepared by <%= @appraiser.name %></h1>
     </div>
   </div>
-  <div class="fotter_certificate">
+  <div class="fotter_certificate" style="width:961px;">
     <h1><a href="https://www.valuethisnow.com">www.ValueThisNow.com</a></h1>
   </div>
 </section>
