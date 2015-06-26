@@ -14,7 +14,7 @@ gem 'pg'
 
 gem 'thin'
 
-# gem 'wkhtmltopdf-binary'
+gem 'wkhtmltopdf-binary'
 
 
 # Gems used only for assets and not required
@@ -140,4 +140,3 @@ gem 'activerecord-deprecated_finders'
 gem 'rails_12factor'
 gem 'ruby-freshbooks'
 gem 'whenever', :require => false
-gem 'wkhtmltopdf-heroku'
