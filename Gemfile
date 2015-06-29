@@ -14,7 +14,7 @@ gem 'pg'
 
 gem 'thin'
 
-gem 'wkhtmltopdf-binary'
+gem 'wkhtmltopdf-binary',:github =>"thuylc/wkhtmltopdf-binary"
 
 
 # Gems used only for assets and not required
