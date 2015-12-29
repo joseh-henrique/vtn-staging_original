@@ -115,3 +115,10 @@ ActiveAdmin.register_page "Orders2015" do
       render :partial => "admin/reports/orders", :locals => {year: "2015"} 
   end
 end
+
+ActiveAdmin.register_page "Orders2016" do
+  menu :label => "Monthly Report 2016", :parent => "Reports"
+  content do
+      render :partial => "admin/reports/orders", :locals => {year: "2016"} 
+  end
+end
