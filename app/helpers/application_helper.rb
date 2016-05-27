@@ -282,4 +282,22 @@ module ApplicationHelper
     return price
   end
 
+  def pepperjam_tag(appraisal)
+    url = "https://t.pepperjamnetwork.com/track?INT=DYNAMIC&PROGRAM_ID=8215"
+    url += "&ORDER_ID=#{appraisal.id}&ITEM_ID1=#{getStringForAppraisalType(appraisal.selected_plan).gsub(/\s+/, '_')}"
+    url += "&ITEM_PRICE1=#{appraisal.payment.amount}&QUANTITY1=1"
+    url += "&COUPON=#{appraisal.coupon_usage.coupon.code}" if appraisal.coupon_usage
+    url += "&NEW_TO_FILE=#{ is_new_to_file?(appraisal) ? 1 : 0 }"
+    markup = "<iframe src='#{url}' width='1' height='1' frameborder='0'></iframe>"
+    raw markup
+  end
+
+  def is_new_to_file?(appraisal)
+    owner = appraisal.owned_by
+    appraisals = [EActivityValuePayed, EActivityValueClaimed, EActivityValueFinalized].map do |s|
+      Appraisal.where(:created_by => owner.id, :status =>s )
+    end
+    ((Time.now - owner.created_at) < 30.days) && (appraisals.flatten.count == 1)
+  end
+
 end
