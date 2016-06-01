@@ -25,6 +25,8 @@ class Appraisals::BuildController < ApplicationController
     @appraisal.update_attributes(params[:appraisal])
     @appraisal.assigned_to = Appraiser.find(@appraisal.appraiser_referral.to_i) unless @appraisal.appraiser_referral.eql?("") 
     @appraisal.save
+    @appraisal.reload
+    @appraisal.payment.reload if @appraisal.payment
     render_wizard @appraisal
   end
 end
