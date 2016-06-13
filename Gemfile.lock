@@ -262,15 +262,6 @@ GEM
       actionpack (>= 3.2, < 5)
       activesupport (>= 3.2, < 5)
     hashie (2.1.0)
-    heroku (3.6.0)
-      heroku-api (~> 0.3.17)
-      launchy (>= 0.3.2)
-      netrc (~> 0.7.7)
-      rest-client (~> 1.6.1)
-      rubyzip
-    heroku-api (0.3.18)
-      excon (~> 0.27)
-      multi_json (~> 1.8)
     heroku-forward (0.4.0)
       em-proxy (>= 0.1.8)
       ffi
@@ -324,7 +315,6 @@ GEM
     net-scp (1.1.2)
       net-ssh (>= 2.6.5)
     net-ssh (2.8.0)
-    netrc (0.7.7)
     newrelic_rpm (3.7.3.204)
     nexmo (1.2.0)
     nio4r (1.0.0)
@@ -447,7 +437,6 @@ GEM
     ruby-freshbooks (0.4.1)
       builder (>= 2.1.2)
       httparty (>= 0.5.0)
-    rubyzip (1.1.3)
     sass (3.2.19)
     sass-rails (4.0.3)
       railties (>= 4.0.0, < 5.0)
@@ -542,7 +531,6 @@ DEPENDENCIES
   guard-cucumber
   guard-rspec
   haml
-  heroku
   heroku-forward
   jbuilder
   jquery-migrate-rails

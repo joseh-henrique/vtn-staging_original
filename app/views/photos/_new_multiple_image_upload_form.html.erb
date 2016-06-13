@@ -84,6 +84,9 @@ can_mark_as_primary ||= can_mark_as_primary.nil? %>
 <script>
   var progressElements = { };
   $(document).ready(function() {
+  var uniqueName = function(data) {
+    return data['lastModifiedDate'].getTime() + data['size'] + data['name'];
+  };
   if ($(".img-row").length > 1) {
     $("#pinnote-1").hide();
     $("#pinnote-2").show();
@@ -141,8 +144,8 @@ can_mark_as_primary ||= can_mark_as_primary.nil? %>
   url: '/photos.json',
   data: data.result,
   success: function(data) {
-    var fileName = extra_data.files[0].name;
-    var el = progressElements[ extra_data.files[0].name ];
+    var fileName = uniqueName(extra_data.files[0]);
+    var el = progressElements[ fileName ];
     el.find("img:first").attr("src", data.files[0].thumbnailUrl);
     el.find(".thumb_link").attr("href", data.files[0].url);
     $(el).find("td:last").remove();
@@ -195,17 +198,21 @@ can_mark_as_primary ||= can_mark_as_primary.nil? %>
   });
 
   $(".cloudinary-fileupload").bind("fileuploadadd", function(e, data){
-  $("#img-table .img-row:first").before('<tr class="img-row"><td class="preview"><a href="#" class="thumb_link"><%= image_tag 'green_loader.gif' %></a></td><td class="name"><div class="hidden-xs"><a href="#" class="thumb_link">'+data.files[0].name+'</a></div></td><td class="size"></td><td colspan="3"><div class="progress">Uploading...Please wait<div class="bar bar-success"></div></div></td></tr>');
-  progressElements[ data.files[0].name ] = $("#img-table .img-row:first");
+      var name = uniqueName(data.files[0]);
+  $("#img-table .img-row:first").before('<tr class="img-row"><td class="preview"><a href="#" class="thumb_link"><%= image_tag 'green_loader.gif' %></a></td><td class="name"><div class="hidden-xs"><a href="#" class="thumb_link">'+name+'</a></div></td><td class="size"></td><td colspan="3"><div class="progress">Uploading...Please wait<div class="bar bar-success"></div></div></td></tr>');
+  progressElements[ name ] = $("#img-table .img-row:first");
   $("#fileUploads").fileupload("send", {files: data.files});
   });
+
   $(".cloudinary-fileupload").bind("fileuploaddone", function(e, data){
-  var fileName = data.files[0].name;
-  var el = progressElements[ data.files[0].name];
+  var fileName = uniqueName(data.files[0]);
+  var el = progressElements[ fileName];
   el.find(".progress").hide();
   });
+
   $(".cloudinary-fileupload").bind("fileuploadprogress", function(e, data){
-  var el = progressElements[ data.files[0].name ];
+  var fileName = uniqueName(data.files[0]);
+  var el = progressElements[ fileName ];
   var progress = parseInt(data.loaded / data.total * 100, 10);
   el.find(".bar").css('width',progress+"%" );
   });
