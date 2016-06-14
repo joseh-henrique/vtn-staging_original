@@ -98,6 +98,7 @@ module AuthorizenetModule
         coupon = Coupon.find_by_code(params[:coupon])
         if coupon
           coupon.apply!(appraisal)
+          session.delete(:coupon) if session[:coupon]
         end
         appraisal.pay_and_notify!
         hash[:status] = true

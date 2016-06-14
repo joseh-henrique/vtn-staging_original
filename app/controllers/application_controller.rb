@@ -4,11 +4,12 @@ class ApplicationController < ActionController::Base
   before_filter :rename_params
   before_filter :configure_permitted_parameters, if: :devise_controller?
   before_filter :ensure_domain
+  before_filter :capture_coupon
 
   APP_DOMAIN = 'www.valuethisnow.com'
 
   def ensure_domain
-    if request.env['HTTP_HOST'] != APP_DOMAIN
+    if request.env['HTTP_HOST'] != APP_DOMAIN && Rails.env != 'development'
       # HTTP 301 is a "permanent" redirect
       redirect_to "https://#{APP_DOMAIN}", :status => 301
     end
@@ -82,6 +83,10 @@ class ApplicationController < ActionController::Base
     if current_user && !current_user.email_verified?
       redirect_to finish_signup_path(current_user)
     end
+  end
+
+  def capture_coupon
+    session[:coupon] = params[:coupon] if params[:coupon]
   end
 
   private
