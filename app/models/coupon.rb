@@ -96,6 +96,16 @@ class Coupon < ActiveRecord::Base
     gross_amount.round(2)
   end
 
+  def legend
+    text = case self.discount_type
+    when "fixed"
+      "$#{sprintf('%.2f', discount)}"
+    when "percentage"
+      "#{discount}%"
+    end
+    "You have a #{text} discount coupon that will automatically be applied to your next purchase"
+  end
+
   private
   def increment_usage_count(appraisal)
     self.usage_count += 1 if CouponUsage.create({coupon_id: self.id, appraisal_id: appraisal.id})

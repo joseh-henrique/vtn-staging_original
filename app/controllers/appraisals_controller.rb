@@ -19,6 +19,8 @@ class AppraisalsController < ApplicationController
       1.times { @appraisal.photos.build }
     end
 
+    get_flash_coupon
+
     respond_to do |format|
       format.html
     end
@@ -254,5 +256,14 @@ class AppraisalsController < ApplicationController
   protected
   def is_appraiser_confirmed
     redirect_to :appraiser_steps if current_user.is_appraiser? && current_user.status != EAUserStatusConfirmed
+  end
+
+  def get_flash_coupon
+    if session[:coupon]
+      coupon = Coupon.details_for(session[:coupon]).legend
+      if Coupon.is_coupon_valid?(session[:coupon])
+        flash[:notice] = Coupon.details_for(session[:coupon]).legend
+      end
+    end
   end
 end

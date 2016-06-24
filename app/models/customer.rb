@@ -47,6 +47,10 @@ class Customer < User
       self.update_column(:client_id, response["client_id"])
     end
   end
+
+  def appraisals_created_today
+    self.payments.where "DATE(created_at) = DATE(?)", Time.now
+  end
  
   
   private
