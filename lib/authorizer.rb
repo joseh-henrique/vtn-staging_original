@@ -76,7 +76,7 @@ module Authorizer
     end
 
     def error_message(response)
-      "Declined (#{response.transactionResponse.errors.errors[0].errorCode}-#{response.messages.messages[0].text}) : #{response.transactionResponse.errors.errors[0].errorText}"
+      "Declined (#{response.messages.messages[0].text})"
     end
 
     def validate(params)
