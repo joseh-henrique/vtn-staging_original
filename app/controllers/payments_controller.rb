@@ -12,7 +12,7 @@ class PaymentsController < ApplicationController
       payment_response = if @appraisal.owned_by.appraisals_created_today.count > 4
                            {status:false, message:"You have exceeded the maximum number of daily transactions in a single business day. Please wait until the following business day to conduct additional sales"}
       else
-      AuthorizenetModule::PayGateway.new.process(appraisal: @appraisal, appraisal_params: params[:appraisal], email: current_user.email )      
+      Authorizer::Authorizenet.new.process(appraisal: @appraisal, params: params[:appraisal][:payment_attributes])
       end
     end
 

@@ -15,7 +15,7 @@ module AuthorizenetModule
       gateway = ActiveMerchant::Billing::AuthorizeNetGateway.new(
         :login     => authorizenet_credential[:login],
         :password  => authorizenet_credential[:password],
-        :test => false)
+        :test => Rails.env != 'production')
       return gateway
     end
 
@@ -75,7 +75,7 @@ module AuthorizenetModule
       billing_address[:phone] = ccparam[:phone] || ""
       billing_address[:zip] = ccparam[:zip]
       billing_address[:city] = ccparam[:city]
-      billing_address[:country] = ccparam[:country] || ""
+      billing_address[:country] = ccparam[:country] || "US"
       billing_address[:state] = ccparam[:state]
       return Payment::BillingAddress.new(billing_address)
     end

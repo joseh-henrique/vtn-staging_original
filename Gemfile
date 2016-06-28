@@ -61,6 +61,7 @@ gem 'will_paginate'  #means lists of active objects can be paginated
 gem 'haml' #more consise template files, easier to read and maintain
 
 gem 'activemerchant'#, '1.23.0', :require => 'active_merchant'
+gem 'authorizenet', '~> 1.8', '>= 1.8.9.1'
 
 # To use Jbuilder templates for JSON
 gem "jbuilder"
@@ -115,7 +116,7 @@ gem "prawn-fillform"
 group :test, :development do
   gem 'rspec-rails'
   gem 'growl', "~> 1.0.3"
-  gem 'pry'
+  gem 'pry-byebug'
   gem 'better_errors'
   gem "binding_of_caller"
 end
