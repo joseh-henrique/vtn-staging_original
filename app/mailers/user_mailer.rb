@@ -99,7 +99,7 @@ class UserMailer < ActionMailer::Base
   end
 
   def notify_uncomplete_appraisal(appraisal, type_of_notify)
-    @txt = Cms::Page.find_by_label("email_when_#{type_of_notify}")
+    @txt = Comfy::Cms::Page.find_by_label("email_when_#{type_of_notify}")
     @appraisal = appraisal
     @user = @appraisal.owned_by
     if (@user && !@user.is_deny_email)

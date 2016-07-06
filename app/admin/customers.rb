@@ -6,7 +6,7 @@ ActiveAdmin.register Customer do
                    "Net 60" => "Net 60",
                    "Net 90" => "Net 90"}
 
-  action_item :only => :show do
+  action_item :edit, :only => :show do
     link_to "Become", "/switch_user?scope_identifier=user_#{customer.id}"
   end
 

@@ -50,7 +50,7 @@
               <%= a.input :country_of_origin, :label => "Country of Origin", :as => :country, input_html: {class: "chzn-select"} %>
             <% end %>
             <%= f.simple_fields_for :classification do |c| %>
-              <%= c.association :category, as: :select, collection: Category.all(order: 'name'), required: true, input_html: {class: "chzn-select"} %>
+              <%= c.association :category, as: :select, collection: Category.all.order(:name), required: true, input_html: {class: "chzn-select"} %>
             <% end %>
             <% if Setting.is_set("enable_insurance_claims","true") %>              
               <%= f.input :insurance_location, label: "Location", as: :string, :input_html => {:class =>"span8" }, required: true, hint: "Please provide the location (city/state) of the property."%>
