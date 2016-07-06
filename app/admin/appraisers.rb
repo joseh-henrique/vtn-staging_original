@@ -99,7 +99,7 @@ ActiveAdmin.register Appraiser do
     column :last_sign_in_at
     column :sign_in_count
     column :referral_id
-    default_actions
+    actions
   end
 
   filter :id

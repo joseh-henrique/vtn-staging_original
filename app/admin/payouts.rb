@@ -26,7 +26,7 @@ ActiveAdmin.register Payout do
     column "Pay" do |payout|
       link_to "Pay", root_path
     end
-    default_actions
+    actions
   end
 
   filter :created_at

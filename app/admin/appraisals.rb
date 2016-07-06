@@ -29,7 +29,7 @@ ActiveAdmin.register Appraisal do
     column "Completed On" do |t|
       "#{display_time(t.completion_time("s"))}" if t.completion_time > 0
     end
-    default_actions
+    actions
   end
 
   filter :id
