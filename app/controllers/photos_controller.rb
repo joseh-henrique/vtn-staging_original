@@ -13,7 +13,7 @@ class PhotosController < ApplicationController
 
   def create
     cloudinary_asset = "image/upload/v#{params[:version]}/#{params[:public_id]}.#{params[:format]}##{params[:signature]}"
-    @photo = @appraisal.photos.find_or_initialize_by_name(picture: cloudinary_asset, name: params[:public_id])
+    @photo = @appraisal.photos.find_or_initialize_by(picture: cloudinary_asset, name: params[:public_id])
     if @photo.save
       @photos = [@photo]
       render 'index'

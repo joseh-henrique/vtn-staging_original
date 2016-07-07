@@ -128,7 +128,7 @@ class AppraisalsController < ApplicationController
       elsif @appraisal.update_attributes(params[:appraisal])
         if @appraisal.status == EActivityValueFinalized && previous_status != EActivityValueFinalized
           # Send Notification via Email to Creator about Finalized Appraisal
-          payout = Payout.find_or_create_by_appraisal_id_and_appraiser_id(:appraisal_id => @appraisal.id, :appraiser_id => @appraisal.assigned_to.id)
+          payout = Payout.find_or_create_by(:appraisal_id => @appraisal.id, :appraiser_id => @appraisal.assigned_to.id)
           payout.amount = @appraisal.paid_amount
           payout.status = EAPayoutPending 
           payout.save

@@ -19,6 +19,6 @@ class AppraiserAccessToken < ActiveRecord::Base
 
   def notify_invited_appraiser
     message = UserMailer.invite_appraiser(self)
-    message.deliver
+    message.deliver_now
   end
 end

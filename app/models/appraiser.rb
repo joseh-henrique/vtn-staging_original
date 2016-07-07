@@ -57,7 +57,7 @@ class Appraiser < User
   def notify_admin_of_new_application
     unless Rails.env.eql?("development") || Rails.env.eql?("test")
       message = Message.new(:name => self.name, :email => self.email )
-      UserMailer.notify_admin_of_new_application(message).deliver
+      UserMailer.notify_admin_of_new_application(message).deliver_now
     end
   end
 

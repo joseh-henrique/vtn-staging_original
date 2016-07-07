@@ -18,7 +18,7 @@ class ContactController < ApplicationController
 			else
 				mailer_method = "contact_us"
 			end
-			eval "UserMailer.#{mailer_method}(@message).deliver"
+			eval "UserMailer.#{mailer_method}(@message).deliver_now"
 			redirect_to(root_path, :notice => "Thank you, your message was sent, someone should be in contact shortly.")
 		else
       flash[:alert] = "Please fill all fields."

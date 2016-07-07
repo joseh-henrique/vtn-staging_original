@@ -1,7 +1,7 @@
 source 'http://rubygems.org'
 ruby "2.3.1"
 
-gem 'rails', '~> 4.1.0'
+gem 'rails', '~> 4.2', '>= 4.2.6'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -39,7 +39,7 @@ gem 'carrierwave', '~> 0.10.0'
 gem "cloudinary", "~> 1.0.63"
 gem 'rmagick', require: false
 gem 'aws-s3'
-gem 'aws-sdk'
+gem 'aws-sdk', '~> 1.66'
 gem "fog"
 
 # authentication
