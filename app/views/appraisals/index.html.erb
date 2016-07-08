@@ -19,6 +19,9 @@
     <% unless @appraisals.empty? %>
       <h2>What you entered so far:</h2>
       <%= render :partial => 'appraisals/partials/appraisal_table_for_users', locals: {appraisals: @appraisals} %>
+      <div style="text-align: center;">
+        <%= paginate @appraisals %>
+      </div>
     <% end %>
   </div>
 </div>

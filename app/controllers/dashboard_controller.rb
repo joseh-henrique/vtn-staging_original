@@ -35,6 +35,7 @@ class DashboardController < ApplicationController
 
 				end
 			@appraisals = @appraisals.visible	unless @appraisals.nil?
+      @appraisals = Kaminari.paginate_array(@appraisals).per_page_kaminari(params[:page]).per(10)
 
 			respond_to do |format|
 				format.html # index.html.haml

@@ -13,6 +13,7 @@ class AppraisalsController < ApplicationController
       @appraisals << Appraisal.where(:created_by => @user.id, :status =>s )
     end
     @appraisals = @appraisals.flatten
+    @appraisals = Kaminari.paginate_array(@appraisals).per_page_kaminari(params[:page]).per(10)
 
     if @appraisals.blank?
       @appraisal = Appraisal.new
