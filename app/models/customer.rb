@@ -49,7 +49,7 @@ class Customer < User
   end
 
   def appraisals_created_today
-    self.payments.where "DATE(created_at) = DATE(?)", Time.now
+    self.payments.where("DATE(updated_at) = DATE(?) AND is_charged = ?", Time.now, true)
   end
  
   

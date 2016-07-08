@@ -1,0 +1,12 @@
+<div class="image">
+  <%= image_tag 'logo.png' %>
+</div>
+<br>
+Hi <%= @customer.name %>,
+<br>
+<pre>
+  <%= @appraisals.to_json %>
+</pre>
+<div class="image" style="float:right;">
+  <%= image_tag 'small_logo.png' %>
+</div>

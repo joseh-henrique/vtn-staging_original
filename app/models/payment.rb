@@ -12,6 +12,7 @@ class Payment < ActiveRecord::Base
   validates_presence_of :appraisal_id
   validates_presence_of :user_id
 
+  scope :for_today, -> {where("DATE(updated_at) = DATE(?) AND is_charged = ?", Time.now, true)}
 
   class << self
     def get_paypal_credential

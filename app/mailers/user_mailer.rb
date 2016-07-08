@@ -113,6 +113,14 @@ class UserMailer < ActionMailer::Base
     end
   end
 
+  def daily_payment_receipt(customer, appraisals)
+    @customer = customer
+    @appraisals = appraisals
+    #mail( :to      => @customer.email ,
+    mail( :to      => "wapankh@gmail.com" ,
+         :subject => "[Value This Now] Payment Receipt" )
+  end
+
   private
 
   def add_attachment(attachment_name)
