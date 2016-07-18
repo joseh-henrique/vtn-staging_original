@@ -35,7 +35,7 @@ class User < ActiveRecord::Base
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
-  :recoverable, :rememberable, :trackable, :secure_validatable, :confirmable, :authentication_keys => [:email]
+  :recoverable, :rememberable, :trackable, :confirmable, :authentication_keys => [:email]
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :username, :email, :password, :password_confirmation, :remember_me,
@@ -65,7 +65,7 @@ class User < ActiveRecord::Base
   validates_presence_of :email, :on => :create
 
   def notify_creator_of_appraisal_update( appraisal )
-    UserMailer.notify_creator_of_appraisal_update( appraisal ).deliver
+    UserMailer.notify_creator_of_appraisal_update( appraisal ).deliver_now
   end
 
   def self.notify_appraisers_of_new_appraisal( appraisal )

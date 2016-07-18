@@ -62,4 +62,8 @@ PurexNew::Application.configure do
 
   config.middleware.use Rails::Rack::LogTailer
   config.eager_load = false
+  config.assets.quiet = true
+  WickedPdf.config = {
+    exe_path: '/usr/local/bin/wkhtmltopdf'
+  }
 end

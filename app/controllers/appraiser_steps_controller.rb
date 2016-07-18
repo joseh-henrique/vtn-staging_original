@@ -25,7 +25,7 @@ class AppraiserStepsController < ApplicationController
 
 	def update
 		@user = current_user
-		@user.attributes = params[:appraiser] || params[:customer]
+		@user.attributes = params[:appraiser] || params[:customer] || {}
 		@user[:last_step] = params[:id]
 		render_wizard @user
 	end

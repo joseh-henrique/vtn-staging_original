@@ -10,3 +10,6 @@ sandbox:
 production:
   app_id: '75vq8v46ai2zqe'
   app_secret: 'lkwJznV7C2jVjbGl'
+test:
+  app_id: '75vq8v46ai2zqe'
+  app_secret: 'lkwJznV7C2jVjbGl'

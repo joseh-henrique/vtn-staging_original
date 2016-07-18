@@ -73,7 +73,7 @@
 
 /* Style of loading message and icon shown during load */
 .MagicZoomLoading {
-    background: #fff url(../assets/graphics/loader.gif) no-repeat 2px 50%;
+    background: #fff url(../assets/loader.gif) no-repeat 2px 50%;
     border: 1px solid #ccc;
     color: #444;
     font-family: sans-serif;

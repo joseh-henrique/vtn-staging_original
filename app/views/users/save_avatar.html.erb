@@ -1,13 +1,12 @@
 <%= stylesheet_link_tag("jquery.Jcrop.min") %>
 <center>
   <div class="contentBlock">
-    <div class="formTop"><span class="title41">Avatar</span></div>
     <div class="sub_box">
       <div class="row">
-        <div class="span7" id="avatar-original-div">
+        <div class="col-sm-7" id="avatar-original-div">
           <%= image_tag @user.avatar_url(:standard), id: "cropbox" %>
         </div>
-        <div class="span3 pull-right">
+        <div class="col-sm-3">
           <div id="avatar-preview-div">
             <%= image_tag @user.avatar_url(:standard), :id => "avatar-preview"%>
           </div>

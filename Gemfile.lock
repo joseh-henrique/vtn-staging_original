@@ -530,6 +530,8 @@ GEM
       byebug (~> 9.0)
       pry (~> 0.10)
     psych (2.1.0)
+    quiet_assets (1.1.0)
+      railties (>= 3.1, < 5.0)
     rack (1.6.4)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -746,6 +748,7 @@ DEPENDENCIES
   protected_attributes
   pry-byebug
   psych
+  quiet_assets
   rails (~> 4.2, >= 4.2.6)
   rails-observers
   rails_12factor
