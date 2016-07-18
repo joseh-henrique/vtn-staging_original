@@ -10,7 +10,7 @@ class AppraisalsController < ApplicationController
     @user = current_user
     @appraisals = []
     [EActivityValueCreated, EActivityValuePayed, EActivityValueClaimed, EActivityValueFinalized].each do |s|
-      @appraisals << Appraisal.where(:created_by => @user.id, :status =>s )
+      @appraisals << Appraisal.where(:created_by => @user.id, :status =>s ).order("updated_at desc")
     end
     @appraisals = @appraisals.flatten
     @appraisals = Kaminari.paginate_array(@appraisals).per_page_kaminari(params[:page]).per(10)
