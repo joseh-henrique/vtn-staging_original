@@ -2,7 +2,7 @@
 <% page = Comfy::Cms::Page.find_by_full_path('/appraisal-body-summary-forselling-uspap-compliant-yes')
 content = ""
 unless (appraisal.nil? || page.nil?)
-  content = page.content
+  content = page.content_cache
 	content = content.gsub("[%created_at%]","#{appraisal.created_at}")
 	content = content.gsub("[%created_at%]","#{appraisal.created_at}")
 	content = content.gsub("[%assigned_to%]","#{appraisal.assigned_to.name}")

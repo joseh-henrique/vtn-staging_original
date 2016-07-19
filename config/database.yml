@@ -17,7 +17,7 @@ development:
   encoding: unicode
   database: purex_new_development
   pool: 5
-  username: wapankh
+  username: postgres
   password:
 
   # Connect on a TCP socket. Omitted by default since the client uses a
@@ -43,7 +43,7 @@ test: &test
   encoding: unicode
   database: purex_new_test
   pool: 5
-  username: wapankh
+  username: postgres
   password:
 
 

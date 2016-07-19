@@ -135,7 +135,7 @@ module ApplicationHelper
 
   def get_cms_content(path)
     page = Comfy::Cms::Page.find_by_full_path(path)
-    return raw(page.nil? ? "Add content to '#{path}'" : page.content)
+    return raw(page.nil? ? "Add content to '#{path}'" : page.content_cache)
   end
 
   def get_page_title(path)

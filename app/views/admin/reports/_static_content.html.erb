@@ -1,7 +1,7 @@
 <h1>Static Content Export</h1>
 <% Comfy::Cms::Page.all.each_with_index do |p,i| %>
 <h2><%= "##{i} #{p.slug} (#{p.full_path})" %></h2>
-<%= raw p.content %>
+<%= raw p.content_cache %>
 <hr />
 <% end %>
 

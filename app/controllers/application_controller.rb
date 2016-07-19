@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
 
   before_filter :rename_params
   before_filter :configure_permitted_parameters, if: :devise_controller?
-  before_filter :ensure_domain
+  #before_filter :ensure_domain
   before_filter :capture_coupon
 
   APP_DOMAIN = 'www.valuethisnow.com'
