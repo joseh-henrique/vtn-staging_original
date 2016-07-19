@@ -3,7 +3,7 @@ ActiveAdmin.register_page "Strategic Partners" do
   content :title=> "Strategic Partners" do
     columns do
       column do
-        table_for appraisals, sortable: true, sortable: true, class: "index_table index", id: "strategic_partner" do
+        table_for appraisals, sortable: true, class: "index_table index", id: "strategic_partner" do
           column("Id", sortable: :id) { |appraisal| appraisal.id}
           column("Name", sortable: :name) { |appraisal| link_to appraisal.name || "Appraisal", admin_appraisal_path(appraisal)}
           column("Created At", sortable: :created_at) { |appraisal| appraisal.created_at}

@@ -1,5 +1,5 @@
 <p>&nbsp;</p>
-<% page = Cms::Page.find_by_full_path('/appraisal-body-restricteduse-uspap-compliant-no')
+<% page = Comfy::Cms::Page.find_by_full_path('/appraisal-body-restricteduse-uspap-compliant-no')
 content = ""
 unless (appraisal.nil? || page.nil?)
   content = page.content

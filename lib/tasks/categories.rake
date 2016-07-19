@@ -159,7 +159,7 @@ namespace :purex do
 		inserts << {:parent=>"Western Americana (cowboy, saddles, chaps, barbed wire, Buffalo Bill, etc.)",:child=>""}
 
 		inserts.each do |insert|
-			pId = Category.find_or_create_by_name(insert[:parent])
+			pId = Category.find_or_create_by(name: insert[:parent])
 			if !insert[:child].empty?
 				cId = pId.children.create(:name => insert[:child])
 			end

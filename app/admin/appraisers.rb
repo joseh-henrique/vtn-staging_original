@@ -80,11 +80,11 @@ ActiveAdmin.register Appraiser do
 
   actions :all, :except => [:new, :destroy]    
 
-  action_item :only => :show do
+  action_item :edit, :only => :show do
     link_to('Reapply', update_appraiser_status_path(:user => appraiser, :status => EAUserStatusPending)) if appraiser.is_appraiser? && appraiser.status == EAUserStatusRejected
   end
 
-  action_item :only => :show do
+  action_item :edit, :only => :show do
     link_to "Become", "/switch_user?scope_identifier=user_#{appraiser.id}"
   end
 
@@ -99,7 +99,7 @@ ActiveAdmin.register Appraiser do
     column :last_sign_in_at
     column :sign_in_count
     column :referral_id
-    default_actions
+    actions
   end
 
   filter :id

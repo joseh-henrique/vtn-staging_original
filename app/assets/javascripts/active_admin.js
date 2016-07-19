@@ -1,16 +1,6 @@
 // Via https://github.com/gregbell/active_admin/issues/2232#issuecomment-18683297
 //= require jquery
 //= require jquery_ujs
-//= require jquery.ui.core
-//= require jquery.ui.widget
-//= require jquery.ui.datepicker
+//= require jquery-ui
 //= require bootstrap
-//= require active_admin/application
 //= require active_admin/base
-//= require active_admin/lib/batch_actions
-//= require active_admin/lib/checkbox-toggler
-//= require active_admin/lib/dropdown-menu
-//= require active_admin/lib/has_many
-//= require active_admin/lib/modal_dialog
-//= require active_admin/lib/popover
-//= require active_admin/lib/table-checkbox-toggler

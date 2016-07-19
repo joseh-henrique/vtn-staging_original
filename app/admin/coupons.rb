@@ -24,7 +24,7 @@ ActiveAdmin.register Coupon do
       number_with_precision coupon.gross_profit, :precision => 2
     end
     column :description
-    default_actions
+    actions
   end
 
   form do |f|

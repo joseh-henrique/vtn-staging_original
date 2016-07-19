@@ -26,7 +26,7 @@ ActiveAdmin.register Compensation do
       end
     end
 
-    default_actions
+    actions
   end
 
   filter :appraisal_plan, :as => :select, :collection => hItems

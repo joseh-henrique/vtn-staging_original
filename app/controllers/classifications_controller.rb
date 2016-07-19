@@ -24,7 +24,7 @@ class ClassificationsController < ApplicationController
 	end
 
 	def update
-		@classification = Classification.find_or_create_by_appraisal_id(params[:classification][:appraisal_id])
+		@classification = Classification.find_or_create_by(appraisal_id: params[:classification][:appraisal_id])
 
 		respond_to do |format|
 			if @classification.update_attributes(params[:classification])

@@ -1,7 +1,7 @@
 source 'http://rubygems.org'
-ruby "2.0.0"
+ruby "2.3.1"
 
-gem 'rails', '4.0.4'
+gem 'rails', '~> 4.2', '>= 4.2.6'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -39,7 +39,7 @@ gem 'carrierwave', '~> 0.10.0'
 gem "cloudinary", "~> 1.0.63"
 gem 'rmagick', require: false
 gem 'aws-s3'
-gem 'aws-sdk'
+gem 'aws-sdk', '~> 1.66'
 gem "fog"
 
 # authentication
@@ -75,8 +75,8 @@ gem 'simple_form', '~> 3.1.0.rc1'
 gem 'country_select'
 gem 'wicked', '~> 1.2'
 gem 'wicked_pdf' # for PDF generation
-gem 'activeadmin', github: 'gregbell/active_admin'
-gem 'ransack', '~> 1.1.0'
+gem 'activeadmin', '~> 1.0.0.pre4'
+gem 'ransack'
 
 gem 'comfortable_mexican_sofa'
 gem "newrelic_rpm"
@@ -120,6 +120,11 @@ group :test, :development do
   gem 'pry-byebug'
   gem 'better_errors'
   gem "binding_of_caller"
+end
+
+group :development do
+  gem 'web-console', '~> 2.0'
+  gem 'quiet_assets'
 end
 
 group :test do

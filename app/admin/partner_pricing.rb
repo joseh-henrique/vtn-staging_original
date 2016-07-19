@@ -22,7 +22,7 @@ ActiveAdmin.register PartnerPricing do
     column :short_restricted_xw
     column :full_restricted_xw
     column :full_use_xw
-    default_actions
+    actions
   end
 
   form do |f|

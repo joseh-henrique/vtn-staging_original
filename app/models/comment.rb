@@ -51,6 +51,6 @@ class Comment < ActiveRecord::Base
 
   private
   def notify_about_new_comment
-    UserMailer.notify_of_new_comment(self).deliver
+    UserMailer.notify_of_new_comment(self).deliver_now
   end
 end

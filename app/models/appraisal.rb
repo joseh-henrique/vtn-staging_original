@@ -131,7 +131,7 @@ class Appraisal < ActiveRecord::Base
     self.status = EActivityValueReviewRejection
     self.rejection_reason = params[:rejection_reason]
     self.save
-    UserMailer.notify_admin_of_suggested_rejection({appraisal: self, rejection_reason: params[:rejection_reason]}).deliver if (Rails.env == 'development' || Rails.env == 'production')
+    UserMailer.notify_admin_of_suggested_rejection({appraisal: self, rejection_reason: params[:rejection_reason]}).deliver_now if (Rails.env == 'development' || Rails.env == 'production')
   end
 
   def reject(comments)
@@ -140,7 +140,7 @@ class Appraisal < ActiveRecord::Base
     self.rejection_reason = "" unless self.rejection_reason
     self.rejection_reason = self.rejection_reason + " ADMIN COMMENTS: " + comments
     self.save
-    UserMailer.notify_user_of_rejection(self,comments).deliver if (Rails.env == 'development' || Rails.env == 'production')
+    UserMailer.notify_user_of_rejection(self,comments).deliver_now if (Rails.env == 'development' || Rails.env == 'production')
   end
 
   def return_to_claimed_status
@@ -177,7 +177,7 @@ class Appraisal < ActiveRecord::Base
     self.assigned_to = appraiser
     self.assigned_on = Time.now
     self.save
-    UserMailer.notify_appraiser_for_new_assign(appraiser.id).deliver
+    UserMailer.notify_appraiser_for_new_assign(appraiser.id).deliver_now
   end
 
   def claim!(params)

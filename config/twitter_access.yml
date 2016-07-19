@@ -9,5 +9,7 @@ sandbox:
     app_secret: 'dkVFVLVdO3kQnyeDUpmgsWTXqUCZpzGoEvrlCHmpdwYtvqi8Ap'
 production:
     app_id: '5opDPGOTgq5G2Whd3fCBkIhvG'
-    app_secret: 'dkVFVLVdO3kQnyeDUpmgsWTXqUCZpzGoEvrlCHmpdwYtvqi8Ap'        
-
+    app_secret: 'dkVFVLVdO3kQnyeDUpmgsWTXqUCZpzGoEvrlCHmpdwYtvqi8Ap'
+test:
+    app_id: '5opDPGOTgq5G2Whd3fCBkIhvG'
+    app_secret: 'dkVFVLVdO3kQnyeDUpmgsWTXqUCZpzGoEvrlCHmpdwYtvqi8Ap'

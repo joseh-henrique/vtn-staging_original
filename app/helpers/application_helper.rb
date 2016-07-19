@@ -134,22 +134,22 @@ module ApplicationHelper
   end
 
   def get_cms_content(path)
-    page = Cms::Page.find_by_full_path(path)
+    page = Comfy::Cms::Page.find_by_full_path(path)
     return raw(page.nil? ? "Add content to '#{path}'" : page.content)
   end
 
   def get_page_title(path)
-    page = Cms::Snippet.find_by_label("title-"+path)
+    page = Comfy::Cms::Snippet.find_by_label("title-"+path)
     return raw(page.nil? ? "ValueThisNow: An Online Appraisal Service For Antiques & Collectibles" : page.content)
   end
 
   def get_page_description(path)
-    page = Cms::Snippet.find_by_label("description-"+path)
+    page = Comfy::Cms::Snippet.find_by_label("description-"+path)
     return raw(page.nil? ? "ValueThisNow is a group of online appraisers offering antique valuations and appraisals for everything from antiques and art paintings to toys and jewelry" : page.content)
   end
 
   def get_page_keywords(path)
-    page = Cms::Snippet.find_by_label("keywords-"+path)
+    page = Comfy::Cms::Snippet.find_by_label("keywords-"+path)
     return raw(page.nil? ? "" : page.content)
   end
 
