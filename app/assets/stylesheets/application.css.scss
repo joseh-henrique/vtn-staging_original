@@ -9,9 +9,13 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
+ *= require new-custom
  *= require custom-bootstrap
  *= require jquery.tag
  *= require jquery-ui.custom
+ *= require fancybox
+ *= require prettyphoto-rails
+ *= require owl.carousel
  *= require magiczoom
  *= require chosen
  *= require_tree ./bootstrap-social

@@ -13,6 +13,13 @@
 //= require jquery
 //= require jquery-migrate-min
 //= require jquery_ujs
+//= require fancybox
+//= require prettyphoto-rails
+//= require owl.carousel
+//= require skrollr
+//= require wow
+//= require imagesloaded
+//= require isotope
 // Loads all Bootstrap javascripts
 //= require bootstrap
 //= require jquery.validate

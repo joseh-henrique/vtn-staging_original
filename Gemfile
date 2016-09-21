@@ -25,6 +25,14 @@ gem 'uglifier', '>= 2.5.0'
 gem "jquery-rails"
 gem "jquery-ui-rails"
 gem 'jquery-migrate-rails'
+gem 'fancybox2-rails', '~> 0.2.8'
+gem 'prettyphoto-rails', '~> 0.2.1'
+gem 'owlcarousel-rails', '~> 1.1', '>= 1.1.3.3'
+gem 'skrollr-rails', '~> 0.6.29'
+gem 'wow-rails', '~> 0.0.1'
+gem 'imagesLoaded_rails', '~> 3.1', '>= 3.1.8'
+gem 'isotope-rails', '~> 2.2', '>= 2.2.2'
+#gem 'parallax-rails', '~> 1.0' - blank page is displayed if this gem is incuded.
 
 # For Twitter bootstrap
 gem 'sass-rails',   '~> 4.0.2'
