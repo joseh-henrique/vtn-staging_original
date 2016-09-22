@@ -3,45 +3,50 @@
   <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 <![endif]>
 <!-- tb_check -->
-<footer id="main-footer">
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-md-12">
-      <ul>
-        <li><%= link_to "Affiliate Links", affiliate_path %></li>
-        <li><%= link_to 'About online appraisals', how_path(role: 'consumer') %></li>
-        <li> <%= link_to "Blog", 'http://blog.valuethisnow.com' %></li>
-        <li><%= link_to('Testimonials', controller: '/home', action: :testimonials)%></li>
-        <li> <%= link_to("Support", contact_path) %></li>
-        <li> <%= link_to("Become an Appraiser", new_appraiser_registration_path) %></li>
-        <li> <%= link_to("Privacy Policy", privacy_path) %></li>
-        <li> <%= link_to("Terms of Service", terms_path) %></li>
-        <li> <%= link_to "Login", new_user_session_path %></li>
-        <li class="dropdown" id="togglemore">
-        <a class="dropdown-toggle" id="drop4" role="button" data-toggle="dropdown" href="#">More <b class="caret"></b></a>
-        <ul id="menu2" class="dropdown-menu" role="menu" aria-labelledby="drop4">
-          <li role="presentation"><a role="menuitem" tabindex="-1" href="<%= url_for stores_path %>">Stores</a></li>
-          <li role="presentation"><a role="menuitem" tabindex="-1" href="<%= url_for roadshows_path %>">Road Show</a></li>
-          <li role="presentation"><a role="menuitem" tabindex="-1" href="<%= url_for salvages_path %>">Salvage</a></li>
-          <li role="presentation"><a role="menuitem" tabindex="-1" href="<%= url_for('/rare-books') %>">Rare Books</a></li>
-          <li role="presentation"><a role="menuitem" tabindex="-1" href="<%= url_for('/sports-memorabilia') %>">Sport Memorabilia</a></li>
+
+  <div class="footer_menu">
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="appraisals.html">Affiliate Links</a></li>
+      <li><a href="appraisals.html">About online appraisals</a></li>
+      <li><a href="http://blog.valuethisnow.com/">Blog</a></li>
+      <li><a href="testimonial.html">Testimonials</a></li>
+      <li><a href="support.html">Support</a></li>
+      <li><a href="login.html">Become an Appraiser </a></li>
+      <li><a href="https://www.valuethisnow.com/home/privacy">Privacy Policy</a></li>
+      <li><a href="https://www.valuethisnow.com/home/terms">Terms of Service</a></li>
+      <li><a href="login.html">Login</a></li>
+      <li><a href="contact-us.html">Contact Us</a></li>
+      <li class="more_link"><a href="#">More <i class="fa fa-caret-up"></i></a>
+        <ul>
+          <li><a href="stores.html">Stores</a></li>
+          <li><a href="roadshows.html">Road Show</a></li>
+          <li><a href="salvages.html">Salvage</a></li>
+          <li><a href="rare-books.html">Rare books</a></li>
+          <li><a href="sports-memorabilia.html">Sport memorabilia</a></li>
         </ul>
-        </li>
-      </ul>
-    </div>
+      </li>
+    </ul>
+  </div>
+  <div class="social_menu2">
+    <ul>
+      <li><a href="https://www.facebook.com/ValueThisNow">Facebook </a></li>
+      <li><a href="http://www.twitter.com/valuethisnow">Twitter</a></li>
+      <li><a href="https://www.pinterest.com/valuethisnow/">Pinterest</a></li>
+      <li><a href="#">Youtube</a></li>
+      <li><a href="#">Email</a></li>
+      <li><a href="#">Google+</a></li>
+    </ul>
+  </div>
+  <div class="copy">
+    <p>Copyright  2015 Valuethisnow, All Rights Reserved</p>
+  </div>
+  <div class="social_menu">
+    <ul>
+      <li><a href="https://www.facebook.com/ValueThisNow"><i class="fa fa-facebook"></i></a></li>
+      <li><a href="http://www.twitter.com/valuethisnow"><i class="fa fa-twitter"></i></a></li>
+      <li><a href="https://www.pinterest.com/valuethisnow/"><i class="fa fa-pinterest-p"></i></a></li>
+    </ul>
   </div>
 
-  <div class="row">
-    <div class="col-md-4">
-      <a href="http://www.twitter.com/valuethisnow" target="_blank" ><%= image_tag "tw.png" %></a>
-      <a href="http://pinterest.com/valuethisnow" target="_blank"><%= image_tag "pin.png" %></a>
-      <a href="http://www.facebook.com/ValueThisNow" target="_blank"><%= image_tag "fb.png" %></a>
-    </div>
-    <div class="col-md-4 copy">Copyright &copy; 2013 Colosses LLC, All Rights Reserved</div>
-    <div class="col-md-4">
-      <script type="text/javascript">TrustLogo("<%= image_path ("secure.png") %>", "SC5", "none");</script>
-    </div>
-  </div>
-</div>
-</footer>
-</div>
+

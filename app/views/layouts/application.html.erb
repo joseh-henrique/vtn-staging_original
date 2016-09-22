@@ -6,6 +6,10 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title><%= get_page_title(request.fullpath) %></title>
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700,900' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Roboto+Condensed:400,300,700' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,800,300,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
     <![if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
@@ -16,6 +20,7 @@
     <%= render partial: 'layouts/js_constants' %>
     <%= stylesheet_link_tag    "application", :media => "all" %>
     <%= javascript_include_tag "application" %>
+    <%= javascript_include_tag "scroll-startstop.events.jquery" %>
     <%= csrf_meta_tags %>
     <!--  styles -->
     <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
@@ -38,22 +43,20 @@
   </head>
   <body>
     <!-- Navbar -->
-    <div id="wrapper_new">
+    <div id="content" class="content">
     <%= render :partial => "layouts/navbar"%> <!-- tb_check -->
     <%= render :partial => 'layouts/flash', locals: {flash: flash}%> <!-- tb_check -->
     <%= render :partial => 'layouts/pixel_code'%>
     <%#= render :partial => 'layouts/schema'%>
-    <div id="content_new">    
-     <div id="wrap">
-        <div class="container-fluid">
             <%= yield %>
-         </div>
-     </div>
-    </div>
-    <div id="footer_new">
+    <footer class="footer-1">
     <%= render :partial => "layouts/footer" %> <!-- tb_check -->
     <img src="https://s.amazon-adsystem.com/iui3?d=3p-hbg&ex-src=valuethisnow.com&ex-hargs=v%3D1.0%3Bc%3D6195181157857%3Bp%3DH" width=1 height=1 border=0>
-    </div>
+    </footer>
    </div>
   </body>
+  <div class="myvideo" style="display:none;">
+    <i class="fa fa-times-circle openvideo"></i>
+    <iframe src="https://www.youtube.com/embed/5q8XwHpGMZY?rel=0&amp;controls=1&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
+  </div>
 </html>

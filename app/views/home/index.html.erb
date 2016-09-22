@@ -1,145 +1,54 @@
-<div id="home">
-  <div class="row hidden-xs" id="main-block">
-    <div class="col-md-12">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="title ">
-            Online appraisals made easy
-          </div>
-          <div class="sign-in">
-            <%= link_to "Sign in / Sign up to get an appraisal", main_app.new_user_session_path, class: "big-button yellow-button" %>
-          </div>
-        </div>
-      </div>
+<div class="random-slider">
+  <div id="owl-demo1" class="owl-carousel owl-theme">
+    <%= render :partial => "home/banners"%>
+  </div>
+</div>
+  <section class="section_1">
+    <div class="more_size">
+      <%= render :partial => "home/recent_appraisals"%>
+      <%= render :partial => "home/what_we_do"%>
+      <%= render :partial => "home/categories"%>
+      <%= render :partial => "home/social_sign_in"%>
+    </div>
+</section>
+<section class="section_4">
+  <div class="more_size">
+    <%= render :partial => "home/call_to_action"%>
+  </div>
+</section>
+<section class="section_3">
+  <div class="more_size">
+    <%= render :partial => "home/vtn_advantage"%>
+  </div>
+</section>
+  <script>
+    $(document).ready(function() {
 
-      <div class="row">
-        <div class="col-md-6 hidden-xs">
-          <div id="homeVideo" class="responsive-container">
-            <object class="frame" type="application/x-shockwave-flash" style="width:538px; height:302px;" data="https://www.youtube.com/v/5q8XwHpGMZY?color2=FBE9EC&amp;version=3">
-              <param name="movie" value="https://www.youtube.com/v/5q8XwHpGMZY?color2=FBE9EC&amp;version=3" />
-              <param name="allowFullScreen" value="true" />
-              <param name="allowscriptaccess" value="always" />
-            </object>
-          </div>
-        </div>
-        <div class="col-md-6 visible-lg">
-          <div class="featured-item">
-            <div id="homeItem"> 
-            </div>
-            <div id="homeValueBlock">
-              <div id="theTitle">
-              </div>
-              <%= link_to "What's your item worth?", main_app.new_user_session_path %>
-            </div>
+      //Sort random function
+      function random(owlSelector){
+        owlSelector.children().sort(function(){
+          return Math.round(Math.random()) - 0.5;
+        }).each(function(){
+          $(this).appendTo(owlSelector);
+        });
+      }
 
-            <div id="homeSocial">
-              <a href="http://www.facebook.com/ValueThisNow" title="Visit our Facebook page."><span id="hS1"></span></a>
-              <a href="http://www.twitter.com/valuethisnow" title="See our twitter feed."><span id="hS2"></span></a>
-              <a href="http://pinterest.com/valuethisnow" title="See our Pinterest board."><span id="hS3"></span></a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="row visible-xs" id="main-block-xs">
-    <div class="col-md-2">
-          <div class="title text-center">
-            Online appraisals made easy
-          </div>
-          <div class="sign-in text-center">
-            <%= link_to "Sign in / Sign up to get an appraisal", main_app.new_user_session_path, class: "yellow-button" %>
-          </div>
-    </div>
-  
-  </div>
-  <!-- Home block 1 -->
-  <div class="row" id="featured-coupon-block">
-    <!-- <div class="col-md-12"> -->
-      <%= render partial: 'layouts/featured_coupon'  %>
-    <!-- </div> -->
-  </div>
-  <!-- Middle 2 -->
-  <div class="row" id="mid-block">
-    <div class="visible-lg visible-md">
-    <%= render partial: "layouts/livehelpnow" %>
-    </div>
-    <div class="row">
-      <div class="col-md-9 col-md-offset-1">
-        <div class="row">
-          <div class="col-md-12 detail">
-            <div class="title">
-              <%= image_tag "m1.jpg" %>
-              Tell us about your item online 
-            </div>
-            <div class="copy">
-              Fill out our appraisal form and let us know as much information about the item as you have. One or more digital photos of your item is all you need.
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-12 detail">
-            <div class="title">
-              <%= image_tag "m2.jpg" %>
-              Our experts will appraise it. It's that simple!
-            </div>
-            <div class="copy">
-              You will receive a professional appraisal of your item which will help you see its true value
-            </div>
-            <div class="copy">
-              <%= link_to 'Learn more about online appraisals.', how_path(role: 'consumer') %>
-            </div>
-            <div class="sign-in" >
-              <%= link_to "Sign in / Sign up to get an appraisal", main_app.new_user_session_path, class: "yellow-button" %>
-            </div>
+      $("#owl-demo1").owlCarousel({
+        autoPlay:60000,
+        singleItem:true,
+        navigation: true,
+        navigationText: [
+          "<i class='icon-chevron-left icon-white'></i>",
+          "<i class='icon-chevron-right icon-white'></i>"
+        ],
+        beforeInit : function(elem){
+          //Parameter elem pointing to $("#owl-demo")
+          random(elem);
+        }
 
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- Middle 3 -->
-  <div class="row" id="mid-block-2">
-    <div class="col-md-9 col-md-offset-1">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="title">
-            Appraisals give you more than just a value
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-8">
-          <div class="copy">
-            <%= get_cms_content('/index-block-1') %>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <%= image_tag("h_items.png", class: "img-responsive") %>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- Middle 4 -->
-  <div class="row" id="bottom-block">
-    <div class="col-md-9 col-md-offset-1">
-      <div class="row">
-        <div class="col-md-4">
-              <img id="Image-Maps_1201309101116038" src="<%= image_path("h_logos.png") %>" usemap="#Image-Maps_1201309101116038" border="0" width="200" height="121" alt=""/>
-              <map id="_Image-Maps_1201309101116038" name="Image-Maps_1201309101116038">
-                <area shape="poly" coords="0,69,79,71,81,112,0,109," href="http://en.wikipedia.org/wiki/Uniform_Standards_of_Professional_Appraisal_Practice" alt="USPAP" title="USPAP"   />
-                <area shape="poly" coords="127,63,197,67,198,106,123,106," href="http://www.aoaonline.org" alt="Association of Online Appraisers" title="Association of Online Appraisers" />
-              </map>
-        </div>
-        <div class="col-md-8">
-          <div class="title">
-            The Value This Now Advantage
-          </div>
-          <div class="copy">
-            <%= get_cms_content('/index-block-2') %>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+      });
+
+    });
+  </script>
+
 </div>
