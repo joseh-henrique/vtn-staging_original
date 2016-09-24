@@ -6,6 +6,8 @@ class HomeController < ApplicationController
     @user = User.new
     @featured_coupon = Coupon.get_featured
     flash.keep
+    #@recent_appraisals = Appraisal.all.order("created_at desc").limit(12)
+    #appraisal.default_photo.picture_url
     return redirect_to get_index_for_user_type(current_user) unless current_user.nil?
   end
 
