@@ -1,20 +1,24 @@
-<div class="row">
-  <div class="col-md-9 col-md-offset-1 big-title">
-    Forgot Password
-  </div>
-</div>
-<div class="row">
-  <div class="col-md-9 col-md-offset-1 forgot_pwd_width">
-    <%= simple_form_for resource, as: resource_name, url: password_path(resource_name), html: { method: :post, class: 'form-horizontal' },
-      wrapper: :horizontal_form,
-      wrapper_mappings: {
-        check_boxes: :horizontal_radio_and_checkboxes,
-        radio_buttons: :horizontal_radio_and_checkboxes,
-        file: :horizontal_file_input,
-        boolean: :horizontal_boolean
-      } do |f| %>
-      <%= f.input :email %>
-      <%= f.submit "Reset Password", :class=> "btn btn-success pull-right"%>
-    <% end %>
+<div class="container">
+  <div class="login">
+    <h2 style="text-align:left;">Forgot Password</h2>
+    <div class="my-login2">
+      <%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { method: :post }) do |f| %>
+        <div class="row">
+          <div class="col-md-5">
+            <div class="sidn2">
+              <div class="form-group">
+                <label class="control-label" >Email<font color="#ff5a00">*</font></label>
+                <%= f.email_field :email, :class => "form-control", :autocomplete => "off" %>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-5">
+            <div class="reset">
+              <%= f.submit "Reset Password", :class => "btn log-gre" %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
   </div>
 </div>
