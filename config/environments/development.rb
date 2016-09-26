@@ -31,8 +31,15 @@ PurexNew::Application.configure do
   # Do not compress assets
   config.assets.compress = false
 
+  # See everything in the log (default is :info)
+  config.log_level = :debug
+
+  # Use a different logger for distributed setups
+  config.logger = Logger.new(STDOUT)
+
   # Expands the lines which load the assets
   config.assets.debug = true
+  ActiveRecord::Base.logger = Logger.new(STDOUT)
 
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.perform_deliveries = false

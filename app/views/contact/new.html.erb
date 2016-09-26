@@ -1,28 +1,78 @@
-<div class="row">
-  <div class="col-md-9 col-md-offset-1">
-    <div class="big-title">
-      Support
-    </div>
-    <%= render :partial => "contact_tabs" if current_user %>
-    <%= simple_form_for @message, :url => contact_path, :html => {:class => 'form-horizontal'}  do |f| %>
-      <% if !current_user %>
-        <%= f.input :name %>
-        <%= f.input :email %>
-      <% else %>
-        <% @message.email = current_user.email; @message.name = current_user.name %>
-        <%= f.input :name, as: :hidden %>
-        <%= f.input :email, as: :hidden %>
-      <% end %>
-      <%= f.input :subject %>
-      <%= f.input :body, as: :text, input_html: {:rows => 4 } %>
-      <div class="row">
-        <div class="col-md-10 col-md-offset-2">
-          For phone support call: (925) 289-8746
+<div class="container wal">
+  <div class="account">
+    <h2>support</h2>
+    <div class="account-tab">
+      <ul>
+        <li class="active"><a href="">Contact Support </a></li>
+        <div class="clear"></div>
+      </ul>
+      <div class="wel-form account-form">
+        <%= form_for(@message, :url => contact_path, :html => { method: :post }) do |f| %>
+        <div class="pad">
+          <div class="row">
+            <% if !current_user %>
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <div class="row">
+                      <div class="col-md-3">
+                        <label class="control-label">* Name</label>
+                      </div>
+                      <div class="col-md-8">
+                        <%= f.text_field :name, :class => "form-control", :autocomplete => "off" %>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <div class="row">
+                      <div class="col-md-3">
+                        <label class="control-label">* Email</label>
+                      </div>
+                      <div class="col-md-8">
+                        <%= f.email_field :email, :class => "form-control", :autocomplete => "off" %>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            <% else %>
+                <% @message.email = current_user.email; @message.name = current_user.name %>
+                <%= f.hidden_field :name %>
+                <%= f.hidden_field :email %>
+            <% end %>
+            <div class="col-md-12">
+              <div class="form-group">
+                <div class="row">
+                  <div class="col-md-3">
+                    <label class="control-label">* Subject</label>
+                  </div>
+                  <div class="col-md-8">
+                    <%= f.text_field :subject, :class => "form-control", :autocomplete => "off" %>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="form-group">
+                <div class="row">
+                  <div class="col-md-3">
+                    <label class="control-label" >* Body</label>
+                  </div>
+                  <div class="col-md-8">
+                    <%= f.text_area :body, :class => "form-control hf", :rows => "5" %>
+                    <p class="pg">For phone support call: (844) 938-2583</p>
+                    <div class="bun2">
+                      <%= f.submit "Send", :class => "btn next-1 gre right-2 scp" %>
+                      <div class="clear"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-      <div>
-        <%= tb_submit_button(title: "Send") %>
-      </div>
-    <% end %>
+      <% end %>
+    </div>
   </div>
 </div>
