@@ -1,23 +1,69 @@
-<div class="row">
-  <div class="col-md-10 col-md-offset-1">
-    <div class="big-title">
-      Account
-    </div>
+<div class="container wal">
+  <div class="account">
+    <h2 style="text-align:left">Account</h2>
     <%= render :partial => "/appraiser_steps/appraiser_tabs" %>
-    <%= simple_form_for resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, :class => "form-horizontal" },
-      wrapper: :horizontal_form,
-      wrapper_mappings: {
-        check_boxes: :horizontal_radio_and_checkboxes,
-        radio_buttons: :horizontal_radio_and_checkboxes,
-        file: :horizontal_file_input,
-        boolean: :horizontal_boolean
-      } do |f| %>
-      <%= devise_error_messages! %>
-      <%= f.input :email %>
-      <%= f.input :current_password, label: "Current Password", :hint => "We need your current password to confirm your changes"%>
-      <%= f.input :password, label: "New Password", placeholder: "Use this field to change your password." %>
-      <%= f.input :password_confirmation, :hint => "Must have at least 6 characters: at least 1 digit, at least 1 upper case letter."%>
-      <%= f.submit "Save", :class => "btn btn-success pull-right"%>
-    <% end %>
+    <div class="wel-form account-form">
+      <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put}) do |f| %>
+          <div class="pad">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-md-3">
+                    </div>
+                    <div class="col-md-8">
+                      <p class="hg dd">Use below fields to change your password.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-12">
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-md-3">
+                      <label class="control-label" >Current Password</label>
+                    </div>
+                    <div class="col-md-8">
+                      <%= f.password_field :current_password, :class => "form-control", :autocomplete => "off" %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-12">
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-md-3">
+                      <label class="control-label" >New Password</label>
+                    </div>
+                    <div class="col-md-8">
+                      <%= f.password_field :password, :class => "form-control", :autocomplete => "off" %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-12">
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-md-3">
+                      <label class="control-label" >Password confirmation</label>
+                    </div>
+                    <div class="col-md-8">
+                      <%= f.password_field :password_confirmation, :class => "form-control", :autocomplete => "off" %>
+                      <p class="hg">Must have at least 6 characters: at least 1 digit, at least 1 upper case letter.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+              <div class="bun2">
+                      <%= f.submit "Save", :class => "btn next-1 gre right-2", :id => "btn_submit_avatar"%>
+                <div class="clear"></div>
+              </div>
+      <% end %>
+    </div>
   </div>
 </div>

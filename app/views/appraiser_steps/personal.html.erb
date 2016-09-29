@@ -1,10 +1,8 @@
 <%= render :partial => "layouts/doc_has_changed" %>
 
-<div class="row">
-  <div class="col-md-10 col-md-offset-1">
-    <div class="big-title">
-      Account
-    </div>
+<div class="container wal">
+  <div class="account">
+    <h2 style="text-align:left">Account</h2>
     <%= render :partial => "appraiser_tabs" %>
     <% unless current_user.is_rejected? %>
       <% if current_user.is_appraiser? %>
@@ -12,31 +10,127 @@
           <span class="glyphicon glyphicon-warning-sign"></i>  <strong>NOTICE:</strong> This information is primarily for the private use of ValueThisNow.com and will not be made public. Only the appraiser’s name, image and website will be made public.
         </div>
       <% end %>
-          <%= simple_form_for @user, :url => wizard_path, :method => :put,  :html => {:multipart => true, :class => "form-horizontal"},
-            wrapper: :horizontal_form,
-            wrapper_mappings: {
-              check_boxes: :horizontal_radio_and_checkboxes,
-              radio_buttons: :horizontal_radio_and_checkboxes,
-              file: :horizontal_file_input,
-              boolean: :horizontal_boolean
-            } do |f| %>
+        <div class="wel-form account-form">
+          <div class="pad">
+            <div class="row">
+          <%= form_for(@user,  :url => wizard_path, :method => :put, :html => {:multipart => true}) do |f| %>
+                  <% if @user.is_appraiser? %>
+                  <% end %>
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <div class="row">
+                        <div class="col-md-3">
+                          <label class="control-label">* Name</label>
+                        </div>
+                        <div class="col-md-8">
+                          <%= f.text_field :name, :class => "form-control" %>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
 
-            <% if @user.is_appraiser? %>
-              <%= f.input :referral_id, label: "Appraiser ID", disabled: true %>
-            <% end %>
-            <%= f.input :name  %>
-            <%= f.input :email %>
-            <%= f.simple_fields_for :address, @user.address do |a| %>
-              <%= a.input :address, :required => @user.is_appraiser?  %>
-              <%= a.input :city, :required => @user.is_appraiser? %>
-              <%= a.input :state, :label => "State/Province", :required => @user.is_appraiser? %>
-              <%= a.input :country, :priority => [ "United States" ], :required => @user.is_appraiser? %>
-              <%= a.input :zip, :label => "Postal Code", :required => @user.is_appraiser? %>
-              <%= a.input :phone1, :label => "Phone", :input_html => {:class => "phone-input"}, :required => @user.is_appraiser? %>
-            <% end %>
-          <%= f.submit "Save and Continue", :class => "btn btn-success pull-right"%>
-      <% end %>
-    <% end %>
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <div class="row">
+                        <div class="col-md-3">
+                          <label class="control-label">* Email</label>
+                        </div>
+                        <div class="col-md-8">
+                          <%= f.email_field :email, :class => "form-control" %>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <%= f.fields_for :address do |ff| %>
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <div class="row">
+                        <div class="col-md-3">
+                          <label class="control-label" >Address</label>
+                        </div>
+                        <div class="col-md-8">
+                          <%= ff.text_field :address, :class => "form-control", :required => @user.is_appraiser? %>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <div class="row">
+                        <div class="col-md-3">
+                          <label class="control-label" >City</label>
+                        </div>
+                        <div class="col-md-8">
+                          <%= ff.text_field :city, :class => "form-control", :required => @user.is_appraiser? %>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <div class="row">
+                        <div class="col-md-3">
+                          <label class="control-label" >State/Province</label>
+                        </div>
+                        <div class="col-md-8">
+                          <%= ff.text_field :state, :class => "form-control", :required => @user.is_appraiser? %>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <div class="row">
+                        <div class="col-md-3">
+                          <label class="control-label" >Country</label>
+                        </div>
+                        <div class="col-md-8" style="text-align:left;">
+                          <%= ff.country_select :country, priority_countries: ["United States"], :class => "form-control", :required => @user.is_appraiser? %>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <div class="row">
+                        <div class="col-md-3">
+                          <label class="control-label" >Postal Code</label>
+                        </div>
+                        <div class="col-md-8">
+                          <%= ff.text_field :zip, :class => "form-control", :required => @user.is_appraiser? %>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <div class="row">
+                        <div class="col-md-3">
+                          <label class="control-label" >Phone</label>
+                        </div>
+                        <div class="col-md-8">
+                          <%= ff.text_field :phone1, :class => "form-control", :required => @user.is_appraiser? %>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <% end %>
+
+        </div>
+        </div>
+          <div class="bun2">
+            <%= link_to "Previous Step", previous_wizard_path, :class => "btn next-1 bge left-2" %>
+            <%= f.submit "Save and Continue", :class => "btn next-1 gre right-2", :id => "btn_submit_avatar"%>
+            <div class="clear"></div>
+          </div>
+              <% end %>
+  </div>
+  <% end %>
   </div>
 </div>
-

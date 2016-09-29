@@ -7,9 +7,13 @@
                }.merge options
     url_for(options)
   end %>
-<ul class="nav nav-tabs">
-    <li <%= css_class_for_active_page(path: wizard_path(:personal)) %> ><%= link_to "Profile", wizard_path(:personal) %></li>
-    <li <%= css_class_for_active_page(path: wizard_path(:avatar)) %> ><%= link_to "Image", wizard_path(:avatar) %></li>
-    <li <%= css_class_for_active_page(path: wizard_path(:preferences)) %> ><%= link_to "Notifications", wizard_path(:preferences) %></li>
-    <li <%= css_class_for_active_page(path: edit_user_registration_path) %> ><%= link_to "Email & Password", edit_user_registration_path %></li>
-</ul>
+<div class="account-tab">
+  <ul>
+    <li <%= css_class_for_active_page(path: wizard_path(:personal)) %>><%= link_to "Profile", wizard_path(:personal) %></li>
+    <li <%= css_class_for_active_page(path: wizard_path(:avatar)) %>><%= link_to "Image", wizard_path(:avatar) %></li>
+    <li <%= css_class_for_active_page(path: wizard_path(:preferences)) %>><%= link_to "Notifications", wizard_path(:preferences) %></li>
+    <li <%= css_class_for_active_page(path: edit_user_registration_path) %>><%= link_to "Email & Password", edit_user_registration_path %></li>
+    <li <%= css_class_for_active_page(path: bulk_coupon_path(1)) %>><%= link_to "Bulk Coupon", bulk_coupon_path(1) %></li>
+    <div class="clear"></div>
+  </ul>
+</div>
