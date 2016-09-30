@@ -1,7 +1,7 @@
 class Appraisals::BuildController < ApplicationController
   include Wicked::Wizard
 
-  steps :general, :characteristics, :photos, :plan, :payment, :thank
+  steps :general, :characteristics, :plan, :payment, :thank
 
   def show
     @appraisal = Appraisal.find(params[:appraisal_id])
@@ -18,12 +18,14 @@ class Appraisals::BuildController < ApplicationController
   def update
     @appraisal = Appraisal.find(params[:appraisal_id])
     params[:appraisal][:appraisal_info] = @appraisal.merge_appraisal_info(params)
-    params[:appraisal].except!(:payment_attributes)
+    # added classification_attributes as it is giving error
+    params[:appraisal].except!(:payment_attributes, :classification_attributes, :appraisal_info_attributes)
     params[:appraisal][:step] = step
     params[:appraisal][:step] = 'active' if step == steps.last
     params[:appraisal][:selected_plan] = (params[:appraisal][:selected_plan].to_i + 4) if params[:isPair]
     @appraisal.update_attributes(params[:appraisal])
-    @appraisal.assigned_to = Appraiser.find(@appraisal.appraiser_referral.to_i) unless @appraisal.appraiser_referral.eql?("") 
+    # giving error if appraiser id is not valid
+    #@appraisal.assigned_to = Appraiser.find(@appraisal.appraiser_referral.to_i) unless @appraisal.appraiser_referral.eql?("")
     @appraisal.save
     @appraisal.reload
     @appraisal.payment.reload if @appraisal.payment

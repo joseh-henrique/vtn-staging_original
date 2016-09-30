@@ -1,88 +1,179 @@
-<%= stylesheet_link_tag "progress_step_bar" %>
-<div id="build_general">
-  <div class="row">
-    <div class="col-md-11 col-md-offset-1 big-title">
-      Tell us about your item
-      <div class="pull-right orderStep">
-        1 of 5
-      </div>
+<div class="container wal">
+  <div class="welcome">
+    <div class="hel">
+      <h2 class="left-1">Tell us about your item</h2>
+      <h2 class="right-1">1 of 4</h2>
+      <div class="clear"></div>
     </div>
-  </div>
-
-  <div class="row stepsbar">
-    <div class="col-md-12 center">
-      <%= image_tag "steps/progressbar-2.jpg", class: "img-responsive"%>
-
-      <!-- <%= render "progress_step_1"%> -->
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-md-10">
-      <%= simple_form_for @appraisal, :url => wizard_path, :method => :put,  :html => {:multipart => true, :class => "form-horizontal"},
-        wrapper: :horizontal_form,
-        wrapper_mappings: {
-          check_boxes: :horizontal_radio_and_checkboxes,
-          radio_buttons: :horizontal_radio_and_checkboxes,
-          file: :horizontal_file_input,
-          boolean: :horizontal_boolean
-        } do |f| %>
-        <div class="row">
-          <div class="col-md-8 col-md-offset-1">
-            <%= f.input :title, label: "Item Name", required: true%>
-            <div class="row brief_name">
-              <div class="col-md-9 col-md-offset-3"> (Enter a brief name for your item, e.g., wall clock, walnut desk, Hummel figurine.) </div>
+    <div class="row">
+      <div class="col-md-9">
+        <div class="my-tab">
+          <div class="my-tab-list-bor"> </div>
+          <div class="my-tab-list">
+            <ul>
+              <li><a href="inform.html">
+                <div class="con-list">
+                  <div class="green-no color-gre"> 1 </div>
+                </div>
+              </a> Inform</li>
+              <li><a href="upload.html">
+                <div class="con-list">
+                  <div class="green-no color-red"> 2 </div>
+                </div>
+              </a>Upload</li>
+              <li><a href="select.html">
+                <div class="con-list">
+                  <div class="green-no color-red">3 </div>
+                </div>
+              </a>Select</li>
+              <li><a href="check.html">
+                <div class="con-list">
+                  <div class="green-no color-red"> 4 </div>
+                </div>
+              </a>Check Out</li>
+            </ul>
+          </div>
+        </div>
+        <div class="wel-form">
+          <%= form_for(@appraisal,  :url => wizard_path, :method => :put, :html => {:multipart => true}) do |f| %>
+          <div class="pad">
+            <div class="row">
+              <div class="col-md-8">
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-md-3">
+                      <label class="control-label" for="usr">* Item Name</label>
+                    </div>
+                    <div class="col-md-9">
+                      <%= f.text_field :title, :class => "form-control"%>
+                      <p> (Enter a brief name for your item, e.g., wall clock, walnut desk, Hummel figurine.) </p>
+                    </div>
+                  </div>
+                </div>
               </div>
-
-          </div>
-          <div class="col-md-3">
-            <%= f.input :appraiser_referral, label: raw("Appraiser ID <a href='#' id='tooltipAppraiserId'> <span class='badge badge-success'>?</span></a>") %>
-          </div>
-        </div>
-
-
-
-        <div class="row">
-          <div class="col-md-12">
-            <%= f.input :name, :as => :text, :label => "Description",  :input_html => {:class => "span8", :rows => 4}, required: true, :hint => "(Enter a brief description of your item including any characteristics you feel are relevant to its value.)" %>
-            <%= f.simple_fields_for :appraisal_info, @appraisal.appraisal_info do |a| %>
-              <%= a.input :item_history, :label => "Item History", :as => :text, required: true,:input_html => {:class => "span8", :rows => 4}, hint: "(Where did you get it? Purchase at auction, flea market? Family Heirloom? How long have you owned it?)" %>
-              <%= a.input :country_of_origin, :label => "Country of Origin", :as => :country, input_html: {class: "chzn-select"} %>
-            <% end %>
-            <%= f.simple_fields_for :classification do |c| %>
-              <%= c.association :category, as: :select, collection: Category.all.order(:name), required: true, input_html: {class: "chzn-select"} %>
-            <% end %>
-            <% if Setting.is_set("enable_insurance_claims","true") %>
-              <%= f.input :insurance_location, label: "Location", as: :string, :input_html => {:class =>"span8" }, required: true, hint: "Please provide the location (city/state) of the property."%>
-              <%= f.input :insurance_claim, label: "This appraisal is for damage claims purposes. I'm seeking values prior to damage", hint: "Remember to provide detailed photos of the item (including a photo showing the whole item)", :input_html => {:class =>"" } %>
-            <% end %>
-
-            <div class="btns-back-forward">
-              <%= f.button :submit, "Forward", class: "btn btn-success pull-right",id: "btnBuildWizardGeneral"  %>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-md-5">
+                      <label class="control-label" for="email">Appraiser ID <i class="fa fa-question-circle que" data-toggle="tooltip" title="Appraiser ID
+"></i> </label>
+                    </div>
+                    <div class="col-md-7">
+                      <%= f.text_field :appraiser_referral, :class => "form-control"%>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-12">
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-md-2">
+                      <label class="control-label des" for="message"> * Description</label>
+                    </div>
+                    <div class="col-md-10">
+                      <%= f.text_area :name, :class => "form-control", :rows => "7"%>
+                      <p> (Enter a brief description of your item including any characteristics You feel are relevant to its value. </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <%= f.fields_for :appraisal_info do |ff| %>
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <div class="row">
+                      <div class="col-md-2">
+                        <label class="control-label" for="Country"> Country of Origin</label>
+                      </div>
+                      <div class="col-md-10">
+                        <%= ff.text_field :country_of_origin, :class => "form-control"%>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              <div class="col-md-12">
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-md-2">
+                      <label class="control-label" for="item-history"> Item History</label>
+                    </div>
+                    <div class="col-md-10">
+                      <%= ff.text_field :item_history, :class => "form-control"%>
+                      <p>(Where did you get it? Purchase at auction, flea market? Family Heirloom? How long have you owned it?)</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <% end %>
+              <%= f.fields_for :classification do |a| %>
+              <div class="col-md-12">
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-md-2">
+                      <label class="control-label" for="Category">* Category</label>
+                    </div>
+                    <div class="col-md-10">
+                      <%= a.select(:category, options_from_collection_for_select(Category.all.order(:name), 'name', 'name'), {}, :class => "form-control", :style => "width:640px" )%>
+                    </div>
+                  </div>
+                </div>
+              </div>
+               <% end %>
+               <% if Setting.is_set("enable_insurance_claims","true") %>
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <div class="row">
+                      <div class="col-md-2">
+                        <label class="control-label" for="Location"> * Location</label>
+                      </div>
+                      <div class="col-md-10">
+                        <%= f.text_field :insurance_location, :class => "form-control"%>
+                        <p>Please provide the location (city/state) of the property.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <% end %>
+              <div class="col-md-12">
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-md-offset-2">
+                      <div class="checkbox hhyu">
+                        <label><%= f.check_box :insurance_claim %>
+                          <p> This appraisal is for damage claims purposes. I'm seeking values prior to damage.</p>
+                          <p>  Remember to provide detailed photos of the item (including a photo showing the whole item).</p>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-
+          </div>
+          <div class="p2">
+            <div class="col-md-offset-10 sdsd">
+              <%= f.submit "Next", :class => "btn next-1 gre right-2 rp", :id => "btn_submit_avatar"%>
+            </div>
+            <div class="clear"></div>
+          </div>
+        <% end %>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="inform">
+          <div class="paypal">
+            <%= image_tag 'paypal.png', alt: "paypal" %>
+          </div>
+          <h6 class="trans"><font color="#e76311" >If you have to go, let's save your work for Your return !</font> </h6>
+          <div class="har">
+            <button type="button" class="btn next-1 gre">save</button>
+          </div>
+          <div class="expert">
+            <p>An Expert Appraisal
+              is only moments
+              away. don't stop now!</p>
           </div>
         </div>
-      <% end %>
-    </div>
-
-    <div class="col-md-2">
-      <div class="center">
-        <%= link_to "Save It", appraisals_path, id: "save_it_btn", class: "btn btn-success"%>
-        </br>
-        If you have to go, let's save your stuff for your return!
-      </div>
-      <div class="notes">
-        <%#= image_tag "pinnotes/pinnote1.png", class: "img-responsive"%>
-        <div class="content-note">
-          <span>
-            An Expert Appraisal <br>
-            is only moments away.<br>
-            Don't stop now!
-          </span>
-        </div>
       </div>
     </div>
-
   </div>
 </div>

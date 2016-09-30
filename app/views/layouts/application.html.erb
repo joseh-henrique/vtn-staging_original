@@ -55,6 +55,30 @@
     </footer>
    </div>
   </body>
+  <!-- This is used by build/plan.html. find a better place to add this js-->
+  <script type="text/javascript">
+
+    //populatedropdown(id_of_day_select, id_of_month_select, id_of_year_select)
+    window.onload=function(){
+      populatedropdown("monthdropdown", "yeardropdown")
+    }
+  </script>
+  <script>
+    $('.check-in').change(function(){
+      if(this.checked) {
+        $(".prome").show();
+        $(".prome2").hide();
+        $(".main-work input").attr("disabled","true");
+      }
+      else{
+        $(".prome").hide();
+        $(".prome2").show();
+        $(".main-work input").removeAttr("disabled","true");
+      }
+
+
+    });
+  </script>
   <div class="myvideo" style="display:none;">
     <i class="fa fa-times-circle openvideo"></i>
     <iframe src="https://www.youtube.com/embed/5q8XwHpGMZY?rel=0&amp;controls=1&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
