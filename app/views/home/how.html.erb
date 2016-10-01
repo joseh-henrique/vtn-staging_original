@@ -1,9 +1,11 @@
 <div class="row">
   <div class="col-md-9 col-md-offset-1">
     <% if @role == "consumer" %>
-      <%= get_cms_content('/how-it-works-consumers') %>
+       <!-- add partial to CMS -->
+        <%= render :partial => "how_it_works_consumer" %>
     <% elsif @role == "appraiser" %>
-      <%= get_cms_content('/how-it-works-appraisers') %>
+        <!-- add partial to CMS -->
+        <%= render :partial => "how_it_works_appraiser" %>
     <% else %>
       <div class="row">
         <div class="col-md-5 col-md-offset-2">
