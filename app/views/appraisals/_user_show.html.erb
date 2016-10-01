@@ -1,113 +1,233 @@
-<div class="row">
-  <div class="col-md-10">
-    <h5><strong>Status :</strong> <%= getStringForActivityValue(@appraisal.status) %></h5>
-    <h5><strong>Type :</strong> <%= getStringForAppraisalType(@appraisal.selected_plan) %></h5>
-    <h3>
-      <%= @appraisal.title %>
-    </h3>
-  </div>
-  <div class="col-md-1" style="padding-top: 15px;">
-      <% if @appraisal.status != EActivityValueFinalized %>
-        <%= link_to 'Edit', edit_appraisal_path(@appraisal), :class => "btn btn-success btn-block" %>
-      <% end %>
-      <% if @appraisal.status == EActivityValueFinalized %>
-        <%= link_to show_shared_path(@appraisal, :format => :pdf), :class => "btn btn-success btn-sm" do %><span class="glyphicon glyphicon-download-alt"></span> Download Appraisal<% end %>
-      <% end %>
-  </div>
-</div>
-
-<div class="row">
-  <div class="col-md-7">
-    <div >
-      <table class="table table-condensed">
-        <tbody>
-          <% if @appraisal.status == EActivityValueFinalized%>
-            <tr>
-              <td><%= "File #".upcase %></td>
-              <td><%= @appraisal.id %></td>
-            </tr>
-            <tr>
-              <td><%= "Effective Date of Report".upcase %></td>
-              <td><%= @appraisal.updated_at.strftime("%d %b. %Y") %></td>
-            </tr>
-          <% end %>
-          <% if @appraisal.status == EActivityValueClaimed || @appraisal.status == EActivityValueFinalized %>
-            <tr>
-              <td><%= "Appraised by".upcase %></td>
-              <td><%= getProfileForUser(@appraisal.assigned_to) %></td>
-            </tr>
-          <% end %>
-          <tr>
-            <td>CATEGORY</td>
-            <td><% if @appraisal.status == EActivityValueFinalized %>
-              <%= @appraisal.classification.nil? ? "" : @appraisal.classification.category.name %>
-            <% else %>
-              <%= render :partial => "appraisals/edit_classification", :locals => {:appraisal => @appraisal} %>
-            <% end %>
-          </td>
-        </tr>
-        <tr>
-          <td><%= "Title".upcase %></td>
-          <td><%= @appraisal.title %></td>
-        </tr>
-        <tr>
-          <td><%= "Description".upcase %></td>
-          <td><%= @appraisal.name %></td>
-        </tr>
-        <tr>
-          <td><%= "Approx. Date of Manufacture".upcase %></td>
-          <td><%= @appraisal.appraisal_info.year_of_manufacture %></td>
-        </tr>
-        <tr>
-          <td><%= "Country of Origin".upcase %></td>
-          <td><%= @appraisal.appraisal_info.country_of_origin %></td>
-        </tr>
-        <tr>
-          <td><%= "Signatures, Maker/Maker's, Dates, etc.".upcase %></td>
-          <td><%= @appraisal.appraisal_info.makers_marks %></td>
-        </tr>
-        <tr>
-          <td><%= "Inscriptions".upcase %></td>
-          <td><%= @appraisal.appraisal_info.inscriptions %></td>
-        </tr>
-        <tr>
-          <td><%= "Dimensions".upcase %></td>
-          <td><%= @appraisal.appraisal_info.dimensions %></td>
-        </tr>
-        <tr>
-          <td><%= "Condition".upcase %></td>
-          <td><%= @appraisal.appraisal_info.damage %></td>
-        </tr>
-        <tr>
-          <td><%= "Item History".upcase %></td>
-          <td><%= @appraisal.appraisal_info.item_history %></td>
-        </tr>
-        <% if @appraisal.status == EActivityValueFinalized %>
-          <tr>
-            <td><%= "Additional Extraordinary Assumptions".upcase %></td>
-            <td><%= @appraisal.appraisal_info.additional_ea %></td>
-          </tr>
-          <tr>
-            <td><%= "Comments".upcase %></td>
-            <td><%= @appraisal.appraisal_info.appraiser_comments %></td>
-          </tr>
-          <tr>
-            <td><%= "Replacement Value".upcase%></br><small>(Comparable)</small></td>
-            <td><%= print_replacement_cost(@appraisal) %></td>
-          </tr>
-          <tr>
-            <td><%= "Fair Market Value".upcase %></td>
-            <td><%= print_fair_market_value(@appraisal) %></td>
-          </tr>
+<div class="product">
+  <div class="container">
+    <div  class="row">
+      <div class="col-md-3 col-sm-6 col-xs-12 text-left gt">
+        <div class="pro-1">
+          <p><span>Status :</span> <%= getStringForActivityValue(@appraisal.status) %></p>
+          <p><span>Type :</span> <%= getStringForAppraisalType(@appraisal.selected_plan) %></p>
+        </div>
+      </div>
+      <div class="col-md-9 col-sm-6 col-xs-12 text-right pt">
+        <% if (@appraisal.status == EActivityValueFinalized) %>
+            <div class="short">
+              <a href="#" class="product-gre"><%= image_tag 'download.png', alt:'download' %> DOWNLOAD SHORT REPORT</a>
+            </div>
+        <% else %>
+            <div class="col-md-1" style="padding-top: 15px;">
+              <%= link_to 'Claim', claim_appraisal_path(@appraisal), :class => "btn btn-success pull-right claim" if @appraisal.status == EActivityValuePayed %>
+              <%= link_to 'Edit', reply_appraisal_path(@appraisal), :class => "btn btn-success pull-right edit" if (@appraisal.status == EActivityValueClaimed) && (current_user == @appraisal.assigned_to) %>
+            </div>
         <% end %>
-      </tbody>
-    </table>
-  </div>
-</div>
+      </div>
+    </div>
+    <div class="app-big-1">
+      <h3><%= @appraisal.title %></h3>
+      <div class="row">
+        <div class="col-md-8">
+          <% if @appraisal.status == EActivityValueFinalized%>
+              <div class="pro-bott auction">
+                <div class="row">
+                  <div class="col-md-3 col-sm-3 col-xs-12">
+                    <span>FILE #</span>
+                  </div>
+                  <div class="col-md-9 col-sm-9 col-xs-12">
+                    <span><%= @appraisal.id %></span>
+                  </div>
+                </div>
+              </div>
+              <div class="pro-bott auction">
+                <div class="row">
+                  <div class="col-md-3 col-sm-3 col-xs-12">
+                    <span>EFFECTIVE DATE OF REPORT</span>
+                  </div>
+                  <div class="col-md-9 col-sm-9 col-xs-12">
+                    <span><%= @appraisal.updated_at.strftime("%d %b. %Y") %></span>
+                  </div>
+                </div>
+              </div>
+              <div class="pro-bott auction">
+                <div class="row">
+                  <div class="col-md-3 col-sm-3 col-xs-12">
+                    <span>APPRAISED BY</span>
+                  </div>
+                  <div class="col-md-9 col-sm-9 col-xs-12">
+                    <span><%= getProfileForUser(@appraisal.created_by) %></span>
+                  </div>
+                </div>
+              </div>
+              <div class="pro-bott auction">
+                <div class="row">
+                  <div class="col-md-3 col-sm-3 col-xs-12">
+                    <span>CATEGORY</span>
+                  </div>
+                  <div class="col-md-9 col-sm-9 col-xs-12">
+                    <span><%= "#{@appraisal.classification.category.name}" unless @appraisal.classification.nil? %></br></span>
+                  </div>
+                </div>
+              </div>
+              <div class="pro-bott auction">
+                <div class="row">
+                  <div class="col-md-3 col-sm-3 col-xs-12">
+                    <span>TITLE</span>
+                  </div>
+                  <div class="col-md-9 col-sm-9 col-xs-12">
+                    <span><%= @appraisal.title %></span>
+                  </div>
+                </div>
+              </div>
+              <div class="pro-bott auction">
+                <div class="row">
+                  <div class="col-md-3 col-sm-3 col-xs-12">
+                    <span>DESCRIPTION</span>
+                  </div>
+                  <div class="col-md-9 col-sm-9 col-xs-12">
+                    <span><%= @appraisal.name %></span>
+                  </div>
+                </div>
+              </div>
+              <div class="pro-bott auction">
+                <div class="row">
+                  <div class="col-md-3 col-sm-3 col-xs-12">
+                    <span>APPROX. DATE OF MANUFACTURE</span>
+                  </div>
+                  <div class="col-md-9 col-sm-9 col-xs-12">
+                    <span><%= @appraisal.appraisal_info.year_of_manufacture %></span>
+                  </div>
+                </div>
+              </div>
+              <div class="pro-bott auction">
+                <div class="row">
+                  <div class="col-md-3 col-sm-3 col-xs-12">
+                    <span>COUNTRY OF ORIGIN</span>
+                  </div>
+                  <div class="col-md-9 col-sm-9 col-xs-12">
+                    <span><%= @appraisal.appraisal_info.country_of_origin %></span>
+                  </div>
+                </div>
+              </div>
+              <div class="pro-bott auction">
+                <div class="row">
+                  <div class="col-md-3 col-sm-3 col-xs-12">
+                    <span>SIGNATURES, MAKER/MAKER'S, DATES, ETC.</span>
+                  </div>
+                  <div class="col-md-9 col-sm-9 col-xs-12">
+                    <span><%= @appraisal.appraisal_info.makers_marks %></span>
+                  </div>
+                </div>
+              </div>
+              <div class="pro-bott auction">
+                <div class="row">
+                  <div class="col-md-3 col-sm-3 col-xs-12">
+                    <span>INSCRIPTIONS</span>
+                  </div>
+                  <div class="col-md-9 col-sm-9 col-xs-12">
+                    <span><%= @appraisal.appraisal_info.inscriptions %></span>
+                  </div>
+                </div>
+              </div>
+              <div class="pro-bott auction">
+                <div class="row">
+                  <div class="col-md-3 col-sm-3 col-xs-12">
+                    <span>DIMENSIONS</span>
+                  </div>
+                  <div class="col-md-9 col-sm-9 col-xs-12">
+                    <span><%= @appraisal.appraisal_info.dimensions %></span>
+                  </div>
+                </div>
+              </div>
 
-<div class="col-md-5">
-  <%= render :partial => "photo_carousel" %>
-</div>
+              <div class="pro-bott auction">
+                <div class="row">
+                  <div class="col-md-3 col-sm-3 col-xs-12">
+                    <span>CONDITION</span>
+                  </div>
+                  <div class="col-md-9 col-sm-9 col-xs-12">
+                    <span><%= @appraisal.appraisal_info.damage %></span>
+                  </div>
+                </div>
+              </div>
+              <div class="pro-bott auction">
+                <div class="row">
+                  <div class="col-md-3 col-sm-3 col-xs-12">
+                    <span>ITEM HISTORY</span>
+                  </div>
+                  <div class="col-md-9 col-sm-9 col-xs-12">
+                    <span><%= @appraisal.appraisal_info.item_history %></span>
+                  </div>
+                </div>
+              </div>
+              <div class="pro-bott auction">
+                <div class="row">
+                  <div class="col-md-3 col-sm-3 col-xs-12">
+                    <span>APPRAISER’S ADDITIONAL EXTRAORDINARY ASSUMPTIONS</span>
+                  </div>
+                  <div class="col-md-9 col-sm-9 col-xs-12">
+                    <span><%= @appraisal.appraisal_info.additional_ea %></span>
+                  </div>
+                </div>
+              </div>
+              <div class="pro-bott auction">
+                <div class="row">
+                  <div class="col-md-3 col-sm-3 col-xs-12">
+                    <span>Appraiser’s Additional Comment</span>
+                  </div>
+                  <div class="col-md-9 col-sm-9 col-xs-12">
+                    <span><%= @appraisal.appraisal_info.appraiser_comments %></span>
+                  </div>
+                </div>
+              </div>
+              <div class="pro-bott auction">
+                <div class="row">
+                  <div class="col-md-3 col-sm-3 col-xs-12">
+                    <span>REPLACEMENT VALUE (COMPARABLE)</span>
+                  </div>
+                  <div class="col-md-9 col-sm-9 col-xs-12">
+                    <span><%= print_replacement_cost(@appraisal) %></span>
+                  </div>
+                </div>
+              </div>
+              <div class="pro-bott auction">
+                <div class="row">
+                  <div class="col-md-3 col-sm-3 col-xs-12">
+                    <span>FAIR MARKET VALUE</span>
+                  </div>
+                  <div class="col-md-9 col-sm-9 col-xs-12">
+                    <span><%= print_fair_market_value(@appraisal) %></span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="auction-download">
+                <div class="row">
+                  <div class="col-md-6 col-sm-6">
+                    <div class="long re">
+                      <a href="#" class="product-gre"> DOWNLOAD LONG REPORT </a>
+                    </div>
+                  </div>
+                  <div class="col-md-6 col-sm-6">
+                  </div>
+                </div>
+              </div>
+          <% end %>
+        </div>
+        <% if @appraisal.insurance_claim %>
+            <div class="auction-download">
+              <div class="row">
+                <div class="col-md-6 col-sm-6">
+                  <div class="long re">
+                    <span class='glyphicon glyphicon-ban-circle pull-right'></span>This appraisal is for an insurance claim for cashing out a property.
+                  </div>
+                </div>
+                <div class="col-md-6 col-sm-6">
+                </div>
+              </div>
+            </div>
+        <% end %>
+
+<div class="col-md-4">
+  <div class="row">
+    <%= render :partial => "photo_carousel" %>
+  </div>
 </div>
 
 <div class="row">
@@ -118,9 +238,6 @@
 <hr>
 <div class="row">
   <div class="col-md-12">
-    <% if @appraisal.status == EActivityValueFinalized %>
-      <%= link_to show_shared_path(@appraisal, :format => :pdf), :class => "btn btn-success" do %><span class="glyphicon glyphicon-download-alt"></span> Download Appraisal<% end %>
-    <% end %>
     <% if @appraisal.status == EActivityValueClaimed || @appraisal.status == EActivityValuePayed %>
       <%= link_to 'Save and Continue', @appraisal, :class => "btn btn-success pull-right" %>
     <% end %>
@@ -173,7 +290,10 @@
         </div>
       <% end %>
     </div>
-  <% end %>
+      <% end %>
 </div>
 </div>
-<% end %>
+          <% end %>
+</div>
+</div>
+  </div>
