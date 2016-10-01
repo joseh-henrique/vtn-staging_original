@@ -1,54 +1,57 @@
-<table class="table table-striped table-condensed table-responsive ">
+<table width="100%" class = "table table-striped" >
   <thead>
-    <tr>
-      <th class="hidden-xs">Item</th>
-      <th>Item #</th>
-      <th>Status</th>
-      <th>Date Appraised</th>
-      <th class="hidden-xs">Estimated<br>Retail Value</th>
-      <th class="hidden-xs">Estimated<br>Replacement Value</th>
-      <th class="hidden-xs">Appraisal Type</th>
-      <th></th>
-      <th></th>
-    </tr>
+  <tr>
+    <th width="61" scope="col" >Item</th>
+    <th width="269" scope="col">Item ID</th>
+    <th width="97" scope="col">Status</th>
+    <th width="102" scope="col">Date <br>
+      Appraised</th>
+    <th width="122" scope="col">Estimated Fair<br>
+      Market Value</th>
+    <th width="108" scope="col">Estimated<br>
+      Replacement Value</th>
+    <th width="109" scope="col">Appraisal Type</th>
+    <th colspan="5" scope="col">Edit/Delete <br> Take Action</th>
+  </tr>
   </thead>
   <tbody>
-    <% appraisals.each do |appraisal| %>
-      <tr>
-        <td class="hidden-xs"><%= linked_thumbnail(appraisal) %></td>
-        <td><%= linked_title(appraisal) %></td>
-        <td><%= getStringForActivityValue(appraisal.status) %></td>
-        <td><%= completed_on(appraisal) %></td>
-        <td class="hidden-xs"><%= print_fair_market_value(appraisal) %></td>
-        <td class="hidden-xs"><%= print_replacement_cost(appraisal) %></td>
-        <td class="hidden-xs"><%= getStringForAppraisalType(appraisal.selected_plan) %></td>
-        <td>
-          <div class="hidden-xs hidden-sm">
-            <%= link_to('Edit', appraisal_build_index_path(appraisal), :class => "btn btn-success btn-sm", :style => "margin:2px;") if appraisal.status == EActivityValueCreated %>
-            <%= link_to('Edit', edit_appraisal_path(appraisal), :class => "btn btn-success btn-sm", :style => "margin:2px;") if appraisal.status == EActivityValuePayed %>
-            <%= link_to show_shared_path(appraisal, :format => :pdf), :class => "btn btn-success btn-sm" do %>Download PDF<% end if appraisal.status == EActivityValueFinalized%>
-          </div>
-          <div class="visible-xs visible-sm">
-            <%= link_to appraisal_build_index_path(appraisal), :class => "btn btn-success btn-xs" do %><span class="glyphicon glyphicon-pencil"></span> <% end if appraisal.status == EActivityValueCreated %>
-            <%= link_to edit_appraisal_path(appraisal), :class => "btn btn-success btn-xs" do %><span class="glyphicon glyphicon-pencil"></span> <% end if appraisal.status == EActivityValuePayed %>
-            <%= link_to show_shared_path(appraisal, :format => :pdf), :class => "btn btn-success btn-xs" do %><span class="glyphicon glyphicon-download-alt"></span><% end if appraisal.status == EActivityValueFinalized%>
-          </div>
-        </td>
-        <td>
-          <div class="hidden-xs hidden-sm">
-            <%= button_to('Delete', appraisal, :confirm => 'Are you sure?', :method => :delete, :class => "btn btn-success btn-sm") if appraisal.status == EActivityValueCreated %>
-            <% if appraisal.status == EActivityValueFinalized %>
-              <%= render :partial => "appraisals/partials/push_to_social", :locals => {:appraisal => appraisal} %>
-            <% end %>
-          </div>
-          <div class="visible-xs visible-sm">
-            <%= button_to appraisal, :confirm => 'Are you sure?', :method => :delete, :class => "btn btn-success btn-xs" do %><span class="glyphicon glyphicon-trash"></span><% end if appraisal.status == EActivityValueCreated %>
-            <% if appraisal.status == EActivityValueFinalized %>
-              <%= render :partial => "appraisals/partials/push_to_social", :locals => {:appraisal => appraisal} %>
-            <% end %>
-          </div>
-        </td>
-      </tr>
-    <% end %>
+  <% appraisals.each do |appraisal| %>
+
+  <tr>
+    <td><%= linked_thumbnail(appraisal) %></td>
+    <td><%= linked_title(appraisal) %></td>
+    <td><%= getStringForActivityValue(appraisal.status) %></td>
+    <td><%= completed_on(appraisal) %></td>
+    <td><%= print_fair_market_value(appraisal) %></td>
+    <td><%= print_replacement_cost(appraisal) %></td>
+    <td><%= getStringForAppraisalType(appraisal.selected_plan) %></td>
+    <td width="79">
+      <div class="hidden-xs hidden-sm">
+        <%= link_to('Edit', appraisal_build_index_path(appraisal), :class => "btn btn-success btn-sm gre4", :style => "margin:2px;") if appraisal.status == EActivityValueCreated %>
+        <%= link_to('Edit', edit_appraisal_path(appraisal), :class => "btn btn-success btn-sm gre4", :style => "margin:2px;") if appraisal.status == EActivityValuePayed %>
+        <%= link_to show_shared_path(appraisal, :format => :pdf), :class => "btn btn-success btn-sm gre4" do %>Download PDF<% end if appraisal.status == EActivityValueFinalized%>
+      </div>
+      <div class="visible-xs visible-sm">
+        <%= link_to appraisal_build_index_path(appraisal), :class => "btn btn-success btn-xs" do %><span class="glyphicon glyphicon-pencil"></span> <% end if appraisal.status == EActivityValueCreated %>
+        <%= link_to edit_appraisal_path(appraisal), :class => "btn btn-success btn-xs" do %><span class="glyphicon glyphicon-pencil"></span> <% end if appraisal.status == EActivityValuePayed %>
+        <%= link_to show_shared_path(appraisal, :format => :pdf), :class => "btn btn-success btn-xs" do %><span class="glyphicon glyphicon-download-alt"></span><% end if appraisal.status == EActivityValueFinalized%>
+      </div>
+    </td>
+    <td width="86">
+      <div class="hidden-xs hidden-sm">
+        <%= button_to('Delete', appraisal, :confirm => 'Are you sure?', :method => :delete, :class => "btn btn-success btn-sm ora4") if appraisal.status == EActivityValueCreated %>
+        <% if appraisal.status == EActivityValueFinalized %>
+            <%= render :partial => "appraisals/partials/push_to_social", :locals => {:appraisal => appraisal} %>
+        <% end %>
+      </div>
+      <div class="visible-xs visible-sm">
+        <%= button_to appraisal, :confirm => 'Are you sure?', :method => :delete, :class => "btn btn-success btn-xs ora4" do %><span class="glyphicon glyphicon-trash"></span><% end if appraisal.status == EActivityValueCreated %>
+        <% if appraisal.status == EActivityValueFinalized %>
+            <%= render :partial => "appraisals/partials/push_to_social", :locals => {:appraisal => appraisal} %>
+        <% end %>
+      </div>
+    </td>
+  </tr>
+  <% end %>
   </tbody>
 </table>
