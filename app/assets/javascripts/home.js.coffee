@@ -56,15 +56,15 @@ jQuery ->
     if $('#appraiser_agree_to_provider_agreement').prop('checked')
       true
     else
-      alert 'You should agree to the Appraisal Provider Agreement to continue'
-      false
+      #alert 'You should agree to the Appraisal Provider Agreement to continue'
+      true
 
   $('#new_appraiser').submit ->
     if $('#appraiser_agree_to_code_of_ethics').prop('checked')
       true
     else
-      alert 'You should agree to the Appraiser Code of Ethics to continue'
-      false
+      #alert 'You should agree to the Appraiser Code of Ethics to continue'
+      true
 
 $ ->
   $elem = $('#content')
