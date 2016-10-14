@@ -10,7 +10,7 @@
       <div class="col-md-9 col-sm-6 col-xs-12 text-right pt">
         <% if (@appraisal.status == EActivityValueFinalized) %>
             <div class="short">
-              <a href="#" class="product-gre"><%= image_tag 'download.png', alt:'download' %> DOWNLOAD SHORT REPORT</a>
+              <%= link_to show_shared_path(@appraisal, :format => :pdf, :full => "no"), :class => "product-gre" do %><span class="glyphicon glyphicon-download-alt"></span> DOWNLOAD SHORT REPORT<% end %>
             </div>
         <% else %>
             <div class="col-md-1" style="padding-top: 15px;">
@@ -201,7 +201,7 @@
                 <div class="row">
                   <div class="col-md-6 col-sm-6">
                     <div class="long re">
-                      <a href="#" class="product-gre"> DOWNLOAD LONG REPORT </a>
+                      <%= link_to show_shared_path(@appraisal, :format => :pdf, :full => "yes"), :class => "product-gre" do %><span class="glyphicon glyphicon-download-alt"></span> DOWNLOAD LONG REPORT<% end %>
                     </div>
                   </div>
                   <div class="col-md-6 col-sm-6">

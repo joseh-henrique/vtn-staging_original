@@ -8,19 +8,23 @@
               <div class="sidn">
                 <div class="form-group">
                   <label class="control-label" >Name<font color="#ff5a00">*</font></label>
-                  <%= f.text_field :name, :class => "form-control", :autocomplete => "off" %>
+                  <%= f.text_field :name, :class => "form-control", :autocomplete => "off", required: true %>
+                  <p class='error' style="color:#a94442;"><%= show_errors(resource, :name) %></p>
                 </div>
                 <div class="form-group">
                   <label class="control-label">Email<font color="#ff5a00">*</font></label>
-                  <%= f.email_field :email, :class => "form-control", :autocomplete => "off" %>
+                  <%= f.email_field :email, :class => "form-control", :autocomplete => "off", required: true%>
+                  <p class='error' style="color:#a94442;"><%= show_errors(resource, :email) %></p>
                 </div>
                 <div class="form-group">
                   <label class="control-label">Password<font color="#ff5a00">*</font></label>
-                  <%= f.password_field :password, :class => "form-control", :autocomplete => "off" %>
+                  <%= f.password_field :password, :class => "form-control", :autocomplete => "off", required: true %>
+                  <p class='error' style="color:#a94442;"><%= show_errors(resource, :password) %></p>
                 </div>
                 <div class="form-group">
                   <label class="control-label" >Confirm Password<font color="#ff5a00">*</font></label>
-                  <%= f.password_field :password_confirmation, :class => "form-control", :autocomplete => "off" %>
+                  <%= f.password_field :password_confirmation, :class => "form-control", :autocomplete => "off", required: true %>
+                  <p class='error' style="color:#a94442;"><%= show_errors(resource, :password_confirmation) %></p>
                 </div>
                 <div class="ghpay">
                   <label for="checkbox"> I have read and agree to the Terms of Service</label>

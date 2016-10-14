@@ -1,159 +1,128 @@
-<meta charset="UTF-8">
-<html>
+<meta charset="UTF-8" xmlns="http://www.w3.org/1999/html">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<title>ValueThisNow.com | Professional Appraisal</title>
-<%= wicked_pdf_javascript_include_tag "application" %>
-<% # The following files need to be called from an external server because wicked_pdf has some problems loading them with the javascript_include_tag
-%>
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
-<script type="text/javascript" src="https://s3.amazonaws.com/vtn.assets.valuethisnow.com/js/jquery-ui-1.8.16.custom.min.js"></script>
-<script type="text/javascript" src="https://s3.amazonaws.com/vtn.assets.valuethisnow.com/js/min.js"></script>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>ValueThisNow: an online appraisal service for antiques &amper; collectibles</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <%= render :partial => 'layouts/meta.html.erb' %>
+  <%= render partial: 'layouts/js_constants.html.erb' %>
+  <%= csrf_meta_tags %>
+  <script type="text/javascript">
 
-
-<script type="text/javascript">
-
-$(document).ready(function() {
-  var signatureData = JSON.parse('<%= raw @appraiser.appraiser_extra.signature_json %>');
-  $('#appraiser-signature').signaturePanel("drawClickstreamToCanvas",signatureData);
-});
-</script>
-<link rel="stylesheet" type="text/css" href="https://s3.amazonaws.com/vtn.assets.valuethisnow.com/finalized_appraisal.css">
-
+    $(document).ready(function() {
+      var signatureData = JSON.parse('<%= raw @appraiser.appraiser_extra.signature_json %>');
+      $('#appraiser-signature').signaturePanel("drawClickstreamToCanvas",signatureData);
+    });
+  </script>
+  <!--  styles -->
+  <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+  <!--[if lt IE 9]>
+  <script src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <!--[if IE]>
+  <link rel="stylesheet" type="text/css" href="/ie.css">
+  <![endif]-->
+  <!-- Le fav and touch icons -->
+  <%= analytics_init if Rails.env.production? %>
+  <style type="text/css" media="all">
+    .navbar {
+      min-width: 0px;
+    }
+  </style>
 </head>
 <body>
-<% unless @supplemental %>  
-<section class="container">
-  <div class=" top_certificate" style="width:961px;margin:0px;padding:0px">
-  </div>
-
-  <div class="content-certificate" style="width:961px;margin-left: -0.1px; padding: 0px">
-    <h1><%= @appraisal.title %></h1>
-
-    <div class="slider">
-      <% if @appraisal.photos.count != 0 %>
-      <div class=zoomer>
-        <div class=holder>
-          <div class=image>
-            <%= wicked_pdf_image_tag @appraisal.default_photo.picture_url(:carrousel), :size => "421x421", :class => 'target'%>
+<div class="short-width">
+  <div class="top-border"> <img src="https://s3-us-west-2.amazonaws.com/vtn-temp/pdf_related/images/border-1.jpg"  alt="border-1"/></div>
+  <div class="middle-border">
+    <div class="des" style="padding: 17px;">
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <%= render :partial => "/appraisals/photo_carousel.html.erb", locals: {pdf: true}   %>
+          <td>
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                <td style="text-align:center; position:relative;vertical-align:top;height:auto;"><%= image_tag 'https://s3-us-west-2.amazonaws.com/vtn-temp/pdf_related/images/short2.png', alt:'short2', size: '160'%></td>
+              </tr>
+              <tr >
+                <td style="text-align:center; position:relative;top: 10px;">
+                  <p style="font-size: 20px;color: #01326A;font-weight: 400; max-width:300px; margin:auto; text-align:center; ">
+                    Valuethisnow.com supports USPAP - the only generally accepted standard for appraisers in the U.S.
+                  </p></td>
+              </tr>
+              <tr>
+                <td style="text-align:center; position:relative;top: 10px;"><a href="https://en.wikipedia.org/wiki/Uniform_Standards_of_Professional_Appraisal_Practice" style="line-height: 1;font-weight: 700; text-decoration:underline;font-size: 20px;color:#01326A; padding-top:9px; display:block;">More about USAP</a></td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <% if @appraisal.status == EActivityValuePayed %>
+        <div class="row sub_box">
+          <% if @payment_completed  %>
+              <img src="https://valuethisnow.postaffiliatepro.com/scripts/sale.php?AccountId=default1&TotalCost=<%= number_with_precision(@appraisal.payment.amount, precision: 2) %>&OrderID=<%= @appraisal.id %>&ProductID=appraisal-<%= @appraisal.selected_plan %>" width="1" height="1" >
+          <% end %>
+          <div class="alert alert-info">
+            <i class="icon-ok"></i> Congratulations your item has been submitted for valuation! Click <%= link_to "here", new_appraisal_path, :class => "btn btn-mini btn-success" %> to get more items appraised!
           </div>
         </div>
-        <div class=thumbs>
-          <% @appraisal.photos[0..3].each_with_index do |image,i| %>
-          <%= wicked_pdf_image_tag image.picture_url(:carrousel), :size => "93x96" %>
-          <% end %>
-        </div>		
-      </div>
-      <% end %>
-    </div>
+    <% end %>
 
-    <div class="autt">
-      <img src="https://s3.amazonaws.com/vtn.assets.valuethisnow.com/finalized_images/medal.png" alt="" title=""  />
-      <p>
-      Valuethisnow.com supports USPAP<br>The only generally accepted standard for appraisers in the USA
-      </p>
-      <a href="http://en.wikipedia.org/wiki/Uniform_Standards_of_Professional_Appraisal_Practice" target="_blank">
-        What is <span>USPAP?</span>
-      </a>
-    </div>
-    <div class="description"><p></p></div>
+      <div class="boo">
+        <h2><%= @appraisal.title.upcase %></h2>
 
-    <div class="description">
-      <div class="left_description">
-        <h2>File #:</h2>
-      </div>
-      <div class="right_description">
-        <p>
-        <%= @appraisal.id %>
+
+        <p>File #: 2842</br>
+          Effective Date of Report: <%= @appraisal.id %>
         </p>
-      </div>
-    </div>
 
-    <div class="description diff">
-      <div class="left_description">
-        <h2>Effective Date of Report:</h2>
-      </div>
-      <div class="right_description">
-        <p>
-        <%= @appraisal.updated_at.strftime("%d %b. %Y") %>
-        </p>
-      </div>
-    </div>
 
-    <div class="description">
-      <div class="container-description">
-        <h1 class="clear">Description:</h1>
-        <p>
-        <%= @appraisal.name.truncate(300) %>
-        </p>
-      </div>
-    </div>
+        <h2 class="col-ol" style="background: #e9c973;">Description</h2>
+        <p><%= @appraisal.name %></p>
 
-    <div class="description">
-      <div class="container-description">
-        <h1 class="clear">Appraiser&#039;s Comments :</h1>
-        <p>
-        <%= @appraisal.appraisal_info.appraiser_comments.truncate(300) %>
-        </p>
-        <%= link_to 'See more', show_shared_url(@appraisal, format: :pdf, full: true), style: "color: rgb(55, 55, 192); text-decoration: underline;" %>
-      </div>
-    </div>	
-    <div class="description">
-      <div class="left_description">
-        <h2>Replacement Value :</h2>
-        <h6>(Comparable)</h6>
-      </div>
-      <div class="right_description">
-        <p><%= print_replacement_cost(@appraisal) %></p>
-      </div>
-    </div>
-    <div class="description">
-      <div class="left_description">
-        <h2>Fair Market Value: </h2>
-      </div>
-      <div class="right_description">
-        <p>
-        <%= print_fair_market_value(@appraisal) %>
-        </p>
-      </div>
-    </div>
+        <h2 class="col-ol" style="background: #e9c973;">Appraiser's comments :</h2>
 
-    <div class="description">
-      <% if (@appraiser.signature?) %>
-      <%= wicked_pdf_image_tag @appraiser.signature.standard.url, :height => "75", :width => "188"%>
-      <% elsif !(@appraiser.appraiser_extra.signature_json.nil? || @appraiser.appraiser_extra.signature_json.empty?) %>
-      <canvas id="appraiser-signature" height="75" width="188"></canvas>
-      <% end %>
-      <h1 class="signature clear" >Prepared by <%= @appraiser.name %></h1>
-    </div>
-  </div>
-  <div class="fotter_certificate" style="width:961px;">
-    <h1><a href="https://www.valuethisnow.com">www.ValueThisNow.com</a></h1>
-  </div>
-</section>
-<% else %>
-<div class="container">
-  <% selected_plan = @appraisal.selected_plan
-  appraiser_type = @appraiser.appraiser_info.uspap.to_i
+        <p><%= @appraisal.appraisal_info.appraiser_comments %></p>
+        <div class="mil">
+          <div class="jhkl">
+            <p> Replacement value : <font color="#bb1f20"><%= print_replacement_cost(@appraisal) %></font>
+              <br>(Comparable)
+            </p>
+            <p>Fair Market Value : <font color="#bb1f20"><%= print_fair_market_value(@appraisal) %></font></p>
+          </div>
+          <div class="kdj">
+            <% if @appraisal.status == EActivityValueFinalized %>
+                <div id="appraiser-info">
+                  <% if (@appraiser.signature?) %>
+                      <%= image_tag "#{@appraiser.signature.standard.url}?id=#{rand(1000)}", :height => "100", :width => "250"%>
+                  <% elsif !(@appraiser.appraiser_extra.signature_json.nil? || @appraiser.appraiser_extra.signature_json.empty?) %>
+                      <canvas id="appraiser-signature" height="100" width="250"></canvas>
+                  <% end %>
+                  <p> <span>prepared by</span></br>
+                    <%= @appraiser.name %></p>
+                </div>
+            <% end %>
+          </div>
+          <div class="clear"></div>
+        </div>
 
-  if (selected_plan == EAAppraisalTypeShortRestricted || selected_plan == EAAppraisalTypeLongRestricted || selected_plan == EAAppraisalTypeShortRestrictedPair || selected_plan == EAAppraisalTypeLongRestrictedPair) && appraiser_type == EAAppraiserUSPAPFamiliar
-    format = "appraisal_body_restricteduse_USPAP_compliant_yes"
-    option = 1
-  elsif (selected_plan == EAAppraisalTypeShortForSelling || selected_plan == EAAppraisalTypeLongForSelling || selected_plan == EAAppraisalTypeShortForSellingPair || selected_plan == EAAppraisalTypeLongForSellingPair) && appraiser_type == EAAppraiserUSPAPFamiliar
-    format = "appraisal_body_summary_forselling_USPAP_compliant_yes"
-    option =2
-  elsif (selected_plan == EAAppraisalTypeShortRestricted || selected_plan == EAAppraisalTypeLongRestricted || selected_plan == EAAppraisalTypeShortRestrictedPair || selected_plan == EAAppraisalTypeLongRestrictedPair) && appraiser_type != EAAppraiserUSPAPFamiliar
-    format = "appraisal_body_restricteduse_USPAP_compliant_no"
-    option =3
-  elsif (selected_plan == EAAppraisalTypeShortForSelling || selected_plan == EAAppraisalTypeLongForSelling || selected_plan == EAAppraisalTypeShortForSellingPair || selected_plan == EAAppraisalTypeLongForSellingPair) && appraiser_type != EAAppraiserUSPAPFamiliar
-    format = "appraisal_body_summary_forselling_USPAP_compliant_no"
-    option =4
-  else
-  raise "Invalid selected_plan and appraiser_type combination"
-  end
-  %>
-  <%=  render :partial => "appraisals/formats/"+format, :locals => {:appraisal => @appraisal} %>
+        <p class="text-center"><a href="index.html">www.valuethisnow.com</a></p>
+        <div class="text-center lof">
+          <%= image_tag 'https://s3-us-west-2.amazonaws.com/vtn-temp/pdf_related/images/hjk.jpg', alt:'pdf_logo' %>
+        </div>
+        <div class="sdfs">
+
+          <%= image_tag 'https://s3-us-west-2.amazonaws.com/vtn-temp/pdf_related/images/share.png', alt:'share', class: 'sham' %>
+        </div>
+        <span class="short-2"><a href="tax-long-appraisel.html">See more</a></span>
+        <div class="clear"></div>
+      </div>
+    </div>
+  <div class="bottom-border"><img src="https://s3-us-west-2.amazonaws.com/vtn-temp/pdf_related/images/border-bottom.jpg"  alt="border-1"/> </div>
 </div>
-<% end %>
 </body>
 </html>
 

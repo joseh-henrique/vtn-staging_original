@@ -300,4 +300,12 @@ module ApplicationHelper
     ((Time.now - owner.created_at) < 30.days) && (appraisals.flatten.count == 1)
   end
 
+  def show_errors(object, field_name)
+    if object.errors.any?
+      if !object.errors.messages[field_name].blank?
+        object.errors.messages[field_name].join(", ")
+      end
+    end
+  end
+
 end

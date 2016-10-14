@@ -1,30 +1,24 @@
+<div class="login-nav">
 <ul>
 <%- if controller_name != 'sessions' %>
-  <%= link_to "Sign in", new_session_path(:user) %>
-  <a href="#">|</a>
+  <li><%= link_to "Sign in", new_session_path(:user) %></li>
 <% end -%>
 
-<%- if devise_mapping.registerable? && controller_name != 'registrations' %>
-  <%= link_to "Create a new account", new_registration_path(:customer) %>
-  <a href="#">|</a>
+  <li><%= link_to "Create a new account", new_registration_path(:customer) %></li>
 
-  <%= link_to "Become an Appraiser", new_registration_path(:appraiser) %>
-  <a href="#">|</a>
-<% end -%>
+  <li><%= link_to "Become an Appraiser", new_registration_path(:appraiser) %></li>
+
 
 <%- if devise_mapping.recoverable? && controller_name != 'passwords' %>
-  <%= link_to "Forgot your password?", new_password_path(:user) %>
-  <a href="#">|</a>
+  <li><%= link_to "Forgot your password?", new_password_path(:user) %></li>
 <% end -%>
 
 <%- if devise_mapping.confirmable? && controller_name != 'confirmations' %>
-  <%= link_to "Didn't receive confirmation instructions?", new_confirmation_path(:user) %>
-  <a href="#">|</a>
+  <li><%= link_to "Didn't receive confirmation instructions?", new_confirmation_path(:user) %></li>
 <% end -%>
 
 <%- if devise_mapping.lockable? && resource_class.unlock_strategy_enabled?(:email) && controller_name != 'unlocks' %>
-  <%= link_to "Didn't receive unlock instructions?", new_unlock_path(:user) %>
-  <a href="#">|</a>
+  <li><%= link_to "Didn't receive unlock instructions?", new_unlock_path(:user) %></li>
 <% end -%>
 
 <!-- <%- if devise_mapping.omniauthable? %>
@@ -33,3 +27,4 @@
   <% end -%>
 <% end -%> -->
 </ul>
+</div>

@@ -32,14 +32,13 @@ if @appraisal.photos.count != 0 && !pdf %>
 <% end %>
 
 <% if @appraisal.photos.count != 0 && pdf %>
-  <div>
-    <div>
-      <%= image_tag @appraisal.default_photo.picture_url(:carrousel) %>
-    </div>
-    <div>
-      <% @appraisal.photos.each_with_index do |image, i| %>
-        <%= image_tag image.picture_url(:thumb) %>
+    <td  style="width:40%;vertical-align:top;height:auto;"><%= image_tag @appraisal.default_photo.picture_url(:carrousel), alt:'default picture', :class => "thumb-style" %></td>
+    <td style="width:11%;vertical-align:top;height:auto;"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <% @appraisal.photos[0..3].each_with_index do |image,i| %>
+        <tr>
+          <td style="padding-bottom: 20px;position: relative;top: 0px;padding-left:10px;"><%= image_tag image.picture_url(:thumb), alt:'short2', :class => "thumb-style" %></td>
+        </tr>
       <% end %>
-    </div>
-  </div>
+    </table>
+      &nbsp;</td>
 <% end %>

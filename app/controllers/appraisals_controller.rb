@@ -55,8 +55,8 @@ class AppraisalsController < ApplicationController
     @appraiser = @appraisal.assigned_to
     @pdf_full ||= params[:full]
     @appraisal_comments = @appraisal.root_comments.order('created_at ASC')
-    
-    template_file = @pdf_full ? "/appraisals/reports/full.pdf.erb" : "/appraisals/reports/lacey.pdf.erb"
+    template_file = (@pdf_full.eql?"yes") ? "/appraisals/reports/full.pdf.erb" : "/appraisals/reports/lacey.pdf.erb"
+    Rails.logger.info "selected plan is #{@appraisal.selected_plan} PDF_FULL IS #{@pdf_full} template_file is #{template_file}"
     respond_to do |format|
       format.pdf { render :pdf => 'report', :page_size => "Legal", :show_as_html => params[:debug].present?, :template => template_file }
     end

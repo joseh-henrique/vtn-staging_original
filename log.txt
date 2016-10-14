@@ -1,0 +1,102 @@
+2016-10-04T18:37:40.614410+00:00 app[web.1]:   [1m[35mPhoto Load (1.2ms)[0m  SELECT  "photos".* FROM "photos" WHERE "photos"."appraisal_id" = $1 AND "photos"."default" = $2 LIMIT 1  [["appraisal_id", 323], ["default", "t"]]
+2016-10-04T18:37:40.616562+00:00 app[web.1]:   [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "photos".* FROM "photos" WHERE "photos"."appraisal_id" = $1 AND "photos"."default" = $2 LIMIT 1[0m  [["appraisal_id", 323], ["default", true]]
+2016-10-04T18:37:40.622218+00:00 app[web.1]:   [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "photos".* FROM "photos" WHERE "photos"."appraisal_id" = $1 AND "photos"."default" = $2 LIMIT 1[0m  [["appraisal_id", 323], ["default", true]]
+2016-10-04T18:37:40.623297+00:00 app[web.1]:   [1m[35mCACHE (0.0ms)[0m  SELECT  "photos".* FROM "photos" WHERE "photos"."appraisal_id" = $1 AND "photos"."default" = $2 LIMIT 1  [["appraisal_id", 323], ["default", true]]
+2016-10-04T18:37:40.627073+00:00 app[web.1]:   [1m[36mCACHE (0.0ms)[0m  [1mSELECT COUNT(*) FROM "photos" WHERE "photos"."appraisal_id" = $1[0m  [["appraisal_id", 323]]
+2016-10-04T18:37:40.627329+00:00 app[web.1]:   Rendered appraisals/_photo_carousel.html.erb (18.5ms)
+2016-10-04T18:37:40.627555+00:00 app[web.1]:   Rendered appraisals/reply.html.erb within layouts/application (66.6ms)
+2016-10-04T18:37:40.630413+00:00 app[web.1]:   [1m[35mComfy::Cms::Snippet Load (1.1ms)[0m  SELECT  "comfy_cms_snippets".* FROM "comfy_cms_snippets" WHERE "comfy_cms_snippets"."label" = $1  ORDER BY comfy_cms_snippets.position LIMIT 1  [["label", "title-/appraisals/323/reply"]]
+2016-10-04T18:37:40.632916+00:00 app[web.1]:   [1m[36mComfy::Cms::Snippet Load (1.2ms)[0m  [1mSELECT  "comfy_cms_snippets".* FROM "comfy_cms_snippets" WHERE "comfy_cms_snippets"."label" = $1  ORDER BY comfy_cms_snippets.position LIMIT 1[0m  [["label", "keywords-/appraisals/323/reply"]]
+2016-10-04T18:37:40.635598+00:00 app[web.1]:   [1m[35mComfy::Cms::Snippet Load (1.3ms)[0m  SELECT  "comfy_cms_snippets".* FROM "comfy_cms_snippets" WHERE "comfy_cms_snippets"."label" = $1  ORDER BY comfy_cms_snippets.position LIMIT 1  [["label", "description-/appraisals/323/reply"]]
+2016-10-04T18:37:40.639895+00:00 app[web.1]:   Rendered layouts/_flash.html.erb (0.2ms)
+2016-10-04T18:37:40.636133+00:00 app[web.1]:   Rendered layouts/_meta.html.erb (5.2ms)
+2016-10-04T18:37:40.636770+00:00 app[web.1]:   Rendered layouts/_js_constants.html.erb (0.3ms)
+2016-10-04T18:37:40.640355+00:00 app[web.1]:   Rendered layouts/_pixel_code.html.erb (0.3ms)
+2016-10-04T18:37:40.639327+00:00 app[web.1]:   Rendered layouts/_navbar.html.erb (1.5ms)
+2016-10-04T18:37:40.642462+00:00 app[web.1]:   Rendered layouts/_footer.html.erb (1.7ms)
+2016-10-04T18:37:40.642946+00:00 app[web.1]: Completed 200 OK in 111ms (Views: 69.4ms | ActiveRecord: 18.8ms)
+2016-10-04T18:39:08.463201+00:00 heroku[router]: at=info method=POST path="/appraisals/323" host=vtn-staging-tmp.herokuapp.com request_id=f5b9186b-a50b-4c9b-a0ca-1e085078d7ec fwd="106.208.111.127" dyno=web.1 connect=1ms service=48ms status=302 bytes=1023
+2016-10-04T18:39:08.408629+00:00 app[web.1]: Started PATCH "/appraisals/323" for 106.208.111.127 at 2016-10-04 18:39:08 +0000
+2016-10-04T18:39:08.411705+00:00 app[web.1]: Processing by AppraisalsController#update as HTML
+2016-10-04T18:39:08.411851+00:00 app[web.1]:   Parameters: {"utf8"=>"✓", "authenticity_token"=>"eH68n2DXocOFWnhgJSyhEl9PRCJfekVKqqIDNFq/BbN61LaqJOKahTwOoti0QLYXaornkXJjujUIXHTnSS5Zuw==", "appraisal"=>{"title"=>"Test", "name"=>"test", "appraisal_info"=>{"year_of_manufacture"=>"saasd", "makers_marks"=>"sdsdf", "inscriptions"=>"sdasd", "dimensions"=>"ssd", "damage"=>"ssasd", "item_history"=>"dsdssd", "additional_ea"=>"aasdsa jkhkk lkjjk lklklj kjkjk lkjklj kkkjlk kkkkk llll lllll aasdsa jkhkk lkjjk lklklj kjkjk lkjklj kkkjlk kkkkk llll lllllaasdsa jkhkk lkjjk lklklj kjkjk lkjklj kkkjlk kkkkk llll lllllaasdsa jkhkk lkjjk lklklj kjkjk lkjklj kkkjlk kkkkk llll lllllaasdsa jkhkk lkjjk lklklj kjkjk lkjklj kkkjlk kkkkk llll lllllaasdsa jkhkk lkjjk lklklj kjkjk lkjklj kkkjlk kkkkk llll lllllaasdsa jkhkk lkjjk lklklj kjkjk lkjklj kkkjlk kkkkk llll lllll", "appraiser_comments"=>"aasdsa jkhkk lkjjk lklklj kjkjk lkjklj kkkjlk kkkkk llll lllll aasdsa jkhkk lkjjk lklklj kjkjk lkjklj kkkjlk kkkkk llll lllllaasdsa jkhkk lkjjk lklklj kjkjk lkjklj kkkjlk kkkkk llll lllllaasdsa jkhkk lkjjk lklklj kjkjk lkjklj kkkjlk kkkkk llll lllllaasdsa jkhkk lkjjk lklklj kjkjk lkjklj kkkjlk kkkkk llll lllllaasdsa jkhkk lkjjk lklklj kjkjk lkjklj kkkjlk kkkkk llll lllllaasdsa jkhkk lkjjk lklklj kjkjk lkjklj kkkjlk kkkkk llll lllll", "replacement_cost_min"=>"200", "replacement_cost_max"=>"300", "fair_market_value_min"=>"220", "fair_market_value_max"=>"270"}}, "commit"=>"Save and Submit Appraisal to Client", "id"=>"323"}
+2016-10-04T18:39:08.414760+00:00 app[web.1]:   [1m[36mUser Load (1.3ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 295]]
+2016-10-04T18:39:08.422623+00:00 app[web.1]:   [1m[35mAppraisal Load (1.3ms)[0m  SELECT  "appraisals".* FROM "appraisals" WHERE "appraisals"."id" = $1 LIMIT 1  [["id", 323]]
+2016-10-04T18:39:08.423655+00:00 app[web.1]:   [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "appraisals".* FROM "appraisals" WHERE "appraisals"."id" = $1 LIMIT 1[0m  [["id", "323"]]
+2016-10-04T18:39:08.425661+00:00 app[web.1]:   [1m[35m (1.0ms)[0m  BEGIN
+2016-10-04T18:39:08.437464+00:00 app[web.1]:   [1m[36mSQL (1.3ms)[0m  [1mUPDATE "appraisals" SET "appraisal_info" = $1, "updated_at" = $2 WHERE "appraisals"."id" = $3[0m  [["appraisal_info", "--- &1 !ruby/object:AppraisalInfo\nvalidation_context: \nerrors: !ruby/object:ActiveModel::Errors\n  base: *1\n  messages: {}\ncountry_of_origin: ''\nitem_history: dsdssd\nmakers_marks: sdsdf\ninscriptions: sdasd\ndimensions: ssd\nmaterials: ''\ndamage: ssasd\nyear_of_manufacture: saasd\nadditional_ea: aasdsa jkhkk lkjjk lklklj kjkjk lkjklj kkkjlk kkkkk llll lllll aasdsa\n  jkhkk lkjjk lklklj kjkjk lkjklj kkkjlk kkkkk llll lllllaasdsa jkhkk lkjjk lklklj\n  kjkjk lkjklj kkkjlk kkkkk llll lllllaasdsa jkhkk lkjjk lklklj kjkjk lkjklj kkkjlk\n  kkkkk llll lllllaasdsa jkhkk lkjjk lklklj kjkjk lkjklj kkkjlk kkkkk llll lllllaasdsa\n  jkhkk lkjjk lklklj kjkjk lkjklj kkkjlk kkkkk llll lllllaasdsa jkhkk lkjjk lklklj\n  kjkjk lkjklj kkkjlk kkkkk llll lllll\nappraiser_comments: aasdsa jkhkk lkjjk lklklj kjkjk lkjklj kkkjlk kkkkk llll lllll\n  aasdsa jkhkk lkjjk lklklj kjkjk lkjklj kkkjlk kkkkk llll lllllaasdsa jkhkk lkjjk\n  lklklj kjkjk lkjklj kkkjlk kkkkk llll lllllaasdsa jkhkk lkjjk lklklj kjkjk lkjklj\n  kkkjlk kkkkk llll lllllaasdsa jkhkk lkjjk lklklj kjkjk lkjklj kkkjlk kkkkk llll\n  lllllaasdsa jkhkk lkjjk lklklj kjkjk lkjklj kkkjlk kkkkk llll lllllaasdsa jkhkk\n  lkjjk lklklj kjkjk lkjklj kkkjlk kkkkk llll lllll\nreplacement_cost_min: '200'\nreplacement_cost_max: '300'\nfair_market_value_min: '220'\nfair_market_value_max: '270'\n"], ["updated_at", "2016-10-04 18:39:08.430574"], ["id", 323]]
+2016-10-04T18:39:08.442583+00:00 app[web.1]:   [1m[35m (1.9ms)[0m  COMMIT
+2016-10-04T18:39:08.443261+00:00 app[web.1]: Redirected to http://vtn-staging-tmp.herokuapp.com/appraisals/323
+2016-10-04T18:39:08.443368+00:00 app[web.1]: Completed 302 Found in 31ms (ActiveRecord: 6.9ms)
+2016-10-04T18:39:08.896478+00:00 app[web.1]: Started GET "/appraisals/323" for 106.208.111.127 at 2016-10-04 18:39:08 +0000
+2016-10-04T18:39:08.899294+00:00 app[web.1]: Processing by AppraisalsController#show as HTML
+2016-10-04T18:39:08.899360+00:00 app[web.1]:   Parameters: {"id"=>"323"}
+2016-10-04T18:39:08.901837+00:00 app[web.1]:   [1m[36mUser Load (1.3ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 295]]
+2016-10-04T18:39:08.909655+00:00 app[web.1]:   [1m[35mAppraisal Load (1.4ms)[0m  SELECT  "appraisals".* FROM "appraisals" WHERE "appraisals"."id" = $1 LIMIT 1  [["id", 323]]
+2016-10-04T18:39:08.910989+00:00 app[web.1]:   [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "appraisals".* FROM "appraisals" WHERE "appraisals"."id" = $1 LIMIT 1[0m  [["id", "323"]]
+2016-10-04T18:39:08.913152+00:00 app[web.1]:   [1m[35mUser Load (1.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1  [["id", 295]]
+2016-10-04T18:39:08.915146+00:00 app[web.1]:   [1m[36mUser Load (1.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1[0m  [["id", 295]]
+2016-10-04T18:39:08.917386+00:00 app[web.1]:   [1m[35mCACHE (0.0ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1  [["id", #<Appraiser id: 295, email: "dileep.ck+newappr@gmail.com", encrypted_password: "$2a$10$cVyHOkCzeUWHpiQJ21wmUejcIcyL7kPqG.Qt/zntgn....", reset_password_token: nil, reset_password_sent_at: nil, remember_created_at: nil, sign_in_count: 5, current_sign_in_at: "2016-10-04 17:37:33", last_sign_in_at: "2016-10-04 16:23:46", current_sign_in_ip: "106.208.111.127", last_sign_in_ip: "202.62.68.75", created_at: "2016-10-04 14:49:31", updated_at: "2016-10-04 17:37:33", role: nil, notify_by_sms: false, notify_by_email: true, next_notification_interval_in_minutes: 60, next_notification_due_at: "2012-08-20 00:17:41", payment_method: "cheque", uspap: false, name: "DileepNewAppr", facebook_token: nil, facebook_location: nil, facebook_location_id: nil, facebook_gender: nil, facebook_verified: nil, facebook_updated: nil, facebook_locale: nil, facebook_id: nil, appraiser_info: nil, username: nil, signature_json: nil, status: 2, confirmation_token: nil, confirmed_at: "2016-10-04 14:50:56", confirmation_sent_at: "2016-10-04 14:49:31", avatar: "1.png", type: "Appraiser", website: nil, paypal_email: "dileep.ck+newappr@gmail.com", last_step: "personal", signature: nil, referral_id: "295", vendor_token: nil, is_partner: false, client_id: nil, secondary_contact_name: nil, secondary_contact_email: nil, negotiated_cost: #<BigDecimal:7f390b180560,'0.0',9(18)>, payment_term: nil, is_deny_email: false>]]
+2016-10-04T18:39:08.920696+00:00 app[web.1]:   [1m[36m (1.1ms)[0m  [1mSELECT COUNT(*) FROM "photos" WHERE "photos"."appraisal_id" = $1[0m  [["appraisal_id", 323]]
+2016-10-04T18:39:08.922730+00:00 app[web.1]:   [1m[35mPhoto Load (1.2ms)[0m  SELECT  "photos".* FROM "photos" WHERE "photos"."appraisal_id" = $1 AND "photos"."default" = $2 LIMIT 1  [["appraisal_id", 323], ["default", "t"]]
+2016-10-04T18:39:08.924241+00:00 app[web.1]:   [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "photos".* FROM "photos" WHERE "photos"."appraisal_id" = $1 AND "photos"."default" = $2 LIMIT 1[0m  [["appraisal_id", 323], ["default", true]]
+2016-10-04T18:39:08.926506+00:00 app[web.1]:   [1m[35mPhoto Load (1.1ms)[0m  SELECT "photos".* FROM "photos" WHERE "photos"."appraisal_id" = $1  [["appraisal_id", 323]]
+2016-10-04T18:39:08.928508+00:00 app[web.1]:   [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "photos".* FROM "photos" WHERE "photos"."appraisal_id" = $1 AND "photos"."default" = $2 LIMIT 1[0m  [["appraisal_id", 323], ["default", true]]
+2016-10-04T18:39:08.929457+00:00 app[web.1]:   [1m[35mCACHE (0.0ms)[0m  SELECT  "photos".* FROM "photos" WHERE "photos"."appraisal_id" = $1 AND "photos"."default" = $2 LIMIT 1  [["appraisal_id", 323], ["default", true]]
+2016-10-04T18:39:08.931959+00:00 app[web.1]:   [1m[36mCACHE (0.0ms)[0m  [1mSELECT COUNT(*) FROM "photos" WHERE "photos"."appraisal_id" = $1[0m  [["appraisal_id", 323]]
+2016-10-04T18:39:08.932095+00:00 app[web.1]:   Rendered appraisals/_photo_carousel.html.erb (13.3ms)
+2016-10-04T18:39:08.935244+00:00 app[web.1]:   Rendered photos/_new_multiple_image_upload_form.html.erb (2.9ms)
+2016-10-04T18:39:08.936962+00:00 app[web.1]:   [1m[35mComment Load (1.1ms)[0m  SELECT "comments".* FROM "comments" WHERE "comments"."commentable_id" = $1 AND "comments"."commentable_type" = $2 AND "comments"."parent_id" IS NULL  ORDER BY created_at ASC  [["commentable_id", 323], ["commentable_type", "Appraisal"]]
+2016-10-04T18:39:08.939173+00:00 app[web.1]:   [1m[36mUser Load (1.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1[0m  [["id", 280]]
+2016-10-04T18:39:08.940059+00:00 app[web.1]:   Rendered appraisals/_comment_block.html.erb (2.6ms)
+2016-10-04T18:39:08.941022+00:00 app[web.1]:   Rendered appraisals/_comment_block.html.erb (0.8ms)
+2016-10-04T18:39:08.940672+00:00 app[web.1]:   [1m[35mCACHE (0.0ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1  [["id", 280]]
+2016-10-04T18:39:08.944621+00:00 app[web.1]:   Rendered appraisals/_comments.html.erb (9.1ms)
+2016-10-04T18:39:08.944762+00:00 app[web.1]:   Rendered appraisals/_appraiser_show.html.erb (26.5ms)
+2016-10-04T18:39:08.944979+00:00 app[web.1]:   Rendered appraisals/show.html.haml within layouts/application (27.0ms)
+2016-10-04T18:39:08.946942+00:00 app[web.1]:   [1m[36mComfy::Cms::Snippet Load (1.1ms)[0m  [1mSELECT  "comfy_cms_snippets".* FROM "comfy_cms_snippets" WHERE "comfy_cms_snippets"."label" = $1  ORDER BY comfy_cms_snippets.position LIMIT 1[0m  [["label", "title-/appraisals/323"]]
+2016-10-04T18:39:08.949462+00:00 app[web.1]:   [1m[35mComfy::Cms::Snippet Load (1.1ms)[0m  SELECT  "comfy_cms_snippets".* FROM "comfy_cms_snippets" WHERE "comfy_cms_snippets"."label" = $1  ORDER BY comfy_cms_snippets.position LIMIT 1  [["label", "keywords-/appraisals/323"]]
+2016-10-04T18:39:08.951430+00:00 app[web.1]:   [1m[36mComfy::Cms::Snippet Load (1.2ms)[0m  [1mSELECT  "comfy_cms_snippets".* FROM "comfy_cms_snippets" WHERE "comfy_cms_snippets"."label" = $1  ORDER BY comfy_cms_snippets.position LIMIT 1[0m  [["label", "description-/appraisals/323"]]
+2016-10-04T18:39:08.951789+00:00 app[web.1]:   Rendered layouts/_meta.html.erb (4.4ms)
+2016-10-04T18:39:08.952170+00:00 app[web.1]:   Rendered layouts/_js_constants.html.erb (0.2ms)
+2016-10-04T18:39:08.953813+00:00 app[web.1]:   Rendered layouts/_navbar.html.erb (1.0ms)
+2016-10-04T18:39:08.954153+00:00 app[web.1]:   Rendered layouts/_flash.html.erb (0.2ms)
+2016-10-04T18:39:08.954478+00:00 app[web.1]:   Rendered layouts/_pixel_code.html.erb (0.2ms)
+2016-10-04T18:39:08.955762+00:00 app[web.1]:   Rendered layouts/_footer.html.erb (1.1ms)
+2016-10-04T18:39:08.956089+00:00 app[web.1]: Completed 200 OK in 57ms (Views: 29.0ms | ActiveRecord: 14.4ms)
+2016-10-04T18:39:08.972137+00:00 heroku[router]: at=info method=GET path="/appraisals/323" host=vtn-staging-tmp.herokuapp.com request_id=586c4206-5ada-4ef2-9399-e9b5ff6caa9e fwd="106.208.111.127" dyno=web.1 connect=0ms service=65ms status=200 bytes=23886
+2016-10-04T18:39:21.992681+00:00 heroku[router]: at=info method=GET path="/appraisals/323/reply" host=vtn-staging-tmp.herokuapp.com request_id=3e521638-4dee-4032-9db0-c7c1b8988614 fwd="106.208.111.127" dyno=web.1 connect=0ms service=76ms status=200 bytes=31852
+2016-10-04T18:39:21.910689+00:00 app[web.1]: Started GET "/appraisals/323/reply" for 106.208.111.127 at 2016-10-04 18:39:21 +0000
+2016-10-04T18:39:21.913502+00:00 app[web.1]: Processing by AppraisalsController#reply as HTML
+2016-10-04T18:39:21.913529+00:00 app[web.1]:   Parameters: {"id"=>"323"}
+2016-10-04T18:39:21.915980+00:00 app[web.1]:   [1m[35mUser Load (1.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 295]]
+2016-10-04T18:39:21.923662+00:00 app[web.1]:   [1m[36mAppraisal Load (1.2ms)[0m  [1mSELECT  "appraisals".* FROM "appraisals" WHERE "appraisals"."id" = $1 LIMIT 1[0m  [["id", 323]]
+2016-10-04T18:39:21.925426+00:00 app[web.1]:   [1m[35mCACHE (0.0ms)[0m  SELECT  "appraisals".* FROM "appraisals" WHERE "appraisals"."id" = $1 LIMIT 1  [["id", "323"]]
+2016-10-04T18:39:21.927562+00:00 app[web.1]:   [1m[36mUser Load (1.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1[0m  [["id", 295]]
+2016-10-04T18:39:21.932702+00:00 app[web.1]:   [1m[35mClassification Load (1.3ms)[0m  SELECT  "classifications".* FROM "classifications" WHERE "classifications"."appraisal_id" = $1 LIMIT 1  [["appraisal_id", 323]]
+2016-10-04T18:39:21.935094+00:00 app[web.1]:   [1m[36mCategory Load (1.2ms)[0m  [1mSELECT  "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT 1[0m  [["id", 3125]]
+2016-10-04T18:39:21.941673+00:00 app[web.1]:   [1m[35mComment Load (1.2ms)[0m  SELECT "comments".* FROM "comments" WHERE "comments"."commentable_id" = $1 AND "comments"."commentable_type" = $2 AND "comments"."parent_id" IS NULL  ORDER BY created_at ASC  [["commentable_id", 323], ["commentable_type", "Appraisal"]]
+2016-10-04T18:39:21.944610+00:00 app[web.1]:   [1m[36mUser Load (1.3ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1[0m  [["id", 280]]
+2016-10-04T18:39:21.946016+00:00 app[web.1]:   Rendered appraisals/_comment_block.html.erb (3.5ms)
+2016-10-04T18:39:21.946857+00:00 app[web.1]:   [1m[35mCACHE (0.0ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1  [["id", 280]]
+2016-10-04T18:39:21.951428+00:00 app[web.1]:   Rendered appraisals/_comments.html.erb (11.7ms)
+2016-10-04T18:39:21.947368+00:00 app[web.1]:   Rendered appraisals/_comment_block.html.erb (1.2ms)
+2016-10-04T18:39:21.953788+00:00 app[web.1]:   [1m[36m (1.1ms)[0m  [1mSELECT COUNT(*) FROM "photos" WHERE "photos"."appraisal_id" = $1[0m  [["appraisal_id", 323]]
+2016-10-04T18:39:21.955602+00:00 app[web.1]:   [1m[35mPhoto Load (1.1ms)[0m  SELECT  "photos".* FROM "photos" WHERE "photos"."appraisal_id" = $1 AND "photos"."default" = $2 LIMIT 1  [["appraisal_id", 323], ["default", "t"]]
+2016-10-04T18:39:21.957476+00:00 app[web.1]:   [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "photos".* FROM "photos" WHERE "photos"."appraisal_id" = $1 AND "photos"."default" = $2 LIMIT 1[0m  [["appraisal_id", 323], ["default", true]]
+2016-10-04T18:39:21.959998+00:00 app[web.1]:   [1m[35mPhoto Load (1.1ms)[0m  SELECT "photos".* FROM "photos" WHERE "photos"."appraisal_id" = $1  [["appraisal_id", 323]]
+2016-10-04T18:39:21.962940+00:00 app[web.1]:   [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "photos".* FROM "photos" WHERE "photos"."appraisal_id" = $1 AND "photos"."default" = $2 LIMIT 1[0m  [["appraisal_id", 323], ["default", true]]
+2016-10-04T18:39:21.964123+00:00 app[web.1]:   [1m[35mCACHE (0.0ms)[0m  SELECT  "photos".* FROM "photos" WHERE "photos"."appraisal_id" = $1 AND "photos"."default" = $2 LIMIT 1  [["appraisal_id", 323], ["default", true]]
+2016-10-04T18:39:21.967141+00:00 app[web.1]:   [1m[36mCACHE (0.0ms)[0m  [1mSELECT COUNT(*) FROM "photos" WHERE "photos"."appraisal_id" = $1[0m  [["appraisal_id", 323]]
+2016-10-04T18:39:21.967334+00:00 app[web.1]:   Rendered appraisals/_photo_carousel.html.erb (15.8ms)
+2016-10-04T18:39:21.967500+00:00 app[web.1]:   Rendered appraisals/reply.html.erb within layouts/application (37.3ms)
+2016-10-04T18:39:21.969861+00:00 app[web.1]:   [1m[35mComfy::Cms::Snippet Load (1.2ms)[0m  SELECT  "comfy_cms_snippets".* FROM "comfy_cms_snippets" WHERE "comfy_cms_snippets"."label" = $1  ORDER BY comfy_cms_snippets.position LIMIT 1  [["label", "title-/appraisals/323/reply"]]
+2016-10-04T18:39:21.972295+00:00 app[web.1]:   [1m[36mComfy::Cms::Snippet Load (1.1ms)[0m  [1mSELECT  "comfy_cms_snippets".* FROM "comfy_cms_snippets" WHERE "comfy_cms_snippets"."label" = $1  ORDER BY comfy_cms_snippets.position LIMIT 1[0m  [["label", "keywords-/appraisals/323/reply"]]
+2016-10-04T18:39:21.974451+00:00 app[web.1]:   [1m[35mComfy::Cms::Snippet Load (1.1ms)[0m  SELECT  "comfy_cms_snippets".* FROM "comfy
+_cms_snippets" WHERE "comfy_cms_snippets"."label" = $1  ORDER BY comfy_cms_snippets.position LIMIT 1  [["label", "description-/appraisals/323/reply"]]
+2016-10-04T18:39:21.974920+00:00 app[web.1]:   Rendered layouts/_meta.html.erb (4.6ms)
+2016-10-04T18:39:21.975469+00:00 app[web.1]:   Rendered layouts/_js_constants.html.erb (0.3ms)
+2016-10-04T18:39:21.977587+00:00 app[web.1]:   Rendered layouts/_navbar.html.erb (1.3ms)
+2016-10-04T18:39:21.978007+00:00 app[web.1]:   Rendered layouts/_flash.html.erb (0.2ms)
+2016-10-04T18:39:21.978400+00:00 app[web.1]:   Rendered layouts/_pixel_code.html.erb (0.2ms)
+2016-10-04T18:39:21.980109+00:00 app[web.1]:   Rendered layouts/_footer.html.erb (1.5ms)
+2016-10-04T18:39:21.980668+00:00 app[web.1]: Completed 200 OK in 67ms (Views: 39.3ms | ActiveRecord: 15.5ms)

@@ -19,7 +19,7 @@ class Appraisals::BuildController < ApplicationController
     @appraisal = Appraisal.find(params[:appraisal_id])
     params[:appraisal][:appraisal_info] = @appraisal.merge_appraisal_info(params)
     # added classification_attributes as it is giving error
-    params[:appraisal].except!(:payment_attributes, :classification_attributes, :appraisal_info_attributes)
+    #params[:appraisal].except!(:payment_attributes, :classification_attributes, :appraisal_info_attributes)
     params[:appraisal][:step] = step
     params[:appraisal][:step] = 'active' if step == steps.last
     params[:appraisal][:selected_plan] = (params[:appraisal][:selected_plan].to_i + 4) if params[:isPair]

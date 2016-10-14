@@ -34,7 +34,7 @@ class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
+  devise :database_authenticatable, :registerable, :validatable,
   :recoverable, :rememberable, :trackable, :confirmable, :authentication_keys => [:email]
 
   # Setup accessible (or protected) attributes for your model
@@ -63,6 +63,9 @@ class User < ActiveRecord::Base
   validates_presence_of :name, :email
   validates_presence_of :password, :password_confirmation, :on => :create
   validates_presence_of :email, :on => :create
+  validates :name, format: { with: /\A[a-zA-Z ]+\z/,
+                                    message: "only allows letters" }
+
 
   def notify_creator_of_appraisal_update( appraisal )
     UserMailer.notify_creator_of_appraisal_update( appraisal ).deliver_now

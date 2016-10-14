@@ -3,6 +3,52 @@
   <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 <![endif]>
 
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css">
+
+<link rel="stylesheet" type="text/css" href="https://s3-us-west-2.amazonaws.com/vtn-temp/pdf_related/new-custom-pdf.css">
+<link href='https://fonts.googleapis.com/css?family=Roboto+Condensed:400,300,700' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,800,300,400italic,700italic' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<style>
+  .des			{ display:block;}
+  .mob			{ display:none;}
+  .thumb-style {border: 2px #436990 solid;}
+
+  @media screen and (max-width:768px)
+  {
+    .des			{ display:block;}
+    .mob			{ display:block;}
+  }
+</style>
+<script>
+  $(document).ready(function(){
+    $('#myCarousel').carousel({
+      interval: 4000
+    });
+
+// handles the carousel thumbnails
+    $('[id^=carousel-selector-]').click( function(){
+      var id_selector = $(this).attr("id");
+      var id = id_selector.substr(id_selector.length -1);
+      id = parseInt(id);
+      $('#myCarousel2').carousel(id);
+      $('[id^=carousel-selector-]').removeClass('selected');
+      $(this).addClass('selected');
+    });
+
+// when the carousel slides, auto update
+    $('#myCarousel2').on('slid', function (e) {
+      var id = $('.item.active').data('slide-number');
+      id = parseInt(id);
+      $('[id^=carousel-selector-]').removeClass('selected');
+      $('[id=carousel-selector-'+id+']').addClass('selected');
+    });
+  });
+</script>
+
 <meta name="keywords" content="<%= get_page_keywords(request.fullpath) %>"> 
 
 <meta name="description" content="<%= get_page_description(request.fullpath) %>"> 

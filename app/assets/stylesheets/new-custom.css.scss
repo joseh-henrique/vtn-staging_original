@@ -104,7 +104,7 @@ body {
   background: #fff;
   font-family: 'roboto_condensedlight';
   font-size: 18px;
-  color: #787878;
+  /**color: #787878;*/
   font-weight: normal;
 }
 * {
@@ -283,6 +283,7 @@ li.login a:hover {
   font-size: 24px;
   line-height: 1.4;
   margin-top: 0px;
+  text-align:left;
 }
 h3.banner_5 {
   color: #000;
@@ -374,6 +375,7 @@ p.green {
   margin-bottom: 8px;
   margin-top: 0px;
   line-height: .8;
+  text-align: left;
 }
 .ban {
   color: #000;
@@ -739,7 +741,7 @@ a {
   padding: 7px;
   background-color: white;
   position: fixed;
-  background: transparent url(../images/arrow_up.png) no-repeat top left;
+  background: transparent image-url('arrow_up.png') no-repeat top left;
   background-position: 50% 50%;
   width: 32px;
   height: 32px;
@@ -760,7 +762,7 @@ a {
   background-color: white;
   border: 1px solid #CCC;
   position: fixed;
-  background: transparent url(../images/arrow_down.png) no-repeat top left;
+  background: transparent image-url('arrow_down.png') no-repeat top left;
   background-position: 50% 50%;
   width: 20px;
   height: 20px;
@@ -1980,7 +1982,7 @@ body {
   font-family: 'Roboto Condensed', sans-serif;
 }
 .sec-appraise-2 ul li {
-  list-style-image: url(../images/list.png);
+  list-style-image: image-url('list.png');
   line-height: 1.75;
 }
 .sec-appraise-2 ul {
@@ -2613,7 +2615,7 @@ p.sal {
 }
 .styled-select {
   overflow: hidden;
-  background: url(../images/drop-1.png) no-repeat right #fff;
+  background: image-url('drop-1.png') no-repeat right #fff;
   border-radius: 0px 5px 5px 0px;
 }
 .pay-3 {
@@ -2684,7 +2686,7 @@ img.que {
   margin-top: 10px;
 }
 .my-select input[type=checkbox]:not(old):checked + label > span:before {
-  content : url(../images/rit.png);
+  content : image-url('rit.png');
   display : block;
   width : 1em;
   color : rgb(153,204,102);
@@ -2870,7 +2872,7 @@ p.app-top {
 }
 .cata .pager ul li:nth-child(3):after {
   position: relative;
-  content: url(../images/dot.png);
+  content: image-url('dot.png');
   bottom: -13px;
   left: 2px;
   padding-left: 4px;
@@ -2985,7 +2987,7 @@ ul.list-inline li img {
   width: 1279px;
 }
 .short-width {
-  max-width: 914px;
+  max-width: 944px;
   margin: 0 auto;
 }
 .middle-border {
