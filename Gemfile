@@ -8,9 +8,9 @@ gem 'rails', '~> 4.2', '>= 4.2.6'
 
 gem 'pg'
 
-# group :production, :staging do
-#   gem "wkhtmltopdf-heroku", "~> 1.0.0"
-# end
+ group :production, :staging do
+   gem "wkhtmltopdf-heroku"
+ end
 
 gem 'thin'
 

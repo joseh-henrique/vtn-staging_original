@@ -699,6 +699,7 @@ GEM
       railties (>= 3.0.7)
     wicked_pdf (1.0.6)
     will_paginate (3.1.0)
+    wkhtmltopdf-heroku (2.12.3.0)
     wow-rails (0.0.1)
     xml-simple (1.1.5)
     xpath (2.0.0)
@@ -797,6 +798,7 @@ DEPENDENCIES
   wicked_pdf
   will_paginate
   wkhtmltopdf-binary!
+  wkhtmltopdf-heroku
   wow-rails (~> 0.0.1)
 
 RUBY VERSION
