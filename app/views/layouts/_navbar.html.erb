@@ -25,7 +25,7 @@
     }
 
   </script>
-<nav class="navbar navbar-inverse-index" role="banner">
+<nav class="navbar navbar-inverse" role="banner">
   <div class="container wal">
     <div class="navbar-header twe">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -45,7 +45,7 @@
           <% elsif current_user.is_appraiser? && current_user.is_confirmed? %>
               <li><%= link_to("My Dashboard", dashboard_detail_path) %></li>
           <% end %>
-            <li class="active" style="width:27%"><%= current_user.get_user_name %></li>
+            <li class="active"><%= current_user.get_user_name %></li>
             <li class="wel-login"><%= link_to("Signout", destroy_user_session_path, method: :delete) %></li>
         <% else %>
           <li><%= link_to("Blog", 'http://blog.valuethisnow.com') %></li>

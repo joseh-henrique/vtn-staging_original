@@ -3089,7 +3089,6 @@ h2.col-ol {
   margin-bottom: 25px;
 }
 .short-bg {
-  background: #dfdfdf;
   padding: 38px 0px;
   width: 65%;
   margin: 0 auto;
@@ -5373,6 +5372,9 @@ input[type=checkbox], input[type=radio] {
   li.wel-login {
     width: 100px;
     text-align: center;
+  }
+  .navbar > .container {
+    margin-left : 15px;
   }
   .navbar-collapse.navbar-right.in {
     max-height: none;

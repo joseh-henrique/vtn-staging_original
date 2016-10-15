@@ -86,39 +86,63 @@
         <h2 class="col-ol" style="background: #e9c973;">Appraiser's comments :</h2>
 
         <p><%= @appraisal.appraisal_info.appraiser_comments %></p>
-        <div class="mil">
-          <div class="jhkl">
-            <p> Replacement value : <font color="#bb1f20"><%= print_replacement_cost(@appraisal) %></font>
-              <br>(Comparable)
-            </p>
-            <p>Fair Market Value : <font color="#bb1f20"><%= print_fair_market_value(@appraisal) %></font></p>
-          </div>
-          <div class="kdj">
-            <% if @appraisal.status == EActivityValueFinalized %>
-                <div id="appraiser-info">
+        <div class="bef">
+          <table width="100%" border="0" cellspacing="0" cellpadding="0"  style="margin:17px;">
+            <tr>
+              <td>
+                <p style="color: #01326a;font-size: 21px;font-weight: 400;line-height: 1.25;"> Replacement value : <font color="#bb1f20"><%= print_replacement_cost(@appraisal) %></font><br>(Comparable)</p>
+                <p style="color: #01326a;font-size: 21px;font-weight: 400;line-height: 1.25;">Fair Market Value : <font color="#bb1f20"><%= print_fair_market_value(@appraisal) %></font></p>
+              </td>
+              <td style="padding-top:0px;">
+                <div id="appraiser-info" class="short-bg" style="margin:inherit; margin-left:32px;">
                   <% if (@appraiser.signature?) %>
                       <%= image_tag "#{@appraiser.signature.standard.url}?id=#{rand(1000)}", :height => "100", :width => "250"%>
                   <% elsif !(@appraiser.appraiser_extra.signature_json.nil? || @appraiser.appraiser_extra.signature_json.empty?) %>
                       <canvas id="appraiser-signature" height="100" width="250"></canvas>
                   <% end %>
-                  <p> <span>prepared by</span></br>
-                    <%= @appraiser.name %></p>
                 </div>
-            <% end %>
-          </div>
-          <div class="clear"></div>
-        </div>
+                <p style="color: #01326a;font-size: 21px;font-weight: 400;line-height: 1.25; padding-left:35px;"><span style=" font-size: 21px;">prepared by</span></br><%= @appraiser.name %></p>
+              </td>
+            </tr>
+          </table>
 
-        <p class="text-center"><a href="index.html">www.valuethisnow.com</a></p>
-        <div class="text-center lof">
-          <%= image_tag 'https://s3-us-west-2.amazonaws.com/vtn-temp/pdf_related/images/hjk.jpg', alt:'pdf_logo' %>
-        </div>
-        <div class="sdfs">
+          <table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+              <td style="width:33%">&nbsp;</td>
 
-          <%= image_tag 'https://s3-us-west-2.amazonaws.com/vtn-temp/pdf_related/images/share.png', alt:'share', class: 'sham' %>
+              <td  style="width:33%"> <p class="text-center" style="font-size: 24px;font-weight: 400;line-height: 1.25;"><a href="index.html" style="color:#01326a;">www.valuethisnow.com</a></p>
+                <div class="text-center lof">
+                  <img src="https://s3-us-west-2.amazonaws.com/vtn-temp/pdf_related/images/hjk.jpg" alt="hjk" style="width:60%;">
+                </div>
+              </td>
+
+              <td  style="width:33%"><div class="sdfs">
+                <%= image_tag 'https://s3-us-west-2.amazonaws.com/vtn-temp/pdf_related/images/share.png', alt:'share', class: 'sham' %>
+                <!-- AddToAny BEGIN -->
+                <div class="a2a_kit a2a_kit_size_32 a2a_default_style" style="display:none">
+                  <a class="a2a_dd" href="https://www.addtoany.com/share"></a>
+                  <a class="a2a_button_facebook"></a>
+                  <a class="a2a_button_twitter"></a>
+                  <a class="a2a_button_google_plus"></a>
+                </div>
+                <script async src="https://static.addtoany.com/menu/page.js"></script>
+                <!-- AddToAny END -->
+              </div>
+              </td>
+            </tr>
+          </table>
+          <table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin:17px;">
+            <tr>
+              <td>
+                <div style="text-align:right; margin:3px;">
+
+                  <span class="short-2"><%= link_to "See more", show_shared_path(@appraisal, :format => :pdf, :full => "yes") %></span>
+
+                </div>
+              </td>
+            </tr>
+          </table>
         </div>
-        <span class="short-2"><a href="tax-long-appraisel.html">See more</a></span>
-        <div class="clear"></div>
       </div>
     </div>
   <div class="bottom-border"><img src="https://s3-us-west-2.amazonaws.com/vtn-temp/pdf_related/images/border-bottom.jpg"  alt="border-1"/> </div>
