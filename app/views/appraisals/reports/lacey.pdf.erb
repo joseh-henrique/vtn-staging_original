@@ -136,7 +136,7 @@
               <td>
                 <div style="text-align:right; margin:3px;">
 
-                  <span class="short-2"><%= link_to "See more", show_shared_path(@appraisal, :format => :pdf, :full => "yes") %></span>
+                  <span class="short-2"><%= link_to "See more", Rails.application.config.server_url + show_shared_path(@appraisal, :format => :pdf, :full => "yes") %></span>
 
                 </div>
               </td>
