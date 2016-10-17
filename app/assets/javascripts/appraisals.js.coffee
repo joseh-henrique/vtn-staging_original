@@ -231,11 +231,11 @@ jQuery ->
 
   $("#chkImportAccount").change ->
     if $(this).is(':checked')
-      $("#txtCardName").val($("#customer_name").val())
-      $("#appraisal_payment_attributes_address").val($("#customer_address_attributes_address").val())
-      $("#appraisal_payment_attributes_city").val($("#customer_address_attributes_city").val())
-      $("#appraisal_payment_attributes_state").val($("#customer_address_attributes_state").val())
-      $("#appraisal_payment_attributes_zip").val($("#customer_address_attributes_zip").val())
+      $("#txtCardName").val($("#current_user_name").val())
+      $("#appraisal_payment_attributes_address").val($("#current_user_address_address").val())
+      $("#appraisal_payment_attributes_city").val($("#current_user_address_city").val())
+      $("#appraisal_payment_attributes_state").val($("#current_user_address_state").val())
+      $("#appraisal_payment_attributes_zip").val($("#current_user_address_zip").val())
     else
       $("#txtCardName").val("")
       $("#appraisal_payment_attributes_address").val("")

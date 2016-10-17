@@ -49,7 +49,7 @@
                   <%= ff.hidden_field :secondary_contact_name %>
                   <%= ff.hidden_field :vendor_token %>
                   <%= ff.hidden_field :id %>
-                  <%= ff.fields_for :address do |a| %>
+                  <%= ff.fields_for :address, current_user.address do |a| %>
                       <%= a.hidden_field :address, as: :hidden %>
                       <%= a.hidden_field :city, as: :hidden %>
                       <%= a.hidden_field :state, as: :hidden %>
