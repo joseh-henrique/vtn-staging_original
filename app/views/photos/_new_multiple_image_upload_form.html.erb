@@ -17,9 +17,8 @@ can_mark_as_primary ||= can_mark_as_primary.nil? %>
         <div class="col-md-2">
           <!-- The fileinput-button span is used to style the file input field as button -->
           <% if can_upload %>
-          <span class="btn btn-success fileinput-button" id="btn_upload_image">
-            <span class="glyphicon glyphicon-plus"></span>
-            <span id="btn_image_upload_label">Add Photos</span>
+          <span class=" fileinput-button" id="btn_upload_image">
+            <span id="btn_image_upload_label" class="btn next-1 bro">UPLOAD IMAGES</span>
             <%= f.cl_image_upload(:picture,:html => { :multiple => true, id: "btn_upload_image_input" } ) %>
           </span>
           <% end %>

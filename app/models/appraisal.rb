@@ -202,7 +202,7 @@ class Appraisal < ActiveRecord::Base
   end
 
   def merge_appraisal_info(params)
-    params[:appraisal][:appraisal_info] = Hash.new if params[:appraisal][:appraisal_info].nil?
+    params[:appraisal][:appraisal_info] = Hash.new if (params[:appraisal].has_key?(:appraisal_info) && params[:appraisal][:appraisal_info].nil?)
     current_appraisal_info = self.appraisal_info.instance_values
     current_appraisal_info.merge!(AppraisalInfo.new(params[:appraisal][:appraisal_info]).instance_values)
     return AppraisalInfo.new(current_appraisal_info)

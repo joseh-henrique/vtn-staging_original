@@ -103,39 +103,64 @@ jQuery ->
 
   # Begin Code for Plan Selection in Appraisal Wizard $("#plansel1").click ->
   $("#planprod1").click ->
-    $(".formProd").removeClass("formProdOn")
+    $("#planprod1").removeClass("formProdOn")
     $("#planprod1").addClass("formProdOn")
-    $(".formProdSelect").removeClass("formProdSelected")
-    $(".formProdSelect").removeClass("formProdSelected-small")
-    $("#plansel1").addClass("formProdSelected")
-    $("#small-plansel1").addClass("formProdSelected-small")
     resetSelectTxt()
-    $("#small-plansel1").html "Selected"
-    $("#appraisal_selected_plan").val(vtn_constants.EAAppraisalTypeShortRestricted)
+    $("#planprod2").removeClass("formProdOn")
+    $("#planprod3").removeClass("formProdOn")
+    $("#planprod4").removeClass("formProdOn")
+    $("#planprod5").removeClass("formProdOn")
+    $("#check1").html "Selected"
+    $("#check1").css("color", "#e76311 !important")
+    $("#appraisal_selected_plan").val(vtn_constants.EAAppraisalTypeAuctionEstimate)
 
   $("#planprod2").click ->
-    $(".formProd").removeClass("formProdOn")
+    $("#planprod2").removeClass("formProdOn")
     $("#planprod2").addClass("formProdOn")
-    $(".formProdSelect").removeClass("formProdSelected")
-    $(".formProdSelect").removeClass("formProdSelected-small")
-    $("#plansel2").addClass("formProdSelected")
-    $("#small-plansel2").addClass("formProdSelected-small")
     resetSelectTxt()
-    $("#plansel2").html "Selected"
-    $("#small-plansel2").html "Selected"
+    $("#planprod1").removeClass("formProdOn")
+    $("#planprod3").removeClass("formProdOn")
+    $("#planprod4").removeClass("formProdOn")
+    $("#planprod5").removeClass("formProdOn")
+    $("#check2").html "Selected"
+    $("#check2").css("color", "#e76311 !important")
+    $("#appraisal_selected_plan").val(vtn_constants.EAAppraisalTypeShortRestricted)
+
+  $("#planprod3").click ->
+    $("#planprod3").removeClass("formProdOn")
+    $("#planprod3").addClass("formProdOn")
+    resetSelectTxt()
+    $("#planprod1").removeClass("formProdOn")
+    $("#planprod2").removeClass("formProdOn")
+    $("#planprod4").removeClass("formProdOn")
+    $("#planprod5").removeClass("formProdOn")
+    $("#check3").html "Selected"
+    $("#check3").css("color", "#e76311 !important")
     $("#appraisal_selected_plan").val(vtn_constants.EAAppraisalTypeLongRestricted)
 
   $("#planprod4").click ->
-    $(".formProd").removeClass("formProdOn")
+    $("#planprod4").removeClass("formProdOn")
     $("#planprod4").addClass("formProdOn")
-    $(".formProdSelect").removeClass("formProdSelected")
-    $(".formProdSelect").removeClass("formProdSelected-small")
-    $("#plansel4").addClass("formProdSelected")
-    $("#small-plansel4").addClass("formProdSelected-small")
     resetSelectTxt()
-    $("#plansel4").html "Selected"
-    $("#small-plansel4").html "Selected"
+    $("#planprod1").removeClass("formProdOn")
+    $("#planprod2").removeClass("formProdOn")
+    $("#planprod3").removeClass("formProdOn")
+    $("#planprod5").removeClass("formProdOn")
+    $("#check4").html "Selected"
+    $("#check4").css("color", "#e76311 !important")
     $("#appraisal_selected_plan").val(vtn_constants.EAAppraisalTypeLongForSelling)
+
+  $("#planprod5").click ->
+    $("#planprod5").removeClass("formProdOn")
+    $("#planprod5").addClass("formProdOn")
+    resetSelectTxt()
+    $("#planprod1").removeClass("formProdOn")
+    $("#planprod2").removeClass("formProdOn")
+    $("#planprod4").removeClass("formProdOn")
+    $("#planprod3").removeClass("formProdOn")
+    $("#check5").html "Selected"
+    $("#check5").css("color", "#e76311 !important")
+    $("#appraisal_selected_plan").val(vtn_constants.EAAppraisalTypeTaxAppraisal)
 
   $("#plansel1").click ->
     $(".formProd").removeClass("formProdOn")
@@ -265,6 +290,7 @@ jQuery ->
       true
 
   $("#btnBuildWizardPayment").click ->
+    alert("in payment purchase")
     if requiredFields()
       $("#paymentModal").modal('show')
       form = $(this).closest('form')

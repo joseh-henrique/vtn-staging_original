@@ -65,8 +65,19 @@ EAAppraisalTypeShortRestrictedPair = 5
 EAAppraisalTypeLongRestrictedPair = 6
 EAAppraisalTypeShortForSellingPair = 7
 EAAppraisalTypeLongForSellingPair = 8
-APPRAISAL_PLANS = [EAAppraisalTypeShortRestricted, EAAppraisalTypeLongRestricted, EAAppraisalTypeShortForSelling, EAAppraisalTypeLongForSelling, EAAppraisalTypeShortRestrictedPair, EAAppraisalTypeLongRestrictedPair,EAAppraisalTypeShortForSellingPair, EAAppraisalTypeLongForSellingPair   ]
-APPRAISAL_PLANS_NAMES = Hash[EAAppraisalTypeShortRestricted => "Light Restricted Use Appraisal", EAAppraisalTypeLongRestricted => "Full Restricted Use Appraisal", EAAppraisalTypeShortForSelling => "Short For Selling (Not currently available)", EAAppraisalTypeLongForSelling => "Full Summary Appraisal", EAAppraisalTypeShortRestrictedPair => "Light Restricted Use Appraisal Pair", EAAppraisalTypeLongRestrictedPair => "Full Restricted Use Appraisal Pair", EAAppraisalTypeShortForSellingPair => "Short For Selling (Not currently available) Pair", EAAppraisalTypeLongForSellingPair => "Full Summary Appraisal Pair"]
+EAAppraisalTypeAuctionEstimate = 9
+EAAppraisalTypeTaxAppraisal = 10
+
+APPRAISAL_PLANS = [EAAppraisalTypeShortRestricted, EAAppraisalTypeLongRestricted, EAAppraisalTypeShortForSelling, EAAppraisalTypeLongForSelling,
+                   EAAppraisalTypeShortRestrictedPair, EAAppraisalTypeLongRestrictedPair,EAAppraisalTypeShortForSellingPair, EAAppraisalTypeLongForSellingPair,
+									 EAAppraisalTypeAuctionEstimate, EAAppraisalTypeTaxAppraisal]
+# Light Restricted Use Appraisal renamed to Short Restricted Use Appraisal
+# Full Restricted Use Appraisal renamed to Full Restricted Use
+APPRAISAL_PLANS_NAMES = Hash[EAAppraisalTypeShortRestricted => "Short Restricted Use", EAAppraisalTypeLongRestricted => "Full Restricted Use Appraisal",
+                             EAAppraisalTypeShortForSelling => "Short For Selling (Not currently available)", EAAppraisalTypeLongForSelling => "Full Summary Appraisal",
+                             EAAppraisalTypeShortRestrictedPair => "Light Restricted Use Appraisal Pair", EAAppraisalTypeLongRestrictedPair => "Full Restricted Use Appraisal Pair",
+                             EAAppraisalTypeShortForSellingPair => "Short For Selling (Not currently available) Pair", EAAppraisalTypeLongForSellingPair => "Full Summary Appraisal Pair",
+														 EAAppraisalTypeAuctionEstimate => "Auction Estimate", EAAppraisalTypeTaxAppraisal => "Tax Appraisal"]
 ## Payouts
 EAPayoutPending = 0
 EAPayoutCompleted = 1

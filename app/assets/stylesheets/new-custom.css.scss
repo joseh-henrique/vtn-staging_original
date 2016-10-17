@@ -1181,9 +1181,14 @@ footer ul li.more_link ul li a:hover {
 
 /*-------------------------------------------------welcome css----------------------------------------------------------*/
 
+@media(min-width:1200px){
+  .container{
+  width:1251px !important;
+}
 
 
 
+}
 @media (min-width: 767px) {
   .container>.collapse.wel-nav {
     display: block;
@@ -1569,7 +1574,7 @@ label.control-label {
   text-transform: uppercase;
   background: #e76311;
   color: #fff;
-  padding: 22px 7%;
+  padding: 22px 6%;
   text-align: center;
 }
 .expert p {
@@ -3099,19 +3104,7 @@ h2.col-ol {
 .text-center.lof img {
   width: 20%;
 }
-span.short-2 {
-  display: block;
-  text-align: right;
-  position: relative;
-  top: -25px;
-  right: 4%;
-  line-height: 1;
-  font-size: 18px;
-  color: #000;
-  font-weight: 700;
-  margin-bottom: -3%;
-  clear: both;
-}
+span.short-2 { display: block; text-align: right; line-height: 1; font-size: 18px; color: #000; font-weight: 700; padding-right:30px;}
 span.hfk {
   padding-right: 3%;
   float: left;
@@ -4102,12 +4095,20 @@ p.sel-tex {
   font-weight: 600 !important;
   color: #e76311;
 }
+.checkbox-ticked {
+  content: 'selected';
+  background-image: image-url('rit.png');
+  background-position: 0px 4px;
+  background-repeat: no-repeat;
+  display: block;
+  padding-left: 36px;
+}
 .my-select input[type=checkbox]:not(old):checked + label > span {
   display: none;
 }
 .my-select input[type=checkbox]:not(old):checked + label:after {
   content: 'selected';
-  background-image: url(../images/rit.png);
+  background-image: image-url('rit.png');
   background-position: 0px 4px;
   background-repeat: no-repeat;
   display: block;
@@ -4214,14 +4215,7 @@ img.sham {
 span.short-2 a {
   color: #01326A;
 }
-.sdfs {
-  float: right;
-  position: relative;
-  top: -55px;
-  margin-top: -59px;
-  right: 6%;
-  cursor: pointer;
-}
+.sdfs {padding-left: 125px; text-align:center; cursor: pointer;}
 .sdfs .a2a_kit.a2a_kit_size_32.a2a_default_style {
   clear: both;
 }

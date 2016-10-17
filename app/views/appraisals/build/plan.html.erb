@@ -1,208 +1,261 @@
-<%= stylesheet_link_tag "progress_step_bar" %>
-<div id="build_plan">
-  <div class="row">
-    <div class="col-md-11 col-md-offset-1 big-title">
-      Select your Appraisal Type
-      <div class="pull-right orderStep">
-        4 of 5
+<div class="container wal">
+  <%= simple_form_for(@appraisal, :url => wizard_path, :method => :put, :html => {:multipart => true, :class => "form-horizontal"}) do |f| %>
+  <div class="welcome app">
+    <h2>Appraisal Type</h2>
+    <div class="my-tab plans">
+      <div class="my-tab-list-bor"></div>
+      <div class="my-tab-list">
+        <ul>
+          <li><a href="inform.html">
+            <div class="con-list">
+              <div class="green-no color-gre"> 1</div>
+            </div>
+          </a> Inform
+          </li>
+          <li><a href="upload.html">
+            <div class="con-list">
+              <div class="green-no color-gre"> 2</div>
+            </div>
+          </a>Upload
+          </li>
+          <li><a href="select.html">
+            <div class="con-list">
+              <div class="green-no color-gre"> 3</div>
+            </div>
+          </a>Select
+          </li>
+          <li><a href="check.html">
+            <div class="con-list">
+              <div class="green-no color-red"> 4</div>
+            </div>
+          </a>Check Out
+          </li>
+        </ul>
       </div>
     </div>
-  </div>
-
-  <div class="row stepsbar">
-    <div class="col-md-12 center">
-      <%= image_tag "steps/progressbar-5.jpg"%>
-      <!-- <%= render "progress_step_4"%> -->
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-md-10">
-      <%= simple_form_for(@appraisal, :url => wizard_path, :method => :put,  :html => {:multipart => true, :class => "form-horizontal"}) do |f| %>
-          <div>
-            <!--- Content start -->
+    <div class="row">
+          <div class="col-md-12">
             <div class="row">
-              <div class="col-md-4">
-                <div class="formProd" id="planprod1" >
-                  <div class="formProdTitle">Short Restricted Use</div>
-                  <div class="formProdRed">PERSONAL USE ONLY</div>
-                  <div class="hidden-xs hidden-sm">
-                    <div class="formProdItem">Basic valuation</div>
-                    <div class="formProdItem">Basic appraiser’s comments</div>
-                    <div class="formProdItem">Replacement Value</div>
-                    <div class="formProdItem">Fair Market Value</div>
-                    <div class="formProdItem">Personal curiosity</div>
-                    <div class="formProdItem">Buying or selling</div>
-                    <div class="formProdItem">Equitable distribution</div>
-                    <div class="formProdItem">Estate planning</div>
-                    <div class="formProdItem">USPAP compliant</div>
-                  </div>
-                  <% unless current_user.is_partner && !PartnerPricing.find_by_user_id(current_user).blank? %>
-                    <div class="formProdPrice planPrice" id="planPrice1"><%= number_to_currency(PAYMENT_PLAN[EAAppraisalTypeShortRestricted-1]) %></div>
-                    <div class="formProdPrice planPairPrice" style="display: none;"><%= number_to_currency(PAYMENT_PLAN[EAAppraisalTypeShortRestricted-1]+20) %></div>
-                    <div class="visible-xs visible-sm planDesc">
-                      USPAP Compliant basic valuation with basic appraiser's comments for personal curiosity, buying or selling, equitable distribution or estate planning.
-                    </div>
-                  <% else %>
-                      <div class="formProdPrice planPrice" id="planPrice1"><%= number_to_currency(PartnerPricing.find_by_user_id(current_user).short_restricted) %></div>
-                      <div class="formProdPrice planPairPrice" style="display: none;"><%= number_to_currency(PartnerPricing.find_by_user_id(current_user).short_restricted+20) %></div>
-                      <div class="visible-xs visible-sm planDesc">
-                        USPAP Compliant basic valuation with basic appraiser's comments for personal curiosity, buying or selling, equitable distribution or estate planning.
+              <div class="my-wel-row">
+                <div class="col-md-7 five-three">
+                  <div class="row">
+                    <div class="col-md-4 planprod1" id="planprod1">
+                      <div class="top">
+                        <h3>Top Seller</h3>
                       </div>
-                  <% end %>
-                </div>
-              </div>
-              <div class="hidden_select_outer">
-                <div class="formProdSelect hidden-md hidden-lg hidden_select_inner" id="small-plansel1">Select</div>
-              </div>
-
-              <div class="col-md-4">
-                <div class="formProd" id="planprod2">
-                  <div class="formProdTitle">Full Restricted Use</div>
-                  <div class="formProdRed">PERSONAL USE ONLY</div>
-                  <div class="hidden-xs hidden-sm">
-                    <div class="formProdItem">Standard valuation</div>
-                    <div class="formProdItem">Comprehensive appraiser’s comments</div>
-                    <div class="formProdItem">Replacement Value</div>
-                    <div class="formProdItem">Fair Market Value</div>
-                    <div class="formProdItem">Comprehensive description</div>
-                    <div class="formProdItem">History often included</div>
-                    <div class="formProdItem">Personal curiosity</div>
-                    <div class="formProdItem">Buying or selling</div>
-                    <div class="formProdItem">Equitable distribution</div>
-                    <div class="formProdItem">Estate planning</div>
-                    <div class="formProdItem">USPAP compliant</div>
+                      <label for="checkbox11" class="jkl">
+                        <div class="auc">
+                          <div class="wel-gre">
+                            <p>Auction Estimate </p>
+                          </div>
+                          <h4>PERSONAL </br>
+                            USE ONLY</h4>
+                          <ul>
+                            <li> Auction value range</li>
+                            <li>Proper description of the subject property</li>
+                            <li>Estimated age of subject property</li>
+                            <li>Brief appraiser comments</li>
+                            <li>USPAP Compliant</li>
+                          </ul>
+                          <h6>Uses</h6>
+                          <ul>
+                            <li>Personal curiosity</li>
+                            <li>Buying or selling</li>
+                          </ul>
+                          <h5 class="dol"><%= number_to_currency(PAYMENT_PLAN[EAAppraisalTypeAuctionEstimate-1]) %></h5>
+                        </div>
+                      </label>
+                      <div class="my-select">
+                        <div>
+                          <input id="checkbox1" class="tick1" type="checkbox" name="checkbox" value="1" unchecked>
+                          <label id="check1" for="checkbox1"><span></span><span class="sele">select</span></label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-4 planprod2" id="planprod2">
+                      <div class="top"></div>
+                      <label for="checkbox22" class="jkl">
+                        <div class="auc">
+                          <div class="wel-gre">
+                            <p>Short Restricted Use</p>
+                          </div>
+                          <h4>PERSONAL </br>
+                            USE ONLY</h4>
+                          <ul>
+                            <li> Basic valuation</li>
+                            <li>Basic appraiser’s comments</li>
+                            <li>Replacement Value</li>
+                            <li>Fair Market Value</li>
+                            <li>USPAP Compliant</li>
+                          </ul>
+                          <h6>Uses</h6>
+                          <ul>
+                            <li>Personal curiosity</li>
+                            <li>Buying or selling</li>
+                            <li>Equitable distribution</li>
+                            <li>Estate planning</li>
+                          </ul>
+                          <h5 class="dol"><%= number_to_currency(PAYMENT_PLAN[EAAppraisalTypeShortRestricted-1]) %></h5>
+                        </div>
+                      </label>
+                      <div class="my-select">
+                        <div>
+                          <input id="checkbox2" type="checkbox" name="checkbox" value="2" unchecked>
+                          <label id="check2" for="checkbox2"><span></span><span class="sele">select</span></label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-4 planprod3" id="planprod3">
+                      <div class="top"></div>
+                      <label for="checkbox23" class="jkl">
+                        <div class="auc">
+                          <div class="wel-gre">
+                            <p>Long Restricted Use</p>
+                          </div>
+                          <h4>PERSONAL </br>
+                            USE ONLY</h4>
+                          <ul>
+                            <li> Standard valuation</li>
+                            <li>Comprehensive appraiser’s comments</li>
+                            <li>Replacement Value</li>
+                            <li>Fair Market Value</li>
+                            <li>Comprehensive description</li>
+                            <li>History often included</li>
+                            <li>USPAP Compliant</li>
+                          </ul>
+                          <h6>Uses</h6>
+                          <ul>
+                            <li>Personal curiosity</li>
+                            <li>Buying or selling</li>
+                            <li>Equitable distribution</li>
+                            <li>Equitable distribution</li>
+                            <li>Estate planning</li>
+                          </ul>
+                          <h5 class="dol"><%= number_to_currency(PAYMENT_PLAN[EAAppraisalTypeLongRestricted-1]) %></h5>
+                        </div>
+                      </label>
+                      <div class="my-select">
+                        <div>
+                          <input id="checkbox3" type="checkbox" name="checkbox" value="3" unchecked>
+                          <label id="check3" for="checkbox3"><span></span><span class="sele">select</span></label>
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                  
-                  
-                  <% unless current_user.is_partner && !PartnerPricing.find_by_user_id(current_user).blank? %>
-                    <div class="formProdPrice planPrice" id="planPrice2"><%= number_to_currency(PAYMENT_PLAN[EAAppraisalTypeLongRestricted-1]) %></div>
-                    <div class="formProdPrice planPairPrice" style="display: none;"><%= number_to_currency(PAYMENT_PLAN[EAAppraisalTypeLongRestricted-1]+20) %></div>
-                    <div class="visible-xs visible-sm planDesc">
-                      USPAP Compliant standard valuation with comprehensive appraiser's comments for personal curiosity, buying or selling, equitable distribution or estate planning.
-                    </div>
-                  <% else %>
-                    <div class="formProdPrice planPrice" id="planPrice2"><%= number_to_currency(PartnerPricing.find_by_user_id(current_user).full_restricted) %></div>
-                    <div class="formProdPrice planPairPrice" style="display: none;"><%= number_to_currency(PartnerPricing.find_by_user_id(current_user).full_restricted+20) %></div>
-                    <div class="visible-xs visible-sm planDesc">
-                      USPAP Compliant standard valuation with comprehensive appraiser's comments for personal curiosity, buying or selling, equitable distribution or estate planning.
-                    </div>
-                  <% end %>
-                  
-                  
-                  
                 </div>
-              </div>
-
-              <div class="hidden_select_outer">
-                <div class="formProdSelect hidden-md hidden-lg hidden_select_inner" id="small-plansel2">Select</div>
-              </div>
-
-              <div class="col-md-4">
-                <div class="formProd formProdOn" id="planprod4">
-                  <div class="formProdTitle">&nbsp;</div>
-                  <div class="formProdRed" style="color:#805700;">FULL USE APPRAISAL REPORT</div>
-                  <div class="hidden-xs hidden-sm">
-                    <div class="formProdItem">Premium valuation</div>
-                    <div class="formProdItem">Comprehensive appraiser’s comments</div>
-                    <div class="formProdItem">Replacement Value</div>
-                    <div class="formProdItem">Fair Market Value</div>
-                    <div class="formProdItem">Comprehensive description</div>
-                    <div class="formProdItem">History often included</div>
-                    <div class="formProdItem">USPAP compliant</div>
-                    <div class="formProdItem2">May be Accepted for </div>
-                    <div class="formProdItem">Buying or selling</div>
-                    <div class="formProdItem">Equitable distribution</div>
-                    <div class="formProdItem">Estate planning</div>
-                    <div class="formProdItem"><b>With pre-approval</b></div>
-                    <div class="formProdItem">Damage claims</div>
-                    <div class="formProdItem">Acquiring insurance</div>
-                    <div class="formProdItem">Other legal uses</div>
+                <div class="col-md-5 five-two">
+                  <div class="row">
+                    <div class="col-md-6 planprod4" id="planprod4">
+                      <div class="top">
+                        <h3>Top Seller</h3>
+                      </div>
+                      <label for="checkbox12" class="jkl">
+                        <div class="auc">
+                          <div class="wel-gre">
+                            <p>long full USE</p>
+                          </div>
+                          <h4> FOR USE BY </br>
+                            THIRD PARTIES </h4>
+                          <ul>
+                            <li>Premium valuation</li>
+                            <li>Comprehensive appraiser’s comments</li>
+                            <li>Replacement Value</li>
+                            <li>Fair Market Value</li>
+                            <li>Comprehensive description</li>
+                            <li>History often included</li>
+                            <li>USPAP compliant</li>
+                          </ul>
+                          <h6>Uses</h6>
+                          <ul>
+                            <li>Buying or selling</li>
+                            <li>Equitable distribution</li>
+                            <li>Estate planning</li>
+                            <li>
+                              <h6 class="marg trans"><font color="e76311">with pre-approval<br>
+                                May be Accepted for</font></h6>
+                            </li>
+                            <li>Damage claims</li>
+                            <li>Acquiring insurance</li>
+                            <li>Other legal uses</li>
+                          </ul>
+                          <h5 class="dol"><%= number_to_currency(PAYMENT_PLAN[EAAppraisalTypeLongForSelling-1]) %></h5>
+                        </div>
+                      </label>
+                      <div class="my-select">
+                        <div>
+                          <input id="checkbox4" type="checkbox" name="checkbox" value="4" unchecked>
+                          <label id="check4" for="checkbox4"><span></span><span class="sele">select</span></label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6 planprod5" id="planprod5">
+                      <div class="top"></div>
+                      <label for="checkbox9" class="jkl">
+                        <div class="auc">
+                          <div class="wel-gre">
+                            <p>Tax Appraisal</p>
+                          </div>
+                          <h4> Valuations </br>
+                            up to $5,000</h4>
+                          <ul>
+                            <li>Premium valuation</li>
+                            <li>Comprehensive appraisers comments</li>
+                            <li>Replacement Value</li>
+                            <li>Fair Market Value</li>
+                            <li>Comprehensive description</li>
+                            <li>USPAP compliant</li>
+                            <li>IRS Compliant</li>
+                            <li>Partially Completed IRS form 8283</li>
+                            <li>(Section A ONLY)</li>
+                          </ul>
+                          <h6>Uses</h6>
+                          <ul>
+                            <li>Ideal for charitable</li>
+                            <li>contributions when under $5,000 FMV</li>
+                          </ul>
+                          <ul>
+                            <li>Proof of value to the IRS</li>
+                            <li>Ideal for tax preparation</li>
+                            <li>Ideal for gifting personal property</li>
+                          </ul>
+                          <h5 class="dol"><%= number_to_currency(PAYMENT_PLAN[EAAppraisalTypeTaxAppraisal-1]) %></h5>
+                        </div>
+                      </label>
+                      <div class="my-select">
+                        <div>
+                          <input id="checkbox5" type="checkbox" name="checkbox" value="5" unchecked>
+                          <label id="check5" for="checkbox5"><span></span><span class="sele">select</span></label>
+                        </div>
+                      </div>
+                    </div>
                   </div>
 
-                  <% unless current_user.is_partner && !PartnerPricing.find_by_user_id(current_user).blank? %>
-                    <div class="formProdPrice planPrice" id="planPrice"><%= number_to_currency(PAYMENT_PLAN[EAAppraisalTypeLongForSelling-1]) %></div>
-                    <div class="formProdPrice planPairPrice" style="display: none;"><%= number_to_currency(PAYMENT_PLAN[EAAppraisalTypeLongForSelling-1]+20) %></div>
-                    <div class="visible-xs visible-sm planDesc">
-                      USPAP Compliant premium valuation with comprehensive appraiser’s comments, comprehensive description for buying or selling, equitable distribution, estate planning,
-                      damage claims, acquiring insurance and other legal uses.
-                    </div>
-                  <% else %>
-                    <div class="formProdPrice planPrice" id="planPrice"><%= number_to_currency(PartnerPricing.find_by_user_id(current_user).full_use) %></div>
-                    <div class="formProdPrice planPairPrice" style="display: none;"><%= number_to_currency(PartnerPricing.find_by_user_id(current_user).full_use+20) %></div>
-                    <div class="visible-xs visible-sm planDesc">
-                      USPAP Compliant premium valuation with comprehensive appraiser’s comments, comprehensive description for buying or selling, equitable distribution, estate planning,
-                      damage claims, acquiring insurance and other legal uses.
-                    </div>
-                  <% end %>
                 </div>
               </div>
-
-              <div class="hidden_select_outer">
-                <div class="formProdSelect hidden-md hidden-lg formProdSelected-small hidden_select_inner" id="small-plansel4">Select</div>
-              </div>
-
             </div>
-
-            <div class="row">
-              <div class="col-md-4">
-                <div class="formProdSelect hidden-xs hidden-sm" id="plansel1">Select</div>
-              </div>
-
-              <div class="col-md-4">
-                <div class="formProdSelect hidden-xs hidden-sm" id="plansel2">Select</div>
-              </div>
-
-              <div class="col-md-4">
-                <div class="formProdSelect hidden-xs hidden-sm formProdSelected" id="plansel4">Select</div>
-              </div>
-            </div>
-
-            <% if Setting.is_set("enable_pair_pricing","true") %>
-              <div class="row">
-                <div class="col-md-12 formProdPairText">
-                  <b>* Note:</b> Check the box below if your appraisal request is for a set (e.g., dresser set), service (e.g., flatware or dinnerware service), or a suite 
-                  (e.g., suite of bedroom furniture). An additional $20.00 will be applied.
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-12 formProdPair">
-                  <input type="checkbox" id="isPair" name="isPair" class="isPair" value="1" style="margin-top: -4px;" /> 
-                  <label class="label_isPair" for="isPair"> Appraisal for a set, service or suite </label>
-                </div>
-              </div>
-            <% end %>
-
-            <%= f.input :selected_plan, as: :hidden %>
-
-            <div class="btns-back-forward buttons" style="margin-top: 20px; padding-bottom: 20px;">
-              <%= link_to "Back", previous_wizard_path, class: "btn btn-success pull-left" %>
-              <%= f.button :submit, "Forward", class: "btn btn-success pull-right" %>
-            </div>
-            
-
           </div>
-        <% end %>
-        <br />
-    </div>
-
-    <div class="col-md-2">
-      <div class="center">
-        <%= link_to "Save It", appraisals_path, id: "save_it_btn", class: "btn btn-success"%>
-        </br>
-        If you have to go, let's save your stuff for your return!
-      </div>
-
-      <div class="notes">
-        <div class="content-note">
-          <span>
-            You're almost done.<br>
-            All you need to do now <br>
-            is to checkout!<br>
-          </span>
-        </div>
-      </div>
-
-    </div>
+          <%= f.input :selected_plan, as: :hidden %>
+          </div>
+          <div class="select-note">
+            <p><b>Note:</b> Check the box below if your appraisal request is for a set (e.g., dresser set), service
+              (e.g., flateware or dinnerware service), or a suite (e.g., suite of bedroom furniture).</p>
+            <input type="checkbox" value="" id="appraisel">
+            <label class="checkbox" for="appraisel">
+              Appraisals for a set, service or a suite
+            </label>
+            <div class="clear"></div>
+          </div>
+          <div class="col-md-12">
+            <div class="form-group">
+              <div class="row">
+                <div class="bun2">
+                  <%= link_to "Back", previous_wizard_path, :class => "btn next-1 bge left-2" %>
+                  <%= f.submit "Next", :class => "btn next-1 gre right-2", :id => "btn_submit_avatar"%>
+                  <div class="clear"></div>
+                </div>
+              </div>
+            </div>
+          </div>
   </div>
+      <% end %>
 </div>

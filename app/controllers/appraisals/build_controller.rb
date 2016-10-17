@@ -17,15 +17,30 @@ class Appraisals::BuildController < ApplicationController
 
   def update
     @appraisal = Appraisal.find(params[:appraisal_id])
-    params[:appraisal][:appraisal_info] = @appraisal.merge_appraisal_info(params)
+    Rails.logger.info "params[:id] is #{params[:id]}"
+    unless (["plan", "payment"].include?(params[:id]))
+      params[:appraisal][:appraisal_info] = @appraisal.merge_appraisal_info(params)
+    end
     # added classification_attributes as it is giving error
     #params[:appraisal].except!(:payment_attributes, :classification_attributes, :appraisal_info_attributes)
     params[:appraisal][:step] = step
     params[:appraisal][:step] = 'active' if step == steps.last
     params[:appraisal][:selected_plan] = (params[:appraisal][:selected_plan].to_i + 4) if params[:isPair]
+    classifications = params[:appraisal][:classification_attributes]
+    unless classifications.nil?
+      classification = Classification.where(appraisal_id: @appraisal.id)
+      if classification.count > 0
+        Classification.update(classification.first.id, category_id: classifications["id"].to_i)
+      else
+        Classification.create(appraisal_id: @appraisal.id, category_id: classifications["id"].to_i)
+      end
+    end
+    params[:appraisal].delete(:classification_attributes)
+    params[:appraisal].delete(:current_user)
+    params[:appraisal].delete(:payment_attributes)
     @appraisal.update_attributes(params[:appraisal])
     # giving error if appraiser id is not valid
-    #@appraisal.assigned_to = Appraiser.find(@appraisal.appraiser_referral.to_i) unless @appraisal.appraiser_referral.eql?("")
+    @appraisal.assigned_to = Appraiser.find(@appraisal.appraiser_referral.to_i) unless @appraisal.appraiser_referral.eql?("")
     @appraisal.save
     @appraisal.reload
     @appraisal.payment.reload if @appraisal.payment

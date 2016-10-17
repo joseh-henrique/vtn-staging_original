@@ -35,7 +35,8 @@
           </div>
         </div>
         <div class="check-form">
-          <%= form_for(:payment,  :url => wizard_path, :method => :put, :html => {:multipart => true}) do |f| %>
+          <%= form_for(@appraisal,  :url => wizard_path, :method => :put, :html => {:multipart => true}) do |f| %>
+              <%= f.fields_for :payment do |p| %>
               <input type="hidden" id="appraisal_type" value="<%= @appraisal.selected_plan %>" />
               <% unless current_user.is_partner && !PartnerPricing.find_by_user_id(current_user).blank? %>
                   <input type="hidden" name="appraisal_price" id="appraisal_price" value="<%= PAYMENT_PLAN[ @appraisal.selected_plan-1] %>" />
@@ -43,7 +44,7 @@
                   <input type="hidden" name="appraisal_price" id="appraisal_price" value="<%= get_pricing_of_partner(current_user, @appraisal.selected_plan) %>" />
               <% end %>
               <input type="hidden" name="appraisal_id" id="appraisal_id" value="<%= @appraisal.id %>" />
-              <%= f.fields_for :current_user do |ff| %>
+              <%= fields_for :current_user do |ff| %>
                   <%= ff.hidden_field :name %>
                   <%= ff.hidden_field :secondary_contact_name %>
                   <%= ff.hidden_field :vendor_token %>
@@ -81,14 +82,11 @@
               <div class="row">
                 <div class="col-md-12">
                   <div class="form-group pay_mar">
-                    <input type="radio" name="allow_share_true">
-                    <label for="radio-1">Allow ValuethisNow to use my appraisal(s) for promotional purposes. My personal information will NOT be used or
-                      displayed for this.</label>
+                    <%= f.radio_button :allow_share, "1" %> <%= f.label :allow_share, "Allow ValuethisNow to use my appraisal(s) for promotional purposes. My personal information will NOT be used or displayed for this." %>
                     <div class="clearfix"></div>
                   </div>
                   <div class="form-group pay_mar">
-                    <input type="radio" name="allow_share_false">
-                    <label for="allow_share_false">I don't want anyone to be able to share my appraisal except me</label>
+                    <%= f.radio_button :allow_share, "0" %> <%= f.label :allow_share, "I don't want anyone to be able to share my appraisal except me" %>
                     <div class="clearfix"></div>
                   </div>
                 </div>
@@ -111,8 +109,8 @@
                     <div class="col-md-6">
                       <div class="main-work">
                         <div class="col-md-offset-4 col-md-8 ghpay chek">
-                          <input type="checkbox" value="true" id="chkImportAccount"  /> Use account information
-                          <label for="checkbox">Use account information</label>
+                          <input type="checkbox" value="true" id="chkImportAccount"  /><label for="checkbox">Use account information</label>
+
                         </div>
                         <div class="form-group">
                           <div class="row pay-pad">
@@ -185,8 +183,7 @@
                     </div>
                     <div class="col-md-6">
                       <div class="col-md-offset-3 col-md-9 ghpay chek le">
-                        <input type="checkbox" value="true" id="chkVtnPartner" name="vtn_partner" />
-                        <label for="checkbox">Check it an Authorized VTN Partner</label>
+                        <input type="checkbox" value="true" id="chkVtnPartner" name="vtn_partner" /><label for="checkbox">Check it an Authorized VTN Partner</label>
                         <div class="clearfix"></div>
                       </div>
                       <div class="prome" style="display:none;">
@@ -362,10 +359,11 @@
                                   </div>
                                   <div class="bun3">
                                     <%= link_to "back", wizard_path(:plan), :class => "btn next-1 bge left-2 up" %>
-                                    <%= f.submit "Purchase", :class => "btn next-1 gre right-2 rp", :id => "btn_submit_avatar"%>
+                                    <%= f.submit "Purchase", :class => "btn next-1 gre right-2 rp", :id => "btnBuildWizardPayment"%>
                                     <div class="clear"></div>
                                   </div>
               <% end %>
+          <% end %>
               </div>
                               </div>
                               <div class="col-md-3">
