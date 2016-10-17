@@ -264,6 +264,7 @@
                     </div>
                   </div>
                 </div>
+                    <%= f.hidden_field :status, :as => :hidden, :value => @appraisal.status %>
                 <div class="appraisel-button">
                   <ul>
                     <li><%= f.submit "Save and Update Appraisal", :class => "btn gre", :id => "btnUpdateAppraisalReply"%></li>
