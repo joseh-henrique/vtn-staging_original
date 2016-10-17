@@ -20,6 +20,7 @@
 //= require wow
 //= require imagesloaded
 //= require isotope
+//= require js-routes
 // Loads all Bootstrap javascripts
 //= require bootstrap
 //= require jquery.validate

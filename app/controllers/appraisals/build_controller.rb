@@ -6,12 +6,24 @@ class Appraisals::BuildController < ApplicationController
   def show
     @appraisal = Appraisal.find(params[:appraisal_id])
     @photos = @appraisal.photos
-    @appraisal.payment = Payment.new(user_id: current_user.id, appraisal_id: @appraisal.id) if @appraisal.payment.nil?
+    if current_user
+      @appraisal.payment = Payment.new(user_id: current_user.id, appraisal_id: @appraisal.id) if @appraisal.payment.nil?
+    else
+      temp_user = User.where(:role => ["admin", "superadmin"]).first
+      @appraisal.payment = Payment.new(user_id: temp_user.id, appraisal_id: @appraisal.id) if @appraisal.payment.nil?
+    end
     render_wizard
   end
 
   def create
-    @appraisal = Appraisal.create(created_by: current_user.id, status: EActivityValueCreated)
+    if current_user
+      @appraisal = Appraisal.create(created_by: current_user.id, status: EActivityValueCreated)
+    else
+      Rails.logger.info "create params #{params}"
+      @appraisal = Appraisal.create(status: EActivityValueCreated)
+      @appraisal.title = params[:title] if params.has_key?("title")
+      @appraisal.save
+    end
     redirect_to wizard_path(steps.first, :appraisal_id => @appraisal.id)
   end
 
@@ -30,9 +42,9 @@ class Appraisals::BuildController < ApplicationController
     unless classifications.nil?
       classification = Classification.where(appraisal_id: @appraisal.id)
       if classification.count > 0
-        Classification.update(classification.first.id, category_id: classifications["id"].to_i)
+        Classification.update(classification.first.id, category_id: classifications["category"].to_i)
       else
-        Classification.create(appraisal_id: @appraisal.id, category_id: classifications["id"].to_i)
+        Classification.create(appraisal_id: @appraisal.id, category_id: classifications["category"].to_i)
       end
     end
     params[:appraisal].delete(:classification_attributes)

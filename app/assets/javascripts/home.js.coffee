@@ -170,6 +170,7 @@ $(document).ready ->
     autoPlay: true
   # Custom Navigation Events
   $('.next').click ->
+    alert('in next')
     owl.trigger 'owl.next'
     return
   $('.prev').click ->

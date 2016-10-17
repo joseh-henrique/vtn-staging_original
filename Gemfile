@@ -32,6 +32,7 @@ gem 'skrollr-rails', '~> 0.6.29'
 gem 'wow-rails', '~> 0.0.1'
 gem 'imagesLoaded_rails', '~> 3.1', '>= 3.1.8'
 gem 'isotope-rails', '~> 2.2', '>= 2.2.2'
+gem "js-routes"
 #gem 'parallax-rails', '~> 1.0' - blank page is displayed if this gem is incuded.
 
 # For Twitter bootstrap

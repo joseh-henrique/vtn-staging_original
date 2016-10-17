@@ -112,7 +112,7 @@
                       <label class="control-label" for="Category">* Category</label>
                     </div>
                     <div class="col-md-10">
-                      <%= a.select(:category, options_from_collection_for_select(Category.all.order(:name), 'name', 'name'), {}, :class => "form-control", :style => "width:640px" )%>
+                      <%= a.select(:category, options_from_collection_for_select(Category.all.order(:name), 'id', 'name', @appraisal.classification.category_id), {}, :class => "form-control", :style => "width:640px" )%>
                     </div>
                   </div>
                 </div>
