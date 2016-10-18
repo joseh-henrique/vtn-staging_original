@@ -34,8 +34,9 @@
             <td width="79">
               <%= link_to('Edit', edit_appraisal_path(appraisal), :class => "btn gre4", :style => "margin:2px;") if appraisal.status == EActivityValuePayed %>
             </td>
-            <td width="79"></td>
-            <td width="79"></td>
+            <td width="100"></td>
+            <td width="100"></td>
+            <td width="100"></td>
         <% end %>
         <% if appraisal.status == EActivityValueFinalized %>
             <td width="77"><%= link_to('Sell It', completed_appraisal_path(appraisal.id), :class => "btn gre5", :style => "margin:2px;")%></td>
