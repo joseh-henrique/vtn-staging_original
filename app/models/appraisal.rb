@@ -182,7 +182,7 @@ class Appraisal < ActiveRecord::Base
 
   def claim!(params)
     return false if self.status != EActivityValuePayed
-
+    Rails.logger.info "in claim params is #{params}"
     self.assigned_to = params[:appraiser] #current_user
     self.assigned_on = Time.now
     self.status = EActivityValueClaimed
