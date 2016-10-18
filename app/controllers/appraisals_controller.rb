@@ -150,7 +150,7 @@ class AppraisalsController < ApplicationController
   # DELETE /appraisals/1
   def destroy
     @appraisal = Appraisal.find(params[:id])
-
+    @appraisal.destroy
     respond_to do |format|
       format.html { redirect_to(root_path, :notice => 'Appraisal was deleted successfully.') }
     end
@@ -167,6 +167,10 @@ class AppraisalsController < ApplicationController
         redirect_to(@appraisal, :alert => "Please try claiming this item again in a few minutes.")
       end
     #end
+  end
+
+  def completed
+    Rails.logger.info "appraisal completed"
   end
 
   def wizard_photo_upload

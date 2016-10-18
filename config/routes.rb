@@ -52,6 +52,7 @@ PurexNew::Application.routes.draw do
     member do
       get 'reply'
       get 'claim'
+      get 'completed'
     end
   end
 
