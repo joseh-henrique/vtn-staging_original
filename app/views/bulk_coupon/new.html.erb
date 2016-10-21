@@ -1,40 +1,9 @@
 <div class="container wal">
-
-  <div class="welcome app">
-    <h2>Appraisal Type</h2>
-    <div class="my-tab plans">
-      <div class="my-tab-list-bor"></div>
-      <div class="my-tab-list">
-        <ul>
-          <li><a href="inform.html">
-            <div class="con-list">
-              <div class="green-no color-gre"> 1</div>
-            </div>
-          </a> Inform
-          </li>
-          <li><a href="upload.html">
-            <div class="con-list">
-              <div class="green-no color-gre"> 2</div>
-            </div>
-          </a>Upload
-          </li>
-          <li><a href="select.html">
-            <div class="con-list">
-              <div class="green-no color-gre"> 3</div>
-            </div>
-          </a>Select
-          </li>
-          <li><a href="check.html">
-            <div class="con-list">
-              <div class="green-no color-red"> 4</div>
-            </div>
-          </a>Check Out
-          </li>
-        </ul>
-      </div>
-    </div>
+  <div class="welcome app ghf">
+    <h2>Buy your appraisals in bulk and SAVE!
+    </h2>
     <div class="row">
-      <%= simple_form_for(@appraisal, :url => wizard_path, :method => :put, :html => {:multipart => true, :class => "form-horizontal"}) do |f| %>
+      <%= form_for(@bulk_order, :url => {:action => :create}, :method => :post) do |f| %>
           <div class="col-md-12">
             <div class="row">
               <div class="my-wel-row">
@@ -235,28 +204,188 @@
               </div>
             </div>
           </div>
-          <%= f.input :selected_plan, as: :hidden %>
-        </div>
-          <div class="select-note">
-            <p><b>Note:</b> Check the box below if your appraisal request is for a set (e.g., dresser set), service
-              (e.g., flateware or dinnerware service), or a suite (e.g., suite of bedroom furniture).</p>
-            <input type="checkbox" value="" id="appraisel">
-            <label class="checkbox" for="appraisel">
-              Appraisals for a set, service or a suite
-            </label>
-            <div class="clear"></div>
+          <%= f.hidden_field :selected_plan %>
           </div>
-          <div class="col-md-12">
-            <div class="form-group">
-              <div class="row">
-                <div class="bun2">
-                  <%= link_to "Back", previous_wizard_path, :class => "btn next-1 bge left-2" %>
-                  <%= f.submit "Next", :class => "btn next-1 gre right-2", :id => "btn_submit_avatar"%>
-                  <div class="clear"></div>
+          <div class="bulk-sec">
+            <div class="row">
+              <div class="col-md-5">
+                <div class="radio">
+                  <div class="radio">
+                    <input id="radio1" type="radio" name="appraisal_credits" value="1"><label for="radio1"><span><span></span></span>3 Appraisal credit (save 10%)</label>
+                  </div>
+                </div>
+                <div class="radio">
+                  <input id="radio2" type="radio" name="appraisal_credits" value="2"><label for="radio2"><span><span></span></span>5 Appraisal credit (save 15%)</label>
+                </div>
+                <div class="radio">
+                  <input id="radio3" type="radio" name="appraisal_credits" value="3"><label for="radio3"><span><span></span></span>10 Appraisal credit (save 20%)</label>
+                </div>
+              </div>
+              <div class="col-md-7">
+                <div class="des">
+                  <div class="amount"> Total amount
+                    <input type="text" placeholder="$79.60">
+                  </div>
+
+                  <div class="save">
+                    Amount you save
+                    <input type="text" placeholder="$19.90">
+                  </div>
                 </div>
               </div>
             </div>
           </div>
+
+          <div class="more_size2">
+            <div class="bd">
+              <div class="row">
+                <div class="col-md-8">
+                  <div class="form-group">
+                    <div class="row">
+                      <div class="col-md-3 aft">
+                        <label class="control-label" for="">Card Number</label>
+                      </div>
+                      <div class="col-md-5">
+                        <input type="text" class="form-control" id="appraisal_payment_attributes_number" placeholder="Card Number" name="appraisal[payment_attributes][number]" value="" maxlength="16" required/>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="row">
+                      <div class="col-md-3 aft">
+                        <label class="control-label" for="">Email</label>
+                      </div>
+                      <div class="col-md-5">
+                        <%= f.text_field :user_email, class: 'form-control', placeholder: 'Email' %>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="row">
+                      <div class="col-md-3 aft">
+                        <label class="control-label" for="">Card Type</label>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="styled-select">
+                          <select name="select" id="select" class="form-control" required>
+                            <option value="selectcard">Select Card </option>
+                            <option value="mastercard">Mastercard</option>
+                            <option value="maestro">Maestro</option>
+                            <option>American Express</option>
+                            <option value="solo">Solo (UK only)</option>
+                            <option value="visaelectron">Visa Electron</option>
+                            <option value="visadebit">Visa Debit</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="col-md-5">
+                        <%= image_tag("pay-3.png", :alt=> "pay-3") %>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="row">
+                      <div class="col-md-3 aft">
+                        <label class="control-label" for="">Expiration Date</label>
+                      </div>
+                      <div class="col-md-3 pay-pad">
+                        <div class="styled-select">
+                          <select class="form-control" id="appraisal_payment_attributes_expmon" name="appraisal[payment_attributes][expmon]" required>
+                            <option value=""></option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10" selected>10</option>
+                            <option value="11">11</option>
+                            <option value="12">12</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="col-md-3 pay-pad">
+                        <div class="tyu">
+                          <div class="styled-select">
+                            <select class="form-control" id="appraisal_payment_attributes_expyear" name="appraisal[payment_attributes][expyear]" required>
+                              <option value=""></option>
+                              <option>2014</option>
+                              <option>2015</option>
+                              <option selected>2016</option>
+                              <option>2017</option>
+                              <option>2018</option>
+                              <option>2019</option>
+                              <option>2020</option>
+                              <option>2021</option>
+                              <option>2022</option>
+                              <option>2023</option>
+                              <option>2024</option>
+                              <option>2025</option>
+                              <option>2026</option>
+                              <option>2027</option>
+                              <option>2028</option>
+                              <option>2029</option>
+                              <option>2030</option>
+                              <option>2031</option>
+                              <option>2032</option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                      <script type="text/javascript">
+                        //populatedropdown(id_of_day_select, id_of_month_select, id_of_year_select)
+                        window.onload=function(){
+                          populatedropdown("appraisal_payment_attributes_expmon", "appraisal_payment_attributes_expyear")
+                        }
+                      </script>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="row">
+                      <div class="col-md-3 aft">
+                        <label class="control-label" for="">Security Code ( CVV )</label>
+                      </div>
+                      <div class="col-md-3 pay-pad">
+                        <input type="password" class="form-control" id="appraisal_payment_attributes_cvv" name="appraisal[payment_attributes][cvv]" required/>
+                      </div>
+                      <div class="col-md-1">
+                        <%= image_tag("que.png", :alt=> "que") %>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="row">
+                      <div class="col-md-3 aft">
+                        <label class="control-label" for="">Card Holder’s Name</label>
+                      </div>
+                      <div class="col-md-5">
+                        <input type="text" class="form-control" id="txtCardName" placeholder="Card Holder’s Name" name="appraisal[payment_attributes][name]" required />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="huy">
+                    <%= image_tag("lock.png", :alt=> "right") %><span>Your information is secure. <a href="#">Privacy & Security</a></span>
+                  </div>
+                </div>
+                <div class="col-md-4 text-right">
+                  <%= image_tag("pay-2.png", :alt=> "pay-2") %>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="more_size2">
+            <div class="bun4">
+              <button type="button" class="btn next-1 bge left-2 up" onclick="window.location.href='inform.html'">back</button>
+              <%= f.submit "Purchase", :class => "btn next-1 gre right-2 rp", :id => "btnBuildWizardPayment"%>
+              <div class="clear"></div>
+            </div>
+          </div>
+
+
+
+          <% end %>
+    </div>
   </div>
-      <% end %>
-</div>

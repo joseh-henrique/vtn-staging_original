@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160706181151) do
+ActiveRecord::Schema.define(version: 20161021112244) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -156,6 +156,18 @@ ActiveRecord::Schema.define(version: 20160706181151) do
 
   add_index "appraiser_extras", ["appraiser_id"], name: "index_appraiser_extras_on_appraiser_id", using: :btree
 
+  create_table "bulk_orders", force: :cascade do |t|
+    t.string   "promo_code"
+    t.integer  "selected_plan"
+    t.integer  "credits_count"
+    t.integer  "credits_remaining"
+    t.integer  "discount"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.string   "user_email"
+    t.string   "appraisal_credits"
+  end
+
   create_table "categories", force: :cascade do |t|
     t.string   "name",       limit: 255
     t.string   "ancestry",   limit: 255
@@ -181,7 +193,7 @@ ActiveRecord::Schema.define(version: 20160706181151) do
     t.text     "content"
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
-    t.string   "blockable_type", limit: 255
+    t.string   "blockable_type"
   end
 
   add_index "comfy_cms_blocks", ["blockable_id", "identifier"], name: "index_comfy_cms_blocks_on_blockable_id_and_identifier", using: :btree
@@ -344,11 +356,11 @@ ActiveRecord::Schema.define(version: 20160706181151) do
     t.boolean  "featured",                     default: false
     t.integer  "max_usage",                    default: 1
     t.integer  "usage_count",                  default: 0
-    t.datetime "start_date",                   default: '2013-05-22 15:29:06'
+    t.datetime "start_date",                   default: '2013-07-12 02:37:00'
     t.string   "description",      limit: 255
     t.float    "max_discount"
     t.text     "allowed_products"
-    t.string   "pap_id",           limit: 255
+    t.string   "pap_id"
   end
 
   create_table "customer_extras", force: :cascade do |t|
@@ -516,7 +528,7 @@ ActiveRecord::Schema.define(version: 20160706181151) do
   create_table "sharecounts", force: :cascade do |t|
     t.integer  "appraisal_id"
     t.integer  "user_id"
-    t.string   "network",      limit: 255
+    t.string   "network"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

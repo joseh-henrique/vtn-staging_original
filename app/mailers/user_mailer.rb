@@ -48,6 +48,13 @@ class UserMailer < ActionMailer::Base
          :subject => "[User Support] #{message.subject}")
   end
 
+  def bulk_order_code(email, message, subject, promo_code)
+    @message = message
+    @promo_code = promo_code
+    mail(:to => email,
+         :subject => "#{subject}")
+  end
+
   def notify_admin_of_new_application(message)
     @message = message
     mail(:to => Setting.get("admin_distribution_list").split(','),

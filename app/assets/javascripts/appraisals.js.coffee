@@ -113,6 +113,7 @@ jQuery ->
     $("#check1").html "Selected"
     $("#check1").css("color", "#e76311 !important")
     $("#appraisal_selected_plan").val(vtn_constants.EAAppraisalTypeAuctionEstimate)
+    $("#bulk_order_selected_plan").val(vtn_constants.EAAppraisalTypeAuctionEstimate)
 
   $("#planprod2").click ->
     $("#planprod2").removeClass("formProdOn")
@@ -125,6 +126,7 @@ jQuery ->
     $("#check2").html "Selected"
     $("#check2").css("color", "#e76311 !important")
     $("#appraisal_selected_plan").val(vtn_constants.EAAppraisalTypeShortRestricted)
+    $("#bulk_order_selected_plan").val(vtn_constants.EAAppraisalTypeShortRestricted)
 
   $("#planprod3").click ->
     $("#planprod3").removeClass("formProdOn")
@@ -137,6 +139,7 @@ jQuery ->
     $("#check3").html "Selected"
     $("#check3").css("color", "#e76311 !important")
     $("#appraisal_selected_plan").val(vtn_constants.EAAppraisalTypeLongRestricted)
+    $("#bulk_order_selected_plan").val(vtn_constants.EAAppraisalTypeLongRestricted)
 
   $("#planprod4").click ->
     $("#planprod4").removeClass("formProdOn")
@@ -149,6 +152,7 @@ jQuery ->
     $("#check4").html "Selected"
     $("#check4").css("color", "#e76311 !important")
     $("#appraisal_selected_plan").val(vtn_constants.EAAppraisalTypeLongForSelling)
+    $("#bulk_order_selected_plan").val(vtn_constants.EAAppraisalTypeLongForSelling)
 
   $("#planprod5").click ->
     $("#planprod5").removeClass("formProdOn")
@@ -161,6 +165,7 @@ jQuery ->
     $("#check5").html "Selected"
     $("#check5").css("color", "#e76311 !important")
     $("#appraisal_selected_plan").val(vtn_constants.EAAppraisalTypeTaxAppraisal)
+    $("#bulk_order_selected_plan").val(vtn_constants.EAAppraisalTypeTaxAppraisal)
 
   $("#plansel1").click ->
     $(".formProd").removeClass("formProdOn")
@@ -292,6 +297,7 @@ jQuery ->
   $("#btnBuildWizardPayment").click ->
     alert("in payment purchase")
     if requiredFields()
+      alert("in payment purchase requiredfields valid")
       $("#paymentModal").modal('show')
       form = $(this).closest('form')
       $.ajax '/payments',
@@ -345,6 +351,13 @@ requiredFields = ->
 
 
 resetSelectTxt = ->
+  $("#check1").html "Select"
+  $("#check2").html "Select"
+  $("#check3").html "Select"
+  $("#check4").html "Select"
+  $("#check5").html "Select"
+
+
   $("#plansel1").html "Select"
   $("#plansel2").html "Select"
   $("#plansel4").html "Select"

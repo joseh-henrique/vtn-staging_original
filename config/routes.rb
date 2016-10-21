@@ -57,6 +57,7 @@ PurexNew::Application.routes.draw do
   end
 
   resources :bulk_coupon
+  resources :bulk_order
 
   resource :appraiser , :controller => "appraiser" do
     resources :skills
