@@ -9,6 +9,7 @@ class Appraisals::BuildController < ApplicationController
     if current_user
       @appraisal.payment = Payment.new(user_id: current_user.id, appraisal_id: @appraisal.id) if @appraisal.payment.nil?
     else
+      # This is for cases where user is not logged in. temp_user has to be replaced in payment page with new user created.
       temp_user = User.where(:role => ["admin", "superadmin"]).first
       @appraisal.payment = Payment.new(user_id: temp_user.id, appraisal_id: @appraisal.id) if @appraisal.payment.nil?
     end

@@ -6,7 +6,38 @@ module Authorizer
       charge(params[:appraisal], params[:params])
     end
 
+    def process_bulk_order(params)
+      charge_bulk_order(params)
+    end
+
     # private
+    def charge_bulk_order(params)
+      result = Hash[:status => false, :message => ""]
+      gateway = get_gateway
+      request = create_request_bulk_order(params)
+      response = gateway.create_transaction(request)
+      Rails.logger.info "response error #{response.messages.messages[0].text}"
+      if success?(response)
+        result[:message] = "Congratulations your bulk order payment is successful"
+      end
+      result
+    end
+
+    def create_request_bulk_order(params)
+      request = AuthorizeNet::API::CreateTransactionRequest.new
+      request.transactionRequest = AuthorizeNet::API::TransactionRequestType.new()
+      #TODO: review how to handle absence of appraisal or owner objects in bulk order
+      request.transactionRequest.order = AuthorizeNet::API::OrderType.new(Random.new.rand(100000),SecureRandom.hex(4))
+      request.transactionRequest.customer = AuthorizeNet::API::CustomerDataType.new(AuthorizeNet::API::CustomerTypeEnum::Individual,Random.new.rand(100000),params[:user_email])
+
+      request.transactionRequest.billTo = billing_address(params[:appraisal][:payment_attributes])
+      request.transactionRequest.amount = params[:total_amount].slice!(1, params[:total_amount].length)
+      request.transactionRequest.payment = AuthorizeNet::API::PaymentType.new
+      request.transactionRequest.payment.creditCard = credit_card(params[:appraisal][:payment_attributes])
+      request.transactionRequest.transactionType = AuthorizeNet::API::TransactionTypeEnum::AuthCaptureTransaction
+      request
+    end
+
     def charge(appraisal, params)
       result = Hash[:status => false, :message => ""]
       gateway = get_gateway

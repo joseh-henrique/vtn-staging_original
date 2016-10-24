@@ -12,7 +12,9 @@ PurexNew::Application.routes.draw do
   post "tags/create" => "tags#create", :as => :annotate
   match "tags/destroy" => "tags#destroy", :as => :destroy_tag, via: [:get, :delete, :post]
 
-  resources :payments, :only => [:create]
+  resources :payments do
+    post 'bulk_order'
+  end
   get "/validate_coupon" => "payments#validate_coupon", :as => :validate_coupon, via: [:get]
   get "appraisal_data/create"
   get '/facebook/' => "users#facebook_login", via: [:get]

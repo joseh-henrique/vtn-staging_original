@@ -47,6 +47,28 @@ jQuery ->
     false
   ))
 
+
+  $('input[type=radio][name=appraisal_credits]').change ->
+    if $("#bulk_order_selected_plan").val() == ""
+      alert("Please select appraisal plan first")
+      return
+    amount = PAYMENT_PLAN[$("#bulk_order_selected_plan").val()-1]
+    if @value == "1"
+      discount = (amount*3)*.1
+      $("#total_amount").val("$"+((amount*3) - discount.toFixed(2)).toFixed(2))
+      $("#amount_saved").val("$"+discount.toFixed(2))
+    else if @value == "2"
+      discount = (amount*5)*.15
+      $("#total_amount").val("$"+((amount*5) - discount.toFixed(2)).toFixed(2))
+      $("#amount_saved").val("$"+discount.toFixed(2))
+    else
+      discount = (amount*10)*.20
+      $("#total_amount").val("$"+((amount*10) - discount.toFixed(2)).toFixed(2))
+      $("#amount_saved").val("$"+discount.toFixed(2))
+    return
+
+
+
   $('#btnSaveComment').click ->
     $('#div_comment').hide()
     $('#div_saving_comment').show()
@@ -294,10 +316,35 @@ jQuery ->
     else
       true
 
-  $("#btnBuildWizardPayment").click ->
-    alert("in payment purchase")
+  $("#btnBulkOrderPayment").click ->
     if requiredFields()
-      alert("in payment purchase requiredfields valid")
+      $("#paymentModal").modal('show')
+      form = $(this).closest('form')
+      $.ajax(
+        Routes.payment_bulk_order_path(1),
+        type: 'POST',
+        data: $("#new_bulk_order").serializeObject(),
+        success: (data) ->
+          $("#paymentModalLoading").hide()
+          $("#paymentModalDeclined").html(data.message)
+          $("#paymentModalDeclined").show()
+          if data.status is false
+            $("#paymentModalFooter").show()
+          else
+            setTimeout (-> form.submit()), 1000
+
+        error: (jqXHR, textStatus, errorThrown) ->
+          $("#paymentModalLoading").hide()
+          $("#paymentModalDeclined").html(textStatus+ ": " + errorThrown)
+          $("#paymentModalFooter").show()
+      )
+      true
+    else
+      alert "Please complete all required fields"
+      return false
+
+  $("#btnBuildWizardPayment").click ->
+    if requiredFields()
       $("#paymentModal").modal('show')
       form = $(this).closest('form')
       $.ajax '/payments',
@@ -341,10 +388,12 @@ jQuery ->
 
 requiredFields = ->
   isValid = true
-  if $("#chkVtnPartner")[0].checked == true
+  alert("in requiredfields")
+  if $("#chkVtnPartner").length > 0 && $("#chkVtnPartner")[0].checked == true
     $("[partner-required]").not(":hidden").each ->
       isValid = false if $(this).val() is ""
   else
+    alert("in requiredfields else")
     $("[required]").not(":hidden").each ->
       isValid = false if $(this).val() is ""
   isValid

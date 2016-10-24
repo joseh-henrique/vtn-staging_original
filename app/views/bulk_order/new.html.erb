@@ -3,7 +3,7 @@
     <h2>Buy your appraisals in bulk and SAVE!
     </h2>
     <div class="row">
-      <%= form_for(@bulk_order, :url => {:action => :create}, :method => :post) do |f| %>
+      <%= form_for(@bulk_order, :url => {:action => :create}, :method => :post, :html => {:multipart => true}) do |f| %>
           <div class="col-md-12">
             <div class="row">
               <div class="my-wel-row">
@@ -224,12 +224,12 @@
               <div class="col-md-7">
                 <div class="des">
                   <div class="amount"> Total amount
-                    <input type="text" placeholder="$79.60">
+                    <input type="text" id="total_amount" name="total_amount" placeholder="$0.00">
                   </div>
 
                   <div class="save">
                     Amount you save
-                    <input type="text" placeholder="$19.90">
+                    <input type="text" id="amount_saved" placeholder="$0.00">
                   </div>
                 </div>
               </div>
@@ -379,13 +379,30 @@
           <div class="more_size2">
             <div class="bun4">
               <button type="button" class="btn next-1 bge left-2 up" onclick="window.location.href='inform.html'">back</button>
-              <%= f.submit "Purchase", :class => "btn next-1 gre right-2 rp", :id => "btnBuildWizardPayment"%>
+              <%= f.submit "Purchase", :class => "btn next-1 gre right-2 rp", :id => "btnBulkOrderPayment"%>
               <div class="clear"></div>
             </div>
           </div>
 
-
-
       <% end %>
       </div>
+</div>
+
+<div class="modal fade" id="paymentModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="myModalLabel">Processing payment</h3>
+      </div>
+      <div class="modal-body">
+        <div>
+          <p id="paymentModalLoading"><%= image_tag "loader.gif" %> Please wait...</p>
+          <p id="paymentModalDeclined"></p>
+        </div>
+      </div>
+      <div class="modal-footer" id="paymentModalFooter" style="display: none;">
+        <button class="btn btn-success" data-dismiss="modal" aria-hidden="true">Close</button>
+      </div>
+    </div>
+  </div>
 </div>

@@ -1,6 +1,6 @@
 require 'authorizenet_module'
 class PaymentsController < ApplicationController
-  before_filter :authenticate_user!
+  before_filter :authenticate_user!, :except => :bulk_order
 
   def create
     @appraisal = Appraisal.find(params[:appraisal_id])
@@ -16,6 +16,14 @@ class PaymentsController < ApplicationController
                          end
     end
 
+    respond_to do |format|
+      format.json {render :json => payment_response.to_json}
+    end
+  end
+
+  def bulk_order
+    Rails.logger.info "in payments bulk order params #{params}"
+    payment_response = Authorizer::Authorizenet.new.process_bulk_order(params)
     respond_to do |format|
       format.json {render :json => payment_response.to_json}
     end
