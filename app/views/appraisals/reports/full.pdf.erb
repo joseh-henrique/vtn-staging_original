@@ -136,9 +136,21 @@
         <p><%= @appraisal.appraisal_info.appraiser_comments %></p>
       </div>
       <div class="milt">
-        <p> Replacement value : <font color="#bb1f20"><%= print_replacement_cost(@appraisal) %></font> <br>
-          (Comparable) </p>
-        <p>Fair Market Value : <font color="#bb1f20"><%= print_fair_market_value(@appraisal) %></font></p>
+        <% selected_plan = @appraisal.selected_plan %>
+        <% if (selected_plan == EAAppraisalTypeAuctionEstimate || selected_plan == EAAppraisalTypeLongRestricted || selected_plan == EAAppraisalTypeLongForSelling) %>
+            <p> Replacement value : <font color="#bb1f20"><%= print_replacement_cost_min(@appraisal) %></font> <br>
+              (Comparable Min) </p>
+            <p> Replacement value : <font color="#bb1f20"><%= print_replacement_cost_max(@appraisal) %></font> <br>
+              (Comparable Max) </p>
+            <p> Fair Market Value Min : <font color="#bb1f20"><%= print_as_currency(@appraisal.appraisal_info.fair_market_value_min) %></font> <br>
+               </p>
+            <p> Fair Market Value Max : <font color="#bb1f20"><%= print_as_currency(@appraisal.appraisal_info.fair_market_value_max) %></font> <br>
+            </p>
+        <% end %>
+        <% if (selected_plan == EAAppraisalTypeTaxAppraisal) %>
+            <p> Fair Market Value Avg : <font color="#bb1f20"><%= print_as_currency(@appraisal.appraisal_info.fair_market_value_avg) %></font> <br>
+            </p>
+        <% end %>
       </div>
       <% end %>
       <% if @appraisal.status == EActivityValueFinalized %>

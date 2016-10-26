@@ -14,6 +14,13 @@ module AppraisalsHelper
     end
   end
 
+  def print_fair_market_value_avg(appraisal)
+    return "-" if (appraisal.status != EActivityValueFinalized && appraisal.status != EActivityValueClaimed)
+    unless (appraisal.appraisal_info.fair_market_value_avg.blank?)
+      "#{print_as_currency(appraisal.appraisal_info.fair_market_value_avg)}"
+    end
+  end
+
   def print_amount_paid(appraisal)
     if appraisal.status == EActivityValueFinalized && !appraisal.payout.nil?
       "#{print_as_currency(appraisal.payout.amount)}"

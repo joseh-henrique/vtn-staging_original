@@ -13,7 +13,7 @@ class AppraisalInfo
                   :value_of_item, :historical_significance, 
                   :number_of_pieces_created, :where_it_was_manufactured, :when_it_was_used, 
                   :how_it_was_used, :inscriptions, :item_history, :appraiser_comments,
-                  :replacement_cost_min, :replacement_cost_max, :fair_market_value_min, :fair_market_value_max
+                  :replacement_cost_min, :replacement_cost_max, :fair_market_value_min, :fair_market_value_max, :fair_market_value_avg
 
 	def initialize(attributes = {})
 		attributes.each do |name, value|

@@ -176,6 +176,8 @@
                   </div>
                 </div>
               </div>
+              <% selected_plan = @appraisal.selected_plan %>
+              <% if (selected_plan == EAAppraisalTypeShortRestricted || selected_plan == EAAppraisalTypeLongRestricted || selected_plan == EAAppraisalTypeLongForSelling) %>
               <div class="pro-bott auction">
                 <div class="row">
                   <div class="col-md-3 col-sm-3 col-xs-12">
@@ -186,6 +188,7 @@
                   </div>
                 </div>
               </div>
+              <% end %>
               <div class="pro-bott auction">
                 <div class="row">
                   <div class="col-md-3 col-sm-3 col-xs-12">
@@ -201,11 +204,17 @@
                 <div class="row">
                   <div class="col-md-6 col-sm-6">
                     <div class="long re">
-                      <%= link_to show_shared_path(@appraisal, :format => :pdf, :full => "yes"), :class => "product-gre" do %><span class="glyphicon glyphicon-download-alt"></span> DOWNLOAD LONG REPORT<% end %>
+                      <%= link_to show_shared_path(@appraisal, :format => :pdf, :full => "yes"), :class => "product-gre" do %><span class="glyphicon glyphicon-download-alt"></span> Download Full Appraisal Report<% end %>
                     </div>
                   </div>
+                  <% if (selected_plan == EAAppraisalTypeTaxAppraisal) %>
                   <div class="col-md-6 col-sm-6">
+                    <div class="long">
+                      <a href="charitable.html" class="product-gre"> Download IRS Tax Form 8283
+                      </a>
+                    </div>
                   </div>
+                  <% end %>
                 </div>
               </div>
           <% end %>

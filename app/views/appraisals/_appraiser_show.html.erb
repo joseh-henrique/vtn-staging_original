@@ -176,26 +176,64 @@
                 </div>
               </div>
             </div>
-            <div class="pro-bott auction">
-              <div class="row">
-                <div class="col-md-3 col-sm-3 col-xs-12">
-                  <span>REPLACEMENT VALUE (COMPARABLE)</span>
-                </div>
-                <div class="col-md-9 col-sm-9 col-xs-12">
-                  <span><%= print_replacement_cost(@appraisal) %></span>
-                </div>
-              </div>
-            </div>
-            <div class="pro-bott auction">
-              <div class="row">
-                <div class="col-md-3 col-sm-3 col-xs-12">
-               <span>FAIR MARKET VALUE</span>
-                </div>
-                <div class="col-md-9 col-sm-9 col-xs-12">
-                  <span><%= print_fair_market_value(@appraisal) %></span>
-                </div>
-              </div>
-            </div>
+            <% selected_plan = @appraisal.selected_plan %>
+              <% if (selected_plan == EAAppraisalTypeAuctionEstimate || selected_plan == EAAppraisalTypeLongRestricted || selected_plan == EAAppraisalTypeLongForSelling) %>
+                  <div class="pro-bott auction">
+                    <div class="row">
+                      <div class="col-md-3 col-sm-3 col-xs-12">
+                        <span>REPLACEMENT VALUE (COMPARABLE MIN)</span>
+                      </div>
+                      <div class="col-md-9 col-sm-9 col-xs-12">
+                        <span><%= print_as_currency(@appraisal.appraisal_info.replacement_cost_min) %></span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="pro-bott auction">
+                    <div class="row">
+                      <div class="col-md-3 col-sm-3 col-xs-12">
+                        <span>REPLACEMENT VALUE (COMPARABLE MAX)</span>
+                      </div>
+                      <div class="col-md-9 col-sm-9 col-xs-12">
+                        <span><%= print_as_currency(@appraisal.appraisal_info.replacement_cost_max) %></span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="pro-bott auction">
+                    <div class="row">
+                      <div class="col-md-3 col-sm-3 col-xs-12">
+                        <span>FAIR MARKET VALUE MIN</span>
+                      </div>
+                      <div class="col-md-9 col-sm-9 col-xs-12">
+                        <span><%= print_as_currency(@appraisal.appraisal_info.fair_market_value_min) %></span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="pro-bott auction">
+                    <div class="row">
+                      <div class="col-md-3 col-sm-3 col-xs-12">
+                        <span>FAIR MARKET VALUE MAX</span>
+                      </div>
+                      <div class="col-md-9 col-sm-9 col-xs-12">
+                        <span><%= print_as_currency(@appraisal.appraisal_info.fair_market_value_max) %></span>
+                      </div>
+                    </div>
+                  </div>
+                <% end %>
+              <% if (selected_plan == EAAppraisalTypeTaxAppraisal) %>
+                  <div class="pro-bott auction">
+                    <div class="row">
+                      <div class="col-md-3 col-sm-3 col-xs-12">
+                        <span>FAIR MARKET VALUE AVERAGE</span>
+                      </div>
+                      <div class="col-md-9 col-sm-9 col-xs-12">
+                        <span><%= print_as_currency(@appraisal.appraisal_info.fair_market_value_avg) %></span>
+                      </div>
+                    </div>
+                  </div>
+              <% end %>
+
+
+
 
         <div class="auction-download">
           <div class="row">
