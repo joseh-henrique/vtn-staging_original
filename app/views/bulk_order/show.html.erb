@@ -1,0 +1,51 @@
+<div class="container wal">
+  <div class="account">
+    <h2 style="text-align:left">Account</h2>
+    <%= render :partial => "/appraiser_steps/appraiser_tabs" %>
+    <div class="wel-form account-form">
+      <%= form_tag(resend_code_bulk_order_path(id: 1), :method => :get, :html => {:multipart => true}) do %>
+          <div class="pad">
+            <div class="row">
+              <div class="bulk-head">
+                <% if @email_sent && @email_sent.length > 0 %>
+                  <b><%= @email_sent %></b>
+                <% else %>
+                  Retrieve your bulk order coupon:
+                <% end %>
+              </div>
+              <div class="col-md-12">
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-md-3">
+                      <label class="control-label" >Enter your email address:</label>
+                    </div>
+                    <div class="col-md-8">
+                      <%= email_field_tag 'email', "", class: 'coupan_container, form-control' %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-12">
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-md-3">
+                      <label class="control-label">Enter your login password:</label>
+                    </div>
+                    <div class="col-md-8">
+                      <%= password_field_tag :password, "", :class => "coupan_container, form-control" %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+          <div class="bun2">
+            <%= submit_tag "Resend Code", :class => "btn next-1 gre right-2", :id => "btn_submit_coupon" %>
+            <div class="clear"></div>
+          </div>
+      <% end %>
+    </div>
+  </div>
+</div>

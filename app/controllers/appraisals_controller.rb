@@ -1,7 +1,7 @@
 class AppraisalsController < ApplicationController
   load_and_authorize_resource
-  before_filter :authenticate_user!, :except => [:show_shared]
-  before_filter :is_appraiser_confirmed, :except => [:wizard_photo_upload, :wizard_categories, :show_shared]
+  before_filter :authenticate_user!, :except => [:show_shared, :bulk_order_promo]
+  before_filter :is_appraiser_confirmed, :except => [:wizard_photo_upload, :wizard_categories, :show_shared, :bulk_order_promo]
 
   # GET /appraisals
   def index
@@ -171,6 +171,18 @@ class AppraisalsController < ApplicationController
 
   def completed
     Rails.logger.info "appraisal completed"
+  end
+
+  def bulk_order_promo
+    Rails.logger.info "in bulk_order_promo #{params}"
+    #appraisal = Appraisal.create
+    if current_user
+      session[:promo_code] = params[:promo_code]
+      redirect_to root_path
+    else
+      appraisal = Appraisal.create
+      redirect_to appraisal_build_index_path(appraisal_id: appraisal.id)
+    end
   end
 
   def wizard_photo_upload

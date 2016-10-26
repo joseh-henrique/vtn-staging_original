@@ -784,6 +784,18 @@ a {
 #myCarousel {
   display: none;
 }
+
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 0;
+  background-color: black;
+}
+
+
 @media (max-width:1200px) {
   ul.nav {
     font-size: 14px;
@@ -4346,6 +4358,8 @@ input[type=checkbox], input[type=radio] {
   text-align: center;
   padding: 40px;
   padding-top: 8%;
+  -webkit-transform: translateZ(0);
+  z-index: 0;
 }
 .back-check h5 {
   font-size: 40px;

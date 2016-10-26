@@ -6,6 +6,8 @@ class Appraisals::BuildController < ApplicationController
   def show
     @appraisal = Appraisal.find(params[:appraisal_id])
     @photos = @appraisal.photos
+    Rails.logger.info "in build controller show params #{params}"
+    @promo_code = params[:promo_code] if params.has_key?('promo_code')
     if current_user
       @appraisal.payment = Payment.new(user_id: current_user.id, appraisal_id: @appraisal.id) if @appraisal.payment.nil?
     else
@@ -17,10 +19,10 @@ class Appraisals::BuildController < ApplicationController
   end
 
   def create
+    Rails.logger.info "create params #{params}"
     if current_user
       @appraisal = Appraisal.create(created_by: current_user.id, status: EActivityValueCreated)
     else
-      Rails.logger.info "create params #{params}"
       @appraisal = Appraisal.create(status: EActivityValueCreated)
       @appraisal.title = params[:title] if params.has_key?("title")
       @appraisal.save
@@ -51,12 +53,23 @@ class Appraisals::BuildController < ApplicationController
     params[:appraisal].delete(:classification_attributes)
     params[:appraisal].delete(:current_user)
     params[:appraisal].delete(:payment_attributes)
+    if params[:id] == "payment" && !params[:promo_code].blank?
+      bulk_order = BulkOrder.where(:promo_code => params[:promo_code]).first
+      if !bulk_order.nil? && bulk_order.selected_plan == @appraisal.selected_plan && bulk_order.credits_count > 0
+        @appraisal.pay!
+        bulk_order.credits_remaining = bulk_order.credits_remaining - 1
+        bulk_order.save
+      end
+    end
+
     @appraisal.update_attributes(params[:appraisal])
     # giving error if appraiser id is not valid
-    @appraisal.assigned_to = Appraiser.find(@appraisal.appraiser_referral.to_i) unless @appraisal.appraiser_referral.eql?("")
+    @appraisal.assigned_to = Appraiser.find(@appraisal.appraiser_referral.to_i) unless @appraisal.appraiser_referral.blank?
     @appraisal.save
     @appraisal.reload
     @appraisal.payment.reload if @appraisal.payment
     render_wizard @appraisal
   end
+
+
 end

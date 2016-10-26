@@ -174,7 +174,7 @@
                                 <label class="control-label" for="">Promo Code</label>
                               </div>
                               <div class="col-md-8">
-                                <input type="text" class="form-control">
+                                <input type="text" id="promo_code" name="promo_code" class="form-control" value="<%= session[:promo_code] %>">
                               </div>
                             </div>
                           </div>
@@ -359,7 +359,12 @@
                                   </div>
                                   <div class="bun3">
                                     <%= link_to "back", wizard_path(:plan), :class => "btn next-1 bge left-2 up" %>
-                                    <%= f.submit "Purchase", :class => "btn next-1 gre right-2 rp", :id => "btnBuildWizardPayment"%>
+                                    <% if !session[:promo_code].blank? %>
+                                        <input type="submit" value="Purchase" class="btn next-1 gre right-2 rp" id="btnBuildPromoPayment" formnovalidate>
+                                    <% else %>
+                                        <%= f.submit "Purchase", :class => "btn next-1 gre right-2 rp", :id => "btnBuildWizardPayment"%>
+                                    <% end %>
+
                                     <div class="clear"></div>
                                   </div>
               <% end %>

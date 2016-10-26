@@ -316,6 +316,32 @@ jQuery ->
     else
       true
 
+  $("#btnSubmitSelectPlan").click ->
+    $("#signupModal").modal()
+    false
+
+  $("#createAccount").click ->
+    $.ajax(
+      "/customers",
+      type: 'POST',
+      data: {
+        user: {
+          name: $("#first_name").val(),
+          email: $("#email").val(),
+          password: $("#password").val(),
+          password_confirmation: $("#password").val(),
+          role: "customer"
+        }
+      },
+      success: (data) ->
+        console.log("in success "+data.message)
+      error: (jqXHR, textStatus, errorThrown) ->
+        console.log("in error "+textStatus+ ": " + errorThrown)
+    )
+    console.log("in createAccount name is "+$("#first_name").val())
+    false
+
+
   $("#btnBulkOrderPayment").click ->
     if requiredFields()
       $("#paymentModal").modal('show')
@@ -331,14 +357,14 @@ jQuery ->
           if data.status is false
             $("#paymentModalFooter").show()
           else
-            setTimeout (-> form.submit()), 1000
+            setTimeout (-> $("#new_bulk_order").submit()), 1000
 
         error: (jqXHR, textStatus, errorThrown) ->
           $("#paymentModalLoading").hide()
           $("#paymentModalDeclined").html(textStatus+ ": " + errorThrown)
           $("#paymentModalFooter").show()
       )
-      true
+      false
     else
       alert "Please complete all required fields"
       return false
@@ -388,12 +414,10 @@ jQuery ->
 
 requiredFields = ->
   isValid = true
-  alert("in requiredfields")
   if $("#chkVtnPartner").length > 0 && $("#chkVtnPartner")[0].checked == true
     $("[partner-required]").not(":hidden").each ->
       isValid = false if $(this).val() is ""
   else
-    alert("in requiredfields else")
     $("[required]").not(":hidden").each ->
       isValid = false if $(this).val() is ""
   isValid

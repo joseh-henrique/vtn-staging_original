@@ -55,6 +55,13 @@ class UserMailer < ActionMailer::Base
          :subject => "#{subject}")
   end
 
+  def resend_bulk_order_code(email, message, subject, bulk_orders)
+    @message = message
+    @bulk_orders = bulk_orders
+    mail(:to => email,
+         :subject => "#{subject}")
+  end
+
   def notify_admin_of_new_application(message)
     @message = message
     mail(:to => Setting.get("admin_distribution_list").split(','),

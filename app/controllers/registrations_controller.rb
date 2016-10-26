@@ -1,6 +1,8 @@
 class RegistrationsController < Devise::RegistrationsController
+  respond_to :json
 
   def create
+    Rails.logger.info "in registration create #{params}"
     # TODO This should be in the model
     params["user"]["status"] = params["user"]["role"] == "customer" ? EAUserStatusConfirmed : EAUserStatusPending
     super

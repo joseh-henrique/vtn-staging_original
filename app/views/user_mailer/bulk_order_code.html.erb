@@ -1,1 +1,2 @@
 We have received your order. Please use promo code <%= @promo_code %> in future transactions.
+<%= link_to "Use ", Rails.application.config.server_url + "/appraisals/bulk_order_promo?promo_code=#{@promo_code}" %>

@@ -4,7 +4,7 @@ can_upload ||= can_upload.nil?
 can_mark_as_primary ||= can_mark_as_primary.nil? %>
 <!-- new design -->
 <div class="">
-  <% unless current_user.is_appraiser? %>
+  <% if !current_user || !current_user.is_appraiser? %>
       <div class="row">
         <div class="col-md-12">
           <h5>You must upload at least one image, but more would be better. Send close-up images such as of signatures, maker's marks, damages or other details you feel important.</h5>

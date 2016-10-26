@@ -18,7 +18,10 @@ module Authorizer
       response = gateway.create_transaction(request)
       Rails.logger.info "response error #{response.messages.messages[0].text}"
       if success?(response)
+        result[:status] = true
         result[:message] = "Congratulations your bulk order payment is successful"
+      else
+        result[:message] = "Sorry your bulk order payment failed. Please try again"
       end
       result
     end

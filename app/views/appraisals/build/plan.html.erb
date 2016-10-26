@@ -251,7 +251,11 @@
               <div class="row">
                 <div class="bun2">
                   <%= link_to "Back", previous_wizard_path, :class => "btn next-1 bge left-2" %>
-                  <%= f.submit "Next", :class => "btn next-1 gre right-2", :id => "btn_submit_avatar"%>
+                  <% if current_user %>
+                      <%= f.submit "Next", :class => "btn next-1 gre right-2", :id => "btnSubmitPlan"%>
+                  <% else %>
+                      <%= f.submit "Next", :class => "btn next-1 gre right-2", :id => "btnSubmitSelectPlan"%>
+                  <% end %>
                   <div class="clear"></div>
                 </div>
               </div>
@@ -259,4 +263,89 @@
           </div>
   </div>
       <% end %>
+</div>
+
+<div class="modal fade" id="paymentModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="myModalLabel">Processing payment</h3>
+      </div>
+      <div class="modal-body">
+        <div>
+          <p id="paymentModalLoading"><%= image_tag "loader.gif" %> Please wait...</p>
+          <p id="paymentModalDeclined"></p>
+        </div>
+      </div>
+      <div class="modal-footer" id="paymentModalFooter" style="display: none;">
+        <button class="btn btn-success" data-dismiss="modal" aria-hidden="true">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="back-check modal" id="signupModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="back-check-inner modal-dialog">
+    <div class="back-inner modal-content">
+      <%= form_tag 'signup_modal_form' do %>
+      <h5>Sign up for a FREE account now!</h5>
+      <div class="modal-body">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <input type="text" id="first_name" name="first_name" class="form-control" placeholder="First Name*" required>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <input type="text" name="last_name" class="form-control" placeholder="Last Name*">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <input type="email" id="email" name="email" class="form-control" placeholder="Email Address*" required">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <input type="password" id="password" name="password" class="form-control" placeholder="Password*" required>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="form-group">
+            <select class="form-control">
+              <option>How did you hear about us ?</option>
+              <option>Facebook</option>
+              <option>Banner Ad</option>
+              <option>TV Ad</option>
+              <option>Online Video (Hulu, Youtube) </option>
+              <option>Search Engine (Google, Bing)</option>
+              <option>Other Social Media (Twitter, Instagram, Pinterest, Linkedln)</option>
+              <option>Press Coverage (News, Magazine, Blog)</option>
+              <option>Friends or Family</option>
+              <option>Parenting Group or Forum</option>
+              <option>Other </option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="back-sum">
+        <div class="row">
+          <div class="col-md-8 text-left">
+            By clicking Join now, you agree to our <a href="https://www.valuethisnow.com/home/terms">Terms of Us</a>e and <a href="https://www.valuethisnow.com/home/privacy">Privacy policy</a>.
+          </div>
+        </div>
+        <div class="text-center join">
+          <button class="btn btn-success btn-lg" id="createAccount">Create a Free account</button>
+        </div>
+      </div>
+
+    </div>
+      <% end %>
+      </div>
+  </div>
 </div>

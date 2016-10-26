@@ -21,7 +21,7 @@ PurexNew::Application.routes.draw do
   match '/users/update_appraiser_status' => "users#update_appraiser_status", :as => :update_appraiser_status, via: [:post, :put]
   get '/users/get_user_by_vendor_token' => 'users#get_user_by_vendor_token'
   
-  devise_for :users, :controllers => { :registrations => "registrations"}
+  devise_for :users, :controllers => { :sessions => 'sessions',:registrations => "registrations"}
 
   devise_for :appraisers, :controllers => { :registrations => "registrations"}
 
@@ -48,6 +48,7 @@ PurexNew::Application.routes.draw do
   get '/appraisals/wizard_categories/:appraisal_id' => 'appraisals#wizard_categories', :as => :wizard_categories, via: [:get]
   match '/appraisals/share' => 'appraisals#share', :as => :share_appraisal, via: [:get, :post]
   get '/appraisals/show_shared/:id' => 'appraisals#show_shared', :as => :show_shared
+  get '/appraisals/bulk_order_promo' => 'appraisals#bulk_order_promo', :as => :bulk_order_promo
   resources :appraisals do
     resources :build, controller: 'appraisals/build'
     resources :photos, :only => [:index, :create, :destroy]
@@ -55,11 +56,16 @@ PurexNew::Application.routes.draw do
       get 'reply'
       get 'claim'
       get 'completed'
+      get 'bulk_order_promo'
     end
   end
 
   resources :bulk_coupon
-  resources :bulk_order
+  resources :bulk_order do
+    member do
+      get 'resend_code'
+    end
+  end
 
   resource :appraiser , :controller => "appraiser" do
     resources :skills
