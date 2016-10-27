@@ -138,9 +138,9 @@
       <div class="milt">
         <% selected_plan = @appraisal.selected_plan %>
         <% if (selected_plan == EAAppraisalTypeAuctionEstimate || selected_plan == EAAppraisalTypeLongRestricted || selected_plan == EAAppraisalTypeLongForSelling) %>
-            <p> Replacement value : <font color="#bb1f20"><%= print_replacement_cost_min(@appraisal) %></font> <br>
+            <p> Replacement value : <font color="#bb1f20"><%= print_as_currency(@appraisal.appraisal_info.replacement_cost_min) %></font> <br>
               (Comparable Min) </p>
-            <p> Replacement value : <font color="#bb1f20"><%= print_replacement_cost_max(@appraisal) %></font> <br>
+            <p> Replacement value : <font color="#bb1f20"><%= print_as_currency(@appraisal.appraisal_info.replacement_cost_max) %></font> <br>
               (Comparable Max) </p>
             <p> Fair Market Value Min : <font color="#bb1f20"><%= print_as_currency(@appraisal.appraisal_info.fair_market_value_min) %></font> <br>
                </p>
@@ -159,7 +159,7 @@
                   <% selected_plan = @appraisal.selected_plan
                      appraiser_type = @appraiser.appraiser_info.uspap.to_i
 
-                     if (selected_plan == EAAppraisalTypeShortRestricted || selected_plan == EAAppraisalTypeLongRestricted || selected_plan == EAAppraisalTypeShortRestrictedPair || selected_plan == EAAppraisalTypeLongRestrictedPair) && appraiser_type == EAAppraiserUSPAPFamiliar
+                     if (selected_plan == EAAppraisalTypeTaxAppraisal || selected_plan == EAAppraisalTypeAuctionEstimate || selected_plan == EAAppraisalTypeShortRestricted || selected_plan == EAAppraisalTypeLongRestricted || selected_plan == EAAppraisalTypeLongForSelling || selected_plan == EAAppraisalTypeShortRestrictedPair || selected_plan == EAAppraisalTypeLongRestrictedPair) && appraiser_type == EAAppraiserUSPAPFamiliar
                        format = "appraisal_body_restricteduse_USPAP_compliant_yes"
                        option = 1
                      elsif (selected_plan == EAAppraisalTypeShortForSelling || selected_plan == EAAppraisalTypeLongForSelling || selected_plan == EAAppraisalTypeShortForSellingPair || selected_plan == EAAppraisalTypeLongForSellingPair) && appraiser_type == EAAppraiserUSPAPFamiliar

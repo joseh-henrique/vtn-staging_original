@@ -270,7 +270,7 @@
         <% selected_plan = @appraisal.selected_plan
         appraiser_type = @appraiser.appraiser_info.uspap.to_i
 
-        if (selected_plan == EAAppraisalTypeShortRestricted || selected_plan == EAAppraisalTypeLongRestricted || selected_plan == EAAppraisalTypeShortRestrictedPair || selected_plan == EAAppraisalTypeLongRestrictedPair) && appraiser_type == EAAppraiserUSPAPFamiliar
+        if (selected_plan == EAAppraisalTypeTaxAppraisal || selected_plan == EAAppraisalTypeAuctionEstimate || selected_plan == EAAppraisalTypeShortRestricted || selected_plan == EAAppraisalTypeLongRestricted || selected_plan == EAAppraisalTypeLongForSelling || selected_plan == EAAppraisalTypeShortRestrictedPair || selected_plan == EAAppraisalTypeLongRestrictedPair) && appraiser_type == EAAppraiserUSPAPFamiliar
           format = "appraisal_body_restricteduse_USPAP_compliant_yes"
           option = 1
         elsif (selected_plan == EAAppraisalTypeShortForSelling || selected_plan == EAAppraisalTypeLongForSelling || selected_plan == EAAppraisalTypeShortForSellingPair || selected_plan == EAAppraisalTypeLongForSellingPair) && appraiser_type == EAAppraiserUSPAPFamiliar
