@@ -5,6 +5,7 @@
 //= require jquery.carouFredSel-6.1.0-packed
 //= require magiczoom
 //= require chosen.jquery.min
+//= require jquery.textareaCounter.plugin
 
 jQuery ->
   $(".currency-input").maskMoney()
@@ -87,15 +88,6 @@ jQuery ->
         $('#div_saving_comment').hide()
     false
 
-  $('#btnSubmitAppraisalReply').click ->
-    $('#appraisal_status').val("10")
-    if payment_selected_plan == 4 || payment_selected_plan == 8
-      if words_number < 100
-        alert "The minimum length for Appraiser's Additional Comments is 100 words"
-        false
-      else
-        true
-
   $("#chkSuggestRejection").click ->
     if ($(this).attr("checked") == "checked")
       $("#btnUpdateAppraisalReply").attr("disabled", true)
@@ -114,14 +106,108 @@ jQuery ->
     if $("#chkSuggestRejection").is(':checked') and $("#txtRejectionReason").val().length == 0
       alert "Please enter a reason for rejecting the appraisal"
       false
-  
+
+  $('.full_summary').textcounter
+    type: 'word'
+    min: 150
+    stopInputAtMaximum: false
+    displayErrorText: true
+    countContainerClass: "word"
+    counterErrorClass: "counter-error"
+    minimumErrorText: "Please add at least 150 words"
+    counterText: "Word Count: "
+
+  $('.tax_appraisal').textcounter
+    type: 'word'
+    min: 150
+    stopInputAtMaximum: false
+    displayErrorText: true
+    countContainerClass: "word"
+    counterErrorClass: "counter-error"
+    minimumErrorText: "Please add at least 150 words"
+    counterText: "Word Count: "
+
+  $('.short_restricted').textcounter
+    type: 'word'
+    max: 40
+    stopInputAtMaximum: false
+    displayErrorText: true
+    countContainerClass: "word"
+    counterErrorClass: "counter-error"
+    maximumErrorText: "You are not allowed more than 40 words for this appraisal type"
+    counterText: "Word Count: "
+
+  $('.long_restricted').textcounter
+    type: 'word'
+    min: 50
+    max: 151
+    stopInputAtMaximum: false
+    displayErrorText: true
+    countContainerClass: "word"
+    counterErrorClass: "counter-error"
+    minimumErrorText: "Please add at least 50 words"
+    maximumErrorText: "You are not allowed more than 150 words for this appraisal type"
+    counterText: "Word Count: "
+
+  $('.auction_estimate').textcounter
+    type: 'word'
+    max: 21
+    stopInputAtMaximum: false
+    displayErrorText: true
+    countContainerClass: "word"
+    counterErrorClass: "counter-error"
+    maximumErrorText: "You are not allowed more than 20 words for this appraisal type"
+    counterText: "Word Count: "
+
   $('#btnUpdateAppraisalReply').click ->
-    if payment_selected_plan == 4 || payment_selected_plan == 8
-      if words_number < 100
-        alert "The minimum length for Appraiser's Additional Comments is 100 words"
-        false
-      else
-        true
+    word_count = wordCount($('#appraisal_appraisal_info_appraiser_comments').val())
+    if payment_selected_plan == 9 && word_count > 20
+      alert("The maximum words allowed in comments field for auction estimate is 20. Please correct and submit again.")
+      false
+    else if payment_selected_plan == 4 && word_count < 150
+      alert("You have to write at least 150 words in comments field for long full use type. Please correct and submit again.")
+      false
+    else if payment_selected_plan == 2 && (word_count > 150 || word_count < 50)
+      alert("You have to write min 50 words and max 150 words in comments field for long restricted use type. Please correct and submit again.")
+      false
+    else if payment_selected_plan == 1 && word_count > 40
+      alert("The maximum words allowed in comments field for short restricted use type is 40. Please correct and submit again.")
+      false
+    else if payment_selected_plan == 10 && word_count < 150
+      alert("You have to write at least 150 words in comments field for auction estimate type. Please correct and submit again.")
+      false
+    else
+      true
+    #EAAppraisalTypeShortRestricted = 1
+    #EAAppraisalTypeTaxAppraisal = 10
+    #EAAppraisalTypeLongRestricted = 2
+    #EAAppraisalTypeLongForSelling = 4
+    #EAAppraisalTypeAuctionEstimate = 9
+
+  wordCount = (val) ->
+    wom = val.match(/\S+/g)
+    if wom then wom.length else 0
+
+  $('#btnSubmitAppraisalReply').click ->
+    $('#appraisal_status').val("10")
+    word_count = wordCount($('#appraisal_appraisal_info_appraiser_comments').val())
+    if payment_selected_plan == 9 && word_count > 20
+      alert("The maximum words allowed in comments field for auction estimate is 20. Please correct and submit again.")
+      false
+    else if payment_selected_plan == 4 && word_count < 150
+      alert("You have to write at least 150 words in comments field for long full use type. Please correct and submit again.")
+      false
+    else if payment_selected_plan == 2 && (word_count > 150 || word_count < 50)
+      alert("You have to write min 50 words and max 150 words in comments field for long restricted use type. Please correct and submit again.")
+      false
+    else if payment_selected_plan == 1 && word_count > 40
+      alert("The maximum words allowed in comments field for short restricted use type is 40. Please correct and submit again.")
+      false
+    else if payment_selected_plan == 10 && word_count < 150
+      alert("You have to write at least 150 words in comments field for auction estimate type. Please correct and submit again.")
+      false
+    else
+      true
 
   # Begin Code for Plan Selection in Appraisal Wizard $("#plansel1").click ->
   $("#planprod1").click ->

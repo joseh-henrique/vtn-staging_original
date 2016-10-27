@@ -42,14 +42,33 @@ module ApplicationHelper
   def getStringForAppraisalType(nType)
     return "" if nType.nil?
 
-    hItems = {EAAppraisalTypeShortRestricted => "Light Restricted Use Appraisal",
-              EAAppraisalTypeLongRestricted  => "Full Restricted Use Appraisal",
+    hItems = {EAAppraisalTypeShortRestricted => "Short Restricted Use Appraisal",
+              EAAppraisalTypeLongRestricted  => "Long Restricted Use Appraisal",
               EAAppraisalTypeShortForSelling => "Light Summary Appraisal",
-              EAAppraisalTypeLongForSelling => "Full Summary Appraisal", 
+              EAAppraisalTypeLongForSelling => "Long Full Use Appraisal",
               EAAppraisalTypeShortRestrictedPair => "Light Restricted Use Appraisal Pair",
               EAAppraisalTypeLongRestrictedPair  => "Full Restricted Use Appraisal Pair",
               EAAppraisalTypeShortForSellingPair => "Light Summary Appraisal Pair",
-              EAAppraisalTypeLongForSellingPair => "Full Summary Appraisal Pair"}
+              EAAppraisalTypeLongForSellingPair => "Full Summary Appraisal Pair",
+              EAAppraisalTypeAuctionEstimate => "Auction Estimate",
+              EAAppraisalTypeTaxAppraisal => "Tax Appraisal"}
+
+    hItems[nType].blank? ? "" : hItems[nType]
+  end
+
+  def getDescForAppraisalType(nType)
+    return "" if nType.nil?
+
+    hItems = {EAAppraisalTypeShortRestricted => "Light Restricted Use Appraisal",
+              EAAppraisalTypeLongRestricted  => "appraiser comments should be minimum 50 words and maximum 150 words",
+              EAAppraisalTypeShortForSelling => "Light Summary Appraisal",
+              EAAppraisalTypeLongForSelling => "appraiser comments should be minimum 150 words",
+              EAAppraisalTypeShortRestrictedPair => "Light Restricted Use Appraisal Pair",
+              EAAppraisalTypeLongRestrictedPair  => "Full Restricted Use Appraisal Pair",
+              EAAppraisalTypeShortForSellingPair => "Light Summary Appraisal Pair",
+              EAAppraisalTypeLongForSellingPair => "Full Summary Appraisal Pair",
+              EAAppraisalTypeAuctionEstimate => "appraiser comments are restricted to 20 words max.",
+              EAAppraisalTypeTaxAppraisal => "Tax Appraisal"}
 
     hItems[nType].blank? ? "" : hItems[nType]
   end

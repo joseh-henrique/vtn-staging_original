@@ -3,7 +3,7 @@
     <div  class="row">
       <div class="col-md-12 text-left">
         <div class="pro-1">
-          <p>This is a <%= getStringForAppraisalType(@appraisal.selected_plan) %> - appraiser comments are restricted to 20 words max.</p>
+          <p>This is a <%= getStringForAppraisalType(@appraisal.selected_plan) %> - <%= getDescForAppraisalType(@appraisal.selected_plan) %></p>
           <p>Current status: <%= getStringForActivityValue(@appraisal.status) %></p>
           <p>File number: <%= @appraisal.id %></p>
           <p>Category: <%= @appraisal.classification.category.name unless @appraisal.classification.nil? %></p>
@@ -170,6 +170,7 @@
                         </div>
                       </div>
                     </div>
+                        <% selected_plan = @appraisal.selected_plan %>
                     <div class="col-md-12">
                       <div class="form-group">
                         <div class="row">
@@ -179,11 +180,23 @@
                               Comment</label>
                           </div>
                           <div class="col-md-9">
-                            <%= ff.text_area :appraiser_comments, :class => "form-control", :rows => "5"  %>
-                            <ul class="word">
-                              <li>0 Characters </li>
-                              <li>  0 Words </li>
-                            </ul>
+                            <% comment_class =
+                                   case selected_plan
+                                     when EAAppraisalTypeAuctionEstimate
+                                       "auction_estimate"
+                                     when EAAppraisalTypeShortRestricted
+                                       "short_restricted"
+                                     when EAAppraisalTypeLongRestricted
+                                       "long_restricted"
+                                     when EAAppraisalTypeLongForSelling
+                                       "full_summary"
+                                     when EAAppraisalTypeTaxAppraisal
+                                       "tax_appraisal"
+                                     else
+                                       "comment_class"
+                                     end
+                            %>
+                            <%= ff.text_area :appraiser_comments, :class => "form-control #{comment_class}", :rows => "5"  %>
                             <p>(E.g., history of the item or its maker, how the item was used, historical significance, association with important personages, extraordinary assumptions being made by the appraisers, market data on which option of value was based (i.e., past
                               comparable sales or current asking prices for similar items ), how to best care for or preserve the item, relevant club to join or periodical to subscribe to if interested in learning more about the item. web sites of interest, etc.)</p>
 
@@ -191,7 +204,7 @@
                         </div>
                       </div>
                     </div>
-                    <% selected_plan = @appraisal.selected_plan %>
+
                     <% if (selected_plan == EAAppraisalTypeAuctionEstimate || selected_plan == EAAppraisalTypeLongRestricted || selected_plan == EAAppraisalTypeLongForSelling) %>
                     <div class="col-md-12">
                       <div class="form-group">
