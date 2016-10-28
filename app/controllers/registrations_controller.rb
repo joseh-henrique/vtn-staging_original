@@ -16,4 +16,8 @@ class RegistrationsController < Devise::RegistrationsController
     end
   end
 
+  def after_update_path_for(resource)
+    bulk_order_path(1)
+  end
+
 end

@@ -26,8 +26,15 @@ class AppraiserStepsController < ApplicationController
 	def update
 		@user = current_user
 		@user.attributes = params[:appraiser] || params[:customer] || {}
-		@user[:last_step] = params[:id]
-		render_wizard @user
+		Rails.logger.info "step is #{step}"
+ 	  @user[:last_step] = params[:id]
+		if step == :preferences
+			Rails.logger.info "step==preferences"
+			redirect_to edit_user_registration_path
+		else
+			render_wizard @user
+		end
+
 	end
 
   def set_cache_buster
