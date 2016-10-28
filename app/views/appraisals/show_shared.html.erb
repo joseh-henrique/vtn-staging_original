@@ -86,7 +86,7 @@
         <% elsif !(@appraiser.appraiser_extra.signature_json.nil? || @appraiser.appraiser_extra.signature_json.empty?) %>
           <canvas id="appraiser-signature" height="100" width="250"></canvas>
         <% end %>
-        <h4>Appraised by <%= @appraiser.name.nil? || @appraiser.name.empty? ? "#{@appraiser.name}" : "#{@appraiser.name}" %></h4>
+        <h4>Appraised by <%= @appraiser.name.nil? || @appraiser.name.empty? ? "" : "#{@appraiser.name}" %></h4>
       </div>
     </div>
   </div>
