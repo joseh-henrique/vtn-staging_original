@@ -24,7 +24,7 @@ PurexNew::Application.configure do
   # Raise exception on mass assignment protection for Active Record models
   config.active_record.mass_assignment_sanitizer = :strict
 
-  config.server_url = "http://localhost:3000"
+  config.server_url = "http://localhost:5000"
   # Log the query plan for queries taking more than this (works
   # with SQLite, MySQL, and PostgreSQL)
   #config.active_record.auto_explain_threshold_in_seconds = 0.5
@@ -44,7 +44,7 @@ PurexNew::Application.configure do
 
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.perform_deliveries = false
-  config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+  config.action_mailer.default_url_options = { :host => 'localhost:5000' }
   ActionMailer::Base.smtp_settings = {
     :address        => 'smtp.sendgrid.net',
     :port           => '587',
@@ -66,7 +66,7 @@ PurexNew::Application.configure do
   SendgridToolkit.api_user = "app4334028@heroku.com"
   SendgridToolkit.api_key = "uu1nfkq3"
 
-  ENV['BASE_URI'] = "http://localhost:3000"
+  ENV['BASE_URI'] = "http://localhost:5000"
 
   config.middleware.use Rails::Rack::LogTailer
   config.eager_load = false

@@ -1,7 +1,11 @@
+require 'open-uri'
+
 class UserMailer < ActionMailer::Base
   helper :application
   default :from    => "no-reply@valuethisnow.com",
     :sent_on => Time.now.to_s
+  PDF_DIR        = "#{Rails.root}/tmp/pdf_dir_#{Process.pid}/"
+
   def notify_appraiser_of_new_appraisal(appraiser,appraisal)
     @appraiser = appraiser
     @appraisal = appraisal
@@ -46,6 +50,19 @@ class UserMailer < ActionMailer::Base
     @message = message
     mail(:to => Setting.get("admin_distribution_list").split(','),
          :subject => "[User Support] #{message.subject}")
+  end
+
+  def sell_insure_notify(partner_detail, subject, sell_insure, static_content, appraisal, pdf_link)
+    @partner_detail = partner_detail
+    @sell_insure = sell_insure
+    @static_content = static_content
+    @appraisal = appraisal
+    @pdf_link = pdf_link
+    mail(:to => partner_detail.company_email,
+         :subject => "#{subject}") do |format|
+      format.text
+      format.html
+    end
   end
 
   def bulk_order_code(email, message, subject, promo_code)

@@ -1,5 +1,6 @@
 <div id="content" class="content sell-insure">
 <div class="container wal">
+  <%= form_for @sell_insure, :url => :process_completed_appraisal, :method => :post, :html => { :multipart => true } do |f| %>
   <div class="welcome frt">
     <div class="row">
       <div class="col-md-10">
@@ -15,7 +16,7 @@
                 <label for="Name">Name :</label>
               </div>
               <div class="col-md-8">
-                <input type="text" class="form-control" id="Name">
+                <%= f.text_field :customer_name, class: 'form-control' %>
               </div>
             </div>
           </div>
@@ -25,7 +26,7 @@
                 <label for="email">Email :</label>
               </div>
               <div class="col-md-8">
-                <input type="email" class="form-control" id="email">
+                <%= f.text_field :email, class: 'form-control' %>
               </div>
             </ </div>
         </div>
@@ -36,7 +37,7 @@
             <label for="phone">Phone Number : </label>
           </div>
           <div class="col-md-8">
-            <input type="tel" class="form-control" id="phone">
+            <%= f.text_field :phone, class: 'form-control' %>
           </div>
         </ </div>
     </div>
@@ -47,7 +48,7 @@
         <label for="phone">Message :</label>
       </div>
       <div class="col-md-8">
-        <textarea class="form-control" id="phone"></textarea>
+        <%= f.text_area :message, :class => "form-control", :rows => "5"%>
         <p class="sel-tex"> Anything  you want to tell us about your personal property?</p>
       </div>
     </div>
@@ -63,27 +64,18 @@
     </div>
     <div class="col-md-8">
       <div class="radio">
-        <input type="radio" class="css-checkbox" name="optionsRadios" id="optionsRadios1" value="option1" unchecked>
-        <label for="optionsRadios1" class="css-label radGroup2">
-          <span> Please contact me by email only: </span>
-        </label>
-
+        <%= radio_button_tag :email_phone, "0" %> <%= f.label :email_phone, "Please contact me by email only:" %>
 
       </div>
       <div class="radio">
-        <input type="radio" class="css-checkbox" name="optionsRadios" id="optionsRadios2" value="option1" unchecked>
-        <label for="optionsRadios2" class="css-label radGroup2">
-          <span> Please contact me by phone only:</span>
+        <%= radio_button_tag :email_phone, "1" %> <%= f.label :email_phone, "Please contact me by phone only:" %>
+      </div>
+      <div class="radio">
+        <%= radio_button_tag :email_phone, "2" %> <%= f.label :email_phone, "Please contact me by phone or email:" %>
         </label>
       </div>
       <div class="radio">
-        <input type="radio" class="css-checkbox" name="optionsRadios" id="optionsRadios3" value="option1" unchecked>
-        <label for="optionsRadios3" class="css-label radGroup2">
-          <span> Please contact me by phone or email: </span>
-        </label>
-      </div>
-      <div class="radio">
-        <input type="radio" class="css-checkbox" name="optionsRadios" id="optionsRadios4" value="option1" unchecked>
+        <input type="radio" class="css-checkbox" name="optionsRadios" id="approve_sending" value="option1" unchecked>
         <label for="optionsRadios4" class="css-label radGroup2">
  <span>  I understand that a copy of my appraisal<br/>  report
 will be sent to a ValueThisNow <br/> value-added partner
@@ -93,6 +85,7 @@ for evaluation and I approve. </span>
     </div>
   </div>
 </div>
+      <%= hidden_field_tag 'button_clicked', @button_clicked %>
 <div class="my-self">
   <div class="row">
     <div class="col-md-6">
@@ -112,15 +105,16 @@ for evaluation and I approve. </span>
         </div>
       </div>
       <div class="frien">
-        <button type="submit" class="pull-right sel-send">Print Friendly</button>
+        <%= link_to show_shared_path(@appraisal, :format => :pdf, :full => "no"), :class => "pull-right sel-send" do %>Print Friendly<% end %>
         <div class="clear"></div>
       </div>
-      <button type="submit" class="pull-right sel-send">SUBMIT</button>
+      <%= f.submit "Submit", :class => "pull-right sel-send", :id => "btnSellInsure"%>
       <div class="clear"></div>
     </div>
   </div>
 </div>
 </div>
+<% end %>
 </div>
 </div>
 </div>

@@ -1,6 +1,6 @@
 ActiveAdmin.register_page "Strategic Partners" do
 
-  content :title=> "Strategic Partners" do
+  content :title=> "Strategic Partners List" do
     columns do
       column do
         table_for appraisals, sortable: true, class: "index_table index", id: "strategic_partner" do

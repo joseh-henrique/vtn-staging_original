@@ -57,6 +57,7 @@ PurexNew::Application.routes.draw do
       get 'claim'
       get 'completed'
       get 'bulk_order_promo'
+      post 'process_completed'
     end
   end
 

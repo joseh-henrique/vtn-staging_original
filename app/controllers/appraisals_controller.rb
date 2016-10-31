@@ -2,7 +2,7 @@ class AppraisalsController < ApplicationController
   load_and_authorize_resource
   before_filter :authenticate_user!, :except => [:show_shared, :bulk_order_promo]
   before_filter :is_appraiser_confirmed, :except => [:wizard_photo_upload, :wizard_categories, :show_shared, :bulk_order_promo]
-
+  PDF_DIR        = "#{Rails.root}/tmp/pdf_dir_#{Process.pid}/"
   # GET /appraisals
   def index
     # TODO Check if performance can be improved
@@ -170,7 +170,63 @@ class AppraisalsController < ApplicationController
   end
 
   def completed
-    Rails.logger.info "appraisal completed"
+    @appraisal = Appraisal.find(params[:id])
+    @sell_insure = SellInsure.new
+    @button_clicked = params[:button_clicked]
+    Rails.logger.info "appraisal completed params #{params}"
+  end
+
+  def process_completed
+    Rails.logger.info "params is #{params}"
+    @appraisal = Appraisal.find(params[:id])
+    sell_insure = SellInsure.new(sell_insure_params(params))
+    if params[:email_phone] == "0"
+      sell_insure.email_only = true
+    elsif params[:email_phone] == "1"
+      sell_insure.phone_only = true
+    elsif params[:email_phone] == "2"
+      sell_insure.phone_or_email = true
+    end
+    sell_insure.appraisal_id = params[:id]
+    sell_insure.save
+
+    #AppraisalsController.delay.send_mail_and_save(params, sell_insure)
+    AppraisalsController.delay.send_mail_and_save(params, sell_insure, current_user)
+  end
+
+  def self.send_mail_and_save(params, sell_insure, current_user)
+    @appraisal = Appraisal.find(params[:id])
+    page = Comfy::Cms::Page.find_by_full_path("/#{params[:button_clicked]}")
+    static_content = page.content_cache
+    subject = "Enquiry"
+
+    Dir.mkdir(PDF_DIR) if !Dir.exists?(PDF_DIR)
+    file = PDF_DIR + rand(10000).to_s + ".pdf"
+    open(file, 'wb') do |file|
+      file << open(Rails.application.config.server_url + "/appraisals/show_shared/#{@appraisal.id}.pdf?full=no").read
+    end
+    result = Cloudinary::Uploader.upload(file, {:resource_type => 'raw'})
+
+    pdf_link = result["secure_url"]
+    Rails.logger.info "result is #{result} and @pdf_link is #{pdf_link}"
+    PartnerDetail.all.each do |partner_detail|
+      UserMailer.sell_insure_notify(partner_detail, subject, sell_insure, static_content, @appraisal, pdf_link).deliver_now
+    end
+    t = Time.now
+    emailed_on = t.strftime("Emailed on %m/%d/%Y at %I:%M%p")
+    SellInsureEmailReport.create(appraisal_id: @appraisal.id, appraisal_name: @appraisal.name, email_sent_at: emailed_on, customer_id: current_user.id, customer_name: sell_insure.customer_name, appraisal_link: pdf_link)
+  end
+
+  def sell_insure_params user_params
+    user_params.require(:sell_insure).permit(:customer_name, :email, :phone, :message)
+  end
+
+  def recipient_list
+    recipients = ""
+    PartnerDetail.all.each do |pd|
+      recipients.concat(pd.company_email).concat(",")
+    end
+    recipients.chop if recipients.end_with(",")
   end
 
   def bulk_order_promo

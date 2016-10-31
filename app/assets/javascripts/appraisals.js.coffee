@@ -98,6 +98,11 @@ jQuery ->
       $("#btnSubmitAppraisalReply").attr("disabled", false)
       $("#btnRejectAppraisal").attr("disabled", true)
 
+  $('#btnSellInsure').click ->
+    if not($('#approve_sending').is(':checked'))
+      alert("Please accept 'I understand that a copy of my appraisal report will be sent to a ValueThisNow value-added partner for evaluation and I approve.'")
+      false
+
   $('#btnRejectAppraisal').click ->
     edit_form.resetForm()
     form = $('.edit_appraisal').get(0)

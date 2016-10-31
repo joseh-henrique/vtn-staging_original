@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161021112244) do
+ActiveRecord::Schema.define(version: 20161031073618) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -398,6 +398,18 @@ ActiveRecord::Schema.define(version: 20161021112244) do
 
   add_index "identities", ["user_id"], name: "index_identities_on_user_id", using: :btree
 
+  create_table "partner_details", force: :cascade do |t|
+    t.string   "company_name"
+    t.string   "company_address"
+    t.string   "primary_contact"
+    t.string   "company_phone"
+    t.string   "company_email"
+    t.string   "payment_terms"
+    t.string   "vendor_token"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
   create_table "partner_informations", force: :cascade do |t|
     t.string   "company_name",     limit: 255
     t.string   "client_name",      limit: 255
@@ -507,6 +519,30 @@ ActiveRecord::Schema.define(version: 20161021112244) do
   add_index "roles", ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id", using: :btree
   add_index "roles", ["name"], name: "index_roles_on_name", using: :btree
 
+  create_table "sell_insure_email_reports", force: :cascade do |t|
+    t.integer  "appraisal_id"
+    t.string   "appraisal_name"
+    t.string   "email_sent_at"
+    t.string   "customer_id"
+    t.string   "customer_name"
+    t.string   "appraisal_link"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  create_table "sell_insures", force: :cascade do |t|
+    t.string   "customer_name"
+    t.string   "email"
+    t.string   "phone"
+    t.string   "message"
+    t.boolean  "phone_only",     default: false
+    t.boolean  "email_only",     default: false
+    t.boolean  "phone_or_email", default: false
+    t.integer  "appraisal_id"
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+  end
+
   create_table "sessions", force: :cascade do |t|
     t.string   "session_id", limit: 255, null: false
     t.text     "data"
@@ -547,6 +583,18 @@ ActiveRecord::Schema.define(version: 20161021112244) do
 
   add_index "skills", ["appraiser_id"], name: "index_skills_on_appraiser_id", using: :btree
   add_index "skills", ["category_id"], name: "index_skills_on_category_id", using: :btree
+
+  create_table "strategic_partners", force: :cascade do |t|
+    t.string   "company_name"
+    t.string   "company_address"
+    t.string   "primary_contact"
+    t.string   "company_phone"
+    t.string   "company_email"
+    t.string   "payment_terms"
+    t.string   "vendor_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
 
   create_table "tickets", force: :cascade do |t|
     t.integer  "user_id"

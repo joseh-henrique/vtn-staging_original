@@ -1,0 +1,13 @@
+Hi <%= @partner_detail.primary_contact %>
+<%= @static_content %>
+<p><b>Customer Information</b></p>
+Customer Name: <%= @sell_insure.customer_name %><br/>
+Customer Email: <%= @sell_insure.email %><br/>
+Customer Message: <%= @sell_insure.message %><br/>
+Contact preference:<br/>
+Phone Only: <%= (@sell_insure.phone_only) ? "Yes" : "No" %><br/>
+Email Only: <%= (@sell_insure.email_only) ? "Yes" : "No" %><br/>
+Phone or Email: <%= (@sell_insure.phone_or_email) ? "Yes" : "No" %><br/>
+<%= link_to "Download Appraisal Report", @pdf_link %>
+
+

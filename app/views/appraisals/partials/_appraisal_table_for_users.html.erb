@@ -37,10 +37,10 @@
             <td width="100" colspan="3"></td>
         <% end %>
         <% if appraisal.status == EActivityValueFinalized %>
-            <td width="77"><%= link_to('Sell It', completed_appraisal_path(appraisal.id), :class => "btn gre5", :style => "margin:2px;")%></td>
-            <td width="77"><%= link_to('Pawn It', completed_appraisal_path(appraisal.id), :class => "btn ora4", :style => "margin:2px;") %></td>
-            <td width="93"><%= link_to('Insure It', completed_appraisal_path(appraisal.id), :class => "btn ins", :style => "margin:2px;") %></td>
-            <td width="77"><%= link_to('Repair It', completed_appraisal_path(appraisal.id), :class => "btn fix", :style => "margin:2px;") %></td>
+            <td width="77"><%= link_to('Sell It', completed_appraisal_path(appraisal.id, button_clicked: 'sell-it'), :class => "btn gre5", :style => "margin:2px;")%></td>
+            <td width="77"><%= link_to('Pawn It', completed_appraisal_path(appraisal.id, button_clicked: 'pawn-it'), :class => "btn ora4", :style => "margin:2px;") %></td>
+            <td width="93"><%= link_to('Insure It', completed_appraisal_path(appraisal.id, button_clicked: 'insure-it'), :class => "btn ins", :style => "margin:2px;") %></td>
+            <td width="77"><%= link_to('Repair It', completed_appraisal_path(appraisal.id, button_clicked: 'repair-it'), :class => "btn fix", :style => "margin:2px;") %></td>
         <% end %>
       </div>
     <td width="86">
