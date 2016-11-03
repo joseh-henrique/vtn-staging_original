@@ -190,7 +190,6 @@ class AppraisalsController < ApplicationController
     sell_insure.appraisal_id = params[:id]
     sell_insure.save
 
-    #AppraisalsController.delay.send_mail_and_save(params, sell_insure)
     AppraisalsController.delay.send_mail_and_save(params, sell_insure, current_user)
   end
 

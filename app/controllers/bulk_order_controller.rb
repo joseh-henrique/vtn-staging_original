@@ -37,7 +37,7 @@ class BulkOrderController < ApplicationController
     end
     bulk_order.save
 
-    UserMailer.bulk_order_code(params[:user_email], message, subject, bulk_order.promo_code).deliver_now
+    UserMailer.bulk_order_code(params[:bulk_order][:user_email], message, subject, bulk_order.promo_code).deliver_now
     Rails.logger.info "in create params is #{params}"
   end
 
