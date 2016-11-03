@@ -1,7 +1,7 @@
-<%= @message %>
+<%= @message %>\r\n
 <% @bulk_orders.each do |bulk_order| %>
-    Code : <%= bulk_order.promo_code %>
-    Selected Plan : <%= APPRAISAL_PLANS_NAMES[bulk_order.selected_plan] %>
-    Appraisal Credits : <%= bulk_order.credits_count %>
-    Credits Remaining : <%= bulk_order.credits_remaining %>
+    Code : <%= bulk_order.promo_code %>\r\n
+    Selected Plan : <%= APPRAISAL_PLANS_NAMES[bulk_order.selected_plan] %>\r\n
+    Appraisal Credits : <%= bulk_order.credits_count %>\r\n
+    Credits Remaining : <%= bulk_order.credits_remaining %>\r\n
 <% end %>
