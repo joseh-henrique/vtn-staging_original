@@ -6,7 +6,10 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-md-12">
+      <div style="float:left;margin-top:5px;" class="col-md-12">
+        <%= link_to "Download Sales Receipt",sales_receipt_path(@appraisal, :format => :pdf), class: "btn btn-success btn-lg" %>
+      </div>
+      <div style="float:right" class="col-md-12">
         <%= link_to "Appraise Another Item",appraisal_build_index_path(appraisal_id: 'building'), method: :post, class: "btn btn-success btn-lg pull-right" %>
       </div>
     </div>

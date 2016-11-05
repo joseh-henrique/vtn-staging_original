@@ -1,7 +1,7 @@
 class AppraisalsController < ApplicationController
   load_and_authorize_resource
-  before_filter :authenticate_user!, :except => [:show_shared, :bulk_order_promo]
-  before_filter :is_appraiser_confirmed, :except => [:wizard_photo_upload, :wizard_categories, :show_shared, :bulk_order_promo]
+  before_filter :authenticate_user!, :except => [:show_shared, :bulk_order_promo, :sales_receipt]
+  before_filter :is_appraiser_confirmed, :except => [:wizard_photo_upload, :wizard_categories, :show_shared, :bulk_order_promo, :sales_receipt]
   PDF_DIR        = "#{Rails.root}/tmp/pdf_dir_#{Process.pid}/"
   # GET /appraisals
   def index
@@ -59,6 +59,15 @@ class AppraisalsController < ApplicationController
     Rails.logger.info "selected plan is #{@appraisal.selected_plan} PDF_FULL IS #{@pdf_full} template_file is #{template_file}"
     respond_to do |format|
       format.pdf { render :pdf => 'report', :page_size => "Legal", :show_as_html => params[:debug].present?, :template => template_file }
+    end
+  end
+
+  def sales_receipt
+    @appraisal = Appraisal.find(params[:id])
+    template_file = "/appraisals/reports/sales_receipt.pdf.erb"
+
+    respond_to do |format|
+      format.pdf { render :pdf => 'report', :page_size => "A3", :show_as_html => true, :template => template_file }
     end
   end
 

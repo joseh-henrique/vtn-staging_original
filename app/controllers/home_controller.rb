@@ -107,6 +107,9 @@ class HomeController < ApplicationController
   def testimonials
   end
 
+  def categories
+  end
+
   def stores
   end
 

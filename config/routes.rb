@@ -48,6 +48,7 @@ PurexNew::Application.routes.draw do
   get '/appraisals/wizard_categories/:appraisal_id' => 'appraisals#wizard_categories', :as => :wizard_categories, via: [:get]
   match '/appraisals/share' => 'appraisals#share', :as => :share_appraisal, via: [:get, :post]
   get '/appraisals/show_shared/:id' => 'appraisals#show_shared', :as => :show_shared
+  get '/appraisals/sales_receipt/:id' => 'appraisals#sales_receipt', :as => :sales_receipt
   get '/appraisals/bulk_order_promo' => 'appraisals#bulk_order_promo', :as => :bulk_order_promo
   resources :appraisals do
     resources :build, controller: 'appraisals/build'
@@ -108,6 +109,7 @@ PurexNew::Application.routes.draw do
   get '/home/appraisal_body_summary_forselling_USPAP_compliant_yes' => 'home#appraisal_body_summary_forselling_USPAP_compliant_yes'
   get '/home/cost' => 'home#cost'
   get '/home/testimonials' => 'home#testimonials'
+  get '/home/categories' => 'home#categories'
   get '/stores' => 'home#stores'
   get '/roadshows' => 'home#roadshows'
   get '/salvages' => 'home#salvages'
