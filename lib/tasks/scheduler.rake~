@@ -5,7 +5,7 @@ task :auto_email_when_uncomplete => :environment do
   puts "Done."
 end
 
-desc "This task is used to send sales receipts for appraisals paid for in the previous day"
+desc "This task is used for notify uncomplete appraisal"
 task :email_sales_receipt => :environment do
-  
+
 end

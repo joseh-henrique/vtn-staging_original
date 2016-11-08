@@ -134,7 +134,7 @@ GEM
     chronic (0.10.2)
     climate_control (0.0.3)
       activesupport (>= 3.0)
-    cloudinary (1.0.85)
+    cloudinary (1.2.4)
       aws_cf_signer
       rest-client
     cocaine (0.5.8)
@@ -208,7 +208,7 @@ GEM
       devise (>= 3.0.0, < 4.0)
       railties (>= 3.2.6, < 5.0)
     diff-lcs (1.2.5)
-    domain_name (0.5.20160615)
+    domain_name (0.5.20161021)
       unf (>= 0.0.5, < 1.0.0)
     em-proxy (0.1.8)
       eventmachine
@@ -413,7 +413,7 @@ GEM
       nokogiri (~> 1.6.0)
       ruby_parser (~> 3.5)
     htmlentities (4.3.4)
-    http-cookie (1.0.2)
+    http-cookie (1.0.3)
       domain_name (~> 0.5)
     httparty (0.13.7)
       json (~> 1.8)
@@ -730,7 +730,7 @@ DEPENDENCIES
   cancan
   capybara (~> 2.2.1)
   carrierwave (~> 0.10.0)
-  cloudinary (~> 1.0.63)
+  cloudinary (~> 1.2.4)
   coffee-rails (~> 4.0.1)
   comfortable_mexican_sofa
   country_select

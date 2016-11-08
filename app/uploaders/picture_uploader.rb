@@ -27,4 +27,8 @@ class PictureUploader < CarrierWave::Uploader::Base
   version :huge do
     process :resize_to_fit => [2048, 2048]
   end
+
+  version :small do
+    process :resize_to_fit => [105, 148]
+  end
 end

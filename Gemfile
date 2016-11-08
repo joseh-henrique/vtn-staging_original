@@ -45,7 +45,7 @@ gem "heroku-forward"
 # TODO Move all storage from Paperclip to Carrierwave
 gem 'paperclip'
 gem 'carrierwave', '~> 0.10.0'
-gem "cloudinary", "~> 1.0.63"
+gem "cloudinary", "~> 1.2.4"
 gem 'rmagick', require: false
 gem 'aws-s3'
 gem 'aws-sdk', '~> 1.66'

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161031073618) do
+ActiveRecord::Schema.define(version: 20161107052116) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -117,6 +117,7 @@ ActiveRecord::Schema.define(version: 20161031073618) do
     t.boolean  "sent_1w",                               default: false
     t.boolean  "sent_2w",                               default: false
     t.boolean  "sent_30d",                              default: false
+    t.string   "short_appraisal_public_id"
   end
 
   add_index "appraisals", ["assigned_to"], name: "index_appraisals_on_assigned_to", using: :btree

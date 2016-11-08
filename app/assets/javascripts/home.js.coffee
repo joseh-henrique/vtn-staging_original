@@ -89,7 +89,10 @@ $(document).ready ->
     $('.myvideo').toggle()
     return
   $('.report-image1').click ->
+    alert("image click")
     $('.report1').toggle 1000
+    iframe = document.getElementById('myIframe')[0];
+    iframe.src="http://res.cloudinary.com/hpc/image/upload/c_fill,h_208,w_105/appraisal_259.png"
     $('.home-contact').show 1000
     return
   $('.report1 .close-frame').click ->
@@ -133,7 +136,7 @@ $(document).ready ->
       return
     return
 
-  $('#owl-demo1').owlCarousel
+  $('#owl-demo').owlCarousel
     autoPlay: 60000
     singleItem: true
     navigation: true

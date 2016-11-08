@@ -67,7 +67,7 @@ class AppraisalsController < ApplicationController
     template_file = "/appraisals/reports/sales_receipt.pdf.erb"
 
     respond_to do |format|
-      format.pdf { render :pdf => 'report', :page_size => "A3", :show_as_html => true, :template => template_file }
+      format.pdf { render :pdf => 'report', :page_size => "Legal", :show_as_html => params[:debug].present?, :template => template_file }
     end
   end
 
@@ -137,6 +137,7 @@ class AppraisalsController < ApplicationController
         format.html { redirect_to(@appraisal, :notice => 'Appraisal was sent to administrator for review.') }
       elsif @appraisal.update_attributes(params[:appraisal])
         if @appraisal.status == EActivityValueFinalized && previous_status != EActivityValueFinalized
+          AppraisalsController.delay.save_short_appraisal(@appraisal)
           # Send Notification via Email to Creator about Finalized Appraisal
           payout = Payout.find_or_create_by(:appraisal_id => @appraisal.id, :appraiser_id => @appraisal.assigned_to.id)
           payout.amount = @appraisal.paid_amount
@@ -155,6 +156,17 @@ class AppraisalsController < ApplicationController
     end
   end
 
+  def self.save_short_appraisal appraisal
+    Dir.mkdir(PDF_DIR) if !Dir.exists?(PDF_DIR)
+    file = PDF_DIR + rand(10000).to_s + ".pdf"
+    open(file, 'wb') do |file|
+      file << open(Rails.application.config.server_url + "/appraisals/show_shared/#{appraisal.id}.pdf?full=no").read
+    end
+    result = Cloudinary::Uploader.upload(file, {:public_id => "appraisal_#{appraisal.id}"})
+    #example url - https://res.cloudinary.com/hpc/image/upload/appraisal_372.pdf
+    appraisal.short_appraisal_public_id = "appraisal_#{appraisal.id}"
+    appraisal.save
+  end
 
   # DELETE /appraisals/1
   def destroy
@@ -182,6 +194,10 @@ class AppraisalsController < ApplicationController
     @appraisal = Appraisal.find(params[:id])
     @sell_insure = SellInsure.new
     @button_clicked = params[:button_clicked]
+    if @appraisal.short_appraisal_public_id.blank?
+      Rails.logger.info "before call to save_short_appraisal"
+      AppraisalsController.delay.save_short_appraisal(@appraisal)
+    end
     Rails.logger.info "appraisal completed params #{params}"
   end
 
