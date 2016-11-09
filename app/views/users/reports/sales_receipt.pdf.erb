@@ -1,0 +1,263 @@
+<meta charset="UTF-8" xmlns="http://www.w3.org/1999/html">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>ValueThisNow: an online appraisal service for antiques &amper; collectibles</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <%= render :partial => 'layouts/meta.html.erb' %>
+  <%= render partial: 'layouts/js_constants.html.erb' %>
+  <%= csrf_meta_tags %>
+  <!--  styles -->
+  <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+  <!--[if lt IE 9]>
+  <script src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <!--[if IE]>
+  <link rel="stylesheet" type="text/css" href="/ie.css">
+  <![endif]-->
+  <!-- Le fav and touch icons -->
+  <%= analytics_init if Rails.env.production? %>
+  <style type="text/css" media="all">
+    .navbar {
+      min-width: 0px;
+    }
+  </style>
+</head>
+<body>
+<div class="mid_wrap">
+  <table width="100%" border="0" cellspacing="0" cellpadding="0" class="header1">
+    <tr>
+      <td width="50%"><img src="https://s3-us-west-2.amazonaws.com/vtn-temp/pdf_related/images/main_logo.png"  alt="main-logo"></td>
+      <td width="50%"><h1>Sales Receipt</h1></td>
+    </tr>
+    <!--<tr class="address">
+      <td width="70%">
+          <h5><span>Address:</span>ValueThisNow.com<p>543 Matterhorn Drive</p><p>Walnut Creek CA 94598</p></h5>
+    <h5><span>Phone:</span>(844) 938-2583</h5>
+            <h5><span>Email:</span>info@valuethisnow</h5>
+        </td>
+
+        <td width="30%">
+          <ul>
+            <li><span>Transaction ID</span><input type="text"></li>
+            <li><span>Date:</span><input type="text"></li>
+    <li><span>Receipt #:</span><input type="text"></li>
+        </td>
+    </tr>-->
+  </table>
+
+  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td width="70%" class="address1"><h5><span>Address:</span>ValueThisNow.com<p>543 Matterhorn Drive</p><p>Walnut Creek CA 94598</p></h5>
+        <h5><span>Phone:</span>(844) 938-2583</h5>
+        <h5><span>Email:</span>info@valuethisnow</h5>
+      </td>
+      <td width="45%" class="transaction1">
+        <ul>
+          <li><span>Transaction ID</span><input type="text"></li>
+          <li><span>Date:</span><input type="text" value="<%= Date.today%>"></li>
+          <li><span>Receipt #:</span><input type="text" placeholder="<%= @receipt_id.to_s.rjust(6, "0") %>"></li>
+        </ul>
+      </td>
+    </tr>
+  </table>
+
+  <div class="sale_table1">
+    <table  width="100%" cellspacing="1" class="table table-striped table-bordered1	 table-hover dataTable no-footer" id="dt_basic" style=" width: 100%; background:#cccccc" role="grid" aria-describedby="dt_basic_info">
+      <thead>
+      <tr role="row"><th data-hide="phone" class="sorting_asc" tabindex="0" aria-controls="dt_basic" rowspan="1" colspan="1" aria-sort="ascending" aria-label="ID: activate to sort column descending" style="width:8%; text-align:left; padding: 8px;">ID</th>
+        <th data-class="expand" class="expand sorting" tabindex="0" aria-controls="dt_basic" rowspan="1" colspan="1" aria-label="First Name: activate to sort column ascending" style="width:62%;">NAME OF ITEM APPRAISED</th>
+        <th data-hide="phone" class="sorting" tabindex="0" aria-controls="dt_basic" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending" style="width:6%;">Qty</th>
+        <th class="sorting new_sort" tabindex="0" aria-controls="dt_basic" rowspan="1" colspan="1" aria-label="Application Address: activate to sort column ascending" style="width:9%;">UNIT PRICE</th>
+        <th data-hide="phone,tablet" class="sorting1" tabindex="0" aria-controls="dt_basic" rowspan="1" colspan="1" aria-label=" Date: activate to sort column ascending" style="width: 181px;">TOTAL</th>
+      </tr>
+      </thead>
+      <tbody>
+
+      <%
+        sub_total = 0.0
+        discount = 0.0
+        ccnum = ""
+        promo_code = ""
+        appraised_by = ""
+        appraisal_name = ""
+        @appraisals.each_with_index do |appraisal, i|
+        row_class = "odd1"
+        row_class = "even1" if i%2
+        sub_total = sub_total + PAYMENT_PLAN[appraisal.selected_plan-1]
+        unless appraisal.paid_with_promo_code.blank?
+          bulk_order = BulkOrder.where(promo_code: appraisal.promo_code).first
+          discount = discount + (PAYMENT_PLAN[appraisal.selected_plan-1] * bulk_order.discount)/100
+          promo_code = appraisal.paid_with_promo_code
+        end
+        unless appraisal.payment.blank?
+          ccnum = appraisal.payment.ccnum
+        end
+        unless appraisal.assigned_to.blank?
+          appraiser = User.find_by_id(appraisal.assigned_to)
+          appraised_by = appraiser.name
+        end
+        appraisal_name = appraisal.name
+      %>
+          <tr role="row" class="<%= row_class %>">
+            <td class="sorting_1">12345</td>
+            <td class=" expand"><span class="responsiveExpander"></span><%= appraisal.name %></td>
+            <td>1</td>
+            <td><%= number_to_currency(PAYMENT_PLAN[appraisal.selected_plan-1]) %></td>
+            <td><%= number_to_currency(PAYMENT_PLAN[appraisal.selected_plan-1]) %></td>
+          </tr>
+
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+  <div class="sale_bottom1">
+
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td align="right" valign="top" class="sale_bottom_left1"><ul>
+          <li>
+            <span>Item Appraised By: </span>
+            <input type="text" placeholder="<%= appraised_by %>">
+          </li>
+        </ul></td>
+        <td class="sale_bottom_right1">
+          <ul>
+            <li><span>Subtotal</span><%= number_to_currency(sub_total) %></li>
+            <li><span>Discount</span> <input type="text" value="<%= discount.round(2) %>"></li>
+            <li><span>Sales Tax Rate</span> <input type="text"></li>
+            <li><span>Sales Tax</span><b>$</b>0.00</li>
+
+            <li class="main_new1">
+              <hr>
+              <span class="tot1">Total</span><span class="eqe"><b>$</b><%= (sub_total - discount).round(2) %></span>
+              <hr>
+            </li>
+          </ul>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="mid_section1">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td align="right" valign="top" class="sale_bottom_left1">
+          <%  %>
+          <ul>
+            <li><span>Credit Card No:</span><input type="text" placeholder="XXXX-XXX-XXX-<%= ccnum %>>"></li>
+            <li><span>Check No</span> <input type="text"></li>
+            <li><span>Money Order No:</span> <input type="text"></li>
+          </ul>
+        </td>
+
+        <td class="sale_bottom_right1">
+          <ul class="inner_input1">
+            <li>
+              <span>Credit Card</span>
+              <input placeholder="XXXX-XXX-XXX-<%= ccnum %>" type="text">
+            </li>
+            <li>
+              <span>Check No</span>
+              <input placeholder="XXXX" type="text">
+            </li>
+            <li>
+              <span>Money Order No:</span>
+              <input placeholder="XXXX" type="text">
+            </li>
+            <li>
+              <span>Check No</span>
+              <input placeholder="XXXX" type="text">
+            </li>
+            <li>
+              <span>Check No</span>
+              <input placeholder="XXXX" type="text">
+            </li>
+          </ul>
+
+        </td>
+      </tr>
+    </table>
+  </div>
+  <div class="last_sec1">
+
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td>
+          <h1>Four Hundred Dollars and 00/100 Thank You For Your Business!</h1>
+          <p>
+            Should you have any enquiries concerning this receipt, please contact Support at
+            <a href="tel:(844) 938-2583">(844) 938-2583</a>
+          </p>
+          <h2>ValueThisNow.com 543 Matterhorn Drive Walnut Creek CA 94598</h2>
+          <h4>
+            Tel:
+            <a href="tel:(844) 938-2583">(844) 938-2583</a>
+            Email: info@valuethisnow Web:
+            <a href="https://www.valuethisnow.com" target="_blank">https://www.ValueThisNow.com</a>
+          </h4>
+        </td>
+      </tr>
+    </table>
+  </div>
+  <div class="sale_last1">
+
+
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td>
+          <form>
+            <label class="control-label1">Name:</label>
+
+            <input type="text" class="form-control1" id="" placeholder="<%= @customer.name %>">
+
+            <br>
+
+            <label class="control-label1">Address:</label>
+
+            <input type="text" class="form-control1" id="" value="<%= @customer.address.address %>">
+            <br>
+
+            <label class="control-label1">City:</label>
+
+            <input type="text" class="form-control1" id="" placeholder="<%= @customer.address.city %>">
+            <br>
+
+            <label class="control-label1">State:</label>
+
+            <input type="text" class="form-control1" id="" placeholder="<%= @customer.address.state %>">
+
+            <br>
+
+            <label class="control-label1">Zip code:</label>
+
+            <input type="text" class="form-control1" id="" placeholder="<%= @customer.address.zip %>">
+
+            <br>
+
+            <label class="control-label1">Name of item appraised:</label>
+
+            <input type="text" class="form-control1" id=""  placeholder="<%= appraisal_name %>">
+
+          </form>
+        </td>
+        <td class="new-head1" align="right" valign="top">
+          <strong> <h1>Sales Receipt Slip</h1>
+            <ul>
+              <li><span>Transaction ID</span> <input type="text" placeholder="<%= promo_code %>"></li>
+              <li><span>Date:</span> <input type="text" placeholder="<%= Date.today%>"></li>
+              <li><span>Receipt #:</span> <input type="text" placeholder="<%= @receipt_id.to_s.rjust(6, "0") %>"></li>
+              <li class="sec_main1">Amount Received</span><b>$<%= (sub_total - discount).round(2) %></b></li>
+            </ul></strong>
+
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+</body>
+</html>

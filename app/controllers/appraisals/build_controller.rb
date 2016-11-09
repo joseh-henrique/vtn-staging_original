@@ -56,6 +56,7 @@ class Appraisals::BuildController < ApplicationController
     if params[:id] == "payment" && !params[:promo_code].blank?
       bulk_order = BulkOrder.where(:promo_code => params[:promo_code]).first
       if !bulk_order.nil? && bulk_order.selected_plan == @appraisal.selected_plan && bulk_order.credits_count > 0
+        @appraisal.paid_with_promo_code = params[:promo_code]
         @appraisal.pay!
         bulk_order.credits_remaining = bulk_order.credits_remaining - 1
         bulk_order.save

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161107052116) do
+ActiveRecord::Schema.define(version: 20161108135228) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -118,6 +118,7 @@ ActiveRecord::Schema.define(version: 20161107052116) do
     t.boolean  "sent_2w",                               default: false
     t.boolean  "sent_30d",                              default: false
     t.string   "short_appraisal_public_id"
+    t.string   "paid_with_promo_code"
   end
 
   add_index "appraisals", ["assigned_to"], name: "index_appraisals_on_assigned_to", using: :btree
@@ -519,6 +520,15 @@ ActiveRecord::Schema.define(version: 20161107052116) do
 
   add_index "roles", ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id", using: :btree
   add_index "roles", ["name"], name: "index_roles_on_name", using: :btree
+
+  create_table "sales_receipts", force: :cascade do |t|
+    t.integer  "receipt_id",    default: 0, null: false
+    t.integer  "customer_id"
+    t.datetime "email_sent_at"
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.string   "pdf_url"
+  end
 
   create_table "sell_insure_email_reports", force: :cascade do |t|
     t.integer  "appraisal_id"

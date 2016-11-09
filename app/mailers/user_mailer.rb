@@ -52,6 +52,16 @@ class UserMailer < ActionMailer::Base
          :subject => "[User Support] #{message.subject}")
   end
 
+  def email_sales_receipt(email, subject, pdf_link, customer_name)
+    @pdf_link = pdf_link
+    @customer_name = customer_name
+    mail(:to => email,
+         :subject => "#{subject}") do |format|
+      format.text
+      format.html
+    end
+  end
+
   def sell_insure_notify(partner_detail, subject, sell_insure, static_content, appraisal, pdf_link)
     @partner_detail = partner_detail
     @sell_insure = sell_insure

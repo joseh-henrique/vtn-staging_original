@@ -16,7 +16,6 @@ class AppraisalsController < ApplicationController
     @appraisals = Kaminari.paginate_array(@appraisals).per_page_kaminari(params[:page]).per(10)
 
     if @appraisals.blank?
-      @appraisal = Appraisal.new
       1.times { @appraisal.photos.build }
     end
 

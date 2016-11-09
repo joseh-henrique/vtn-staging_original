@@ -36,6 +36,7 @@ PurexNew::Application.routes.draw do
 
     get '/users/save_json_avatar' => 'users#save_json_avatar', :as => :save_json_avatar
     get '/users/new_avatar' => 'users#new_avatar', :as => :new_avatar
+    get '/users/sales_receipt/:id' => 'users#sales_receipt', :as => :sales_receipt
     post '/users/save_avatar' => 'users#save_avatar', :as => :save_avatar
     match '/users/crop_avatar' => 'users#crop_avatar', :as => :crop_avatar, via: :all
 
@@ -48,7 +49,6 @@ PurexNew::Application.routes.draw do
   get '/appraisals/wizard_categories/:appraisal_id' => 'appraisals#wizard_categories', :as => :wizard_categories, via: [:get]
   match '/appraisals/share' => 'appraisals#share', :as => :share_appraisal, via: [:get, :post]
   get '/appraisals/show_shared/:id' => 'appraisals#show_shared', :as => :show_shared
-  get '/appraisals/sales_receipt/:id' => 'appraisals#sales_receipt', :as => :sales_receipt
   get '/appraisals/bulk_order_promo' => 'appraisals#bulk_order_promo', :as => :bulk_order_promo
   resources :appraisals do
     resources :build, controller: 'appraisals/build'
