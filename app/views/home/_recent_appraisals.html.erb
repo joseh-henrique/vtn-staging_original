@@ -5,7 +5,7 @@
     <div class="span12">
       <div id="owl-demo" class="owl-carousel">
         <% @recent_appraisals.each_with_index do |ra, i| %>
-            <div class="item"><span class="gft report-image1"><%= cl_image_tag(ra.short_appraisal_public_id+".png", :width => 105, :height => 208, :crop => :fill, :id => "ra_image_"+i.to_s) %></span></div>
+            <div class="item link"><span class="gft report-image1"><%= cl_image_tag(ra.short_appraisal_public_id+".png", :width => 125, :height => 248, :crop => :fill, :id => ra.id.to_s) %></span></div>
          <% end %>
      </div>
       <div class="customNavigation">

@@ -85,11 +85,52 @@ $ ->
   return
 
 $(document).ready ->
+  $("#owl-demo").owlCarousel({
+    items : 8
+    itemsDesktop: [
+      1100
+      7
+    ]
+    itemsDesktopSmall: [
+      900
+      4
+    ]
+    itemsTablet: [
+      600
+      3
+    ]
+    itemsMobile: [
+      375
+      2
+    ]
+    autoPlay: true
+  })
+  $('.next').click ->
+    alert('in next')
+    owl.trigger 'owl.next'
+    return
+  $('.prev').click ->
+    owl.trigger 'owl.prev'
+    return
+  $('.link').on 'click', (event) ->
+    $this = $(this)
+    img_src = $(this).find("img:first").attr("src")
+    appraisal_id = $(this).find("img:first").attr("id")
+    #alert("appraisal_id is "+appraisal_id)
+    #alert("iframe_url is "+document.getElementById("iframe_url").value)
+    iframe_url = document.getElementById("iframe_url").value + appraisal_id + ".pdf?full=no&debug=true"
+    iframe = document.getElementsByName('myIframe')[0]
+    #iframe.src = img_src
+    iframe.src = iframe_url
+    $(".report1").show(1000)
+    $(".home-contact").show(1000)
+    return
+
   $('.openvideo').click ->
     $('.myvideo').toggle()
     return
   $('.report-image1').click ->
-    alert("image click")
+    alert("image click "+$this)
     $('.report1').toggle 1000
     iframe = document.getElementById('myIframe')[0];
     iframe.src="http://res.cloudinary.com/hpc/image/upload/c_fill,h_208,w_105/appraisal_259.png"
