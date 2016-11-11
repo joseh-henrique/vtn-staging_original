@@ -116,8 +116,6 @@ $(document).ready ->
     $this = $(this)
     img_src = $(this).find("img:first").attr("src")
     appraisal_id = $(this).find("img:first").attr("id")
-    #alert("appraisal_id is "+appraisal_id)
-    #alert("iframe_url is "+document.getElementById("iframe_url").value)
     iframe_url = document.getElementById("iframe_url").value + appraisal_id + ".pdf?full=no&debug=true"
     iframe = document.getElementsByName('myIframe')[0]
     #iframe.src = img_src
@@ -129,8 +127,16 @@ $(document).ready ->
   $('.openvideo').click ->
     $('.myvideo').toggle()
     return
+  $('.myvideo .close-frame').click ->
+    CloseVideo()
+    return
+  CloseVideo = ->
+    player = $('#iframe_id')
+    vidSrc = player.prop('src')
+    player.prop 'src', ''
+    player.prop 'src', vidSrc
+    return
   $('.report-image1').click ->
-    alert("image click "+$this)
     $('.report1').toggle 1000
     iframe = document.getElementById('myIframe')[0];
     iframe.src="http://res.cloudinary.com/hpc/image/upload/c_fill,h_208,w_105/appraisal_259.png"
