@@ -116,6 +116,7 @@ $(document).ready ->
     $this = $(this)
     img_src = $(this).find("img:first").attr("src")
     appraisal_id = $(this).find("img:first").attr("id")
+    $("#appraisal_id").val(appraisal_id)
     iframe_url = document.getElementById("iframe_url").value + appraisal_id + ".pdf?full=no&debug=true"
     iframe = document.getElementsByName('myIframe')[0]
     #iframe.src = img_src

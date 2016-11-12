@@ -1,7 +1,7 @@
 <div class="container wal">
   <div class="welcome">
     <div class="hel">
-      <h2 class="left-1">Tell us about your item</h2>
+      <h2 class="left-1">Payment and Confirm</h2>
       <h2 class="right-1">1 of 4</h2>
       <div class="clear"></div>
     </div>
@@ -18,17 +18,17 @@
               </a> Inform</li>
               <li><a href="upload.html">
                 <div class="con-list">
-                  <div class="green-no color-red"> 2 </div>
+                  <div class="green-no color-gre"> 2 </div>
                 </div>
               </a>Upload</li>
               <li><a href="select.html">
                 <div class="con-list">
-                  <div class="green-no color-red">3 </div>
+                  <div class="green-no color-gre">3 </div>
                 </div>
               </a>Select</li>
               <li><a href="check.html">
                 <div class="con-list">
-                  <div class="green-no color-red"> 4 </div>
+                  <div class="green-no color-gre"> 4 </div>
                 </div>
               </a>Check Out</li>
             </ul>
@@ -267,46 +267,57 @@
 
                                               <div class="prome2">
                                                 <div class="form-group">
-                                                  <label for="appraisal_payment_attributes_zip" class="col-sm-4 control-label">* Card No.</label>
-                                                  <div class="col-sm-8">
-                                                    <input type="text" class="form-control" id="appraisal_payment_attributes_number" name="appraisal[payment_attributes][number]" value="" maxlength="16" required/>
+                                                  <div class="row pay-pad">
+                                                    <div class="col-md-4">
+                                                      <label class="control-label" for="appraisal_payment_attributes_zip">* Card No.</label>
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                      <input type="text" class="form-control" id="appraisal_payment_attributes_number" name="appraisal[payment_attributes][number]" value="" maxlength="16" required/>
+                                                    </div>
                                                   </div>
                                                 </div>
                                                 <div class="form-group">
-                                                  <label class="col-sm-4 control-label">* Type</label>
-                                                  <div class="col-sm-8">
-                                                    <select name="select" id="select" class="form-control" required>
-                                                      <option value=""></option>
-                                                      <option>VISA</option>
-                                                      <option>Mastercard</option>
-                                                      <option>American Express</option>
-                                                      <option>Discover</option>
-                                                    </select>
-                                                  </div>
-                                                </div>
-                                                <div class="form-group">
-                                                  <label class="col-sm-4 control-label">* Expires</label>
-                                                  <div class="col-sm-8">
-                                                    <div class="row">
-                                                      <div class="col-xs-6">
-                                                        <select class="form-control" id="appraisal_payment_attributes_expmon" name="appraisal[payment_attributes][expmon]" required>
+                                                    <div class="row pay-pad">
+                                                      <div class="col-md-4">
+                                                        <label class="control-label">* Type</label>
+                                                      </div>
+                                                      <div class="col-md-8">
+                                                        <select name="select" id="select" class="form-control" required>
                                                           <option value=""></option>
-                                                          <option value="1">1</option>
-                                                          <option value="2">2</option>
-                                                          <option value="3">3</option>
-                                                          <option value="4">4</option>
-                                                          <option value="5">5</option>
-                                                          <option value="6">6</option>
-                                                          <option value="7">7</option>
-                                                          <option value="8">8</option>
-                                                          <option value="9">9</option>
-                                                          <option value="10">10</option>
-                                                          <option value="11">11</option>
-                                                          <option value="12">12</option>
+                                                          <option>VISA</option>
+                                                          <option>Mastercard</option>
+                                                          <option>American Express</option>
+                                                          <option>Discover</option>
                                                         </select>
                                                       </div>
-                                                      <div class="col-xs-6">
-                                                        <select class="form-control" id="appraisal_payment_attributes_expyear" name="appraisal[payment_attributes][expyear]" required>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                  <div class="row pay-pad">
+                                                    <div class="col-md-4">
+                                                       <label class="control-label">* Expires</label>
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                      <div class="row">
+                                                        <div class="col-md-6">
+                                                        <select class="form-control" id="appraisal_payment_attributes_expmon" name="appraisal[payment_attributes][expmon]" required>
+                                                          <option value=""></option>
+                                                          <option value="1">Jan</option>
+                                                          <option value="2">Feb</option>
+                                                          <option value="3">Mar</option>
+                                                          <option value="4">Apr</option>
+                                                          <option value="5">May</option>
+                                                          <option value="6">Jun</option>
+                                                          <option value="7">Jul</option>
+                                                          <option value="8">Aug</option>
+                                                          <option value="9">Sep</option>
+                                                          <option value="10">Oct</option>
+                                                          <option value="11">Nov</option>
+                                                          <option value="12">Dec</option>
+                                                        </select>
+                                                      </div>
+                                                        <div class="col-md-6">
+                                                           <select class="form-control" id="appraisal_payment_attributes_expyear" name="appraisal[payment_attributes][expyear]" required>
                                                           <option value=""></option>
                                                           <option>2014</option>
                                                           <option>2015</option>
@@ -332,14 +343,19 @@
                                                     </div>
                                                   </div>
                                                 </div>
+                                                </div>
                                                 <div class="form-group">
-                                                  <label for="appraisal_payment_attributes_cvv" class="col-sm-4 control-label">* CVV</label>
-                                                  <div class="col-sm-8">
-                                                    <input type="password" class="form-control" id="appraisal_payment_attributes_cvv" name="appraisal[payment_attributes][cvv]" required/>
-                                                  </div>
+                                                  <div class="row pay-pad">
+                                                    <div class="col-md-4">
+                                                      <label for="appraisal_payment_attributes_cvv" class="control-label">* CVV</label>
+                                                     </div>
+                                                    <div class="col-md-8">
+                                                      <input type="password" class="form-control" id="appraisal_payment_attributes_cvv" name="appraisal[payment_attributes][cvv]" required/>
+                                                    </div>
                                                 </div>
                                               </div>
                                             </div>
+                                          </div>
                                           </div>
                                           <div class="form-group">
                                             <div class="row">

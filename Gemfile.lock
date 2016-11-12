@@ -134,7 +134,7 @@ GEM
     chronic (0.10.2)
     climate_control (0.0.3)
       activesupport (>= 3.0)
-    cloudinary (1.2.4)
+    cloudinary (1.0.85)
       aws_cf_signer
       rest-client
     cocaine (0.5.8)
@@ -602,6 +602,8 @@ GEM
       builder
       nokogiri (>= 1.4.1)
       trollop
+    recaptcha (3.4.0)
+      json
     responders (2.2.0)
       railties (>= 4.2.0, < 5.1)
     rest-client (2.0.0)
@@ -730,7 +732,7 @@ DEPENDENCIES
   cancan
   capybara (~> 2.2.1)
   carrierwave (~> 0.10.0)
-  cloudinary (~> 1.2.4)
+  cloudinary (~> 1.0.63)
   coffee-rails (~> 4.0.1)
   comfortable_mexican_sofa
   country_select
@@ -783,6 +785,7 @@ DEPENDENCIES
   rails_email_validator (~> 0.1.4)
   ransack
   rb-fsevent (~> 0.9.1)
+  recaptcha
   rmagick
   rolify
   rspec-rails

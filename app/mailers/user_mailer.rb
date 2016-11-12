@@ -82,6 +82,15 @@ class UserMailer < ActionMailer::Base
          :subject => "#{subject}")
   end
 
+  def contact_property_owner(email, subject, phone, contact_email, message, appraisal_name)
+    @phone = phone
+    @appraisal_name = appraisal_name
+    @contact_email = contact_email
+    @message = message
+    mail(:to => email,
+         :subject => "#{subject}")
+  end
+
   def resend_bulk_order_code(email, message, subject, bulk_orders)
     @message = message
     @bulk_orders = bulk_orders

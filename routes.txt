@@ -1,0 +1,400 @@
+DEPRECATION WARNING: LogTailer is deprecated and will be removed on Rails 5. (called from block in tsort_each at /home/vagrant/.rvm/rubies/ruby-2.3.1/lib/ruby/2.3.0/tsort.rb:228)
+                                                    Prefix Verb            URI Pattern                                                               Controller#Action
+                                                      root GET             /                                                                         home#index
+                                              taxes_income GET             /taxes/irs_income(.:format)                                               taxes#irs_income
+                                            payouts_create GET             /payouts/create(.:format)                                                 payouts#create
+                                         dashboard_payouts GET             /dashboard/payouts(/:status)(.:format)                                    dashboard#payouts
+                                          dashboard_detail GET             /dashboard(/:detail)(.:format)                                            dashboard#index
+                                                  annotate POST            /tags/create(.:format)                                                    tags#create
+                                               destroy_tag GET|DELETE|POST /tags/destroy(.:format)                                                   tags#destroy
+                                        payment_bulk_order POST            /payments/:payment_id/bulk_order(.:format)                                payments#bulk_order
+                                                  payments GET             /payments(.:format)                                                       payments#index
+                                                           POST            /payments(.:format)                                                       payments#create
+                                               new_payment GET             /payments/new(.:format)                                                   payments#new
+                                              edit_payment GET             /payments/:id/edit(.:format)                                              payments#edit
+                                                   payment GET             /payments/:id(.:format)                                                   payments#show
+                                                           PATCH           /payments/:id(.:format)                                                   payments#update
+                                                           PUT             /payments/:id(.:format)                                                   payments#update
+                                                           DELETE          /payments/:id(.:format)                                                   payments#destroy
+                                           validate_coupon GET             /validate_coupon(.:format)                                                payments#validate_coupon
+                                     appraisal_data_create GET             /appraisal_data/create(.:format)                                          appraisal_data#create
+                                                  facebook GET             /facebook(.:format)                                                       users#facebook_login
+                                   update_appraiser_status POST|PUT        /users/update_appraiser_status(.:format)                                  users#update_appraiser_status
+                            users_get_user_by_vendor_token GET             /users/get_user_by_vendor_token(.:format)                                 users#get_user_by_vendor_token
+                                          new_user_session GET             /users/sign_in(.:format)                                                  sessions#new
+                                              user_session POST            /users/sign_in(.:format)                                                  sessions#create
+                                      destroy_user_session DELETE          /users/sign_out(.:format)                                                 sessions#destroy
+                                             user_password POST            /users/password(.:format)                                                 devise/passwords#create
+                                         new_user_password GET             /users/password/new(.:format)                                             devise/passwords#new
+                                        edit_user_password GET             /users/password/edit(.:format)                                            devise/passwords#edit
+                                                           PATCH           /users/password(.:format)                                                 devise/passwords#update
+                                                           PUT             /users/password(.:format)                                                 devise/passwords#update
+                                  cancel_user_registration GET             /users/cancel(.:format)                                                   registrations#cancel
+                                         user_registration POST            /users(.:format)                                                          registrations#create
+                                     new_user_registration GET             /users/sign_up(.:format)                                                  registrations#new
+                                    edit_user_registration GET             /users/edit(.:format)                                                     registrations#edit
+                                                           PATCH           /users(.:format)                                                          registrations#update
+                                                           PUT             /users(.:format)                                                          registrations#update
+                                                           DELETE          /users(.:format)                                                          registrations#destroy
+                                         user_confirmation POST            /users/confirmation(.:format)                                             devise/confirmations#create
+                                     new_user_confirmation GET             /users/confirmation/new(.:format)                                         devise/confirmations#new
+                                                           GET             /users/confirmation(.:format)                                             devise/confirmations#show
+                                     new_appraiser_session GET             /appraisers/sign_in(.:format)                                             devise/sessions#new
+                                         appraiser_session POST            /appraisers/sign_in(.:format)                                             devise/sessions#create
+                                 destroy_appraiser_session DELETE          /appraisers/sign_out(.:format)                                            devise/sessions#destroy
+                                        appraiser_password POST            /appraisers/password(.:format)                                            devise/passwords#create
+                                    new_appraiser_password GET             /appraisers/password/new(.:format)                                        devise/passwords#new
+                                   edit_appraiser_password GET             /appraisers/password/edit(.:format)                                       devise/passwords#edit
+                                                           PATCH           /appraisers/password(.:format)                                            devise/passwords#update
+                                                           PUT             /appraisers/password(.:format)                                            devise/passwords#update
+                             cancel_appraiser_registration GET             /appraisers/cancel(.:format)                                              registrations#cancel
+                                    appraiser_registration POST            /appraisers(.:format)                                                     registrations#create
+                                new_appraiser_registration GET             /appraisers/sign_up(.:format)                                             registrations#new
+                               edit_appraiser_registration GET             /appraisers/edit(.:format)                                                registrations#edit
+                                                           PATCH           /appraisers(.:format)                                                     registrations#update
+                                                           PUT             /appraisers(.:format)                                                     registrations#update
+                                                           DELETE          /appraisers(.:format)                                                     registrations#destroy
+                                    appraiser_confirmation POST            /appraisers/confirmation(.:format)                                        devise/confirmations#create
+                                new_appraiser_confirmation GET             /appraisers/confirmation/new(.:format)                                    devise/confirmations#new
+                                                           GET             /appraisers/confirmation(.:format)                                        devise/confirmations#show
+                                      new_customer_session GET             /customers/sign_in(.:format)                                              devise/sessions#new
+                                          customer_session POST            /customers/sign_in(.:format)                                              devise/sessions#create
+                                  destroy_customer_session DELETE          /customers/sign_out(.:format)                                             devise/sessions#destroy
+                                         customer_password POST            /customers/password(.:format)                                             devise/passwords#create
+                                     new_customer_password GET             /customers/password/new(.:format)                                         devise/passwords#new
+                                    edit_customer_password GET             /customers/password/edit(.:format)                                        devise/passwords#edit
+                                                           PATCH           /customers/password(.:format)                                             devise/passwords#update
+                                                           PUT             /customers/password(.:format)                                             devise/passwords#update
+                              cancel_customer_registration GET             /customers/cancel(.:format)                                               registrations#cancel
+                                     customer_registration POST            /customers(.:format)                                                      registrations#create
+                                 new_customer_registration GET             /customers/sign_up(.:format)                                              registrations#new
+                                edit_customer_registration GET             /customers/edit(.:format)                                                 registrations#edit
+                                                           PATCH           /customers(.:format)                                                      registrations#update
+                                                           PUT             /customers(.:format)                                                      registrations#update
+                                                           DELETE          /customers(.:format)                                                      registrations#destroy
+                                     customer_confirmation POST            /customers/confirmation(.:format)                                         devise/confirmations#create
+                                 new_customer_confirmation GET             /customers/confirmation/new(.:format)                                     devise/confirmations#new
+                                                           GET             /customers/confirmation(.:format)                                         devise/confirmations#show
+                               customer_omniauth_authorize GET|POST        /customers/auth/:provider(.:format)                                       omniauth_callbacks#passthru {:provider=>/twitter|facebook|linkedin/}
+                                customer_omniauth_callback GET|POST        /customers/auth/:action/callback(.:format)                                omniauth_callbacks#(?-mix:twitter|facebook|linkedin)
+                                             finish_signup GET|PATCH       /users/:id/finish_signup(.:format)                                        users#finish_signup
+                                       save_json_signature POST            /users/save_json_signature(.:format)                                      users#save_json_signature
+                                             new_signature GET             /users/new_signature(.:format)                                            users#new_signature
+                                            save_signature POST            /users/save_signature(.:format)                                           users#save_signature
+                                            crop_signature                 /users/crop_signature(.:format)                                           users#crop_signature
+                                          save_json_avatar GET             /users/save_json_avatar(.:format)                                         users#save_json_avatar
+                                                new_avatar GET             /users/new_avatar(.:format)                                               users#new_avatar
+                                             sales_receipt GET             /users/sales_receipt/:id(.:format)                                        users#sales_receipt
+                                               save_avatar POST            /users/save_avatar(.:format)                                              users#save_avatar
+                                               crop_avatar                 /users/crop_avatar(.:format)                                              users#crop_avatar
+                                           appraiser_steps GET             /appraiser_steps(.:format)                                                appraiser_steps#index
+                                                           POST            /appraiser_steps(.:format)                                                appraiser_steps#create
+                                        new_appraiser_step GET             /appraiser_steps/new(.:format)                                            appraiser_steps#new
+                                       edit_appraiser_step GET             /appraiser_steps/:id/edit(.:format)                                       appraiser_steps#edit
+                                            appraiser_step GET             /appraiser_steps/:id(.:format)                                            appraiser_steps#show
+                                                           PATCH           /appraiser_steps/:id(.:format)                                            appraiser_steps#update
+                                                           PUT             /appraiser_steps/:id(.:format)                                            appraiser_steps#update
+                                                           DELETE          /appraiser_steps/:id(.:format)                                            appraiser_steps#destroy
+                                                    photos GET             /photos(.:format)                                                         photos#index
+                                                           POST            /photos(.:format)                                                         photos#create
+                                                     photo DELETE          /photos/:id(.:format)                                                     photos#destroy
+                                                 photo_tag GET             /photos/tag/:appraisal_id/:photo_id(.:format)                             photos#tag
+                                         set_default_photo POST            /photos/set_as_default/:appraisal_id/:photo_id(.:format)                  photos#set_as_default
+                                       wizard_photo_upload GET             /appraisals/wizard_photo_upload/:appraisal_id(.:format)                   appraisals#wizard_photo_upload
+                                         wizard_categories GET             /appraisals/wizard_categories/:appraisal_id(.:format)                     appraisals#wizard_categories
+                                           share_appraisal GET|POST        /appraisals/share(.:format)                                               appraisals#share
+                                               show_shared GET             /appraisals/show_shared/:id(.:format)                                     appraisals#show_shared
+                                          bulk_order_promo GET             /appraisals/bulk_order_promo(.:format)                                    appraisals#bulk_order_promo
+                                     appraisal_build_index GET             /appraisals/:appraisal_id/build(.:format)                                 appraisals/build#index
+                                                           POST            /appraisals/:appraisal_id/build(.:format)                                 appraisals/build#create
+                                       new_appraisal_build GET             /appraisals/:appraisal_id/build/new(.:format)                             appraisals/build#new
+                                      edit_appraisal_build GET             /appraisals/:appraisal_id/build/:id/edit(.:format)                        appraisals/build#edit
+                                           appraisal_build GET             /appraisals/:appraisal_id/build/:id(.:format)                             appraisals/build#show
+                                                           PATCH           /appraisals/:appraisal_id/build/:id(.:format)                             appraisals/build#update
+                                                           PUT             /appraisals/:appraisal_id/build/:id(.:format)                             appraisals/build#update
+                                                           DELETE          /appraisals/:appraisal_id/build/:id(.:format)                             appraisals/build#destroy
+                                          appraisal_photos GET             /appraisals/:appraisal_id/photos(.:format)                                photos#index
+                                                           POST            /appraisals/:appraisal_id/photos(.:format)                                photos#create
+                                           appraisal_photo DELETE          /appraisals/:appraisal_id/photos/:id(.:format)                            photos#destroy
+                                           reply_appraisal GET             /appraisals/:id/reply(.:format)                                           appraisals#reply
+                                           claim_appraisal GET             /appraisals/:id/claim(.:format)                                           appraisals#claim
+                                       completed_appraisal GET             /appraisals/:id/completed(.:format)                                       appraisals#completed
+                                bulk_order_promo_appraisal GET             /appraisals/:id/bulk_order_promo(.:format)                                appraisals#bulk_order_promo
+                               process_completed_appraisal POST            /appraisals/:id/process_completed(.:format)                               appraisals#process_completed
+                                                appraisals GET             /appraisals(.:format)                                                     appraisals#index
+                                                           POST            /appraisals(.:format)                                                     appraisals#create
+                                             new_appraisal GET             /appraisals/new(.:format)                                                 appraisals#new
+                                            edit_appraisal GET             /appraisals/:id/edit(.:format)                                            appraisals#edit
+                                                 appraisal GET             /appraisals/:id(.:format)                                                 appraisals#show
+                                                           PATCH           /appraisals/:id(.:format)                                                 appraisals#update
+                                                           PUT             /appraisals/:id(.:format)                                                 appraisals#update
+                                                           DELETE          /appraisals/:id(.:format)                                                 appraisals#destroy
+                                         bulk_coupon_index GET             /bulk_coupon(.:format)                                                    bulk_coupon#index
+                                                           POST            /bulk_coupon(.:format)                                                    bulk_coupon#create
+                                           new_bulk_coupon GET             /bulk_coupon/new(.:format)                                                bulk_coupon#new
+                                          edit_bulk_coupon GET             /bulk_coupon/:id/edit(.:format)                                           bulk_coupon#edit
+                                               bulk_coupon GET             /bulk_coupon/:id(.:format)                                                bulk_coupon#show
+                                                           PATCH           /bulk_coupon/:id(.:format)                                                bulk_coupon#update
+                                                           PUT             /bulk_coupon/:id(.:format)                                                bulk_coupon#update
+                                                           DELETE          /bulk_coupon/:id(.:format)                                                bulk_coupon#destroy
+                                    resend_code_bulk_order GET             /bulk_order/:id/resend_code(.:format)                                     bulk_order#resend_code
+                                          bulk_order_index GET             /bulk_order(.:format)                                                     bulk_order#index
+                                                           POST            /bulk_order(.:format)                                                     bulk_order#create
+                                            new_bulk_order GET             /bulk_order/new(.:format)                                                 bulk_order#new
+                                           edit_bulk_order GET             /bulk_order/:id/edit(.:format)                                            bulk_order#edit
+                                                bulk_order GET             /bulk_order/:id(.:format)                                                 bulk_order#show
+                                                           PATCH           /bulk_order/:id(.:format)                                                 bulk_order#update
+                                                           PUT             /bulk_order/:id(.:format)                                                 bulk_order#update
+                                                           DELETE          /bulk_order/:id(.:format)                                                 bulk_order#destroy
+                                          appraiser_skills GET             /appraiser/skills(.:format)                                               skills#index
+                                                           POST            /appraiser/skills(.:format)                                               skills#create
+                                       new_appraiser_skill GET             /appraiser/skills/new(.:format)                                           skills#new
+                                      edit_appraiser_skill GET             /appraiser/skills/:id/edit(.:format)                                      skills#edit
+                                           appraiser_skill GET             /appraiser/skills/:id(.:format)                                           skills#show
+                                                           PATCH           /appraiser/skills/:id(.:format)                                           skills#update
+                                                           PUT             /appraiser/skills/:id(.:format)                                           skills#update
+                                                           DELETE          /appraiser/skills/:id(.:format)                                           skills#destroy
+                                                 appraiser POST            /appraiser(.:format)                                                      appraiser#create
+                                             new_appraiser GET             /appraiser/new(.:format)                                                  appraiser#new
+                                            edit_appraiser GET             /appraiser/edit(.:format)                                                 appraiser#edit
+                                                           GET             /appraiser(.:format)                                                      appraiser#show
+                                                           PATCH           /appraiser(.:format)                                                      appraiser#update
+                                                           PUT             /appraiser(.:format)                                                      appraiser#update
+                                                           DELETE          /appraiser(.:format)                                                      appraiser#destroy
+                                        submit_application GET             /appraisers/submit_application(.:format)                                  appraiser#submit_application
+                                    get_application_status GET             /appraisers/get_application_status/:id(.:format)                          appraiser#get_application_status
+                                         appraisers_notify GET|POST        /appraisers/notify(.:format)                                              appraiser#notify
+                                  skills_getRootCategories GET             /skills/getRootCategories(.:format)                                       skills#getRootCategories
+                                           classifications GET             /classifications(.:format)                                                classifications#index
+                                                           POST            /classifications(.:format)                                                classifications#create
+                                        new_classification GET             /classifications/new(.:format)                                            classifications#new
+                                       edit_classification GET             /classifications/:id/edit(.:format)                                       classifications#edit
+                                            classification GET             /classifications/:id(.:format)                                            classifications#show
+                                                           PATCH           /classifications/:id(.:format)                                            classifications#update
+                                                           PUT             /classifications/:id(.:format)                                            classifications#update
+                                                           DELETE          /classifications/:id(.:format)                                            classifications#destroy
+                                                    skills GET             /skills(.:format)                                                         skills#index
+                                                           POST            /skills(.:format)                                                         skills#create
+                                                     skill DELETE          /skills/:id(.:format)                                                     skills#destroy
+                                                   contact GET             /contact(.:format)                                                        contact#new
+                                                           POST            /contact(.:format)                                                        contact#create
+                                                complaints GET             /complaint(.:format)                                                      contact#complaint
+                                                   tickets GET             /tickets(.:format)                                                        contact#tickets
+                                                new_ticket GET             /ticket(.:format)                                                         contact#ticket
+                                             ticket_create POST            /ticket(.:format)                                                         contact#ticket_create
+                                               show_ticket GET             /tickets/:id(.:format)                                                    contact#show
+                                               unsubscribe GET             /unsubscribe(.:format)                                                    home#unsubscribe
+                                                       how GET             /home/how(.:format)                                                       home#how
+                                                    become GET             /home/become(.:format)                                                    home#become
+                                                   privacy GET             /home/privacy(.:format)                                                   home#privacy
+                                                     terms GET             /home/terms(.:format)                                                     home#terms
+                                                    ethics GET             /home/ethics(.:format)                                                    home#ethics
+                                               determining GET             /home/determining(.:format)                                               home#determining
+                                                  limiting GET             /home/limiting(.:format)                                                  home#limiting
+                                                what_makes GET             /home/what_makes(.:format)                                                home#what_makes
+                                                      cost GET             /home/cost(.:format)                                                      home#cost
+                                     home_appraiser_invite GET             /home/appraiser_invite(.:format)                                          home#appraiser_invite
+                                         home_fee_schedule GET             /home/fee_schedule(.:format)                                              home#fee_schedule
+                                     home_uspap_compliance GET             /home/uspap_compliance(.:format)                                          home#uspap_compliance
+      home_appraisal_body_restricteduse_USPAP_compliant_no GET             /home/appraisal_body_restricteduse_USPAP_compliant_no(.:format)           home#appraisal_body_restricteduse_USPAP_compliant_no
+     home_appraisal_body_restricteduse_USPAP_compliant_yes GET             /home/appraisal_body_restricteduse_USPAP_compliant_yes(.:format)          home#appraisal_body_restricteduse_USPAP_compliant_yes
+ home_appraisal_body_summary_forselling_USPAP_compliant_no GET             /home/appraisal_body_summary_forselling_USPAP_compliant_no(.:format)      home#appraisal_body_summary_forselling_USPAP_compliant_no
+home_appraisal_body_summary_forselling_USPAP_compliant_yes GET             /home/appraisal_body_summary_forselling_USPAP_compliant_yes(.:format)     home#appraisal_body_summary_forselling_USPAP_compliant_yes
+                                                 home_cost GET             /home/cost(.:format)                                                      home#cost
+                                         home_testimonials GET             /home/testimonials(.:format)                                              home#testimonials
+                                           home_categories GET             /home/categories(.:format)                                                home#categories
+                                                    stores GET             /stores(.:format)                                                         home#stores
+                                                 roadshows GET             /roadshows(.:format)                                                      home#roadshows
+                                                  salvages GET             /salvages(.:format)                                                       home#salvages
+                                                rare_books GET             /rare-books(.:format)                                                     home#rare_books
+                                        sports_memorabilia GET             /sports-memorabilia(.:format)                                             home#sports_memorabilia
+                                                 affiliate GET             /home/affiliate(.:format)                                                 home#affiliate
+                              appraisal_provider_agreement GET             /home/appraisal_provider_agreement(.:format)                              home#appraisal_provider_agreement
+                                   using_online_appraisals GET             /home/using_online_appraisals(.:format)                                   home#using_online_appraisals
+                                        cost_of_appraisals GET             /home/cost_of_appraisals(.:format)                                        home#cost_of_appraisals
+                                     contact_propery_owner POST            /home/contact_property_owner(.:format)                                    home#contact_property_owner
+                                                  comments POST            /appraisals/comment(.:format)                                             appraisals#comment
+                                          appraisal_reject GET             /appraisals/reject/:id(.:format)                                          appraisals#reject
+                                               switch_user GET             /switch_user(.:format)                                                    switch_user#set_current_user
+                                                admin_root GET             /admin(.:format)                                                          admin/dashboard#index
+                       batch_action_admin_partner_pricings POST            /admin/partner_pricings/batch_action(.:format)                            admin/partner_pricings#batch_action
+                                    admin_partner_pricings GET             /admin/partner_pricings(.:format)                                         admin/partner_pricings#index
+                                                           POST            /admin/partner_pricings(.:format)                                         admin/partner_pricings#create
+                                 new_admin_partner_pricing GET             /admin/partner_pricings/new(.:format)                                     admin/partner_pricings#new
+                                edit_admin_partner_pricing GET             /admin/partner_pricings/:id/edit(.:format)                                admin/partner_pricings#edit
+                                     admin_partner_pricing GET             /admin/partner_pricings/:id(.:format)                                     admin/partner_pricings#show
+                                                           PATCH           /admin/partner_pricings/:id(.:format)                                     admin/partner_pricings#update
+                                                           PUT             /admin/partner_pricings/:id(.:format)                                     admin/partner_pricings#update
+                                                           DELETE          /admin/partner_pricings/:id(.:format)                                     admin/partner_pricings#destroy
+                                      admin_vtn_statistics GET             /admin/vtn_statistics(.:format)                                           admin/vtn_statistics#index
+                             batch_action_admin_promotions POST            /admin/promotions/batch_action(.:format)                                  admin/promotions#batch_action
+                                          admin_promotions GET             /admin/promotions(.:format)                                               admin/promotions#index
+                                                           POST            /admin/promotions(.:format)                                               admin/promotions#create
+                                       new_admin_promotion GET             /admin/promotions/new(.:format)                                           admin/promotions#new
+                                      edit_admin_promotion GET             /admin/promotions/:id/edit(.:format)                                      admin/promotions#edit
+                                           admin_promotion GET             /admin/promotions/:id(.:format)                                           admin/promotions#show
+                                                           PATCH           /admin/promotions/:id(.:format)                                           admin/promotions#update
+                                                           PUT             /admin/promotions/:id(.:format)                                           admin/promotions#update
+                          batch_action_admin_compensations POST            /admin/compensations/batch_action(.:format)                               admin/compensations#batch_action
+                                       admin_compensations GET             /admin/compensations(.:format)                                            admin/compensations#index
+                                                           POST            /admin/compensations(.:format)                                            admin/compensations#create
+                                    new_admin_compensation GET             /admin/compensations/new(.:format)                                        admin/compensations#new
+                                   edit_admin_compensation GET             /admin/compensations/:id/edit(.:format)                                   admin/compensations#edit
+                                        admin_compensation GET             /admin/compensations/:id(.:format)                                        admin/compensations#show
+                                                           PATCH           /admin/compensations/:id(.:format)                                        admin/compensations#update
+                                                           PUT             /admin/compensations/:id(.:format)                                        admin/compensations#update
+                                  admin_compensation_table GET             /admin/compensation_table(.:format)                                       admin/compensation_table#index
+                             batch_action_admin_appraisers POST            /admin/appraisers/batch_action(.:format)                                  admin/appraisers#batch_action
+                                          admin_appraisers GET             /admin/appraisers(.:format)                                               admin/appraisers#index
+                                                           POST            /admin/appraisers(.:format)                                               admin/appraisers#create
+                                      edit_admin_appraiser GET             /admin/appraisers/:id/edit(.:format)                                      admin/appraisers#edit
+                                           admin_appraiser GET             /admin/appraisers/:id(.:format)                                           admin/appraisers#show
+                                                           PATCH           /admin/appraisers/:id(.:format)                                           admin/appraisers#update
+                                                           PUT             /admin/appraisers/:id(.:format)                                           admin/appraisers#update
+                                           admin_dashboard GET             /admin/dashboard(.:format)                                                admin/dashboard#index
+                                       admin_email_reports GET             /admin/email_reports(.:format)                                            admin/email_reports#index
+                                              admin_orders GET             /admin/orders(.:format)                                                   admin/orders#index
+                                          admin_orders2014 GET             /admin/orders2014(.:format)                                               admin/orders2014#index
+                                          admin_orders2015 GET             /admin/orders2015(.:format)                                               admin/orders2015#index
+                                          admin_orders2016 GET             /admin/orders2016(.:format)                                               admin/orders2016#index
+                           regenerate_token_admin_customer PUT             /admin/customers/:id/regenerate_token(.:format)                           admin/customers#regenerate_token
+                              batch_action_admin_customers POST            /admin/customers/batch_action(.:format)                                   admin/customers#batch_action
+                                           admin_customers GET             /admin/customers(.:format)                                                admin/customers#index
+                                                           POST            /admin/customers(.:format)                                                admin/customers#create
+                                       edit_admin_customer GET             /admin/customers/:id/edit(.:format)                                       admin/customers#edit
+                                            admin_customer GET             /admin/customers/:id(.:format)                                            admin/customers#show
+                                                           PATCH           /admin/customers/:id(.:format)                                            admin/customers#update
+                                                           PUT             /admin/customers/:id(.:format)                                            admin/customers#update
+                                batch_action_admin_payouts POST            /admin/payouts/batch_action(.:format)                                     admin/payouts#batch_action
+                                             admin_payouts GET             /admin/payouts(.:format)                                                  admin/payouts#index
+                                                           POST            /admin/payouts(.:format)                                                  admin/payouts#create
+                                          new_admin_payout GET             /admin/payouts/new(.:format)                                              admin/payouts#new
+                                         edit_admin_payout GET             /admin/payouts/:id/edit(.:format)                                         admin/payouts#edit
+                                              admin_payout GET             /admin/payouts/:id(.:format)                                              admin/payouts#show
+                                                           PATCH           /admin/payouts/:id(.:format)                                              admin/payouts#update
+                                                           PUT             /admin/payouts/:id(.:format)                                              admin/payouts#update
+                                batch_action_admin_coupons POST            /admin/coupons/batch_action(.:format)                                     admin/coupons#batch_action
+                                             admin_coupons GET             /admin/coupons(.:format)                                                  admin/coupons#index
+                                                           POST            /admin/coupons(.:format)                                                  admin/coupons#create
+                                          new_admin_coupon GET             /admin/coupons/new(.:format)                                              admin/coupons#new
+                                         edit_admin_coupon GET             /admin/coupons/:id/edit(.:format)                                         admin/coupons#edit
+                                              admin_coupon GET             /admin/coupons/:id(.:format)                                              admin/coupons#show
+                                                           PATCH           /admin/coupons/:id(.:format)                                              admin/coupons#update
+                                                           PUT             /admin/coupons/:id(.:format)                                              admin/coupons#update
+              batch_action_admin_sell_insure_email_reports POST            /admin/sell_insure_email_reports/batch_action(.:format)                   admin/sell_insure_email_reports#batch_action
+                           admin_sell_insure_email_reports GET             /admin/sell_insure_email_reports(.:format)                                admin/sell_insure_email_reports#index
+                                                           POST            /admin/sell_insure_email_reports(.:format)                                admin/sell_insure_email_reports#create
+                        new_admin_sell_insure_email_report GET             /admin/sell_insure_email_reports/new(.:format)                            admin/sell_insure_email_reports#new
+                       edit_admin_sell_insure_email_report GET             /admin/sell_insure_email_reports/:id/edit(.:format)                       admin/sell_insure_email_reports#edit
+                            admin_sell_insure_email_report GET             /admin/sell_insure_email_reports/:id(.:format)                            admin/sell_insure_email_reports#show
+                                                           PATCH           /admin/sell_insure_email_reports/:id(.:format)                            admin/sell_insure_email_reports#update
+                                                           PUT             /admin/sell_insure_email_reports/:id(.:format)                            admin/sell_insure_email_reports#update
+                                                           DELETE          /admin/sell_insure_email_reports/:id(.:format)                            admin/sell_insure_email_reports#destroy
+                                      admin_static_content GET             /admin/static_content(.:format)                                           admin/static_content#index
+                             batch_action_admin_appraisals POST            /admin/appraisals/batch_action(.:format)                                  admin/appraisals#batch_action
+                                          admin_appraisals GET             /admin/appraisals(.:format)                                               admin/appraisals#index
+                                                           POST            /admin/appraisals(.:format)                                               admin/appraisals#create
+                                       new_admin_appraisal GET             /admin/appraisals/new(.:format)                                           admin/appraisals#new
+                                      edit_admin_appraisal GET             /admin/appraisals/:id/edit(.:format)                                      admin/appraisals#edit
+                                           admin_appraisal GET             /admin/appraisals/:id(.:format)                                           admin/appraisals#show
+                                                           PATCH           /admin/appraisals/:id(.:format)                                           admin/appraisals#update
+                                                           PUT             /admin/appraisals/:id(.:format)                                           admin/appraisals#update
+                        batch_action_admin_partner_details POST            /admin/partner_details/batch_action(.:format)                             admin/partner_details#batch_action
+                                     admin_partner_details GET             /admin/partner_details(.:format)                                          admin/partner_details#index
+                                                           POST            /admin/partner_details(.:format)                                          admin/partner_details#create
+                                  new_admin_partner_detail GET             /admin/partner_details/new(.:format)                                      admin/partner_details#new
+                                 edit_admin_partner_detail GET             /admin/partner_details/:id/edit(.:format)                                 admin/partner_details#edit
+                                      admin_partner_detail GET             /admin/partner_details/:id(.:format)                                      admin/partner_details#show
+                                                           PATCH           /admin/partner_details/:id(.:format)                                      admin/partner_details#update
+                                                           PUT             /admin/partner_details/:id(.:format)                                      admin/partner_details#update
+                            admin_categories_vs_appraisers GET             /admin/categories_vs_appraisers(.:format)                                 admin/categories_vs_appraisers#index
+                            admin_appraisers_vs_categories GET             /admin/appraisers_vs_categories(.:format)                                 admin/appraisers_vs_categories#index
+                                   admin_orphan_categories GET             /admin/orphan_categories(.:format)                                        admin/orphan_categories#index
+                               admin_export_static_content GET             /admin/export_static_content(.:format)                                    admin/export_static_content#index
+                               batch_action_admin_settings POST            /admin/settings/batch_action(.:format)                                    admin/settings#batch_action
+                                            admin_settings GET             /admin/settings(.:format)                                                 admin/settings#index
+                                                           POST            /admin/settings(.:format)                                                 admin/settings#create
+                                         new_admin_setting GET             /admin/settings/new(.:format)                                             admin/settings#new
+                                        edit_admin_setting GET             /admin/settings/:id/edit(.:format)                                        admin/settings#edit
+                                             admin_setting GET             /admin/settings/:id(.:format)                                             admin/settings#show
+                                                           PATCH           /admin/settings/:id(.:format)                                             admin/settings#update
+                                                           PUT             /admin/settings/:id(.:format)                                             admin/settings#update
+                                                           DELETE          /admin/settings/:id(.:format)                                             admin/settings#destroy
+                                  admin_strategic_partners GET             /admin/strategic_partners(.:format)                                       admin/strategic_partners#index
+                             batch_action_admin_categories POST            /admin/categories/batch_action(.:format)                                  admin/categories#batch_action
+                                          admin_categories GET             /admin/categories(.:format)                                               admin/categories#index
+                                                           POST            /admin/categories(.:format)                                               admin/categories#create
+                                        new_admin_category GET             /admin/categories/new(.:format)                                           admin/categories#new
+                                       edit_admin_category GET             /admin/categories/:id/edit(.:format)                                      admin/categories#edit
+                                            admin_category GET             /admin/categories/:id(.:format)                                           admin/categories#show
+                                                           PATCH           /admin/categories/:id(.:format)                                           admin/categories#update
+                                                           PUT             /admin/categories/:id(.:format)                                           admin/categories#update
+                                            admin_comments GET             /admin/comments(.:format)                                                 admin/comments#index
+                                                           POST            /admin/comments(.:format)                                                 admin/comments#create
+                                             admin_comment GET             /admin/comments/:id(.:format)                                             admin/comments#show
+                                                           DELETE          /admin/comments/:id(.:format)                                             admin/comments#destroy
+                                                           GET             /cms/blog/posts/:slug(.:format)                                           home#blog_redirect
+                                                  cms_blog GET             /cms/blog(.:format)                                                       home#blog_redirect
+                                           comfy_admin_cms GET             /admin(.:format)                                                          comfy/admin/cms/base#jump
+                     form_blocks_comfy_admin_cms_site_page GET             /admin/sites/:site_id/pages/:id/form_blocks(.:format)                     comfy/admin/cms/pages#form_blocks
+                   toggle_branch_comfy_admin_cms_site_page GET             /admin/sites/:site_id/pages/:id/toggle_branch(.:format)                   comfy/admin/cms/pages#toggle_branch
+                        reorder_comfy_admin_cms_site_pages PUT             /admin/sites/:site_id/pages/reorder(.:format)                             comfy/admin/cms/pages#reorder
+                 revert_comfy_admin_cms_site_page_revision PATCH           /admin/sites/:site_id/pages/:page_id/revisions/:id/revert(.:format)       comfy/admin/cms/revisions#revert
+                       comfy_admin_cms_site_page_revisions GET             /admin/sites/:site_id/pages/:page_id/revisions(.:format)                  comfy/admin/cms/revisions#index
+                        comfy_admin_cms_site_page_revision GET             /admin/sites/:site_id/pages/:page_id/revisions/:id(.:format)              comfy/admin/cms/revisions#show
+                                comfy_admin_cms_site_pages GET             /admin/sites/:site_id/pages(.:format)                                     comfy/admin/cms/pages#index
+                                                           POST            /admin/sites/:site_id/pages(.:format)                                     comfy/admin/cms/pages#create
+                             new_comfy_admin_cms_site_page GET             /admin/sites/:site_id/pages/new(.:format)                                 comfy/admin/cms/pages#new
+                            edit_comfy_admin_cms_site_page GET             /admin/sites/:site_id/pages/:id/edit(.:format)                            comfy/admin/cms/pages#edit
+                                 comfy_admin_cms_site_page PATCH           /admin/sites/:site_id/pages/:id(.:format)                                 comfy/admin/cms/pages#update
+                                                           PUT             /admin/sites/:site_id/pages/:id(.:format)                                 comfy/admin/cms/pages#update
+                                                           DELETE          /admin/sites/:site_id/pages/:id(.:format)                                 comfy/admin/cms/pages#destroy
+                        reorder_comfy_admin_cms_site_files PUT             /admin/sites/:site_id/files/reorder(.:format)                             comfy/admin/cms/files#reorder
+                                comfy_admin_cms_site_files GET             /admin/sites/:site_id/files(.:format)                                     comfy/admin/cms/files#index
+                                                           POST            /admin/sites/:site_id/files(.:format)                                     comfy/admin/cms/files#create
+                             new_comfy_admin_cms_site_file GET             /admin/sites/:site_id/files/new(.:format)                                 comfy/admin/cms/files#new
+                            edit_comfy_admin_cms_site_file GET             /admin/sites/:site_id/files/:id/edit(.:format)                            comfy/admin/cms/files#edit
+                                 comfy_admin_cms_site_file PATCH           /admin/sites/:site_id/files/:id(.:format)                                 comfy/admin/cms/files#update
+                                                           PUT             /admin/sites/:site_id/files/:id(.:format)                                 comfy/admin/cms/files#update
+                                                           DELETE          /admin/sites/:site_id/files/:id(.:format)                                 comfy/admin/cms/files#destroy
+                      reorder_comfy_admin_cms_site_layouts PUT             /admin/sites/:site_id/layouts/reorder(.:format)                           comfy/admin/cms/layouts#reorder
+               revert_comfy_admin_cms_site_layout_revision PATCH           /admin/sites/:site_id/layouts/:layout_id/revisions/:id/revert(.:format)   comfy/admin/cms/revisions#revert
+                     comfy_admin_cms_site_layout_revisions GET             /admin/sites/:site_id/layouts/:layout_id/revisions(.:format)              comfy/admin/cms/revisions#index
+                      comfy_admin_cms_site_layout_revision GET             /admin/sites/:site_id/layouts/:layout_id/revisions/:id(.:format)          comfy/admin/cms/revisions#show
+                              comfy_admin_cms_site_layouts GET             /admin/sites/:site_id/layouts(.:format)                                   comfy/admin/cms/layouts#index
+                                                           POST            /admin/sites/:site_id/layouts(.:format)                                   comfy/admin/cms/layouts#create
+                           new_comfy_admin_cms_site_layout GET             /admin/sites/:site_id/layouts/new(.:format)                               comfy/admin/cms/layouts#new
+                          edit_comfy_admin_cms_site_layout GET             /admin/sites/:site_id/layouts/:id/edit(.:format)                          comfy/admin/cms/layouts#edit
+                               comfy_admin_cms_site_layout PATCH           /admin/sites/:site_id/layouts/:id(.:format)                               comfy/admin/cms/layouts#update
+                                                           PUT             /admin/sites/:site_id/layouts/:id(.:format)                               comfy/admin/cms/layouts#update
+                                                           DELETE          /admin/sites/:site_id/layouts/:id(.:format)                               comfy/admin/cms/layouts#destroy
+                     reorder_comfy_admin_cms_site_snippets PUT             /admin/sites/:site_id/snippets/reorder(.:format)                          comfy/admin/cms/snippets#reorder
+              revert_comfy_admin_cms_site_snippet_revision PATCH           /admin/sites/:site_id/snippets/:snippet_id/revisions/:id/revert(.:format) comfy/admin/cms/revisions#revert
+                    comfy_admin_cms_site_snippet_revisions GET             /admin/sites/:site_id/snippets/:snippet_id/revisions(.:format)            comfy/admin/cms/revisions#index
+                     comfy_admin_cms_site_snippet_revision GET             /admin/sites/:site_id/snippets/:snippet_id/revisions/:id(.:format)        comfy/admin/cms/revisions#show
+                             comfy_admin_cms_site_snippets GET             /admin/sites/:site_id/snippets(.:format)                                  comfy/admin/cms/snippets#index
+                                                           POST            /admin/sites/:site_id/snippets(.:format)                                  comfy/admin/cms/snippets#create
+                          new_comfy_admin_cms_site_snippet GET             /admin/sites/:site_id/snippets/new(.:format)                              comfy/admin/cms/snippets#new
+                         edit_comfy_admin_cms_site_snippet GET             /admin/sites/:site_id/snippets/:id/edit(.:format)                         comfy/admin/cms/snippets#edit
+                              comfy_admin_cms_site_snippet PATCH           /admin/sites/:site_id/snippets/:id(.:format)                              comfy/admin/cms/snippets#update
+                                                           PUT             /admin/sites/:site_id/snippets/:id(.:format)                              comfy/admin/cms/snippets#update
+                                                           DELETE          /admin/sites/:site_id/snippets/:id(.:format)                              comfy/admin/cms/snippets#destroy
+                           comfy_admin_cms_site_categories GET             /admin/sites/:site_id/categories(.:format)                                comfy/admin/cms/categories#index
+                                                           POST            /admin/sites/:site_id/categories(.:format)                                comfy/admin/cms/categories#create
+                         new_comfy_admin_cms_site_category GET             /admin/sites/:site_id/categories/new(.:format)                            comfy/admin/cms/categories#new
+                        edit_comfy_admin_cms_site_category GET             /admin/sites/:site_id/categories/:id/edit(.:format)                       comfy/admin/cms/categories#edit
+                             comfy_admin_cms_site_category PATCH           /admin/sites/:site_id/categories/:id(.:format)                            comfy/admin/cms/categories#update
+                                                           PUT             /admin/sites/:site_id/categories/:id(.:format)                            comfy/admin/cms/categories#update
+                                                           DELETE          /admin/sites/:site_id/categories/:id(.:format)                            comfy/admin/cms/categories#destroy
+                                     comfy_admin_cms_sites GET             /admin/sites(.:format)                                                    comfy/admin/cms/sites#index
+                                                           POST            /admin/sites(.:format)                                                    comfy/admin/cms/sites#create
+                                  new_comfy_admin_cms_site GET             /admin/sites/new(.:format)                                                comfy/admin/cms/sites#new
+                                 edit_comfy_admin_cms_site GET             /admin/sites/:id/edit(.:format)                                           comfy/admin/cms/sites#edit
+                                      comfy_admin_cms_site PATCH           /admin/sites/:id(.:format)                                                comfy/admin/cms/sites#update
+                                                           PUT             /admin/sites/:id(.:format)                                                comfy/admin/cms/sites#update
+                                                           DELETE          /admin/sites/:id(.:format)                                                comfy/admin/cms/sites#destroy
+                                      comfy_cms_render_css GET             /cms-css/:site_id/:identifier(/:cache_buster)(.:format)                   comfy/cms/assets#render_css
+                                       comfy_cms_render_js GET             /cms-js/:site_id/:identifier(/:cache_buster)(.:format)                    comfy/cms/assets#render_js
+                                     comfy_cms_render_page GET             /(*cms_path)(.:format)                                                    comfy/cms/content#show
+                                                           GET             /switch_user(.:format)                                                    switch_user#set_current_user
+                                 switch_user_remember_user GET             /switch_user/remember_user(.:format)                                      switch_user#remember_user

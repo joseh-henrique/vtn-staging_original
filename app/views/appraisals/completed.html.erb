@@ -89,7 +89,7 @@ for evaluation and I approve. </span>
 <div class="my-self">
   <div class="row">
     <div class="col-md-6">
-      <%= image_tag 'report.png', alt: "paypal" %>
+      <%= cl_image_tag(@appraisal.short_appraisal_public_id+".png", :width => 415, :height => 604, :crop => :fill, :alt => "report image") %><
     </div>
     <div class="col-md-6">
       <div class="last-self">

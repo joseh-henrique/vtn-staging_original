@@ -120,6 +120,8 @@ PurexNew::Application.routes.draw do
   get '/home/using_online_appraisals' => 'home#using_online_appraisals', :as => "using_online_appraisals"
   get '/home/cost_of_appraisals' => 'home#cost_of_appraisals', :as => "cost_of_appraisals"
 
+  post '/home/contact_property_owner' => "home#contact_property_owner", :as => :contact_property_owner
+
   post '/appraisals/comment' => "appraisals#comment", :as => :comments
   get '/appraisals/reject/:id' => "appraisals#reject", :as => :appraisal_reject, via: [:all]
   get 'switch_user' => 'switch_user#set_current_user', via: [:all]

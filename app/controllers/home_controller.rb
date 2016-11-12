@@ -129,6 +129,19 @@ class HomeController < ApplicationController
   def affiliate
   end
 
+  def contact_property_owner
+    Rails.logger.info "in contact_property_owner params #{params}"
+    if verify_recaptcha
+      appraisal = Appraisal.find_by_id(params[:appraisal_id])
+      email = appraisal.owned_by.email
+      subject = "Enquiry related to item - #{appraisal.name}"
+      UserMailer.contact_property_owner(email, subject, params[:phone], params[:email], params[:message], appraisal.name).deliver_now
+      redirect_to(root_path, :notice => 'We have sent an email to the property owner with your details.')
+    else
+      redirect_to(root_path, :notice => 'Please click on I am not a Robot before clicking on Send')
+    end
+  end
+
   def appraisal_provider_agreement
     respond_to do |format|
       format.html

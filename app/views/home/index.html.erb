@@ -65,40 +65,39 @@
     <div class="home-bh">
       <h4>Contact The Property Owner</h4>
       <i class="fa fa-times-circle capcha"></i>
-      <form class="form-horizontal">
-
+        <%= form_tag(contact_property_owner_path, :method => :POST, :class => "form-horizontal") do %>
         <div class="row">
           <div class="col-md-6">
+            <input type="hidden" id="appraisal_id" name="appraisal_id">
             <div class="form-group">
               <label for="inputEmail3" class="col-sm-5 control-label">Your Email Address: </label>
               <div class="col-sm-7">
-                <input type="email" class="form-control" id="inputEmail3">
+                <%= text_field_tag "email", nil, :class => "form-control", :required => true %>
               </div>
             </div>
             <div class="form-group">
               <label for="inputtel" class="col-sm-5 control-label">Your Phone Number:  </label>
               <div class="col-sm-7">
-                <input type="tel" class="form-control" id="inputtel">
+                <%= text_field_tag "phone", nil, :class => "form-control", :required => true %>
               </div>
             </div>
 
             <div class="form-group">
               <label for="text-msg" class="col-sm-5 control-label">Your Message:   </label>
               <div class="col-sm-7">
-                <textarea class="form-control" rows="3" id="text-msg"></textarea>
+                <%= text_area_tag "message", nil, :rows => 3, :class => "form-control", :required => true %>
               </div>
             </div>
           </div>
           <div class="col-md-6">
-
             <div class="repacha">
-              <%= image_tag 'recaptcha_pic1.png' %>
-              <input type="submit" value="SEND">
+              <%= recaptcha_tags %>
+              <%= submit_tag "SEND", :id => "btn_contact_owner" %>
             </div>
-
           </div>
+
         </div>
-      </form>
+      <% end %>
     </div>
   </div>
   <div class="a2a_kit a2a_kit_size_32 a2a_default_style" data-a2a-url="http://www.controlf5.in/client-demo/value_this_now/short-appraisal.html" data-a2a-title="shot-appraisal:"><a class="a2a_dd" href="https://www.addtoany.com/share"></a><a class="a2a_button_facebook"></a><a class="a2a_button_twitter"></a><a class="a2a_button_google_plus"></a></div>

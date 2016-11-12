@@ -198,7 +198,7 @@ class User < ActiveRecord::Base
   end
   
   def get_user_name
-    "Welcome #{self.name.camelize}"
+    "Welcome: #{self.name.camelize}"
   end
 
   # TODO This should be moved out of the User model
