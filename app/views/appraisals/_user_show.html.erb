@@ -8,14 +8,14 @@
         </div>
       </div>
       <div class="col-md-9 col-sm-6 col-xs-12 text-right pt">
-        <% if (@appraisal.status == EActivityValueFinalized) %>
+        <% if @appraisal.status != EActivityValueFinalized %>
             <div class="short">
-              <%= link_to show_shared_path(@appraisal, :format => :pdf, :full => "no"), :class => "product-gre" do %><span class="glyphicon glyphicon-download-alt"></span> DOWNLOAD SHORT REPORT<% end %>
+              <%= link_to 'Edit', edit_appraisal_path(@appraisal), :class => "btn btn-success pull-right edit" %>
             </div>
-        <% else %>
-            <div class="col-md-1" style="padding-top: 15px;">
-              <%= link_to 'Claim', claim_appraisal_path(@appraisal), :class => "btn btn-success pull-right claim" if @appraisal.status == EActivityValuePayed %>
-              <%= link_to 'Edit', reply_appraisal_path(@appraisal), :class => "btn btn-success pull-right edit" if (@appraisal.status == EActivityValueClaimed) && (current_user == @appraisal.assigned_to) %>
+        <% end %>
+        <% if @appraisal.status == EActivityValueFinalized %>
+            <div class="short">
+              <%= link_to show_shared_path(@appraisal, :format => :pdf), :class => "product-gre" do %><span class="glyphicon glyphicon-download-alt"></span> DOWNLOAD SHORT REPORT<% end %>
             </div>
         <% end %>
       </div>
