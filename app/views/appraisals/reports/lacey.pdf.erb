@@ -75,13 +75,13 @@
         <h2><%= @appraisal.title.upcase %></h2>
 
 
-        <p>File #: 2842</br>
-          Effective Date of Report: <%= @appraisal.id %>
+        <p>File #: <%= @appraisal.id %></br>
+          Effective Date of Report: <%= @appraisal.updated_at.strftime("%d %b. %Y") %>
         </p>
 
 
         <h2 class="col-ol" style="background: #e9c973;">Description</h2>
-        <p><%= @appraisal.name %></p>
+        <p><%= @appraisal.name.truncate(300) %></p>
 
         <h2 class="col-ol" style="background: #e9c973;">Appraiser's comments :</h2>
 

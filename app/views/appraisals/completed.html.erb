@@ -89,7 +89,12 @@ for evaluation and I approve. </span>
 <div class="my-self">
   <div class="row">
     <div class="col-md-6">
-      <%= cl_image_tag(@appraisal.short_appraisal_public_id+".png", :width => 415, :height => 604, :crop => :fill, :alt => "report image") %><
+      <% if @appraisal.short_appraisal_public_id.nil? %>
+          <%= image_tag 'report.png', alt: "report" %>
+      <% else %>
+          <%= cl_image_tag(@appraisal.short_appraisal_public_id+".png", :width => 415, :height => 604, :crop => :fill, :alt => "report image") %><
+      <% end %>
+
     </div>
     <div class="col-md-6">
       <div class="last-self">
