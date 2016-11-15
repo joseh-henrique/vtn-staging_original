@@ -272,6 +272,10 @@
   }
 </style>
 <script>
+  $( window ).load(function() {
+    window.status = 'render-pdf';
+  });
+
   $(document).ready(function(){
     $('#myCarousel').carousel({
       interval: 4000

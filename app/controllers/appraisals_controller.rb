@@ -57,7 +57,7 @@ class AppraisalsController < ApplicationController
     template_file = (@pdf_full.eql?"yes") ? "/appraisals/reports/full.pdf.erb" : "/appraisals/reports/lacey.pdf.erb"
     Rails.logger.info "selected plan is #{@appraisal.selected_plan} PDF_FULL IS #{@pdf_full} template_file is #{template_file}"
     respond_to do |format|
-      format.pdf { render :pdf => 'report', :page_size => "Legal", :show_as_html => params[:debug].present?, :template => template_file }
+      format.pdf { render :pdf => 'report', :page_size => "Legal", :show_as_html => params[:debug].present?, :template => template_file, :window_status => "render-pdf" }
     end
   end
 

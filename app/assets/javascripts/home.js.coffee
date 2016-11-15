@@ -86,7 +86,7 @@ $ ->
 
 $(document).ready ->
   $("#owl-demo").owlCarousel({
-    items : 8
+    items : 7
     itemsDesktop: [
       1100
       7
@@ -198,34 +198,4 @@ $(document).ready ->
       return
   return
 
-$(document).ready ->
-  owl = $('#owl-demo')
-  owl.owlCarousel
-    items: 8
-    itemsDesktop: [
-      1100
-      7
-    ]
-    itemsDesktopSmall: [
-      900
-      4
-    ]
-    itemsTablet: [
-      600
-      3
-    ]
-    itemsMobile: [
-      375
-      2
-    ]
-    autoPlay: true
-  # Custom Navigation Events
-  $('.next').click ->
-    alert('in next')
-    owl.trigger 'owl.next'
-    return
-  $('.prev').click ->
-    owl.trigger 'owl.prev'
-    return
-  return
 

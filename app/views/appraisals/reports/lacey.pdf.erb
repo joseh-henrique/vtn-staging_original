@@ -81,11 +81,11 @@
 
 
         <h2 class="col-ol" style="background: #e9c973;">Description</h2>
-        <p><%= @appraisal.name.truncate(300) %></p>
+        <p><%= @appraisal.name %></p>
 
         <h2 class="col-ol" style="background: #e9c973;">Appraiser's comments :</h2>
 
-        <p><%= @appraisal.appraisal_info.appraiser_comments %></p>
+        <p><%= truncate(@appraisal.appraisal_info.appraiser_comments, :omission => "...", :length => 300) %></p>
         <div class="bef">
           <table width="100%" border="0" cellspacing="0" cellpadding="0"  style="margin:17px;">
             <tr>
