@@ -90,8 +90,12 @@
           <table width="100%" border="0" cellspacing="0" cellpadding="0"  style="margin:17px;">
             <tr>
               <td>
-                <p style="color: #01326a;font-size: 21px;font-weight: 400;line-height: 1.25;"> Replacement value : <font color="#bb1f20"><%= print_replacement_cost(@appraisal) %></font><br>(Comparable)</p>
-                <p style="color: #01326a;font-size: 21px;font-weight: 400;line-height: 1.25;">Fair Market Value : <font color="#bb1f20"><%= print_fair_market_value(@appraisal) %></font></p>
+                <% if (@appraisal.selected_plan == EAAppraisalTypeAuctionEstimate) || (@appraisal.selected_plan == EAAppraisalTypeTaxAppraisal) %>
+                    <p style="color: #01326a;font-size: 21px;font-weight: 400;line-height: 1.25;">Fair Market Value : <font color="#bb1f20"><%= print_fair_market_value_avg(@appraisal) %></font></p>
+                <% else %>
+                    <p style="color: #01326a;font-size: 21px;font-weight: 400;line-height: 1.25;"> Replacement value : <font color="#bb1f20"><%= print_replacement_cost(@appraisal) %></font><br>(Comparable)</p>
+                    <p style="color: #01326a;font-size: 21px;font-weight: 400;line-height: 1.25;">Fair Market Value : <font color="#bb1f20"><%= print_fair_market_value(@appraisal) %></font></p>
+                <% end %>
               </td>
               <td style="padding-top:0px;">
                 <div id="appraiser-info" class="short-bg" style="margin:inherit; margin-left:32px;">

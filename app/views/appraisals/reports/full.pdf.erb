@@ -136,20 +136,11 @@
         <p><%= @appraisal.appraisal_info.appraiser_comments %></p>
       </div>
       <div class="milt">
-        <% selected_plan = @appraisal.selected_plan %>
-        <% if (selected_plan == EAAppraisalTypeAuctionEstimate || selected_plan == EAAppraisalTypeLongRestricted || selected_plan == EAAppraisalTypeLongForSelling) %>
-            <p> Replacement value : <font color="#bb1f20"><%= print_as_currency(@appraisal.appraisal_info.replacement_cost_min) %></font> <br>
-              (Comparable Min) </p>
-            <p> Replacement value : <font color="#bb1f20"><%= print_as_currency(@appraisal.appraisal_info.replacement_cost_max) %></font> <br>
-              (Comparable Max) </p>
-            <p> Fair Market Value Min : <font color="#bb1f20"><%= print_as_currency(@appraisal.appraisal_info.fair_market_value_min) %></font> <br>
-               </p>
-            <p> Fair Market Value Max : <font color="#bb1f20"><%= print_as_currency(@appraisal.appraisal_info.fair_market_value_max) %></font> <br>
-            </p>
-        <% end %>
-        <% if (selected_plan == EAAppraisalTypeTaxAppraisal) %>
-            <p> Fair Market Value Avg : <font color="#bb1f20"><%= print_as_currency(@appraisal.appraisal_info.fair_market_value_avg) %></font> <br>
-            </p>
+        <% if (@appraisal.selected_plan == EAAppraisalTypeAuctionEstimate) || (@appraisal.selected_plan == EAAppraisalTypeTaxAppraisal) %>
+            <p style="color: #01326a;font-size: 21px;font-weight: 400;line-height: 1.25;">Fair Market Value : <font color="#bb1f20"><%= print_fair_market_value_avg(@appraisal) %></font></p>
+        <% else %>
+            <p style="color: #01326a;font-size: 21px;font-weight: 400;line-height: 1.25;"> Replacement value : <font color="#bb1f20"><%= print_replacement_cost(@appraisal) %></font><br>(Comparable)</p>
+            <p style="color: #01326a;font-size: 21px;font-weight: 400;line-height: 1.25;">Fair Market Value : <font color="#bb1f20"><%= print_fair_market_value(@appraisal) %></font></p>
         <% end %>
       </div>
       <% end %>
