@@ -99,6 +99,9 @@
   .col-md-7.five-three {
     width: 60%;
   }
+  .col-md-7.five-five {
+    width: 100%;
+  }
 }
 body {
   background: #fff;
@@ -195,6 +198,7 @@ li.login a:hover {
 .set a:hover{
   text-decoration:none;
 }
+.tumbh    { width:20% !important;}
 
 .banner1 {
   background: image-url('bg_banner_1.png');
@@ -5425,6 +5429,9 @@ input[type=checkbox], input[type=radio] {
   }
   div.col-xs-7.five-three {
     width: 60% !important;
+  }
+  div.col-xs-7.five-five {
+    width: 100% !important;
   }
   div.col-xs-5.five-two {
     width: 40% !important;

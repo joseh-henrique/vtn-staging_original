@@ -106,7 +106,6 @@ $(document).ready ->
     autoPlay: true
   })
   $('.next').click ->
-    alert('in next')
     owl.trigger 'owl.next'
     return
   $('.prev').click ->

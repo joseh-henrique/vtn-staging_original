@@ -1,83 +1,46 @@
-<% can_tag ||= can_tag.nil?
+images_rowimage_row<% can_tag ||= can_tag.nil?
 can_delete ||= can_delete.nil?
 can_upload ||= can_upload.nil?
 can_mark_as_primary ||= can_mark_as_primary.nil? %>
 <!-- new design -->
-<div class="">
+
   <% if !current_user || !current_user.is_appraiser? %>
-      <div class="row">
-        <div class="col-md-12">
-          <h5>You must upload at least one image, but more would be better. Send close-up images such as of signatures, maker's marks, damages or other details you feel important.</h5>
-        </div>
-      </div>
-  <% end %>
+
   <%= form_for(Photo.new) do |f| %>
-      <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
-      <div class="row fileupload-buttonbar">
-        <div class="col-md-2">
-          <!-- The fileinput-button span is used to style the file input field as button -->
+
+      <div style="margin-left:18%;">
+        <div class="my-upload">
           <% if can_upload %>
-          <span class=" fileinput-button" id="btn_upload_image">
-            <span id="btn_image_upload_label" class="btn next-1 bro">UPLOAD IMAGES</span>
-            <%= f.cl_image_upload(:picture,:html => { :multiple => true, id: "btn_upload_image_input" } ) %>
-          </span>
+          <%= f.cl_image_upload(:picture,:html => { :multiple => true, id: "btn_upload_image_input" } ) %><span class="btn next-1 bro">upload images</span>
           <% end %>
         </div>
+        <p class="marg">You must upload at least one image, but more would be better. Send close-up images such as of
+          signatures,
+          maker's marks, damages or other details you feel important.</p>
         <div class="col-md-10">
           <span class="status"></span>
           <span class="statusImg"></span>
         </div>
       </div>
   <% end %>
+  <% end %>
 
-  <!-- The loading indicator is shown during image processing -->
-  <br>
-  <!-- The table listing the files available for upload/download -->
-  <table id="appraisal_images_table" class="table table-striped table-responsive"><tbody class="files" data-toggle="modal-gallery" data-target="#modal-gallery"></tbody></table>
-</div>
-<!-- Old design -->
-
-  <div class="row edited-height">
-    <div class="col-md-12">
-      <table class="table table-striped table-responsive" id="img-table">
-        <tbody>
-          <tr class="img-row"></tr>
-          <% photos.each do |photo| %>
-            <tr class="img-row">
-              <td class="preview"><%= link_to image_tag(photo.picture_url(:thumb)), photo.picture_url(:huge) %></td>
-              <td class="name">
-                <div class="hidden-xs">
-                  <%= link_to File.basename(photo.picture.to_s), photo.picture_url(:huge) %></td>
-              </div>
-              <td class="size"></td>
-              <td>
-                <div class="hidden-xs hidden-sm">
-                  <%= link_to photo_tag_url(@appraisal, photo), class: "btn btn-success btn-sm", :target => "_blank" do %><span class="glyphicon glyphicon-tag"></span> Tag<% end %>
-                </div>
-              </td>
-              <td>
-                <% if can_mark_as_primary %>
-                  <% if (photo.default?) %>
-                    <%= link_to set_default_photo_path(:appraisal_id => @appraisal, :photo_id => photo.id), method: :post, remote: true, class: "btn btn-default btn-success btn-sm disabled btn_make_image_primary" do %><span class="glyphicon glyphicon-picture"></span> Primary<% end %>
-                  <% else %>
-                    <%= link_to set_default_photo_path(:appraisal_id => @appraisal, :photo_id => photo.id), method: :post, remote: true, class: "btn btn-default btn-sm btn_make_image_primary" do %><span class="glyphicon glyphicon-picture"></span> Mark as Primary<% end %>
-                  <% end %>
-                <% end %>
-              </td>
-              <td class="delete">
-                <% if can_delete %>
-                  <%= link_to appraisal_photo_url(:id => photo.id, :appraisal_id => @appraisal), method: :delete, class: 'btn btn-default btn-sm btn_delete_image', :remote => true do %>
-                    <span class="glyphicon glyphicon-trash"></span>
-                    <span>Delete</span>
-                  <% end %>
-                <% end %>
-              </td>
-            </tr>
-          </tbody>
+<div class="col-md-offset-2">
+  <div class="row fg">
+    <div class="col-md-12 five-three col-xs-12" >
+      <div id="images_row" class="row">
+        <% photos.each do |photo| %>
+            <div class="col-md-2 col-xs-2 tumbh">
+            <%= image_tag photo.picture_url(:thumbnail) %>
+          </div>
         <% end %>
-      </table>
+      </div>
     </div>
-  </div>
+
+</div>
+</div>
+
+
 <!-- Configure Cloudinary jQuery plugin -->
 <%= cloudinary_js_config %>
 
@@ -146,12 +109,13 @@ can_mark_as_primary ||= can_mark_as_primary.nil? %>
   success: function(data) {
     var fileName = uniqueName(extra_data.files[0]);
     var el = progressElements[ fileName ];
-    el.find("img:first").attr("src", data.files[0].thumbnailUrl);
-    el.find(".thumb_link").attr("href", data.files[0].url);
-    $(el).find("td:last").remove();
-    $(el).append('<td><div class="hidden-xs hidden-sm"><a href="'+data.files[0].tag_url+'" class="btn btn-success btn-sm" target="_blank"><span class="glyphicon glyphicon-tag"></span> Tag</a></div></td>');
-    $(el).append('<td><a href="'+data.files[0].set_as_default_url+'" class="btn btn-default btn-sm btn_make_image_primary" data-method="post" data-remote="true" rel="nofollow"><span class="glyphicon glyphicon-picture"></span>Mark As Primary</a></td>');
-    $(el).append('<td class="delete"><a href="'+data.files[0].deleteUrl+'" class="btn btn-default btn-sm btn_delete_image" data-method="delete" data-remote="true" rel="nofollow"><span class="glyphicon glyphicon-trash"></span><span>Delete</span></a></td>');
+    //el.find("img:first").attr("src", data.files[0].thumbnailUrl);
+    //el.find(".thumb_link").attr("href", data.files[0].url);
+    $("#images_row").append("<div class='col-md-2 col-xs-2 tumbh'><img src='"+data.files[0].thumbnailUrl+"'/></div>");
+    //$(el).find("td:last").remove();
+    //$(el).append('<td><div class="hidden-xs hidden-sm"><a href="'+data.files[0].tag_url+'" class="btn btn-success btn-sm" target="_blank"><span class="glyphicon glyphicon-tag"></span> Tag</a></div></td>');
+    //$(el).append('<td><a href="'+data.files[0].set_as_default_url+'" class="btn btn-default btn-sm btn_make_image_primary" data-method="post" data-remote="true" rel="nofollow"><span class="glyphicon glyphicon-picture"></span>Mark As Primary</a></td>');
+    //$(el).append('<td class="delete"><a href="'+data.files[0].deleteUrl+'" class="btn btn-default btn-sm btn_delete_image" data-method="delete" data-remote="true" rel="nofollow"><span class="glyphicon glyphicon-trash"></span><span>Delete</span></a></td>');
 
     if ($(".img-row").length > 1) {
       $("#pinnote-1").hide();
@@ -200,7 +164,7 @@ can_mark_as_primary ||= can_mark_as_primary.nil? %>
   $(".cloudinary-fileupload").bind("fileuploadadd", function(e, data){
       var name = uniqueName(data.files[0]);
   $("#img-table .img-row:first").before('<tr class="img-row"><td class="preview"><a href="#" class="thumb_link"><%= image_tag 'green_loader.gif' %></a></td><td class="name"><div class="hidden-xs"><a href="#" class="thumb_link">'+name+'</a></div></td><td class="size"></td><td colspan="3"><div class="progress">Uploading...Please wait<div class="bar bar-success"></div></div></td></tr>');
-  progressElements[ name ] = $("#img-table .img-row:first");
+  progressElements[ name ] = $("#images_row");
   $("#fileUploads").fileupload("send", {files: data.files});
   });
 
