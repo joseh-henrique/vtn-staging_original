@@ -10,7 +10,7 @@
       <div class="col-md-9 col-sm-6 col-xs-12 text-right pt">
         <% if @appraisal.status != EActivityValueFinalized %>
             <div class="short">
-              <%= link_to 'Edit', edit_appraisal_path(@appraisal), :class => "btn btn-success pull-right edit" %>
+              <%= link_to 'Edit', appraisal_build_index_path(@appraisal), :class => "btn btn-success pull-right edit" %>
             </div>
         <% end %>
         <% if @appraisal.status == EActivityValueFinalized %>
