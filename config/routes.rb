@@ -110,6 +110,7 @@ PurexNew::Application.routes.draw do
   get '/home/cost' => 'home#cost'
   get '/home/testimonials' => 'home#testimonials'
   get '/home/categories' => 'home#categories'
+  get '/home/appraisal_types' => 'home#appraisal_types'
   get '/stores' => 'home#stores'
   get '/roadshows' => 'home#roadshows'
   get '/salvages' => 'home#salvages'

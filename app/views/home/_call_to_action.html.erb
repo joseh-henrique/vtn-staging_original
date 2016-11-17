@@ -43,9 +43,10 @@
       </div>
       <div class="col-sm-6 col-md-3 gcf">
         <div class="green-box set">
-          <a href="select.html">
-            <%= image_tag("play_2.png", :alt=> "play2") %>
-            <p>Appraisal Types </p></a>
+          <%= link_to controller: '/home', action: :appraisal_types do %>
+              <%= image_tag("play_2.png", :alt=> "play2") %>
+              <p>Appraisal Types </p></a>
+          <% end %>
         </div>
       </div>
       <div class="col-sm-6 col-md-3 gcf">

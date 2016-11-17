@@ -111,6 +111,10 @@ class HomeController < ApplicationController
   def categories
   end
 
+  def appraisal_types
+
+  end
+
   def stores
   end
 
