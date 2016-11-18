@@ -106,10 +106,10 @@ $(document).ready ->
     autoPlay: true
   })
   $('.next').click ->
-    owl.trigger 'owl.next'
+    $("#owl-demo").trigger 'owl.next'
     return
   $('.prev').click ->
-    owl.trigger 'owl.prev'
+    $("#owl-demo").trigger 'owl.prev'
     return
   $('.link').on 'click', (event) ->
     $this = $(this)
