@@ -135,6 +135,7 @@ class AppraisalsController < ApplicationController
       if pending_rejection
         format.html { redirect_to(@appraisal, :notice => 'Appraisal was sent to administrator for review.') }
       elsif @appraisal.update_attributes(params[:appraisal])
+        @appraisal.reload
         if @appraisal.status == EActivityValueFinalized && previous_status != EActivityValueFinalized
           AppraisalsController.delay.save_short_appraisal(@appraisal)
           # Send Notification via Email to Creator about Finalized Appraisal

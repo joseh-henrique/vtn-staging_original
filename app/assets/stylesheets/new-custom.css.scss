@@ -4410,6 +4410,10 @@ input[type=checkbox], input[type=radio] {
   padding: 23px;
   border-radius: 10px;
 }
+.g-recaptcha div {
+  width:414px;
+  height:122px;
+}
 .repacha input[type="submit"] {
   color: #fff;
   background-color: #81c031;
