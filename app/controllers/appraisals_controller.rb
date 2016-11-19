@@ -120,6 +120,7 @@ class AppraisalsController < ApplicationController
 
   # PUT /appraisals/1
   def update
+    Rails.logger.info "in update params is #{params}"
     @appraisal = Appraisal.find(params[:id])
 
     if params[:suggest_rejection] && params[:appraisal][:status] == "14"
@@ -135,8 +136,10 @@ class AppraisalsController < ApplicationController
       if pending_rejection
         format.html { redirect_to(@appraisal, :notice => 'Appraisal was sent to administrator for review.') }
       elsif @appraisal.update_attributes(params[:appraisal])
+        Rails.logger.info "********after elsif @appraisal.update_attributes params[:appraisal][:status] is #{params[:appraisal][:status]}"
         @appraisal.reload
-        if @appraisal.status == EActivityValueFinalized && previous_status != EActivityValueFinalized
+        if params[:appraisal][:status].to_i == EActivityValueFinalized && previous_status != EActivityValueFinalized
+          Rails.logger.info "*************** before call to save_short_appraisal"
           AppraisalsController.delay.save_short_appraisal(@appraisal)
           # Send Notification via Email to Creator about Finalized Appraisal
           payout = Payout.find_or_create_by(:appraisal_id => @appraisal.id, :appraiser_id => @appraisal.assigned_to.id)

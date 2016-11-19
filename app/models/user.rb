@@ -78,7 +78,7 @@ class User < ActiveRecord::Base
       UserMailer.delay.notify_appraiser_of_new_appraisal( appraiser ,
         appraisal ) if appraiser.notify_by_email && Rails.env != "sandbox"
       unless (phone = PhonyRails.normalize_number(appraiser.address.phone1, :default_country_code => 'US')).nil?
-        User.delay(run_at: (30*index).seconds.from_now).send_sms({:number => phone, :body => "A New Appraisal is Available in one of your selected categories!"}) if appraiser.notify_by_sms
+        #User.delay(run_at: (30*index).seconds.from_now).send_sms({:number => phone, :body => "A New Appraisal is Available in one of your selected categories!"}) if appraiser.notify_by_sms
       end
     end
   end
@@ -98,7 +98,7 @@ class User < ActiveRecord::Base
       UserMailer.delay.notify_referral_of_new_appraisal( appraiser ,
         appraisal ) if appraiser.notify_by_email && Rails.env != "sandbox"
       unless (phone = PhonyRails.normalize_number(appraiser.address.phone1, :default_country_code => 'US')).nil?
-        User.delay(run_at: (30*index).seconds.from_now).send_sms({:number => phone, :body => "A New Appraisal is Available in one of your selected categories!"}) if appraiser.notify_by_sms
+        #User.delay(run_at: (30*index).seconds.from_now).send_sms({:number => phone, :body => "A New Appraisal is Available in one of your selected categories!"}) if appraiser.notify_by_sms
       end
     end
   end
