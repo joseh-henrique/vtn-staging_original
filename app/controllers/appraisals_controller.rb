@@ -190,7 +190,7 @@ class AppraisalsController < ApplicationController
       else
         redirect_to(@appraisal, :alert => "Please try claiming this item again in a few minutes.")
       end
-    #end
+    end
   end
 
   def completed
