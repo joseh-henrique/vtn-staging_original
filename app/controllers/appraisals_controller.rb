@@ -181,9 +181,9 @@ class AppraisalsController < ApplicationController
   end
 
   def claim
-    #if Rails.env != 'sandbox' && !Appraisal.processing.where(assigned_to: current_user).empty?
-      #redirect_to(@appraisal, :alert => "You can only have one processing appraisal at a time.")
-    #else
+    if Rails.env != 'sandbox' && !Appraisal.processing.where(assigned_to: current_user).empty?
+      redirect_to(@appraisal, :alert => "You can only have one processing appraisal at a time.")
+    else
       @appraisal = Appraisal.find(params[:id])
       if @appraisal.claim!(appraiser: current_user)
         redirect_to reply_appraisal_path(@appraisal)
